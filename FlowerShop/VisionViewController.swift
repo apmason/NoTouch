@@ -10,9 +10,7 @@ import AVFoundation
 import Vision
 
 class VisionViewController: ViewController {
-    
-    private var detectionOverlay: CALayer! = nil
-    
+        
     // Vision parts
     private var analysisRequests = [VNRequest]()
     private let sequenceRequestHandler = VNSequenceRequestHandler()
@@ -37,7 +35,6 @@ class VisionViewController: ViewController {
                 return
             }
             self.productViewOpen = true
-            self.performSegue(withIdentifier: "showProductSegue", sender: identifier)
         })
     }
     
@@ -177,44 +174,21 @@ class VisionViewController: ViewController {
     }
     
     private func showDetectionOverlay(_ visible: Bool) {
-        DispatchQueue.main.async(execute: {
-            // perform all the UI updates on the main queue
-            self.detectionOverlay.isHidden = !visible
-        })
+        
     }
     
     override func setupAVCapture() {
         super.setupAVCapture()
         
         // setup Vision parts
-        setupLayers()
         setupVision()
         
         // start the capture
         startCaptureSession()
     }
     
-    func setupLayers() {
-        detectionOverlay = CALayer()
-        detectionOverlay.bounds = self.view.bounds.insetBy(dx: 20, dy: 20)
-        detectionOverlay.position = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
-        detectionOverlay.borderColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 0.2, 0.7])
-        detectionOverlay.borderWidth = 8
-        detectionOverlay.cornerRadius = 20
-        detectionOverlay.isHidden = true
-        rootLayer.addSublayer(detectionOverlay)
-    }
-    
     @IBAction func unwindToScanning(unwindSegue: UIStoryboardSegue) {
         productViewOpen = false
         self.resetTranspositionHistory() // reset scene stability
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let productVC = segue.destination as? ProductViewController, segue.identifier == "showProductSegue" {
-            if let productID = sender as? String {
-                productVC.productID = productID
-            }
-        }
     }
 }
