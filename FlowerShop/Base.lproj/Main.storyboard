@@ -16,13 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sEV-Jv-DGT">
-                                <rect key="frame" x="131.5" y="616" width="112.5" height="32"/>
-                                <segments>
-                                    <segment title="" image="person" catalog="system"/>
-                                    <segment title="" image="nosign" catalog="system"/>
-                                </segments>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lx-Bf-BXa" userLabel="Audio Button">
                                 <rect key="frame" x="12" y="12" width="40" height="40"/>
                                 <constraints>
@@ -31,6 +24,9 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="speaker" catalog="system"/>
+                                <connections>
+                                    <action selector="flipSound:" destination="BYZ-38-t0r" eventType="touchUpInside" id="APN-W3-TEu"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwv-Sj-Ovl" userLabel="Camera Flip Button">
                                 <rect key="frame" x="323" y="12" width="40" height="40"/>
@@ -39,6 +35,9 @@
                                 </constraints>
                                 <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="camera.rotate" catalog="system"/>
+                                <connections>
+                                    <action selector="flipCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oZk-HZ-ys4"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We'll flash the screen when we detect a touch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4c-5t-GY2">
                                 <rect key="frame" x="112.5" y="32" width="150" height="57"/>
@@ -46,17 +45,43 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7H-Vt-qq9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sEV-Jv-DGT">
+                                <rect key="frame" x="131.5" y="616" width="112.5" height="32"/>
+                                <segments>
+                                    <segment title="" image="person" catalog="system"/>
+                                    <segment title="" image="nosign" catalog="system"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="mai-j9-Ghi"/>
+                                </connections>
+                            </segmentedControl>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y3h-2L-cTO" userLabel="Flashing View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="l7H-Vt-qq9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1fz-pY-oqa"/>
                             <constraint firstItem="8Lx-Bf-BXa" firstAttribute="leading" secondItem="ya0-DO-AIf" secondAttribute="leading" constant="12" id="7DA-je-VqQ"/>
                             <constraint firstItem="sEV-Jv-DGT" firstAttribute="bottom" secondItem="ya0-DO-AIf" secondAttribute="bottom" constant="-20" id="AGh-mb-hzz"/>
+                            <constraint firstItem="y3h-2L-cTO" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="Cge-DR-jte"/>
                             <constraint firstItem="8Lx-Bf-BXa" firstAttribute="top" secondItem="ya0-DO-AIf" secondAttribute="top" constant="12" id="IOX-HF-apE"/>
                             <constraint firstItem="Qwv-Sj-Ovl" firstAttribute="top" secondItem="ya0-DO-AIf" secondAttribute="top" constant="12" id="IiV-Rm-Xbn"/>
                             <constraint firstItem="sEV-Jv-DGT" firstAttribute="centerX" secondItem="ya0-DO-AIf" secondAttribute="centerX" id="L0X-Vf-3J1"/>
+                            <constraint firstAttribute="trailing" secondItem="l7H-Vt-qq9" secondAttribute="trailing" id="O9c-fI-6fo"/>
                             <constraint firstItem="D4c-5t-GY2" firstAttribute="width" secondItem="ya0-DO-AIf" secondAttribute="width" multiplier="0.4" id="Uqa-bn-H0K"/>
                             <constraint firstItem="ya0-DO-AIf" firstAttribute="trailing" secondItem="Qwv-Sj-Ovl" secondAttribute="trailing" constant="12" id="bbT-53-5Gj"/>
+                            <constraint firstItem="y3h-2L-cTO" firstAttribute="centerY" secondItem="ya0-DO-AIf" secondAttribute="centerY" id="jFc-2S-vmU"/>
                             <constraint firstItem="sEV-Jv-DGT" firstAttribute="width" secondItem="ya0-DO-AIf" secondAttribute="width" multiplier="0.3" id="oQO-qz-GMp"/>
+                            <constraint firstItem="l7H-Vt-qq9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="poj-ft-Gxa"/>
+                            <constraint firstItem="y3h-2L-cTO" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="qIz-ig-OE3"/>
+                            <constraint firstAttribute="bottom" secondItem="l7H-Vt-qq9" secondAttribute="bottom" id="qSd-jM-qFW"/>
+                            <constraint firstItem="y3h-2L-cTO" firstAttribute="centerX" secondItem="ya0-DO-AIf" secondAttribute="centerX" id="vbB-3w-bmo"/>
                             <constraint firstItem="Qwv-Sj-Ovl" firstAttribute="width" secondItem="8Lx-Bf-BXa" secondAttribute="width" id="wkm-Vy-KQf"/>
                             <constraint firstItem="D4c-5t-GY2" firstAttribute="centerX" secondItem="ya0-DO-AIf" secondAttribute="centerX" id="wry-NM-59L"/>
                             <constraint firstItem="D4c-5t-GY2" firstAttribute="top" secondItem="8Lx-Bf-BXa" secondAttribute="centerY" id="ycm-gl-ktR"/>
@@ -64,6 +89,8 @@
                         <viewLayoutGuide key="safeArea" id="ya0-DO-AIf"/>
                     </view>
                     <connections>
+                        <outlet property="coverageView" destination="l7H-Vt-qq9" id="gzw-r5-7yF"/>
+                        <outlet property="flashingView" destination="y3h-2L-cTO" id="kyi-TH-R5S"/>
                         <outlet property="previewView" destination="8bC-Xf-vdC" id="KdU-3x-Jsv"/>
                     </connections>
                 </viewController>

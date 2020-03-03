@@ -25,17 +25,14 @@ class VisionViewController: ViewController {
     
     // Queue for dispatching vision classification and barcode requests
     private let visionQueue = DispatchQueue(label: "com.example.apple-samplecode.FlowerShop.serialVisionQueue")
-    var productViewOpen = false
     
-    fileprivate func showProductInfo(_ identifier: String) {
-        // Perform all UI updates on the main queue.
-        DispatchQueue.main.async(execute: {
-            if self.productViewOpen {
-                // Bail out early if another observation already opened the product display.
-                return
-            }
-            self.productViewOpen = true
-        })
+    @IBOutlet var coverageView: UIView!
+    
+    @IBOutlet var flashingView: UIView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        alertVM.addObserver(self)
     }
     
     /// - Tag: SetupVisionRequest
@@ -44,20 +41,8 @@ class VisionViewController: ViewController {
         // Setup Vision parts.
         let error: NSError! = nil
         
-        // Setup barcode detection.
-        let barcodeDetection = VNDetectBarcodesRequest(completionHandler: { (request, error) in
-            if let results = request.results as? [VNBarcodeObservation] {
-                if let mainBarcode = results.first {
-                    if let payloadString = mainBarcode.payloadStringValue {
-                        self.showProductInfo(payloadString)
-                    }
-                }
-            }
-        })
-        self.analysisRequests = ([barcodeDetection])
-        
         // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "FlowerShop", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "Faces", withExtension: "mlmodelc") else {
             return NSError(domain: "VisionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "The model file is missing."])
         }
         guard let objectRecognition = createClassificationRequest(modelURL: modelURL) else {
@@ -68,14 +53,14 @@ class VisionViewController: ViewController {
     }
     
     private func createClassificationRequest(modelURL: URL) -> VNCoreMLRequest? {
-        
         do {
             let objectClassifier = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
-            let classificationRequest = VNCoreMLRequest(model: objectClassifier, completionHandler: { (request, error) in
+            let classificationRequest = VNCoreMLRequest(model: objectClassifier, completionHandler: { [weak self] (request, error) in
                 if let results = request.results as? [VNClassificationObservation] {
                     print("\(results.first!.identifier) : \(results.first!.confidence)")
-                    if results.first!.confidence > 0.9 {
-                        self.showProductInfo(results.first!.identifier)
+                    if results.first!.identifier == "Touching" && results.first!.confidence > 0.90 {
+                        print("WINNER!!!")
+                        self?.alertVM.fireAlert()
                     }
                 }
             })
@@ -131,6 +116,7 @@ class VisionViewController: ViewController {
         }
         return false
     }
+    
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
@@ -142,9 +128,6 @@ class VisionViewController: ViewController {
             return
         }
         
-        if productViewOpen {
-            return
-        }
         let registrationRequest = VNTranslationalImageRegistrationRequest(targetedCVPixelBuffer: pixelBuffer)
         do {
             try sequenceRequestHandler.perform([ registrationRequest ], on: previousPixelBuffer!)
@@ -187,8 +170,59 @@ class VisionViewController: ViewController {
         startCaptureSession()
     }
     
-    @IBAction func unwindToScanning(unwindSegue: UIStoryboardSegue) {
-        productViewOpen = false
-        self.resetTranspositionHistory() // reset scene stability
+    @IBAction func flipCamera(_ sender: Any) {
+//        switch captureDevicePosition {
+//        case .front:
+//            captureDevicePosition = .back
+//
+//        case .back:
+//            captureDevicePosition = .front
+//
+//        case .unspecified:
+//            print("Unspecified device position set")
+//
+//        }
+        
+        setupAVCapture()
+    }
+    
+    @IBAction func flipSound(_ sender: Any) {
+        
+    }
+    
+    
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            print("Show footage")
+            coverageView.isHidden = true
+            
+        } else {
+            print("Cover footage")
+            coverageView.isHidden = false
+            
+        }
+    }
+}
+
+
+extension VisionViewController: AlertObserver {
+    
+    func alertDidFire(withTimeoutPeriod timeoutPeriod: TimeInterval) {
+        flashingView.alpha = 0
+        flashingView.isHidden = false
+        
+        UIView.animateKeyframes(withDuration: timeoutPeriod, delay: 0, options: .calculationModeCubic, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.3) {
+                self.flashingView.alpha = 1
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.7) {
+                self.flashingView.alpha = 0
+            }
+            
+        }) { _ in
+            self.flashingView.alpha = 0
+            self.flashingView.isHidden = true
+        }
     }
 }

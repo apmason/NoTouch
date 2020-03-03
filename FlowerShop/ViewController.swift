@@ -22,12 +22,15 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
+    var alertVM = AlertViewModel()
+    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         // Implement this in the subclass.
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        alertVM.setupAlerts()
         setupAVCapture()
     }
     
@@ -40,13 +43,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         var deviceInput: AVCaptureDeviceInput!
         
         // Select a video device and make an input.
-        let videoDevice = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .back).devices.first
+        let videoDevice = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera], mediaType: .video, position: .front).devices.first
         do {
             deviceInput = try AVCaptureDeviceInput(device: videoDevice!)
         } catch {
             print("Could not create video device input: \(error).")
             return
         }
+        session.stopRunning()
         
         session.beginConfiguration()
         
@@ -119,4 +123,3 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         return exifOrientation
     }
 }
-

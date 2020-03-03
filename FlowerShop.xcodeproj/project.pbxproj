@@ -17,6 +17,13 @@
 		76D66BBE2138B7FA00AEF9D9 /* Verbena.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BB52138B7FA00AEF9D9 /* Verbena.jpg */; };
 		76D66BBF2138B7FA00AEF9D9 /* Agapanthus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BB62138B7FA00AEF9D9 /* Agapanthus.jpg */; };
 		76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */; };
+		C387C164240EE59B008C47F5 /* keras_model-2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C387C163240EE59B008C47F5 /* keras_model-2.mlmodel */; };
+		C387C166240EE7AF008C47F5 /* keras_model2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C387C165240EE7AF008C47F5 /* keras_model2.mlmodel */; };
+		C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C167240F1363008C47F5 /* AlertViewModel.swift */; };
+		C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C16A240F1EC3008C47F5 /* AudioAlert.swift */; };
+		C387C16D240F2046008C47F5 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = C387C16C240F2046008C47F5 /* ding.wav */; };
+		C38C09F6240D3B5E003F211B /* keras_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C38C09F5240D3B5E003F211B /* keras_model.mlmodel */; };
+		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
 		FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0F95BE20B8883700378A66 /* ProductCatalog.plist */; };
 		FAA391EA20B5D2480085DA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391E920B5D2480085DA28 /* UIKit.framework */; };
 		FAA391EC20B5D2510085DA28 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391EB20B5D2510085DA28 /* Vision.framework */; };
@@ -43,6 +50,13 @@
 		76D66BB62138B7FA00AEF9D9 /* Agapanthus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Agapanthus.jpg; sourceTree = "<group>"; };
 		76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94A0611094A060D000000001 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C387C163240EE59B008C47F5 /* keras_model-2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "keras_model-2.mlmodel"; sourceTree = "<group>"; };
+		C387C165240EE7AF008C47F5 /* keras_model2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = keras_model2.mlmodel; sourceTree = "<group>"; };
+		C387C167240F1363008C47F5 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
+		C387C16A240F1EC3008C47F5 /* AudioAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAlert.swift; sourceTree = "<group>"; };
+		C387C16C240F2046008C47F5 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
+		C38C09F5240D3B5E003F211B /* keras_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = keras_model.mlmodel; sourceTree = "<group>"; };
+		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
 		FA0F95BE20B8883700378A66 /* ProductCatalog.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductCatalog.plist; sourceTree = "<group>"; };
 		FAA391E920B5D2480085DA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FAA391EB20B5D2510085DA28 /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
@@ -95,6 +109,16 @@
 			path = LICENSE;
 			sourceTree = "<group>";
 		};
+		C387C169240F1D85008C47F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C387C16C240F2046008C47F5 /* ding.wav */,
+				C387C167240F1363008C47F5 /* AlertViewModel.swift */,
+				C387C16A240F1EC3008C47F5 /* AudioAlert.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FA0F95C220B8BE9E00378A66 /* Product Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,12 +169,17 @@
 		FAD5009D1ED668B60074D713 /* FlowerShop */ = {
 			isa = PBXGroup;
 			children = (
+				C387C169240F1D85008C47F5 /* Model */,
 				FAD5009E1ED668B60074D713 /* AppDelegate.swift */,
 				FAD500A01ED668B60074D713 /* ViewController.swift */,
 				FAB417F52099308400494E9C /* VisionViewController.swift */,
 				FAD500A71ED668B60074D713 /* LaunchScreen.storyboard */,
 				FAD500A21ED668B60074D713 /* Main.storyboard */,
+				C3D9554A240C74E600A03D25 /* Faces.mlmodel */,
 				FADF58432110D83200DE9236 /* FlowerShop.mlmodel */,
+				C38C09F5240D3B5E003F211B /* keras_model.mlmodel */,
+				C387C163240EE59B008C47F5 /* keras_model-2.mlmodel */,
+				C387C165240EE7AF008C47F5 /* keras_model2.mlmodel */,
 				FAD500AA1ED668B60074D713 /* Info.plist */,
 				FA0F95C220B8BE9E00378A66 /* Product Resources */,
 				76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */,
@@ -229,6 +258,7 @@
 				76D66BBB2138B7FA00AEF9D9 /* Tansy.jpg in Resources */,
 				FAD500A41ED668B60074D713 /* Main.storyboard in Resources */,
 				76D66BB82138B7FA00AEF9D9 /* Jasmine.jpg in Resources */,
+				C387C16D240F2046008C47F5 /* ding.wav in Resources */,
 				76D66BBF2138B7FA00AEF9D9 /* Agapanthus.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,8 +271,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB417F62099308400494E9C /* VisionViewController.swift in Sources */,
+				C387C164240EE59B008C47F5 /* keras_model-2.mlmodel in Sources */,
 				FAD500A11ED668B60074D713 /* ViewController.swift in Sources */,
+				C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */,
 				FAD5009F1ED668B60074D713 /* AppDelegate.swift in Sources */,
+				C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */,
+				C387C166240EE7AF008C47F5 /* keras_model2.mlmodel in Sources */,
+				C38C09F6240D3B5E003F211B /* keras_model.mlmodel in Sources */,
+				C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */,
 				FADF58442110D83200DE9236 /* FlowerShop.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
