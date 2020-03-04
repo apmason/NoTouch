@@ -27,8 +27,9 @@ class VisionViewController: ViewController {
     private let visionQueue = DispatchQueue(label: "com.example.apple-samplecode.FlowerShop.serialVisionQueue")
     
     @IBOutlet var coverageView: UIView!
-    
     @IBOutlet var flashingView: UIView!
+    @IBOutlet var audioButton: UIButton!
+    @IBOutlet var announcementLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,20 +187,48 @@ class VisionViewController: ViewController {
         setupAVCapture()
     }
     
-    @IBAction func flipSound(_ sender: Any) {
-        
+    @IBAction func muteUnmuteSound(_ sender: Any) {
+        if alertVM.audioIsMuted {
+            alertVM.audioIsMuted = false
+            
+            guard let image = UIImage(systemName: "speaker") else {
+                return
+            }
+            
+            // set image
+            audioButton.setImage(image, for: .normal)
+        } else {
+            alertVM.audioIsMuted = true
+            guard let image = UIImage(systemName: "speaker.slash") else {
+                return
+            }
+            
+            audioButton.setImage(image, for: .normal)
+        }
     }
     
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            print("Show footage")
+            announcementLabel.isHidden = true
             coverageView.isHidden = true
             
         } else {
-            print("Cover footage")
-            coverageView.isHidden = false
+            coverageView.isHidden = false // animate this?
             
+            announcementLabel.alpha = 0
+            announcementLabel.isHidden = false
+            UIView.animate(withDuration: 0.2, animations: {
+                self.announcementLabel.alpha = 1
+            }) { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    UIView.animate(withDuration: 0.8, animations: {
+                        self.announcementLabel.alpha = 0
+                    }) { _ in
+                        self.announcementLabel.isHidden = true
+                    }
+                }
+            }
         }
     }
 }

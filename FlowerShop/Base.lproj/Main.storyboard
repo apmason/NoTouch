@@ -16,6 +16,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwv-Sj-Ovl" userLabel="Camera Flip Button">
+                                <rect key="frame" x="323" y="12" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Qwv-Sj-Ovl" secondAttribute="height" multiplier="1:1" id="DWl-PJ-Zfq"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="camera.rotate" catalog="system"/>
+                                <connections>
+                                    <action selector="flipCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oZk-HZ-ys4"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7H-Vt-qq9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sEV-Jv-DGT">
+                                <rect key="frame" x="131.5" y="616" width="112.5" height="32"/>
+                                <segments>
+                                    <segment title="" image="person" catalog="system"/>
+                                    <segment title="" image="nosign" catalog="system"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="mai-j9-Ghi"/>
+                                </connections>
+                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lx-Bf-BXa" userLabel="Audio Button">
                                 <rect key="frame" x="12" y="12" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.070009903169014079" alpha="0.74686399647887325" colorSpace="calibratedRGB"/>
@@ -31,40 +56,15 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="flipSound:" destination="BYZ-38-t0r" eventType="touchUpInside" id="APN-W3-TEu"/>
+                                    <action selector="muteUnmuteSound:" destination="BYZ-38-t0r" eventType="touchUpInside" id="APN-W3-TEu"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwv-Sj-Ovl" userLabel="Camera Flip Button">
-                                <rect key="frame" x="323" y="12" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Qwv-Sj-Ovl" secondAttribute="height" multiplier="1:1" id="DWl-PJ-Zfq"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="camera.rotate" catalog="system"/>
-                                <connections>
-                                    <action selector="flipCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oZk-HZ-ys4"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We'll flash the screen when we detect a touch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4c-5t-GY2">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We'll flash the screen when a face touch is detected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4c-5t-GY2">
                                 <rect key="frame" x="112.5" y="32" width="150" height="57"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7H-Vt-qq9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sEV-Jv-DGT">
-                                <rect key="frame" x="131.5" y="616" width="112.5" height="32"/>
-                                <segments>
-                                    <segment title="" image="person" catalog="system"/>
-                                    <segment title="" image="nosign" catalog="system"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="mai-j9-Ghi"/>
-                                </connections>
-                            </segmentedControl>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y3h-2L-cTO" userLabel="Flashing View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -95,6 +95,8 @@
                         <viewLayoutGuide key="safeArea" id="ya0-DO-AIf"/>
                     </view>
                     <connections>
+                        <outlet property="announcementLabel" destination="D4c-5t-GY2" id="kuO-Xj-Kwj"/>
+                        <outlet property="audioButton" destination="8Lx-Bf-BXa" id="SIV-oE-Bgl"/>
                         <outlet property="coverageView" destination="l7H-Vt-qq9" id="gzw-r5-7yF"/>
                         <outlet property="flashingView" destination="y3h-2L-cTO" id="kyi-TH-R5S"/>
                         <outlet property="previewView" destination="8bC-Xf-vdC" id="KdU-3x-Jsv"/>

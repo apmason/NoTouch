@@ -20,6 +20,14 @@ class AlertViewModel {
     
     private var audioVM = AudioAlert()
     
+    var audioIsMuted: Bool {
+        get {
+            return audioVM.isMuted
+        } set {
+            audioVM.isMuted = newValue
+        }
+    }
+    
     public func setupAlerts() {
         addObserver(audioVM)
     }
