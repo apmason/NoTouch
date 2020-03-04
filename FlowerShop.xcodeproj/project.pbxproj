@@ -8,22 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		76C149AE212CC860008E974C /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 76C149AD212CC85F008E974C /* LICENSE.txt */; };
-		76D66BB72138B7FA00AEF9D9 /* Fertilizer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BAE2138B7F900AEF9D9 /* Fertilizer.jpg */; };
-		76D66BB82138B7FA00AEF9D9 /* Jasmine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BAF2138B7F900AEF9D9 /* Jasmine.jpg */; };
-		76D66BBA2138B7FA00AEF9D9 /* Bougainvillea.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BB12138B7FA00AEF9D9 /* Bougainvillea.jpg */; };
-		76D66BBB2138B7FA00AEF9D9 /* Tansy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BB22138B7FA00AEF9D9 /* Tansy.jpg */; };
-		76D66BBC2138B7FA00AEF9D9 /* Trumpet_creeper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BB32138B7FA00AEF9D9 /* Trumpet_creeper.jpg */; };
-		76D66BBD2138B7FA00AEF9D9 /* Ivy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BB42138B7FA00AEF9D9 /* Ivy.jpg */; };
-		76D66BBE2138B7FA00AEF9D9 /* Verbena.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BB52138B7FA00AEF9D9 /* Verbena.jpg */; };
-		76D66BBF2138B7FA00AEF9D9 /* Agapanthus.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BB62138B7FA00AEF9D9 /* Agapanthus.jpg */; };
 		76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */; };
 		C387C164240EE59B008C47F5 /* keras_model-2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C387C163240EE59B008C47F5 /* keras_model-2.mlmodel */; };
 		C387C166240EE7AF008C47F5 /* keras_model2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C387C165240EE7AF008C47F5 /* keras_model2.mlmodel */; };
 		C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C167240F1363008C47F5 /* AlertViewModel.swift */; };
 		C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C16A240F1EC3008C47F5 /* AudioAlert.swift */; };
-		C387C16D240F2046008C47F5 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = C387C16C240F2046008C47F5 /* ding.wav */; };
 		C38C09F6240D3B5E003F211B /* keras_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C38C09F5240D3B5E003F211B /* keras_model.mlmodel */; };
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
+		C3DC394E240F29CF00B978AA /* Ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3DC394D240F29CF00B978AA /* Ding.mp3 */; };
 		FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0F95BE20B8883700378A66 /* ProductCatalog.plist */; };
 		FAA391EA20B5D2480085DA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391E920B5D2480085DA28 /* UIKit.framework */; };
 		FAA391EC20B5D2510085DA28 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391EB20B5D2510085DA28 /* Vision.framework */; };
@@ -40,23 +32,15 @@
 		59C9961059C8910000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		59DB5CA059DEAA4000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		76C149AD212CC85F008E974C /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		76D66BAE2138B7F900AEF9D9 /* Fertilizer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fertilizer.jpg; sourceTree = "<group>"; };
-		76D66BAF2138B7F900AEF9D9 /* Jasmine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Jasmine.jpg; sourceTree = "<group>"; };
-		76D66BB12138B7FA00AEF9D9 /* Bougainvillea.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Bougainvillea.jpg; sourceTree = "<group>"; };
-		76D66BB22138B7FA00AEF9D9 /* Tansy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Tansy.jpg; sourceTree = "<group>"; };
-		76D66BB32138B7FA00AEF9D9 /* Trumpet_creeper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Trumpet_creeper.jpg; sourceTree = "<group>"; };
-		76D66BB42138B7FA00AEF9D9 /* Ivy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Ivy.jpg; sourceTree = "<group>"; };
-		76D66BB52138B7FA00AEF9D9 /* Verbena.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Verbena.jpg; sourceTree = "<group>"; };
-		76D66BB62138B7FA00AEF9D9 /* Agapanthus.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Agapanthus.jpg; sourceTree = "<group>"; };
 		76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94A0611094A060D000000001 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C387C163240EE59B008C47F5 /* keras_model-2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "keras_model-2.mlmodel"; sourceTree = "<group>"; };
 		C387C165240EE7AF008C47F5 /* keras_model2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = keras_model2.mlmodel; sourceTree = "<group>"; };
 		C387C167240F1363008C47F5 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		C387C16A240F1EC3008C47F5 /* AudioAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAlert.swift; sourceTree = "<group>"; };
-		C387C16C240F2046008C47F5 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
 		C38C09F5240D3B5E003F211B /* keras_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = keras_model.mlmodel; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
+		C3DC394D240F29CF00B978AA /* Ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ding.mp3; sourceTree = "<group>"; };
 		FA0F95BE20B8883700378A66 /* ProductCatalog.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductCatalog.plist; sourceTree = "<group>"; };
 		FAA391E920B5D2480085DA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FAA391EB20B5D2510085DA28 /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
@@ -112,7 +96,7 @@
 		C387C169240F1D85008C47F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C387C16C240F2046008C47F5 /* ding.wav */,
+				C3DC394D240F29CF00B978AA /* Ding.mp3 */,
 				C387C167240F1363008C47F5 /* AlertViewModel.swift */,
 				C387C16A240F1EC3008C47F5 /* AudioAlert.swift */,
 			);
@@ -122,14 +106,6 @@
 		FA0F95C220B8BE9E00378A66 /* Product Resources */ = {
 			isa = PBXGroup;
 			children = (
-				76D66BB62138B7FA00AEF9D9 /* Agapanthus.jpg */,
-				76D66BB12138B7FA00AEF9D9 /* Bougainvillea.jpg */,
-				76D66BAE2138B7F900AEF9D9 /* Fertilizer.jpg */,
-				76D66BB42138B7FA00AEF9D9 /* Ivy.jpg */,
-				76D66BAF2138B7F900AEF9D9 /* Jasmine.jpg */,
-				76D66BB22138B7FA00AEF9D9 /* Tansy.jpg */,
-				76D66BB32138B7FA00AEF9D9 /* Trumpet_creeper.jpg */,
-				76D66BB52138B7FA00AEF9D9 /* Verbena.jpg */,
 				FA0F95BE20B8883700378A66 /* ProductCatalog.plist */,
 			);
 			path = "Product Resources";
@@ -246,20 +222,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76D66BBC2138B7FA00AEF9D9 /* Trumpet_creeper.jpg in Resources */,
 				76C149AE212CC860008E974C /* LICENSE.txt in Resources */,
-				76D66BBA2138B7FA00AEF9D9 /* Bougainvillea.jpg in Resources */,
 				FAD500A91ED668B60074D713 /* LaunchScreen.storyboard in Resources */,
-				76D66BBE2138B7FA00AEF9D9 /* Verbena.jpg in Resources */,
-				76D66BB72138B7FA00AEF9D9 /* Fertilizer.jpg in Resources */,
 				76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */,
 				FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */,
-				76D66BBD2138B7FA00AEF9D9 /* Ivy.jpg in Resources */,
-				76D66BBB2138B7FA00AEF9D9 /* Tansy.jpg in Resources */,
 				FAD500A41ED668B60074D713 /* Main.storyboard in Resources */,
-				76D66BB82138B7FA00AEF9D9 /* Jasmine.jpg in Resources */,
-				C387C16D240F2046008C47F5 /* ding.wav in Resources */,
-				76D66BBF2138B7FA00AEF9D9 /* Agapanthus.jpg in Resources */,
+				C3DC394E240F29CF00B978AA /* Ding.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

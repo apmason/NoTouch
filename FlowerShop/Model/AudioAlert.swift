@@ -9,10 +9,10 @@
 import AVFoundation
 import Foundation
 
-class AudioAlert {
+class AudioAlert: NSObject {
     
     private var player: AVAudioPlayer?
-    private let fileName = "ding"
+    private let fileName = "Ding"
     var isMuted: Bool = false {
         didSet {
             guard isMuted, let player = player, player.isPlaying else {
@@ -23,16 +23,21 @@ class AudioAlert {
         }
     }
     
-    init() {
+    override init() {
+        super.init()
+        
         // setup Audio Session
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "wav") else { return }
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
+            return
+        }
 
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .mixWithOthers)
             try AVAudioSession.sharedInstance().setActive(true)
 
             /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+            player?.delegate = self
 
         } catch let error {
             print(error.localizedDescription)
@@ -43,16 +48,22 @@ class AudioAlert {
 extension AudioAlert: AlertObserver {
     
     func alertDidFire(withTimeoutPeriod timeoutPeriod: TimeInterval) {
-        func playSound() {
-            guard let player = player, !isMuted else {
-                return
-            }
-            
-            if player.isPlaying {
-                player.stop()
-            }
-            
-            player.play(atTime: 0)
+        guard let player = player, !isMuted else {
+            return
         }
+        
+        if player.isPlaying {
+            player.stop()
+        }
+        
+        player.play()
     }
 }
+
+extension AudioAlert: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        print("Finished playing succesfully: \(flag)")
+    }
+}
+
+

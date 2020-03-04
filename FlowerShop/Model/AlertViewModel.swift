@@ -15,7 +15,7 @@ protocol AlertObserver: class {
 class AlertViewModel {
     
     private var canFire = true
-    private var timeoutPeriod: TimeInterval = 1
+    private var timeoutPeriod: TimeInterval = 3
     private var observations = [ObjectIdentifier : Observation]()
     
     private var audioVM = AudioAlert()

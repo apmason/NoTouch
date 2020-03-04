@@ -211,12 +211,12 @@ extension VisionViewController: AlertObserver {
         flashingView.alpha = 0
         flashingView.isHidden = false
         
-        UIView.animateKeyframes(withDuration: timeoutPeriod, delay: 0, options: .calculationModeCubic, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.3) {
+        UIView.animateKeyframes(withDuration: timeoutPeriod/3, delay: 0, options: .calculationModeCubic, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.4) {
                 self.flashingView.alpha = 1
             }
             
-            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.7) {
+            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.6) {
                 self.flashingView.alpha = 0
             }
             
