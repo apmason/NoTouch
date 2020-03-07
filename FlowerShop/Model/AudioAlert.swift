@@ -39,6 +39,7 @@ class AudioAlert: NSObject {
             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
             player?.delegate = self
             player?.numberOfLoops = -1
+            player?.prepareToPlay()
 
         } catch let error {
             print(error.localizedDescription)
@@ -48,16 +49,22 @@ class AudioAlert: NSObject {
 
 extension AudioAlert: AlertObserver {
     
-    func alertDidFire(withTimeoutPeriod timeoutPeriod: TimeInterval) {
+    func startAlerting() {
         guard let player = player, !isMuted else {
             return
         }
         
-        if player.isPlaying {
-            player.stop()
+        guard !player.isPlaying else {
+            return
         }
         
         player.play()
+    }
+    
+    func stopAlerting() {
+        player?.stop()
+        player?.currentTime = 0
+        player?.prepareToPlay()
     }
 }
 

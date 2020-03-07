@@ -65,7 +65,6 @@ class VisionViewController: ViewController {
     private func createFaceRequest() -> VNDetectFaceRectanglesRequest {
         //VNDetectFaceRectanglesRequest
         let request = VNDetectFaceRectanglesRequest { request, error in
-            print("Current thread is: \(Thread.current)")
             guard let results = request.results as? [VNDetectedObjectObservation], let boundingBox = results.first?.boundingBox, let pixelBuffer = self.currentlyAnalyzedPixelBuffer else {
                 print("Face detect failed")
                 // As a fallback run with the whole pixel buffer
@@ -291,22 +290,21 @@ class VisionViewController: ViewController {
 
 extension VisionViewController: AlertObserver {
     
-    func alertDidFire(withTimeoutPeriod timeoutPeriod: TimeInterval) {
+    func startAlerting() {
         flashingView.alpha = 0
         flashingView.isHidden = false
         
-//        UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeCubic, animations: {
-//            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1) {
-//                self.flashingView.alpha = 1
-//            }
-//
-//            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.6) {
-//                self.flashingView.alpha = 0
-//            }
-//
-//        }) { _ in
-//            self.flashingView.alpha = 0
-//            self.flashingView.isHidden = true
-//        }
+        UIView.animate(withDuration: 0.3) {
+            self.flashingView.alpha = 1
+        }
+    }
+    
+    func stopAlerting() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.flashingView.alpha = 0
+        }) { _ in
+            self.flashingView.alpha = 0
+            self.flashingView.isHidden = true
+        }
     }
 }
