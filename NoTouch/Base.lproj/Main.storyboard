@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8kw-KF-04z">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -113,22 +113,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NxY-tM-EDN">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NxY-tM-EDN">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="KKj-Bh-TOC"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Q0c-T1-2Fh"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8kw-KF-04z" id="HBW-CB-kdI"/>
+                                </connections>
                             </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="LuG-PT-Vzt">
+                                <rect key="frame" x="168" y="630" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="NxY-tM-EDN" firstAttribute="width" secondItem="gAa-3a-Vrv" secondAttribute="width" id="D97-LB-W0b"/>
-                            <constraint firstItem="NxY-tM-EDN" firstAttribute="centerX" secondItem="ukd-uF-wMv" secondAttribute="centerX" id="UAR-Zh-qDW"/>
-                            <constraint firstItem="NxY-tM-EDN" firstAttribute="height" secondItem="gAa-3a-Vrv" secondAttribute="height" id="WE2-yX-g4c"/>
-                            <constraint firstItem="NxY-tM-EDN" firstAttribute="centerY" secondItem="ukd-uF-wMv" secondAttribute="centerY" id="erE-ez-YyX"/>
+                            <constraint firstItem="LuG-PT-Vzt" firstAttribute="centerX" secondItem="ukd-uF-wMv" secondAttribute="centerX" id="Bw9-L8-cvz"/>
+                            <constraint firstItem="LuG-PT-Vzt" firstAttribute="bottom" secondItem="ukd-uF-wMv" secondAttribute="bottom" id="wvO-Ke-etl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ukd-uF-wMv"/>
                     </view>
                     <connections>
+                        <outlet property="pageControl" destination="LuG-PT-Vzt" id="AnG-zi-2dK"/>
                         <outlet property="scrollView" destination="NxY-tM-EDN" id="9NG-zj-bm2"/>
                     </connections>
                 </viewController>
