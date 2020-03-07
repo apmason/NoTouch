@@ -31,6 +31,9 @@ class VisionViewController: ViewController {
     @IBOutlet var audioButton: UIButton!
     @IBOutlet var announcementLabel: UILabel!
     
+    private var coreMLRequest: VNCoreMLRequest!
+    private var faceRequest: VNDetectFaceRectanglesRequest!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         alertVM.addObserver(self)
@@ -43,14 +46,57 @@ class VisionViewController: ViewController {
         let error: NSError! = nil
         
         // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "Faces", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "adam-official-6", withExtension: "mlmodelc") else {
             return NSError(domain: "VisionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "The model file is missing."])
         }
+        
         guard let objectRecognition = createClassificationRequest(modelURL: modelURL) else {
             return NSError(domain: "VisionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "The classification request failed."])
         }
-        self.analysisRequests.append(objectRecognition)
+        
+        self.coreMLRequest = objectRecognition
+        self.faceRequest = createFaceRequest()
+        
+        // Analysis requests will always call for the Face Request
+        self.analysisRequests.append(faceRequest)
         return error
+    }
+    
+    private func createFaceRequest() -> VNDetectFaceRectanglesRequest {
+        //VNDetectFaceRectanglesRequest
+        let request = VNDetectFaceRectanglesRequest { request, error in
+            print("Current thread is: \(Thread.current)")
+            guard let results = request.results as? [VNDetectedObjectObservation], let boundingBox = results.first?.boundingBox, let pixelBuffer = self.currentlyAnalyzedPixelBuffer else {
+                print("Face detect failed")
+                // As a fallback run with the whole pixel buffer
+                let touchRequest = VNImageRequestHandler(cvPixelBuffer: self.currentlyAnalyzedPixelBuffer!, orientation: self.exifOrientationFromDeviceOrientation())
+                self.visionQueue.async {
+                    do {
+                        // Release the pixel buffer when done, allowing the next buffer to be processed.
+                        try touchRequest.perform([self.coreMLRequest])
+                    } catch {
+                        print("Error: Vision request failed with error \"\(error)\"")
+                    }
+                }
+                return
+            }
+            
+            let ciImage = CIImage(cvImageBuffer: pixelBuffer)
+            ciImage.cropped(to: boundingBox)
+            
+            let touchRequest = VNImageRequestHandler(ciImage: ciImage, orientation: self.exifOrientationFromDeviceOrientation(), options: [:])
+            self.visionQueue.async {
+                do {
+                    // Release the pixel buffer when done, allowing the next buffer to be processed.
+                    try touchRequest.perform([self.coreMLRequest])
+                } catch {
+                    print("Error: Vision request failed with error \"\(error)\"")
+                }
+            }
+            // Run new request with this new data.
+        }
+        
+        return request
     }
     
     private func createClassificationRequest(modelURL: URL) -> VNCoreMLRequest? {
@@ -58,13 +104,21 @@ class VisionViewController: ViewController {
             let objectClassifier = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
             let classificationRequest = VNCoreMLRequest(model: objectClassifier, completionHandler: { [weak self] (request, error) in
                 if let results = request.results as? [VNClassificationObservation] {
-                    print("\(results.first!.identifier) : \(results.first!.confidence)")
-                    if results.first!.identifier == "Touching" && results.first!.confidence > 0.90 {
+                    //print("Result count is \(results.count)")
+//                    for result in results {
+//                        print("Result identifier is: \(result.identifier), confidence is \(result.confidence)")
+//                    }
+                    
+//                    print("\(results.first!.identifier) : \(results.first!.confidence)")
+                    if results.first!.identifier == "Touching" && results.first!.confidence > 15 {
                         print("WINNER!!!")
-                        self?.alertVM.fireAlert()
+                        DispatchQueue.main.async { [weak self] in
+                            self?.alertVM.fireAlert()
+                        }
                     }
                 }
             })
+            classificationRequest.imageCropAndScaleOption = .centerCrop // @ALEX: Test this with different options, does it work best?
             return classificationRequest
             
         } catch let error as NSError {
@@ -74,10 +128,11 @@ class VisionViewController: ViewController {
     }
     
     /// - Tag: AnalyzeImage
-    private func analyzeCurrentImage() {
+    private func findFace() {
         // Most computer vision tasks are not rotation-agnostic, so it is important to pass in the orientation of the image with respect to device.
         let orientation = exifOrientationFromDeviceOrientation()
         
+        //let newPic = VNImageRequestHandler(
         let requestHandler = VNImageRequestHandler(cvPixelBuffer: currentlyAnalyzedPixelBuffer!, orientation: orientation)
         visionQueue.async {
             do {
@@ -150,7 +205,7 @@ class VisionViewController: ViewController {
             if currentlyAnalyzedPixelBuffer == nil {
                 // Retain the image buffer for Vision processing.
                 currentlyAnalyzedPixelBuffer = pixelBuffer
-                analyzeCurrentImage()
+                findFace()
             }
         } else {
             showDetectionOverlay(false)
@@ -240,18 +295,18 @@ extension VisionViewController: AlertObserver {
         flashingView.alpha = 0
         flashingView.isHidden = false
         
-        UIView.animateKeyframes(withDuration: timeoutPeriod/3, delay: 0, options: .calculationModeCubic, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.4) {
-                self.flashingView.alpha = 1
-            }
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.6) {
-                self.flashingView.alpha = 0
-            }
-            
-        }) { _ in
-            self.flashingView.alpha = 0
-            self.flashingView.isHidden = true
-        }
+//        UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeCubic, animations: {
+//            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1) {
+//                self.flashingView.alpha = 1
+//            }
+//
+//            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.6) {
+//                self.flashingView.alpha = 0
+//            }
+//
+//        }) { _ in
+//            self.flashingView.alpha = 0
+//            self.flashingView.isHidden = true
+//        }
     }
 }

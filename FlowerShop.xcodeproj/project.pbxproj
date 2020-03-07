@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		76C149AE212CC860008E974C /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 76C149AD212CC85F008E974C /* LICENSE.txt */; };
 		76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */; };
-		C387C164240EE59B008C47F5 /* keras_model-2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C387C163240EE59B008C47F5 /* keras_model-2.mlmodel */; };
-		C387C166240EE7AF008C47F5 /* keras_model2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C387C165240EE7AF008C47F5 /* keras_model2.mlmodel */; };
 		C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C167240F1363008C47F5 /* AlertViewModel.swift */; };
 		C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C16A240F1EC3008C47F5 /* AudioAlert.swift */; };
-		C38C09F6240D3B5E003F211B /* keras_model.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C38C09F5240D3B5E003F211B /* keras_model.mlmodel */; };
+		C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */; };
+		C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5853024130604002DDCCB /* adam-official-6.mlmodel */; };
+		C3B585332413486E002DDCCB /* beep-01a.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3B585322413486E002DDCCB /* beep-01a.mp3 */; };
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
 		C3DC394E240F29CF00B978AA /* Ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3DC394D240F29CF00B978AA /* Ding.mp3 */; };
 		FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0F95BE20B8883700378A66 /* ProductCatalog.plist */; };
@@ -34,11 +34,11 @@
 		76C149AD212CC85F008E974C /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94A0611094A060D000000001 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		C387C163240EE59B008C47F5 /* keras_model-2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "keras_model-2.mlmodel"; sourceTree = "<group>"; };
-		C387C165240EE7AF008C47F5 /* keras_model2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = keras_model2.mlmodel; sourceTree = "<group>"; };
 		C387C167240F1363008C47F5 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		C387C16A240F1EC3008C47F5 /* AudioAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAlert.swift; sourceTree = "<group>"; };
-		C38C09F5240D3B5E003F211B /* keras_model.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = keras_model.mlmodel; sourceTree = "<group>"; };
+		C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official4.mlmodel"; sourceTree = "<group>"; };
+		C3B5853024130604002DDCCB /* adam-official-6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official-6.mlmodel"; sourceTree = "<group>"; };
+		C3B585322413486E002DDCCB /* beep-01a.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beep-01a.mp3"; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
 		C3DC394D240F29CF00B978AA /* Ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ding.mp3; sourceTree = "<group>"; };
 		FA0F95BE20B8883700378A66 /* ProductCatalog.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductCatalog.plist; sourceTree = "<group>"; };
@@ -96,6 +96,7 @@
 		C387C169240F1D85008C47F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C3B585322413486E002DDCCB /* beep-01a.mp3 */,
 				C3DC394D240F29CF00B978AA /* Ding.mp3 */,
 				C387C167240F1363008C47F5 /* AlertViewModel.swift */,
 				C387C16A240F1EC3008C47F5 /* AudioAlert.swift */,
@@ -152,10 +153,9 @@
 				FAD500A71ED668B60074D713 /* LaunchScreen.storyboard */,
 				FAD500A21ED668B60074D713 /* Main.storyboard */,
 				C3D9554A240C74E600A03D25 /* Faces.mlmodel */,
+				C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */,
+				C3B5853024130604002DDCCB /* adam-official-6.mlmodel */,
 				FADF58432110D83200DE9236 /* FlowerShop.mlmodel */,
-				C38C09F5240D3B5E003F211B /* keras_model.mlmodel */,
-				C387C163240EE59B008C47F5 /* keras_model-2.mlmodel */,
-				C387C165240EE7AF008C47F5 /* keras_model2.mlmodel */,
 				FAD500AA1ED668B60074D713 /* Info.plist */,
 				FA0F95C220B8BE9E00378A66 /* Product Resources */,
 				76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */,
@@ -222,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3B585332413486E002DDCCB /* beep-01a.mp3 in Resources */,
 				76C149AE212CC860008E974C /* LICENSE.txt in Resources */,
 				FAD500A91ED668B60074D713 /* LaunchScreen.storyboard in Resources */,
 				76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */,
@@ -239,15 +240,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB417F62099308400494E9C /* VisionViewController.swift in Sources */,
-				C387C164240EE59B008C47F5 /* keras_model-2.mlmodel in Sources */,
 				FAD500A11ED668B60074D713 /* ViewController.swift in Sources */,
 				C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */,
 				FAD5009F1ED668B60074D713 /* AppDelegate.swift in Sources */,
+				C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */,
 				C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */,
-				C387C166240EE7AF008C47F5 /* keras_model2.mlmodel in Sources */,
-				C38C09F6240D3B5E003F211B /* keras_model.mlmodel in Sources */,
 				C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */,
 				FADF58442110D83200DE9236 /* FlowerShop.mlmodel in Sources */,
+				C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
