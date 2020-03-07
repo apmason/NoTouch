@@ -13,11 +13,11 @@ class VisionViewController: ViewController {
         
     // Vision parts
     private var analysisRequests = [VNRequest]()
-    private let sequenceRequestHandler = VNSequenceRequestHandler()
+    //private let sequenceRequestHandler = VNSequenceRequestHandler()
     
     // Registration history
-    private let maximumHistoryLength = 15
-    private var transpositionHistoryPoints: [CGPoint] = [ ]
+//    private let maximumHistoryLength = 15
+//    private var transpositionHistoryPoints: [CGPoint] = [ ]
     private var previousPixelBuffer: CVPixelBuffer?
     
     // The current pixel buffer undergoing analysis. Run requests in a serial fashion, one after another.
@@ -107,10 +107,14 @@ class VisionViewController: ViewController {
 //                    for result in results {
 //                        print("Result identifier is: \(result.identifier), confidence is \(result.confidence)")
 //                    }
+                    if results.first!.identifier == "Touching" {
+                        print("Confidence is: \(results.first!.confidence)")
+                    }
+                
                     
 //                    print("\(results.first!.identifier) : \(results.first!.confidence)")
-                    if results.first!.identifier == "Touching" && results.first!.confidence > 15 {
-                        print("WINNER!!!")
+                    if results.first!.identifier == "Touching" && results.first!.confidence > 12 {
+                        //print("WINNER!!!")
                         DispatchQueue.main.async { [weak self] in
                             self?.alertVM.fireAlert()
                         }
@@ -143,34 +147,6 @@ class VisionViewController: ViewController {
             }
         }
     }
-    fileprivate func resetTranspositionHistory() {
-        transpositionHistoryPoints.removeAll()
-    }
-    
-    fileprivate func recordTransposition(_ point: CGPoint) {
-        transpositionHistoryPoints.append(point)
-        
-        if transpositionHistoryPoints.count > maximumHistoryLength {
-            transpositionHistoryPoints.removeFirst()
-        }
-    }
-    /// - Tag: CheckSceneStability
-    fileprivate func sceneStabilityAchieved() -> Bool {
-        // Determine if we have enough evidence of stability.
-        if transpositionHistoryPoints.count == maximumHistoryLength {
-            // Calculate the moving average.
-            var movingAverage: CGPoint = CGPoint.zero
-            for currentPoint in transpositionHistoryPoints {
-                movingAverage.x += currentPoint.x
-                movingAverage.y += currentPoint.y
-            }
-            let distance = abs(movingAverage.x) + abs(movingAverage.y)
-            if distance < 20 {
-                return true
-            }
-        }
-        return false
-    }
     
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
@@ -179,40 +155,16 @@ class VisionViewController: ViewController {
         
         guard previousPixelBuffer != nil else {
             previousPixelBuffer = pixelBuffer
-            self.resetTranspositionHistory()
-            return
-        }
-        
-        let registrationRequest = VNTranslationalImageRegistrationRequest(targetedCVPixelBuffer: pixelBuffer)
-        do {
-            try sequenceRequestHandler.perform([ registrationRequest ], on: previousPixelBuffer!)
-        } catch let error as NSError {
-            print("Failed to process request: \(error.localizedDescription).")
             return
         }
         
         previousPixelBuffer = pixelBuffer
         
-        if let results = registrationRequest.results {
-            if let alignmentObservation = results.first as? VNImageTranslationAlignmentObservation {
-                let alignmentTransform = alignmentObservation.alignmentTransform
-                self.recordTransposition(CGPoint(x: alignmentTransform.tx, y: alignmentTransform.ty))
-            }
+        if currentlyAnalyzedPixelBuffer == nil {
+            // Retain the image buffer for Vision processing.
+            currentlyAnalyzedPixelBuffer = pixelBuffer
+            findFace()
         }
-        if self.sceneStabilityAchieved() {
-            showDetectionOverlay(true)
-            if currentlyAnalyzedPixelBuffer == nil {
-                // Retain the image buffer for Vision processing.
-                currentlyAnalyzedPixelBuffer = pixelBuffer
-                findFace()
-            }
-        } else {
-            showDetectionOverlay(false)
-        }
-    }
-    
-    private func showDetectionOverlay(_ visible: Bool) {
-        
     }
     
     override func setupAVCapture() {
@@ -294,13 +246,13 @@ extension VisionViewController: AlertObserver {
         flashingView.alpha = 0
         flashingView.isHidden = false
         
-        UIView.animate(withDuration: 0.3) {
-            self.flashingView.alpha = 1
+        UIView.animate(withDuration: 0.1) {
+            self.flashingView.alpha = 0.4
         }
     }
     
     func stopAlerting() {
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.1, animations: {
             self.flashingView.alpha = 0
         }) { _ in
             self.flashingView.alpha = 0
