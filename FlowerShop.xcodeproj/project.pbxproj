@@ -7,15 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		76C149AE212CC860008E974C /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 76C149AD212CC85F008E974C /* LICENSE.txt */; };
 		76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */; };
+		C32406C02414547D00D5AC9E /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C32406BF2414547C00D5AC9E /* beep-offic.m4a */; };
+		C32406C4241456F100D5AC9E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32406C3241456F100D5AC9E /* TutorialViewController.swift */; };
+		C32406C6241459F500D5AC9E /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32406C5241459F500D5AC9E /* SlideView.swift */; };
+		C32406C824145A0B00D5AC9E /* SlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32406C724145A0B00D5AC9E /* SlideView.xib */; };
+		C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C167240F1363008C47F5 /* AlertViewModel.swift */; };
 		C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C16A240F1EC3008C47F5 /* AudioAlert.swift */; };
 		C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */; };
 		C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5853024130604002DDCCB /* adam-official-6.mlmodel */; };
-		C3B585332413486E002DDCCB /* beep-01a.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3B585322413486E002DDCCB /* beep-01a.mp3 */; };
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
-		C3DC394E240F29CF00B978AA /* Ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3DC394D240F29CF00B978AA /* Ding.mp3 */; };
 		FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0F95BE20B8883700378A66 /* ProductCatalog.plist */; };
 		FAA391EA20B5D2480085DA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391E920B5D2480085DA28 /* UIKit.framework */; };
 		FAA391EC20B5D2510085DA28 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391EB20B5D2510085DA28 /* Vision.framework */; };
@@ -31,22 +33,23 @@
 /* Begin PBXFileReference section */
 		59C9961059C8910000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		59DB5CA059DEAA4000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		76C149AD212CC85F008E974C /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		94A0611094A060D000000001 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C32406BF2414547C00D5AC9E /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
+		C32406C3241456F100D5AC9E /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		C32406C5241459F500D5AC9E /* SlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
+		C32406C724145A0B00D5AC9E /* SlideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideView.xib; sourceTree = "<group>"; };
+		C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		C387C167240F1363008C47F5 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		C387C16A240F1EC3008C47F5 /* AudioAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAlert.swift; sourceTree = "<group>"; };
 		C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official4.mlmodel"; sourceTree = "<group>"; };
 		C3B5853024130604002DDCCB /* adam-official-6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official-6.mlmodel"; sourceTree = "<group>"; };
-		C3B585322413486E002DDCCB /* beep-01a.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beep-01a.mp3"; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
-		C3DC394D240F29CF00B978AA /* Ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ding.mp3; sourceTree = "<group>"; };
 		FA0F95BE20B8883700378A66 /* ProductCatalog.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductCatalog.plist; sourceTree = "<group>"; };
 		FAA391E920B5D2480085DA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FAA391EB20B5D2510085DA28 /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
 		FAA391ED20B5D2570085DA28 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		FAB417F52099308400494E9C /* VisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionViewController.swift; sourceTree = "<group>"; };
-		FAD5009B1ED668B60074D713 /* FlowerShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlowerShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAD5009B1ED668B60074D713 /* NoTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAD5009E1ED668B60074D713 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAD500A01ED668B60074D713 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FAD500A31ED668B60074D713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,19 +88,28 @@
 			name = Configuration;
 			sourceTree = "<group>";
 		};
-		76C149AC212CC85F008E974C /* LICENSE */ = {
+		C32406C12414562E00D5AC9E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				76C149AD212CC85F008E974C /* LICENSE.txt */,
+				C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */,
+				C32406BF2414547C00D5AC9E /* beep-offic.m4a */,
 			);
-			path = LICENSE;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C32406C2241456AF00D5AC9E /* Introduction */ = {
+			isa = PBXGroup;
+			children = (
+				C32406C3241456F100D5AC9E /* TutorialViewController.swift */,
+				C32406C5241459F500D5AC9E /* SlideView.swift */,
+				C32406C724145A0B00D5AC9E /* SlideView.xib */,
+			);
+			path = Introduction;
 			sourceTree = "<group>";
 		};
 		C387C169240F1D85008C47F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C3B585322413486E002DDCCB /* beep-01a.mp3 */,
-				C3DC394D240F29CF00B978AA /* Ding.mp3 */,
 				C387C167240F1363008C47F5 /* AlertViewModel.swift */,
 				C387C16A240F1EC3008C47F5 /* AudioAlert.swift */,
 			);
@@ -125,8 +137,6 @@
 		FAD500921ED668B60074D713 = {
 			isa = PBXGroup;
 			children = (
-				94A0611094A060D000000001 /* README.md */,
-				76C149AC212CC85F008E974C /* LICENSE */,
 				FAD5009D1ED668B60074D713 /* FlowerShop */,
 				FAD5009C1ED668B60074D713 /* Products */,
 				FAA391E820B5D2480085DA28 /* Frameworks */,
@@ -138,7 +148,7 @@
 		FAD5009C1ED668B60074D713 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FAD5009B1ED668B60074D713 /* FlowerShop.app */,
+				FAD5009B1ED668B60074D713 /* NoTouch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,6 +156,8 @@
 		FAD5009D1ED668B60074D713 /* FlowerShop */ = {
 			isa = PBXGroup;
 			children = (
+				C32406C2241456AF00D5AC9E /* Introduction */,
+				C32406C12414562E00D5AC9E /* Resources */,
 				C387C169240F1D85008C47F5 /* Model */,
 				FAD5009E1ED668B60074D713 /* AppDelegate.swift */,
 				FAD500A01ED668B60074D713 /* ViewController.swift */,
@@ -180,7 +192,7 @@
 			);
 			name = FlowerShop;
 			productName = RobotShop;
-			productReference = FAD5009B1ED668B60074D713 /* FlowerShop.app */;
+			productReference = FAD5009B1ED668B60074D713 /* NoTouch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -222,13 +234,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3B585332413486E002DDCCB /* beep-01a.mp3 in Resources */,
-				76C149AE212CC860008E974C /* LICENSE.txt in Resources */,
+				C32406C02414547D00D5AC9E /* beep-offic.m4a in Resources */,
 				FAD500A91ED668B60074D713 /* LaunchScreen.storyboard in Resources */,
+				C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */,
 				76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */,
+				C32406C824145A0B00D5AC9E /* SlideView.xib in Resources */,
 				FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */,
 				FAD500A41ED668B60074D713 /* Main.storyboard in Resources */,
-				C3DC394E240F29CF00B978AA /* Ding.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +252,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB417F62099308400494E9C /* VisionViewController.swift in Sources */,
+				C32406C6241459F500D5AC9E /* SlideView.swift in Sources */,
 				FAD500A11ED668B60074D713 /* ViewController.swift in Sources */,
+				C32406C4241456F100D5AC9E /* TutorialViewController.swift in Sources */,
 				C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */,
 				FAD5009F1ED668B60074D713 /* AppDelegate.swift in Sources */,
 				C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */,
@@ -400,8 +414,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FlowerShop/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.FlowerShop${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
+				PRODUCT_NAME = NoTouch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -417,8 +431,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FlowerShop/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.FlowerShop${SAMPLE_CODE_DISAMBIGUATOR}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
+				PRODUCT_NAME = NoTouch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

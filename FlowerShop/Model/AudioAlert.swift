@@ -12,7 +12,8 @@ import Foundation
 class AudioAlert: NSObject {
     
     private var player: AVAudioPlayer?
-    private let fileName = "beep-01a"
+    private let fileName = "beep-offic"
+    
     var isMuted: Bool = false {
         didSet {
             guard isMuted, let player = player, player.isPlaying else {
@@ -27,7 +28,8 @@ class AudioAlert: NSObject {
         super.init()
         
         // setup Audio Session
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: "m4a") else {
+            fatalError("No URL")
             return
         }
 
@@ -36,7 +38,7 @@ class AudioAlert: NSObject {
             try AVAudioSession.sharedInstance().setActive(true)
 
             /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.m4a.rawValue)
             player?.delegate = self
             player?.numberOfLoops = -1
             player?.prepareToPlay()
