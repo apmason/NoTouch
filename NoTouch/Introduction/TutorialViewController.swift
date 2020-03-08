@@ -12,6 +12,7 @@ class TutorialViewController: UIViewController {
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var pageControl: UIPageControl!
+    private let viewModel = TutorialViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,24 +24,52 @@ class TutorialViewController: UIViewController {
         view.bringSubviewToFront(pageControl)
     }
     
-    func createSlides() -> [SlideView] {
-        guard let slideOne: SlideView = Bundle.main.loadNibNamed("SlideView", owner: self, options: nil)?.first as? SlideView else {
-            assertionFailure("You fucked up")
-            return []
+    private func createSlides() -> [SlideView] {
+        let slideViews = createSlideViews(withCount: 6)
+        for i in 0..<slideViews.count {
+            switch i {
+            case 0:
+                slideViews[i].textLabel.text = viewModel.placingText
+                
+            case 1:
+                slideViews[i].textLabel.text = viewModel.moveCloserText
+                
+            case 2:
+                slideViews[i].textLabel.text = viewModel.alertText
+                
+            case 3:
+                slideViews[i].textLabel.text = viewModel.openText
+                
+            case 4:
+                slideViews[i].textLabel.text = viewModel.batteryText
+                
+            case 5:
+                slideViews[i].textLabel.text = viewModel.privacyText
+                
+            default:
+                print("REACHED DEFAULT, SOMETHING WENT WRONG")
+                assertionFailure("Default hit")
+            
+            }
         }
         
-        //slideOne.textLabel.text = //Localized text
-        
-        guard let slideTwo: SlideView = Bundle.main.loadNibNamed("SlideView", owner: self, options: nil)?.first as? SlideView else {
-            assertionFailure("You fucked up")
-            return []
-        }
-        slideTwo.textLabel.text = "Move the device closer to your face for best results."
-        
-        return [slideOne, slideTwo]
+        return slideViews
     }
     
-    func setupSlideScrollView(slides : [SlideView]) {
+    private func createSlideViews(withCount count: Int) -> [SlideView] {
+        var slideViews = [SlideView]()
+        for _ in 0..<count {
+            guard let slide: SlideView = Bundle.main.loadNibNamed("SlideView", owner: self, options: nil)?.first as? SlideView else {
+                assertionFailure("Failure")
+                return []
+            }
+            
+            slideViews.append(slide)
+        }
+        return slideViews
+    }
+    
+    private func setupSlideScrollView(slides : [SlideView]) {
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height)
         scrollView.isPagingEnabled = true
