@@ -1,3 +1,12 @@
 
 /* Class = "UILabel"; text = "We'll flash the screen when a face touch is detected"; ObjectID = "D4c-5t-GY2"; */
-"D4c-5t-GY2.text" = "We'll flash the screen when a face touch is detected";
+"D4c-5t-GY2.text" = "얼굴 터치가 감지되면 화면이 깜박입니다";
+
+/* Class = "UIButton"; normalTitle = "Tutorial"; ObjectID = "Z15-pz-pFd"; */
+"Z15-pz-pFd.normalTitle" = "지도 시간";
+
+/* Class = "UIButton"; normalTitle = "Share NoTouch"; ObjectID = "fCr-HH-qg3"; */
+"fCr-HH-qg3.normalTitle" = "NoTouch 공유";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "hMe-my-SDL"; */
+"hMe-my-SDL.title" = "지도 시간";

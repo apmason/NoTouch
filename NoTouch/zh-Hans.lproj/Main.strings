@@ -1,3 +1,12 @@
 
 /* Class = "UILabel"; text = "We'll flash the screen when a face touch is detected"; ObjectID = "D4c-5t-GY2"; */
-"D4c-5t-GY2.text" = "We'll flash the screen when a face touch is detected";
+"D4c-5t-GY2.text" = "当我们检测到脸部触摸时，我们将闪烁屏幕";
+
+/* Class = "UIButton"; normalTitle = "Tutorial"; ObjectID = "Z15-pz-pFd"; */
+"Z15-pz-pFd.normalTitle" = "讲解";
+
+/* "Share NoTouch" (Info VC) */
+"fCr-HH-qg3.normalTitle" = "分享NoTouch";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "hMe-my-SDL"; */
+"hMe-my-SDL.title" = "完成";

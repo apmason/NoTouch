@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,15 +12,15 @@
             <objects>
                 <viewController storyboardIdentifier="VisionViewController" id="BYZ-38-t0r" customClass="VisionViewController" customModule="NoTouch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7H-Vt-qq9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sEV-Jv-DGT">
-                                <rect key="frame" x="131.5" y="616" width="112.5" height="32"/>
+                                <rect key="frame" x="131.33333333333334" y="727" width="112.33333333333334" height="32"/>
                                 <segments>
                                     <segment title="" image="person" catalog="system"/>
                                     <segment title="" image="nosign" catalog="system"/>
@@ -30,7 +30,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwv-Sj-Ovl" userLabel="Camera Flip Button">
-                                <rect key="frame" x="323" y="12" width="40" height="40"/>
+                                <rect key="frame" x="318" y="56" width="45" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.070009903169999999" alpha="0.74686399650000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Qwv-Sj-Ovl" secondAttribute="height" multiplier="1:1" id="DWl-PJ-Zfq"/>
@@ -47,11 +47,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lx-Bf-BXa" userLabel="Audio Button">
-                                <rect key="frame" x="12" y="12" width="40" height="40"/>
+                                <rect key="frame" x="12" y="56" width="45" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.070009903169014079" alpha="0.74686399647887325" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="88q-lR-S8G"/>
-                                    <constraint firstAttribute="height" constant="40" id="CDC-XS-mEj"/>
+                                    <constraint firstAttribute="width" constant="45" id="88q-lR-S8G"/>
+                                    <constraint firstAttribute="height" constant="45" id="CDC-XS-mEj"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="speaker" catalog="system"/>
@@ -65,7 +65,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qmm-MT-uXV" userLabel="Info Button">
-                                <rect key="frame" x="323" y="68" width="40" height="40"/>
+                                <rect key="frame" x="318" y="117" width="45" height="45"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.070009903169999999" alpha="0.74686399650000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Qmm-MT-uXV" secondAttribute="height" multiplier="1:1" id="Ihs-gg-2qy"/>
@@ -82,13 +82,13 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We'll flash the screen when a face touch is detected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4c-5t-GY2">
-                                <rect key="frame" x="112.5" y="32" width="150" height="57"/>
+                                <rect key="frame" x="112.66666666666669" y="78.666666666666671" width="150" height="57.000000000000014"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y3h-2L-cTO" userLabel="Flashing View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" red="1" green="0.29287580891886833" blue="0.29096630232708209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                         </subviews>
@@ -136,7 +136,7 @@
             <objects>
                 <viewController storyboardIdentifier="TutorialViewController" id="8kw-KF-04z" customClass="TutorialViewController" customModule="NoTouch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gAa-3a-Vrv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NxY-tM-EDN">
@@ -149,7 +149,7 @@
                                 </connections>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="LuG-PT-Vzt">
-                                <rect key="frame" x="168" y="630" width="39" height="37"/>
+                                <rect key="frame" x="168" y="741" width="39" height="37"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
@@ -168,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oka-uy-208" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1191" y="819"/>
+            <point key="canvasLocation" x="1189.5999999999999" y="818.7192118226601"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="B3p-8P-GSI">
@@ -192,17 +192,17 @@
             <objects>
                 <viewController id="sab-FR-Oa7" customClass="InfoViewController" customModule="NoTouch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EyU-rY-vQZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fth-Gg-KpK">
-                                <rect key="frame" x="173" y="612.5" width="29.5" height="14.5"/>
+                                <rect key="frame" x="172.66666666666666" y="689.66666666666663" width="29.666666666666657" height="14.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCr-HH-qg3" customClass="GradientButton" customModule="NoTouch" customModuleProvider="target">
-                                <rect key="frame" x="56.5" y="100" width="262.5" height="47.5"/>
+                                <rect key="frame" x="56.333333333333343" y="100" width="262.33333333333326" height="53.333333333333343"/>
                                 <state key="normal" title="Share NoTouch">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -211,7 +211,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z15-pz-pFd" userLabel="Tutorial Button" customClass="GradientButton" customModule="NoTouch" customModuleProvider="target">
-                                <rect key="frame" x="56.5" y="172.5" width="262.5" height="47"/>
+                                <rect key="frame" x="56.333333333333343" y="178.33333333333334" width="262.33333333333326" height="53.666666666666657"/>
                                 <state key="normal" title="Tutorial">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -248,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dp9-9e-JpC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="63"/>
+            <point key="canvasLocation" x="1418" y="63"/>
         </scene>
     </scenes>
     <resources>

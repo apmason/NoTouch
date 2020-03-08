@@ -1,3 +1,12 @@
 
 /* Class = "UILabel"; text = "We'll flash the screen when a face touch is detected"; ObjectID = "D4c-5t-GY2"; */
-"D4c-5t-GY2.text" = "We'll flash the screen when a face touch is detected";
+"D4c-5t-GY2.text" = "顔のタッチが検出されたら画面をフラッシュします";
+
+/* Class = "UIButton"; normalTitle = "Tutorial"; ObjectID = "Z15-pz-pFd"; */
+"Z15-pz-pFd.normalTitle" = "チュートリアル";
+
+/* Class = "UIButton"; normalTitle = "Share NoTouch"; ObjectID = "fCr-HH-qg3"; */
+"fCr-HH-qg3.normalTitle" = "NoTouchを共有する";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "hMe-my-SDL"; */
+"hMe-my-SDL.title" = "完了";

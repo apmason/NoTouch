@@ -1,3 +1,12 @@
 
 /* Class = "UILabel"; text = "We'll flash the screen when a face touch is detected"; ObjectID = "D4c-5t-GY2"; */
-"D4c-5t-GY2.text" = "We'll flash the screen when a face touch is detected";
+"D4c-5t-GY2.text" = "Wir werden den nildschirm blinken lassen, wenn eine gesichtsberührung erkannt wird";
+
+/* Class = "UIButton"; normalTitle = "Tutorial"; ObjectID = "Z15-pz-pFd"; */
+"Z15-pz-pFd.normalTitle" = "Lernprogramm";
+
+/* Class = "UIButton"; normalTitle = "Share NoTouch"; ObjectID = "fCr-HH-qg3"; */
+"fCr-HH-qg3.normalTitle" = "Teilen Sie NoTouch";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "hMe-my-SDL"; */
+"hMe-my-SDL.title" = "Erledigt";
