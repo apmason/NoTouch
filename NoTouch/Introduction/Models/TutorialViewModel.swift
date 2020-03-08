@@ -21,6 +21,7 @@ class TutorialViewModel: TutorialProvider {
         
         let slideViews = createSlideViews()
         // Listen for final button taps
+        slideViews.last?.button.isHidden = false
         slideViews.last?.delegate = self
         
         var slides: [UIView] = slideViews

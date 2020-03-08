@@ -210,14 +210,27 @@
                                     <action selector="shareNoTouch:" destination="sab-FR-Oa7" eventType="touchUpInside" id="xXi-n8-jYh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z15-pz-pFd" userLabel="Tutorial Button" customClass="GradientButton" customModule="NoTouch" customModuleProvider="target">
+                                <rect key="frame" x="56.5" y="172.5" width="262.5" height="47"/>
+                                <state key="normal" title="Tutorial">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="startTutorial:" destination="sab-FR-Oa7" eventType="touchUpInside" id="7dD-Cg-wRI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="fCr-HH-qg3" firstAttribute="width" secondItem="Twx-3I-wvg" secondAttribute="width" multiplier="0.7" id="2f7-nC-0kG"/>
+                            <constraint firstItem="Z15-pz-pFd" firstAttribute="width" secondItem="fCr-HH-qg3" secondAttribute="width" id="31L-69-lPc"/>
                             <constraint firstItem="Twx-3I-wvg" firstAttribute="bottom" secondItem="fth-Gg-KpK" secondAttribute="bottom" constant="20" id="91d-PN-pb9"/>
                             <constraint firstItem="fCr-HH-qg3" firstAttribute="centerX" secondItem="Twx-3I-wvg" secondAttribute="centerX" id="Mag-US-82N"/>
                             <constraint firstItem="fCr-HH-qg3" firstAttribute="top" secondItem="Twx-3I-wvg" secondAttribute="top" constant="44" id="VP2-wR-hxl"/>
+                            <constraint firstItem="Z15-pz-pFd" firstAttribute="centerX" secondItem="fCr-HH-qg3" secondAttribute="centerX" id="W8l-wd-LnV"/>
+                            <constraint firstItem="Z15-pz-pFd" firstAttribute="top" secondItem="fCr-HH-qg3" secondAttribute="bottom" constant="25" id="aVa-vr-tMv"/>
                             <constraint firstItem="fth-Gg-KpK" firstAttribute="centerX" secondItem="Twx-3I-wvg" secondAttribute="centerX" id="hB7-aV-6EA"/>
+                            <constraint firstItem="Z15-pz-pFd" firstAttribute="height" secondItem="fCr-HH-qg3" secondAttribute="height" id="uNJ-CR-4R6"/>
                             <constraint firstItem="fCr-HH-qg3" firstAttribute="height" secondItem="Twx-3I-wvg" secondAttribute="height" multiplier="0.08" id="uoM-fT-CUq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Twx-3I-wvg"/>

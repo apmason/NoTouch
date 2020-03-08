@@ -25,8 +25,11 @@ class TutorialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        edgesForExtendedLayout = []
+        
         guard let viewModel = viewModel else {
-            fatalError("Couldn't create view model")
+            assertionFailure("No view model to present")
+            return
         }
         
         let slides = viewModel.createViews()
@@ -38,8 +41,10 @@ class TutorialViewController: UIViewController {
     }
     
     private func setupSlideScrollView(slides: [UIView]) {
-        scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height)
+        let navHeight = navigationController?.navigationBar.frame.height ?? 0
+        scrollView.frame = CGRect(x: 0, y: navHeight, width: view.frame.width, height: view.frame.height - navHeight)
+        
+        scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height - (navHeight * 2))
         scrollView.isPagingEnabled = true
         
         for i in 0 ..< slides.count {
@@ -66,7 +71,7 @@ extension TutorialViewController: TutorialProviderDelegate {
 }
 
 extension TutorialViewController: UIScrollViewDelegate {
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x / view.bounds.width)
     }

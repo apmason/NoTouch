@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set your device up so your face is in the middle of the camera's frame." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGS-gO-YQd">
-                    <rect key="frame" x="30" y="132" width="301" height="233"/>
+                    <rect key="frame" x="30" y="119" width="301" height="239"/>
                     <fontDescription key="fontDescription" name="SFProDisplay-Heavy" family="SF Pro Display" pointSize="40"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                 <constraint firstItem="ezT-uu-kYF" firstAttribute="height" secondItem="vUN-kp-3ea" secondAttribute="height" multiplier="0.07" id="bHn-LC-GkR"/>
                 <constraint firstItem="ezT-uu-kYF" firstAttribute="width" secondItem="vUN-kp-3ea" secondAttribute="width" multiplier="0.6" id="dRX-Jo-YaN"/>
                 <constraint firstItem="kGS-gO-YQd" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" multiplier="0.8" id="fIc-Qn-UJn"/>
-                <constraint firstItem="kGS-gO-YQd" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" multiplier="3" id="iSF-Zv-gDg"/>
+                <constraint firstItem="kGS-gO-YQd" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" multiplier="2.7" id="iSF-Zv-gDg"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ezT-uu-kYF" secondAttribute="bottom" constant="61" id="kfI-4a-fEB"/>
                 <constraint firstItem="kGS-gO-YQd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="oq1-ip-B4W"/>
             </constraints>

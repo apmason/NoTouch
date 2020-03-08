@@ -38,4 +38,18 @@ class InfoViewController: UIViewController {
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(ac, animated: true)
     }
+    
+    @IBAction func startTutorial(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController else {
+            assertionFailure("Failed to cast as TutorialVC")
+            return
+        }
+        
+        vc.viewModel = InfoTutorialProvider()
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

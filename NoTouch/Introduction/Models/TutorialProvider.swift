@@ -48,7 +48,6 @@ extension TutorialProvider {
                 
             case 5:
                 slide.textLabel.text = privacyText
-                slide.button.isHidden = false
                 
             default:
                 print("REACHED DEFAULT, SOMETHING WENT WRONG")
@@ -83,5 +82,5 @@ fileprivate var batteryText: String {
 }
 
 fileprivate var privacyText: String {
-    return NSLocalizedString("Privacy comes first.\n\nNone of your data is saved.\n\nNoTouch works with no Internet.", comment: "Privacy description")
+    return NSLocalizedString("Privacy comes first.\n\nNone of your data is saved.\n\nNoTouch works without Internet.", comment: "Privacy description")
 }
