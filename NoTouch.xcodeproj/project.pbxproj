@@ -13,6 +13,7 @@
 		C32406C6241459F500D5AC9E /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32406C5241459F500D5AC9E /* SlideView.swift */; };
 		C32406C824145A0B00D5AC9E /* SlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32406C724145A0B00D5AC9E /* SlideView.xib */; };
 		C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
+		C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B70B524152D52008F1D39 /* FirstRunModel.swift */; };
 		C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C36795FC24146A1500886163 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C36795FE24146A1500886163 /* Localizable.strings */; };
 		C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367960C24146B1300886163 /* TutorialViewModel.swift */; };
@@ -45,6 +46,7 @@
 		C32406C5241459F500D5AC9E /* SlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
 		C32406C724145A0B00D5AC9E /* SlideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideView.xib; sourceTree = "<group>"; };
 		C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
+		C32B70B524152D52008F1D39 /* FirstRunModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunModel.swift; sourceTree = "<group>"; };
 		C36795F8241469B400886163 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C36795F9241469B400886163 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		C36795FD24146A1500886163 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -113,24 +115,58 @@
 			isa = PBXGroup;
 			children = (
 				C36795FE24146A1500886163 /* Localizable.strings */,
-				C32406C5241459F500D5AC9E /* SlideView.swift */,
-				C32406C724145A0B00D5AC9E /* SlideView.xib */,
-				C367960C24146B1300886163 /* TutorialViewModel.swift */,
-				C32406C3241456F100D5AC9E /* TutorialViewController.swift */,
-				C367960E241485C300886163 /* TutorialProvider.swift */,
-				C3679610241488DC00886163 /* FirstIntroView.swift */,
-				C3679612241488F100886163 /* FirstIntroView.xib */,
+				C32B70BA24153211008F1D39 /* Models */,
+				C32B70B9241531FC008F1D39 /* Views */,
+				C32B70B8241531F1008F1D39 /* Controller */,
 			);
 			path = Introduction;
 			sourceTree = "<group>";
 		};
-		C387C169240F1D85008C47F5 /* Model */ = {
+		C32B70B7241531D8008F1D39 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FAD500A01ED668B60074D713 /* ViewController.swift */,
+				FAB417F52099308400494E9C /* VisionViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C32B70B8241531F1008F1D39 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C32406C3241456F100D5AC9E /* TutorialViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C32B70B9241531FC008F1D39 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C3679610241488DC00886163 /* FirstIntroView.swift */,
+				C3679612241488F100886163 /* FirstIntroView.xib */,
+				C32406C5241459F500D5AC9E /* SlideView.swift */,
+				C32406C724145A0B00D5AC9E /* SlideView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C32B70BA24153211008F1D39 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C367960C24146B1300886163 /* TutorialViewModel.swift */,
+				C367960E241485C300886163 /* TutorialProvider.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C387C169240F1D85008C47F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				C387C167240F1363008C47F5 /* AlertViewModel.swift */,
 				C387C16A240F1EC3008C47F5 /* AudioAlert.swift */,
+				C32B70B524152D52008F1D39 /* FirstRunModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FA0F95C220B8BE9E00378A66 /* Product Resources */ = {
@@ -171,12 +207,11 @@
 		FAD5009D1ED668B60074D713 /* NoTouch */ = {
 			isa = PBXGroup;
 			children = (
+				C32B70B7241531D8008F1D39 /* Controllers */,
 				C32406C2241456AF00D5AC9E /* Introduction */,
 				C32406C12414562E00D5AC9E /* Resources */,
-				C387C169240F1D85008C47F5 /* Model */,
+				C387C169240F1D85008C47F5 /* Models */,
 				FAD5009E1ED668B60074D713 /* AppDelegate.swift */,
-				FAD500A01ED668B60074D713 /* ViewController.swift */,
-				FAB417F52099308400494E9C /* VisionViewController.swift */,
 				FAD500A71ED668B60074D713 /* LaunchScreen.storyboard */,
 				FAD500A21ED668B60074D713 /* Main.storyboard */,
 				C3D9554A240C74E600A03D25 /* Faces.mlmodel */,
@@ -280,6 +315,7 @@
 				C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */,
 				C3679611241488DC00886163 /* FirstIntroView.swift in Sources */,
 				FAB417F62099308400494E9C /* VisionViewController.swift in Sources */,
+				C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */,
 				C32406C6241459F500D5AC9E /* SlideView.swift in Sources */,
 				FAD500A11ED668B60074D713 /* ViewController.swift in Sources */,
 				C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */,

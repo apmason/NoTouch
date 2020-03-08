@@ -9,8 +9,14 @@
 import Foundation
 import UIKit
 
-protocol TutorialProvider {
+protocol TutorialProviderDelegate: class {
+    func dismissTutorial()
+    func presentVisionScreen()
+}
+
+protocol TutorialProvider: class {
     func createViews() -> [UIView]
+    var delegate: TutorialProviderDelegate? { get set }
 }
 
 extension TutorialProvider {

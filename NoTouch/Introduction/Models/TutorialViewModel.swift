@@ -11,6 +11,8 @@ import UIKit
 
 class TutorialViewModel: TutorialProvider {
     
+    weak var delegate: TutorialProviderDelegate?
+    
     func createViews() -> [UIView] {
         guard let firstPage: FirstIntroView = Bundle.main.loadNibNamed("FirstIntroView", owner: nil, options: nil)?.first as? FirstIntroView else {
             assertionFailure("Failure getting first page")
@@ -32,5 +34,6 @@ extension TutorialViewModel: SlideViewDelegate {
     
     func buttonTapped() {
         print("Button was tapped, what to do?")
+        delegate?.presentVisionScreen()
     }
 }

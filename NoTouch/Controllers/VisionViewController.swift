@@ -13,11 +13,7 @@ class VisionViewController: ViewController {
         
     // Vision parts
     private var analysisRequests = [VNRequest]()
-    //private let sequenceRequestHandler = VNSequenceRequestHandler()
-    
-    // Registration history
-//    private let maximumHistoryLength = 15
-//    private var transpositionHistoryPoints: [CGPoint] = [ ]
+
     private var previousPixelBuffer: CVPixelBuffer?
     
     // The current pixel buffer undergoing analysis. Run requests in a serial fashion, one after another.

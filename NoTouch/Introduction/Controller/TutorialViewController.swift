@@ -12,8 +12,16 @@ class TutorialViewController: UIViewController {
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var pageControl: UIPageControl!
-    // TODO: Change this, we will need to pass the TutorialProvider to the VC after initializing from Storyboard
-    private var viewModel: TutorialProvider? = TutorialViewModel()
+    
+    var viewModel: TutorialProvider? {
+        didSet {
+            guard let viewModel = viewModel else {
+                return
+            }
+            
+            viewModel.delegate = self
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +46,22 @@ class TutorialViewController: UIViewController {
             slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
             scrollView.addSubview(slides[i])
         }
+    }
+}
+
+extension TutorialViewController: TutorialProviderDelegate {
+
+    func dismissTutorial() {
+        print("dismiss tutorial")
+    }
+    
+    func presentVisionScreen() {
+        print("Present vision screen")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "VisionViewController")
+        initialViewController.modalTransitionStyle = .crossDissolve
+        initialViewController.modalPresentationStyle = .overFullScreen
+        self.present(initialViewController, animated: true, completion: nil)
     }
 }
 
