@@ -11,19 +11,19 @@
 		C32406C02414547D00D5AC9E /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C32406BF2414547C00D5AC9E /* beep-offic.m4a */; };
 		C32406C4241456F100D5AC9E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32406C3241456F100D5AC9E /* TutorialViewController.swift */; };
 		C32406C6241459F500D5AC9E /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32406C5241459F500D5AC9E /* SlideView.swift */; };
-		C32406C824145A0B00D5AC9E /* SlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32406C724145A0B00D5AC9E /* SlideView.xib */; };
 		C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B70B524152D52008F1D39 /* FirstRunModel.swift */; };
 		C355B88B2415602F00FE69A9 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355B88A2415602F00FE69A9 /* InfoViewController.swift */; };
 		C355B88E2415626F00FE69A9 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355B88D2415626F00FE69A9 /* GradientButton.swift */; };
 		C355B89124156C5B00FE69A9 /* InfoTutorialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355B89024156C5B00FE69A9 /* InfoTutorialProvider.swift */; };
+		C355B89C2415836C00FE69A9 /* FirstIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C355B89E2415836C00FE69A9 /* FirstIntroView.xib */; };
+		C355B8B72415849300FE69A9 /* SlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C355B8B92415849300FE69A9 /* SlideView.xib */; };
 		C35C3F882415486E008DDB5B /* NTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C3F872415486E008DDB5B /* NTError.swift */; };
 		C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C36795FC24146A1500886163 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C36795FE24146A1500886163 /* Localizable.strings */; };
 		C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367960C24146B1300886163 /* TutorialViewModel.swift */; };
 		C367960F241485C300886163 /* TutorialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367960E241485C300886163 /* TutorialProvider.swift */; };
 		C3679611241488DC00886163 /* FirstIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3679610241488DC00886163 /* FirstIntroView.swift */; };
-		C3679613241488F100886163 /* FirstIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3679612241488F100886163 /* FirstIntroView.xib */; };
 		C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C167240F1363008C47F5 /* AlertViewModel.swift */; };
 		C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C16A240F1EC3008C47F5 /* AudioAlert.swift */; };
 		C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */; };
@@ -48,7 +48,6 @@
 		C32406BF2414547C00D5AC9E /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C32406C3241456F100D5AC9E /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		C32406C5241459F500D5AC9E /* SlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
-		C32406C724145A0B00D5AC9E /* SlideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideView.xib; sourceTree = "<group>"; };
 		C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		C32B70B524152D52008F1D39 /* FirstRunModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunModel.swift; sourceTree = "<group>"; };
 		C355B88A2415602F00FE69A9 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +58,26 @@
 		C355B8972415810600FE69A9 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		C355B8992415810700FE69A9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		C355B89B2415810700FE69A9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		C355B89D2415836C00FE69A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FirstIntroView.xib; sourceTree = "<group>"; };
+		C355B8AA241583CA00FE69A9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FirstIntroView.strings"; sourceTree = "<group>"; };
+		C355B8AC241583CB00FE69A9 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/FirstIntroView.strings; sourceTree = "<group>"; };
+		C355B8AE241583CC00FE69A9 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/FirstIntroView.strings; sourceTree = "<group>"; };
+		C355B8B0241583CD00FE69A9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FirstIntroView.strings; sourceTree = "<group>"; };
+		C355B8B2241583D000FE69A9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/FirstIntroView.strings; sourceTree = "<group>"; };
+		C355B8B4241583D200FE69A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FirstIntroView.strings; sourceTree = "<group>"; };
+		C355B8B62415847100FE69A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		C355B8B82415849300FE69A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SlideView.xib; sourceTree = "<group>"; };
+		C355B8BB2415849800FE69A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SlideView.strings; sourceTree = "<group>"; };
+		C355B8BD2415849900FE69A9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SlideView.strings"; sourceTree = "<group>"; };
+		C355B8BF2415849A00FE69A9 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SlideView.strings; sourceTree = "<group>"; };
+		C355B8C12415849B00FE69A9 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/SlideView.strings; sourceTree = "<group>"; };
+		C355B8C32415849B00FE69A9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/SlideView.strings; sourceTree = "<group>"; };
+		C355B8C52415849C00FE69A9 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/SlideView.strings; sourceTree = "<group>"; };
+		C355B8C62415859300FE69A9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FirstIntroView.strings"; sourceTree = "<group>"; };
+		C355B8C72415859300FE69A9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SlideView.strings"; sourceTree = "<group>"; };
+		C355B8C82415859400FE69A9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		C355B8C92415859400FE69A9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		C355B8CA2415859400FE69A9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C35C3F8624153A74008DDB5B /* NoTouch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NoTouch.entitlements; sourceTree = "<group>"; };
 		C35C3F872415486E008DDB5B /* NTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTError.swift; sourceTree = "<group>"; };
 		C36795F8241469B400886163 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -75,7 +94,6 @@
 		C367960C24146B1300886163 /* TutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
 		C367960E241485C300886163 /* TutorialProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialProvider.swift; sourceTree = "<group>"; };
 		C3679610241488DC00886163 /* FirstIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstIntroView.swift; sourceTree = "<group>"; };
-		C3679612241488F100886163 /* FirstIntroView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstIntroView.xib; sourceTree = "<group>"; };
 		C387C167240F1363008C47F5 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		C387C16A240F1EC3008C47F5 /* AudioAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAlert.swift; sourceTree = "<group>"; };
 		C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official4.mlmodel"; sourceTree = "<group>"; };
@@ -113,6 +131,7 @@
 		C32406C12414562E00D5AC9E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C36795FE24146A1500886163 /* Localizable.strings */,
 				C3D9554A240C74E600A03D25 /* Faces.mlmodel */,
 				C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */,
 				C3B5853024130604002DDCCB /* adam-official-6.mlmodel */,
@@ -127,7 +146,6 @@
 		C32406C2241456AF00D5AC9E /* Introduction */ = {
 			isa = PBXGroup;
 			children = (
-				C36795FE24146A1500886163 /* Localizable.strings */,
 				C32B70BA24153211008F1D39 /* Models */,
 				C32B70B9241531FC008F1D39 /* Views */,
 				C32B70B8241531F1008F1D39 /* Controller */,
@@ -156,9 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				C3679610241488DC00886163 /* FirstIntroView.swift */,
-				C3679612241488F100886163 /* FirstIntroView.xib */,
+				C355B89E2415836C00FE69A9 /* FirstIntroView.xib */,
 				C32406C5241459F500D5AC9E /* SlideView.swift */,
-				C32406C724145A0B00D5AC9E /* SlideView.xib */,
+				C355B8B92415849300FE69A9 /* SlideView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -320,6 +338,7 @@
 				it,
 				ko,
 				de,
+				"zh-Hant",
 			);
 			mainGroup = FAD500921ED668B60074D713;
 			productRefGroup = FAD5009C1ED668B60074D713 /* Products */;
@@ -341,8 +360,8 @@
 				C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */,
 				76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */,
 				C3E09D9C24148B3A00698A29 /* SF-Pro-Display-Medium.otf in Resources */,
-				C3679613241488F100886163 /* FirstIntroView.xib in Resources */,
-				C32406C824145A0B00D5AC9E /* SlideView.xib in Resources */,
+				C355B89C2415836C00FE69A9 /* FirstIntroView.xib in Resources */,
+				C355B8B72415849300FE69A9 /* SlideView.xib in Resources */,
 				C36795FC24146A1500886163 /* Localizable.strings in Resources */,
 				FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */,
 				FAD500A41ED668B60074D713 /* Main.storyboard in Resources */,
@@ -383,6 +402,36 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		C355B89E2415836C00FE69A9 /* FirstIntroView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C355B89D2415836C00FE69A9 /* Base */,
+				C355B8AA241583CA00FE69A9 /* zh-Hans */,
+				C355B8AC241583CB00FE69A9 /* de */,
+				C355B8AE241583CC00FE69A9 /* it */,
+				C355B8B0241583CD00FE69A9 /* ja */,
+				C355B8B2241583D000FE69A9 /* ko */,
+				C355B8B4241583D200FE69A9 /* en */,
+				C355B8C62415859300FE69A9 /* zh-Hant */,
+			);
+			name = FirstIntroView.xib;
+			sourceTree = "<group>";
+		};
+		C355B8B92415849300FE69A9 /* SlideView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C355B8B82415849300FE69A9 /* Base */,
+				C355B8BB2415849800FE69A9 /* en */,
+				C355B8BD2415849900FE69A9 /* zh-Hans */,
+				C355B8BF2415849A00FE69A9 /* de */,
+				C355B8C12415849B00FE69A9 /* it */,
+				C355B8C32415849B00FE69A9 /* ja */,
+				C355B8C52415849C00FE69A9 /* ko */,
+				C355B8C72415859300FE69A9 /* zh-Hant */,
+			);
+			name = SlideView.xib;
+			sourceTree = "<group>";
+		};
 		C36795FE24146A1500886163 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -392,6 +441,7 @@
 				C367960524146ACC00886163 /* it */,
 				C367960824146AD200886163 /* ko */,
 				C367960B24146AE900886163 /* de */,
+				C355B8CA2415859400FE69A9 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -405,6 +455,8 @@
 				C355B8972415810600FE69A9 /* it */,
 				C355B8992415810700FE69A9 /* ja */,
 				C355B89B2415810700FE69A9 /* ko */,
+				C355B8B62415847100FE69A9 /* en */,
+				C355B8C92415859400FE69A9 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -418,6 +470,7 @@
 				C367960324146ACC00886163 /* it */,
 				C367960624146AD200886163 /* ko */,
 				C367960924146AE900886163 /* de */,
+				C355B8C82415859400FE69A9 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
