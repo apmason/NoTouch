@@ -109,7 +109,7 @@ class VisionViewController: ViewController {
                 
                     
 //                    print("\(results.first!.identifier) : \(results.first!.confidence)")
-                    if results.first!.identifier == "Touching" && results.first!.confidence > 10.5 {
+                    if results.first!.identifier == "Touching" && results.first!.confidence > 12.5 {
                         //print("WINNER!!!")
                         DispatchQueue.main.async { [weak self] in
                             self?.alertVM.fireAlert()
@@ -269,9 +269,13 @@ extension VisionViewController: AlertObserver {
     func stopAlerting() {
         UIView.animate(withDuration: 0.1, animations: {
             self.flashingView.alpha = 0
-        }) { _ in
-            self.flashingView.alpha = 0
-            self.flashingView.isHidden = true
+        }) { success in
+            if success {
+                self.flashingView.alpha = 0
+                self.flashingView.isHidden = true
+            } else {
+                print("No success!!")
+            }
         }
     }
 }
