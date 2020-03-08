@@ -24,6 +24,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     var alertVM = AlertViewModel()
     
+    private var currentDeviceInput: AVCaptureDeviceInput?
+    
+    var devicePosition: AVCaptureDevice.Position? {
+        return currentDeviceInput?.device.position
+    }
+    
+    private var coverView: UIView?
+    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         // Implement this in the subclass.
     }
@@ -40,17 +48,22 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     func setupAVCapture() {
-        var deviceInput: AVCaptureDeviceInput!
-        
         // Select a video device and make an input.
-        let videoDevice = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTelephotoCamera], mediaType: .video, position: .front).devices.first
+        guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) else {
+            assertionFailure("Couldn't create video device.")
+            return
+        }
+        
         do {
-            deviceInput = try AVCaptureDeviceInput(device: videoDevice!)
+            currentDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
         } catch {
             print("Could not create video device input: \(error).")
             return
         }
-        session.stopRunning()
+        
+        guard let deviceInput = currentDeviceInput else {
+            return
+        }
         
         session.beginConfiguration()
         
@@ -122,4 +135,102 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         }
         return exifOrientation
     }
+}
+
+// MARK: - Camera Transitions
+
+extension ViewController {
+    
+    func changeCapturePosition(position: AVCaptureDevice.Position, completion: @escaping (Result<Void, NTError>) -> Void) {
+        guard let currentInput = self.currentDeviceInput else {
+            completion(.failure(.noDeviceInput))
+            return
+        }
+        
+        addCoverView()
+        
+        let delay: TimeInterval = 0.2
+        
+        UIView.animate(withDuration: delay, animations: { [weak self] in
+            self?.coverView?.alpha = 1
+        }) { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+                        
+            self.session.removeInput(currentInput)
+            
+            self.currentDeviceInput = nil
+            
+            // create new device
+            guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else {
+                self.removeCoverView()
+                completion(.failure(.inputDeviceCreationFailure))
+                return
+            }
+            
+            do {
+                self.currentDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
+            } catch {
+                print("Could not create video device input: \(error).")
+                self.removeCoverView()
+                completion(.failure(.inputDeviceCreationFailure))
+                return
+            }
+            
+            guard let newInput = self.currentDeviceInput else {
+                self.removeCoverView()
+                completion(.failure(.inputDeviceCreationFailure))
+                return
+            }
+            
+            guard self.session.canAddInput(newInput) else {
+                print("Could not add video device input to the session.")
+                self.removeCoverView()
+                self.session.commitConfiguration()
+                completion(.failure(.inputDeviceCreationFailure))
+                return
+            }
+            
+            self.session.addInput(newInput)
+            self.session.commitConfiguration()
+            
+            UIView.animate(withDuration: delay, animations: { [weak self] in
+                self?.coverView?.alpha = 0
+                
+            }) { [weak self] _ in
+                self?.removeCoverView()
+                completion(.success(()))
+                
+            }
+        }
+    }
+    
+    func addCoverView() {
+         let blurEffect = UIBlurEffect(style: .systemThickMaterial)
+         coverView = UIVisualEffectView(effect: blurEffect)
+
+         coverView?.translatesAutoresizingMaskIntoConstraints = false
+         
+         guard let coverView = coverView else {
+             return
+         }
+         
+         coverView.backgroundColor = UIColor.white
+         coverView.alpha = 0
+         
+         previewView.addSubview(coverView)
+         
+         NSLayoutConstraint.activate([
+             coverView.leadingAnchor.constraint(equalTo: previewView.leadingAnchor),
+             coverView.trailingAnchor.constraint(equalTo: previewView.trailingAnchor),
+             coverView.topAnchor.constraint(equalTo: previewView.topAnchor),
+             coverView.bottomAnchor.constraint(equalTo: previewView.bottomAnchor)
+         ])
+     }
+     
+     func removeCoverView() {
+         coverView?.removeFromSuperview()
+         coverView = nil
+     }
 }

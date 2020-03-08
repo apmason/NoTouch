@@ -12,7 +12,7 @@ class FirstRunModel {
     private static let firstRunKey = "firstRun"
     
     static var firstRunCompleted: Bool {
-        return UserDefaults.standard.bool(forKey: firstRunKey)
+        return true //UserDefaults.standard.bool(forKey: firstRunKey)
     }
     
     static func setFirstRunCompleted() {

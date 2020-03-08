@@ -109,7 +109,7 @@ class VisionViewController: ViewController {
                 
                     
 //                    print("\(results.first!.identifier) : \(results.first!.confidence)")
-                    if results.first!.identifier == "Touching" && results.first!.confidence > 12 {
+                    if results.first!.identifier == "Touching" && results.first!.confidence > 10.5 {
                         //print("WINNER!!!")
                         DispatchQueue.main.async { [weak self] in
                             self?.alertVM.fireAlert()
@@ -174,19 +174,38 @@ class VisionViewController: ViewController {
     }
     
     @IBAction func flipCamera(_ sender: Any) {
-//        switch captureDevicePosition {
-//        case .front:
-//            captureDevicePosition = .back
-//
-//        case .back:
-//            captureDevicePosition = .front
-//
-//        case .unspecified:
-//            print("Unspecified device position set")
-//
-//        }
+        guard let oldPosition = devicePosition else {
+            return
+        }
         
-        setupAVCapture()
+        let newPosition: AVCaptureDevice.Position
+        
+        switch oldPosition {
+        case .front:
+            // set to back
+            newPosition = .back
+            
+        case .back:
+            // set to front
+            newPosition = .front
+            
+        default:
+            newPosition = .front
+            break
+        }
+        
+        changeCapturePosition(position: newPosition) { result in
+            switch result {
+            case .success:
+                // Do nothing
+                break
+                
+            case .failure(let error):
+                // TODO: present error and localized description
+                print("Error changing capture position: \(error.localizedDescription)")
+                
+            }
+        }
     }
     
     @IBAction func muteUnmuteSound(_ sender: Any) {

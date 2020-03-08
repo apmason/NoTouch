@@ -14,6 +14,7 @@
 		C32406C824145A0B00D5AC9E /* SlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32406C724145A0B00D5AC9E /* SlideView.xib */; };
 		C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B70B524152D52008F1D39 /* FirstRunModel.swift */; };
+		C35C3F882415486E008DDB5B /* NTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C3F872415486E008DDB5B /* NTError.swift */; };
 		C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C36795FC24146A1500886163 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C36795FE24146A1500886163 /* Localizable.strings */; };
 		C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367960C24146B1300886163 /* TutorialViewModel.swift */; };
@@ -47,6 +48,8 @@
 		C32406C724145A0B00D5AC9E /* SlideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideView.xib; sourceTree = "<group>"; };
 		C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		C32B70B524152D52008F1D39 /* FirstRunModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunModel.swift; sourceTree = "<group>"; };
+		C35C3F8624153A74008DDB5B /* NoTouch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NoTouch.entitlements; sourceTree = "<group>"; };
+		C35C3F872415486E008DDB5B /* NTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTError.swift; sourceTree = "<group>"; };
 		C36795F8241469B400886163 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C36795F9241469B400886163 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		C36795FD24146A1500886163 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -207,6 +210,8 @@
 		FAD5009D1ED668B60074D713 /* NoTouch */ = {
 			isa = PBXGroup;
 			children = (
+				C35C3F8624153A74008DDB5B /* NoTouch.entitlements */,
+				C35C3F872415486E008DDB5B /* NTError.swift */,
 				C32B70B7241531D8008F1D39 /* Controllers */,
 				C32406C2241456AF00D5AC9E /* Introduction */,
 				C32406C12414562E00D5AC9E /* Resources */,
@@ -312,6 +317,7 @@
 			files = (
 				C3E09D9D24148B6C00698A29 /* SF-Pro-Display-Medium.otf in Sources */,
 				C367960F241485C300886163 /* TutorialProvider.swift in Sources */,
+				C35C3F882415486E008DDB5B /* NTError.swift in Sources */,
 				C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */,
 				C3679611241488DC00886163 /* FirstIntroView.swift in Sources */,
 				FAB417F62099308400494E9C /* VisionViewController.swift in Sources */,
@@ -496,6 +502,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				INFOPLIST_FILE = "$(SRCROOT)/NoTouch/Info.plist";
@@ -504,6 +511,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
 				PRODUCT_NAME = NoTouch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -513,6 +521,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				INFOPLIST_FILE = "$(SRCROOT)/NoTouch/Info.plist";
@@ -521,6 +530,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
 				PRODUCT_NAME = NoTouch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -15,17 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwv-Sj-Ovl" userLabel="Camera Flip Button">
-                                <rect key="frame" x="323" y="12" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Qwv-Sj-Ovl" secondAttribute="height" multiplier="1:1" id="DWl-PJ-Zfq"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="camera.rotate" catalog="system"/>
-                                <connections>
-                                    <action selector="flipCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oZk-HZ-ys4"/>
-                                </connections>
-                            </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7H-Vt-qq9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -40,6 +29,23 @@
                                     <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="mai-j9-Ghi"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwv-Sj-Ovl" userLabel="Camera Flip Button">
+                                <rect key="frame" x="323" y="12" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.070009903169999999" alpha="0.74686399650000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Qwv-Sj-Ovl" secondAttribute="height" multiplier="1:1" id="DWl-PJ-Zfq"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="camera.rotate" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="flipCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oZk-HZ-ys4"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lx-Bf-BXa" userLabel="Audio Button">
                                 <rect key="frame" x="12" y="12" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.070009903169014079" alpha="0.74686399647887325" colorSpace="calibratedRGB"/>
@@ -142,7 +148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oka-uy-208" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1106.4000000000001" y="54.422788605697157"/>
+            <point key="canvasLocation" x="1103" y="133"/>
         </scene>
     </scenes>
     <resources>
