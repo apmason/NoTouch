@@ -12,11 +12,16 @@ class TutorialViewController: UIViewController {
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var pageControl: UIPageControl!
-    private let viewModel = TutorialViewModel()
+    // TODO: Change this, we will need to pass the TutorialProvider to the VC after initializing from Storyboard
+    private var viewModel: TutorialProvider? = TutorialViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let slides = createSlides()
+        guard let viewModel = viewModel else {
+            fatalError("Couldn't create view model")
+        }
+        
+        let slides = viewModel.createViews()
         setupSlideScrollView(slides: slides)
         
         pageControl.numberOfPages = slides.count
@@ -24,52 +29,7 @@ class TutorialViewController: UIViewController {
         view.bringSubviewToFront(pageControl)
     }
     
-    private func createSlides() -> [SlideView] {
-        let slideViews = createSlideViews(withCount: 6)
-        for i in 0..<slideViews.count {
-            switch i {
-            case 0:
-                slideViews[i].textLabel.text = viewModel.placingText
-                
-            case 1:
-                slideViews[i].textLabel.text = viewModel.moveCloserText
-                
-            case 2:
-                slideViews[i].textLabel.text = viewModel.alertText
-                
-            case 3:
-                slideViews[i].textLabel.text = viewModel.openText
-                
-            case 4:
-                slideViews[i].textLabel.text = viewModel.batteryText
-                
-            case 5:
-                slideViews[i].textLabel.text = viewModel.privacyText
-                
-            default:
-                print("REACHED DEFAULT, SOMETHING WENT WRONG")
-                assertionFailure("Default hit")
-            
-            }
-        }
-        
-        return slideViews
-    }
-    
-    private func createSlideViews(withCount count: Int) -> [SlideView] {
-        var slideViews = [SlideView]()
-        for _ in 0..<count {
-            guard let slide: SlideView = Bundle.main.loadNibNamed("SlideView", owner: self, options: nil)?.first as? SlideView else {
-                assertionFailure("Failure")
-                return []
-            }
-            
-            slideViews.append(slide)
-        }
-        return slideViews
-    }
-    
-    private func setupSlideScrollView(slides : [SlideView]) {
+    private func setupSlideScrollView(slides: [UIView]) {
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: view.frame.height)
         scrollView.isPagingEnabled = true

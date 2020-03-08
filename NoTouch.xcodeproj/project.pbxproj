@@ -16,11 +16,16 @@
 		C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C36795FC24146A1500886163 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C36795FE24146A1500886163 /* Localizable.strings */; };
 		C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367960C24146B1300886163 /* TutorialViewModel.swift */; };
+		C367960F241485C300886163 /* TutorialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367960E241485C300886163 /* TutorialProvider.swift */; };
+		C3679611241488DC00886163 /* FirstIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3679610241488DC00886163 /* FirstIntroView.swift */; };
+		C3679613241488F100886163 /* FirstIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3679612241488F100886163 /* FirstIntroView.xib */; };
 		C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C167240F1363008C47F5 /* AlertViewModel.swift */; };
 		C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C16A240F1EC3008C47F5 /* AudioAlert.swift */; };
 		C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */; };
 		C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5853024130604002DDCCB /* adam-official-6.mlmodel */; };
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
+		C3E09D9C24148B3A00698A29 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
+		C3E09D9D24148B6C00698A29 /* SF-Pro-Display-Medium.otf in Sources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
 		FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0F95BE20B8883700378A66 /* ProductCatalog.plist */; };
 		FAA391EA20B5D2480085DA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391E920B5D2480085DA28 /* UIKit.framework */; };
 		FAA391EC20B5D2510085DA28 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391EB20B5D2510085DA28 /* Vision.framework */; };
@@ -57,11 +62,15 @@
 		C367960A24146AE900886163 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		C367960B24146AE900886163 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C367960C24146B1300886163 /* TutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
+		C367960E241485C300886163 /* TutorialProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialProvider.swift; sourceTree = "<group>"; };
+		C3679610241488DC00886163 /* FirstIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstIntroView.swift; sourceTree = "<group>"; };
+		C3679612241488F100886163 /* FirstIntroView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstIntroView.xib; sourceTree = "<group>"; };
 		C387C167240F1363008C47F5 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		C387C16A240F1EC3008C47F5 /* AudioAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAlert.swift; sourceTree = "<group>"; };
 		C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official4.mlmodel"; sourceTree = "<group>"; };
 		C3B5853024130604002DDCCB /* adam-official-6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official-6.mlmodel"; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
+		C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
 		FA0F95BE20B8883700378A66 /* ProductCatalog.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductCatalog.plist; sourceTree = "<group>"; };
 		FAA391E920B5D2480085DA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FAA391EB20B5D2510085DA28 /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
@@ -93,6 +102,7 @@
 		C32406C12414562E00D5AC9E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */,
 				C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */,
 				C32406BF2414547C00D5AC9E /* beep-offic.m4a */,
 			);
@@ -103,10 +113,13 @@
 			isa = PBXGroup;
 			children = (
 				C36795FE24146A1500886163 /* Localizable.strings */,
-				C367960C24146B1300886163 /* TutorialViewModel.swift */,
-				C32406C3241456F100D5AC9E /* TutorialViewController.swift */,
 				C32406C5241459F500D5AC9E /* SlideView.swift */,
 				C32406C724145A0B00D5AC9E /* SlideView.xib */,
+				C367960C24146B1300886163 /* TutorialViewModel.swift */,
+				C32406C3241456F100D5AC9E /* TutorialViewController.swift */,
+				C367960E241485C300886163 /* TutorialProvider.swift */,
+				C3679610241488DC00886163 /* FirstIntroView.swift */,
+				C3679612241488F100886163 /* FirstIntroView.xib */,
 			);
 			path = Introduction;
 			sourceTree = "<group>";
@@ -209,6 +222,7 @@
 				TargetAttributes = {
 					FAD5009A1ED668B60074D713 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -245,6 +259,8 @@
 				FAD500A91ED668B60074D713 /* LaunchScreen.storyboard in Resources */,
 				C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */,
 				76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */,
+				C3E09D9C24148B3A00698A29 /* SF-Pro-Display-Medium.otf in Resources */,
+				C3679613241488F100886163 /* FirstIntroView.xib in Resources */,
 				C32406C824145A0B00D5AC9E /* SlideView.xib in Resources */,
 				C36795FC24146A1500886163 /* Localizable.strings in Resources */,
 				FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */,
@@ -259,7 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3E09D9D24148B6C00698A29 /* SF-Pro-Display-Medium.otf in Sources */,
+				C367960F241485C300886163 /* TutorialProvider.swift in Sources */,
 				C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */,
+				C3679611241488DC00886163 /* FirstIntroView.swift in Sources */,
 				FAB417F62099308400494E9C /* VisionViewController.swift in Sources */,
 				C32406C6241459F500D5AC9E /* SlideView.swift in Sources */,
 				FAD500A11ED668B60074D713 /* ViewController.swift in Sources */,
@@ -449,6 +468,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
 				PRODUCT_NAME = NoTouch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -465,6 +485,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
 				PRODUCT_NAME = NoTouch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

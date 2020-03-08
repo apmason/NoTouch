@@ -10,6 +10,9 @@
         <array key="SF-Pro-Display-Heavy.otf">
             <string>SFProDisplay-Heavy</string>
         </array>
+        <array key="SF-Pro-Display-Medium.otf">
+            <string>SFProDisplay-Medium</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -24,15 +27,31 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezT-uu-kYF">
+                    <rect key="frame" x="83" y="743.5" width="248" height="57.5"/>
+                    <color key="backgroundColor" red="1" green="0.29287580889999998" blue="0.29096630229999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="15"/>
+                    <state key="normal" title="Get Started!">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="buttonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="nV4-5F-bZr"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="ezT-uu-kYF" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="94k-jX-74O"/>
+                <constraint firstItem="ezT-uu-kYF" firstAttribute="height" secondItem="vUN-kp-3ea" secondAttribute="height" multiplier="0.07" id="bHn-LC-GkR"/>
+                <constraint firstItem="ezT-uu-kYF" firstAttribute="width" secondItem="vUN-kp-3ea" secondAttribute="width" multiplier="0.6" id="dRX-Jo-YaN"/>
                 <constraint firstItem="kGS-gO-YQd" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" multiplier="0.8" id="fIc-Qn-UJn"/>
                 <constraint firstItem="kGS-gO-YQd" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" multiplier="3" id="iSF-Zv-gDg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ezT-uu-kYF" secondAttribute="bottom" constant="61" id="kfI-4a-fEB"/>
                 <constraint firstItem="kGS-gO-YQd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="oq1-ip-B4W"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="button" destination="ezT-uu-kYF" id="JMh-Mf-Nfw"/>
                 <outlet property="textLabel" destination="kGS-gO-YQd" id="hUa-KH-oyd"/>
             </connections>
             <point key="canvasLocation" x="-23" y="142"/>

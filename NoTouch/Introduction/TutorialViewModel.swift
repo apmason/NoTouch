@@ -7,30 +7,30 @@
 //
 
 import Foundation
+import UIKit
 
-class TutorialViewModel {
+class TutorialViewModel: TutorialProvider {
     
-    var placingText: String {
-        return NSLocalizedString("Place your device in front of you so your face is in the middle of the camera's frame.", comment: "Placing description")
+    func createViews() -> [UIView] {
+        guard let firstPage: FirstIntroView = Bundle.main.loadNibNamed("FirstIntroView", owner: nil, options: nil)?.first as? FirstIntroView else {
+            assertionFailure("Failure getting first page")
+            return []
+        }
+        
+        let slideViews = createSlideViews()
+        // Listen for final button taps
+        slideViews.last?.delegate = self
+        
+        var slides: [UIView] = slideViews
+        slides.insert(firstPage, at: 0)
+        
+        return slides
     }
+}
+
+extension TutorialViewModel: SlideViewDelegate {
     
-    var moveCloserText: String {
-        return NSLocalizedString("Move the device closer to your face for the best results.", comment: "Best results description")
-    }
-    
-    var alertText: String {
-        return NSLocalizedString("When you touch your face you'll be alerted.", comment: "Alert functionality description")
-    }
-    
-    var openText: String {
-        return NSLocalizedString("NoTouch and your device will need to be open to work.", comment: "Open description")
-    }
-    
-    var batteryText: String {
-        return NSLocalizedString("Plug your device in if possible.", comment: "Battery usage description")
-    }
-    
-    var privacyText: String {
-        return NSLocalizedString("Privacy comes first.\n\nNone of your data is saved.\n\nNoTouch works with no Internet.", comment: "Privacy description")
+    func buttonTapped() {
+        print("Button was tapped, what to do?")
     }
 }
