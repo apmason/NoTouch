@@ -173,6 +173,8 @@ class VisionViewController: ViewController {
         startCaptureSession()
     }
     
+    // MARK: - IBActions
+    
     @IBAction func flipCamera(_ sender: Any) {
         guard let oldPosition = devicePosition else {
             return
@@ -251,6 +253,10 @@ class VisionViewController: ViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func infoButtonTapped(_ sender: UIButton) {
+        print("Info button tapped")
     }
 }
 

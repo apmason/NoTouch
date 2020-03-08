@@ -48,7 +48,6 @@ extension TutorialProvider {
                 
             case 5:
                 slide.textLabel.text = privacyText
-                slide.showButton = true
                 slide.button.isHidden = false
                 
             default:

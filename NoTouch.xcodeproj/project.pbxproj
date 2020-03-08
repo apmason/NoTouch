@@ -14,6 +14,8 @@
 		C32406C824145A0B00D5AC9E /* SlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32406C724145A0B00D5AC9E /* SlideView.xib */; };
 		C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B70B524152D52008F1D39 /* FirstRunModel.swift */; };
+		C355B88B2415602F00FE69A9 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355B88A2415602F00FE69A9 /* InfoViewController.swift */; };
+		C355B88E2415626F00FE69A9 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355B88D2415626F00FE69A9 /* GradientButton.swift */; };
 		C35C3F882415486E008DDB5B /* NTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C3F872415486E008DDB5B /* NTError.swift */; };
 		C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C36795FC24146A1500886163 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C36795FE24146A1500886163 /* Localizable.strings */; };
@@ -48,6 +50,8 @@
 		C32406C724145A0B00D5AC9E /* SlideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlideView.xib; sourceTree = "<group>"; };
 		C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		C32B70B524152D52008F1D39 /* FirstRunModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunModel.swift; sourceTree = "<group>"; };
+		C355B88A2415602F00FE69A9 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		C355B88D2415626F00FE69A9 /* GradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
 		C35C3F8624153A74008DDB5B /* NoTouch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NoTouch.entitlements; sourceTree = "<group>"; };
 		C35C3F872415486E008DDB5B /* NTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTError.swift; sourceTree = "<group>"; };
 		C36795F8241469B400886163 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -162,6 +166,30 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		C355B8882415601500FE69A9 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				C355B8892415601E00FE69A9 /* Controllers */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		C355B8892415601E00FE69A9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C355B88A2415602F00FE69A9 /* InfoViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C355B88C2415625600FE69A9 /* SharedViews */ = {
+			isa = PBXGroup;
+			children = (
+				C355B88D2415626F00FE69A9 /* GradientButton.swift */,
+			);
+			path = SharedViews;
+			sourceTree = "<group>";
+		};
 		C387C169240F1D85008C47F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +238,8 @@
 		FAD5009D1ED668B60074D713 /* NoTouch */ = {
 			isa = PBXGroup;
 			children = (
+				C355B88C2415625600FE69A9 /* SharedViews */,
+				C355B8882415601500FE69A9 /* Info */,
 				C35C3F8624153A74008DDB5B /* NoTouch.entitlements */,
 				C35C3F872415486E008DDB5B /* NTError.swift */,
 				C32B70B7241531D8008F1D39 /* Controllers */,
@@ -320,6 +350,7 @@
 				C35C3F882415486E008DDB5B /* NTError.swift in Sources */,
 				C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */,
 				C3679611241488DC00886163 /* FirstIntroView.swift in Sources */,
+				C355B88E2415626F00FE69A9 /* GradientButton.swift in Sources */,
 				FAB417F62099308400494E9C /* VisionViewController.swift in Sources */,
 				C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */,
 				C32406C6241459F500D5AC9E /* SlideView.swift in Sources */,
@@ -333,6 +364,7 @@
 				C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */,
 				FADF58442110D83200DE9236 /* FlowerShop.mlmodel in Sources */,
 				C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */,
+				C355B88B2415602F00FE69A9 /* InfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
