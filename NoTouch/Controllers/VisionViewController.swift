@@ -254,10 +254,6 @@ class VisionViewController: ViewController {
             }
         }
     }
-    
-    @IBAction func infoButtonTapped(_ sender: UIButton) {
-        print("Info button tapped")
-    }
 }
 
 

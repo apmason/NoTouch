@@ -166,12 +166,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		C355B8882415601500FE69A9 /* Info */ = {
+		C355B8882415601500FE69A9 /* InfoSection */ = {
 			isa = PBXGroup;
 			children = (
 				C355B8892415601E00FE69A9 /* Controllers */,
 			);
-			path = Info;
+			path = InfoSection;
 			sourceTree = "<group>";
 		};
 		C355B8892415601E00FE69A9 /* Controllers */ = {
@@ -239,7 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				C355B88C2415625600FE69A9 /* SharedViews */,
-				C355B8882415601500FE69A9 /* Info */,
+				C355B8882415601500FE69A9 /* InfoSection */,
 				C35C3F8624153A74008DDB5B /* NoTouch.entitlements */,
 				C35C3F872415486E008DDB5B /* NTError.swift */,
 				C32B70B7241531D8008F1D39 /* Controllers */,

@@ -78,7 +78,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="infoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dTT-Ra-9dV"/>
                                     <segue destination="EL5-AN-CtT" kind="show" id="HHl-qa-fYG"/>
                                 </connections>
                             </button>
@@ -202,19 +201,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCr-HH-qg3">
-                                <rect key="frame" x="75" y="100" width="225" height="41.5"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCr-HH-qg3" customClass="GradientButton" customModule="NoTouch" customModuleProvider="target">
+                                <rect key="frame" x="56.5" y="100" width="262.5" height="47.5"/>
+                                <state key="normal" title="Share NoTouch">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareNoTouch:" destination="sab-FR-Oa7" eventType="touchUpInside" id="xXi-n8-jYh"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="fCr-HH-qg3" firstAttribute="width" secondItem="Twx-3I-wvg" secondAttribute="width" multiplier="0.6" id="2f7-nC-0kG"/>
+                            <constraint firstItem="fCr-HH-qg3" firstAttribute="width" secondItem="Twx-3I-wvg" secondAttribute="width" multiplier="0.7" id="2f7-nC-0kG"/>
                             <constraint firstItem="Twx-3I-wvg" firstAttribute="bottom" secondItem="fth-Gg-KpK" secondAttribute="bottom" constant="20" id="91d-PN-pb9"/>
                             <constraint firstItem="fCr-HH-qg3" firstAttribute="centerX" secondItem="Twx-3I-wvg" secondAttribute="centerX" id="Mag-US-82N"/>
                             <constraint firstItem="fCr-HH-qg3" firstAttribute="top" secondItem="Twx-3I-wvg" secondAttribute="top" constant="44" id="VP2-wR-hxl"/>
                             <constraint firstItem="fth-Gg-KpK" firstAttribute="centerX" secondItem="Twx-3I-wvg" secondAttribute="centerX" id="hB7-aV-6EA"/>
-                            <constraint firstItem="fCr-HH-qg3" firstAttribute="height" secondItem="Twx-3I-wvg" secondAttribute="height" multiplier="0.07" id="uoM-fT-CUq"/>
+                            <constraint firstItem="fCr-HH-qg3" firstAttribute="height" secondItem="Twx-3I-wvg" secondAttribute="height" multiplier="0.08" id="uoM-fT-CUq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Twx-3I-wvg"/>
                     </view>
