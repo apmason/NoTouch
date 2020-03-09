@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialViewController: UIViewController
         
-        if true {//!FirstRunModel.firstRunCompleted {
+        if !FirstRunModel.firstRunCompleted {
             FirstRunModel.setFirstRunCompleted()
             
             initialViewController = storyboard.instantiateViewController(withIdentifier: "TutorialViewController")
