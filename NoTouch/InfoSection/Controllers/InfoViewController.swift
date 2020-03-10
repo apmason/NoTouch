@@ -12,6 +12,8 @@ class InfoViewController: UIViewController {
 
     @IBOutlet var versionLabel: UILabel!
     
+    @IBOutlet var shareNoTouchButton: GradientButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,7 +38,13 @@ class InfoViewController: UIViewController {
         
         let items = [url]
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        present(ac, animated: true)
+        
+        if UIDevice().userInterfaceIdiom == .pad {
+            ac.modalPresentationStyle = .popover
+            ac.popoverPresentationController?.sourceView = self.view
+        }
+        
+        self.present(ac, animated: true)
     }
     
     @IBAction func startTutorial(_ sender: UIButton) {

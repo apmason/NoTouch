@@ -243,6 +243,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="shareNoTouchButton" destination="fCr-HH-qg3" id="qAF-v3-0fe"/>
                         <outlet property="versionLabel" destination="fth-Gg-KpK" id="KAS-3x-whC"/>
                     </connections>
                 </viewController>
