@@ -11,9 +11,11 @@ import Vision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
-    var rootLayer: CALayer! = nil
+    //var rootLayer: CALayer! = nil
     
     @IBOutlet weak private var previewView: UIView!
+    
+    private var captureConnection: AVCaptureConnection?
     
     private let session = AVCaptureSession()
     
@@ -49,8 +51,19 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     func setupAVCapture() {
         // Select a video device and make an input.
-        guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) else {
-            assertionFailure("Couldn't create video device.")
+        
+        let inputDevice: AVCaptureDevice?
+        
+        #if targetEnvironment(macCatalyst)
+        inputDevice = AVCaptureDevice.default(for: .video)
+        #else
+        inputDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+                                              for: .video,
+                                              position: .front)
+        #endif
+        
+        guard let videoDevice = inputDevice else {
+            //assertionFailure("Couldn't create video device.")
             return
         }
         
@@ -93,14 +106,16 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         
         // Always process the frames.
         captureConnection?.isEnabled = true
+        self.captureConnection = captureConnection
         
         session.commitConfiguration()
         
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        rootLayer = previewView.layer
-        previewLayer.frame = rootLayer.bounds
-        rootLayer.insertSublayer(previewLayer, at: 0)
+        //rootLayer = previewView.layer
+        previewLayer.frame = previewView.bounds
+        previewView.layer.insertSublayer(previewLayer, at: 0)
+        //rootLayer.insertSublayer(previewLayer, at: 0)
     }
     
     func startCaptureSession() {
@@ -134,6 +149,28 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             exifOrientation = .up
         }
         return exifOrientation
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        previewLayer.frame = previewView.bounds
+        
+        switch UIDevice.current.orientation {
+        case .landscapeLeft:
+            previewLayer.connection?.videoOrientation = .landscapeRight
+            
+        case .landscapeRight:
+            previewLayer.connection?.videoOrientation = .landscapeLeft
+            
+        case .portrait:
+            previewLayer.connection?.videoOrientation = .portrait
+            
+        case .portraitUpsideDown:
+            previewLayer.connection?.videoOrientation = .portraitUpsideDown
+            
+        default:
+            print("Default state")
+        }
     }
 }
 

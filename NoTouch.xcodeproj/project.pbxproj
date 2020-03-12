@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		76D66BC5213A1AF300AEF9D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */; };
+		85E09B72D71DAD9C210FA42C /* Pods_NoTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 438ACC009489100DC0103A88 /* Pods_NoTouch.framework */; };
 		C32406C02414547D00D5AC9E /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C32406BF2414547C00D5AC9E /* beep-offic.m4a */; };
 		C32406C4241456F100D5AC9E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32406C3241456F100D5AC9E /* TutorialViewController.swift */; };
 		C32406C6241459F500D5AC9E /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32406C5241459F500D5AC9E /* SlideView.swift */; };
@@ -31,6 +32,7 @@
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
 		C3E09D9C24148B3A00698A29 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
 		C3E09D9D24148B6C00698A29 /* SF-Pro-Display-Medium.otf in Sources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
+		C3F746AB2419AB99001EB7D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */; };
 		FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0F95BE20B8883700378A66 /* ProductCatalog.plist */; };
 		FAA391EA20B5D2480085DA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391E920B5D2480085DA28 /* UIKit.framework */; };
 		FAA391EC20B5D2510085DA28 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391EB20B5D2510085DA28 /* Vision.framework */; };
@@ -44,7 +46,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		438ACC009489100DC0103A88 /* Pods_NoTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9C5574F4C953EB889ECC5B5A /* Pods-NoTouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouch.release.xcconfig"; path = "Target Support Files/Pods-NoTouch/Pods-NoTouch.release.xcconfig"; sourceTree = "<group>"; };
 		C32406BF2414547C00D5AC9E /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C32406C3241456F100D5AC9E /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		C32406C5241459F500D5AC9E /* SlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 		C3B5853024130604002DDCCB /* adam-official-6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official-6.mlmodel"; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
 		C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C81F01C582D21994DA276E31 /* Pods-NoTouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouch.debug.xcconfig"; path = "Target Support Files/Pods-NoTouch/Pods-NoTouch.debug.xcconfig"; sourceTree = "<group>"; };
 		FA0F95BE20B8883700378A66 /* ProductCatalog.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductCatalog.plist; sourceTree = "<group>"; };
 		FAA391E920B5D2480085DA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FAA391EB20B5D2510085DA28 /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
@@ -122,6 +128,7 @@
 				FAA391EE20B5D2570085DA28 /* CoreML.framework in Frameworks */,
 				FAA391EC20B5D2510085DA28 /* Vision.framework in Frameworks */,
 				FAA391EA20B5D2480085DA28 /* UIKit.framework in Frameworks */,
+				85E09B72D71DAD9C210FA42C /* Pods_NoTouch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +240,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		CB9E4CF82363F35171D83C86 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C81F01C582D21994DA276E31 /* Pods-NoTouch.debug.xcconfig */,
+				9C5574F4C953EB889ECC5B5A /* Pods-NoTouch.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		FA0F95C220B8BE9E00378A66 /* Product Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +264,7 @@
 				FAA391ED20B5D2570085DA28 /* CoreML.framework */,
 				FAA391EB20B5D2510085DA28 /* Vision.framework */,
 				FAA391E920B5D2480085DA28 /* UIKit.framework */,
+				438ACC009489100DC0103A88 /* Pods_NoTouch.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -257,6 +275,7 @@
 				FAD5009D1ED668B60074D713 /* NoTouch */,
 				FAD5009C1ED668B60074D713 /* Products */,
 				FAA391E820B5D2480085DA28 /* Frameworks */,
+				CB9E4CF82363F35171D83C86 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -271,6 +290,7 @@
 		FAD5009D1ED668B60074D713 /* NoTouch */ = {
 			isa = PBXGroup;
 			children = (
+				C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */,
 				FAD500AA1ED668B60074D713 /* Info.plist */,
 				C35C3F8624153A74008DDB5B /* NoTouch.entitlements */,
 				C355B88C2415625600FE69A9 /* SharedViews */,
@@ -296,6 +316,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAD500AD1ED668B60074D713 /* Build configuration list for PBXNativeTarget "NoTouch" */;
 			buildPhases = (
+				DBA8DAF04E56EB5120C0600E /* [CP] Check Pods Manifest.lock */,
 				FAD500971ED668B60074D713 /* Sources */,
 				FAD500981ED668B60074D713 /* Frameworks */,
 				FAD500991ED668B60074D713 /* Resources */,
@@ -363,12 +384,38 @@
 				C355B89C2415836C00FE69A9 /* FirstIntroView.xib in Resources */,
 				C355B8B72415849300FE69A9 /* SlideView.xib in Resources */,
 				C36795FC24146A1500886163 /* Localizable.strings in Resources */,
+				C3F746AB2419AB99001EB7D0 /* GoogleService-Info.plist in Resources */,
 				FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */,
 				FAD500A41ED668B60074D713 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DBA8DAF04E56EB5120C0600E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoTouch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FAD500971ED668B60074D713 /* Sources */ = {
@@ -597,6 +644,7 @@
 		};
 		FAD500AE1ED668B60074D713 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C81F01C582D21994DA276E31 /* Pods-NoTouch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
@@ -617,6 +665,7 @@
 		};
 		FAD500AF1ED668B60074D713 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C5574F4C953EB889ECC5B5A /* Pods-NoTouch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;

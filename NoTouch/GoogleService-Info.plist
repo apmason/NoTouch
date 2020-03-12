@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>921176909069-4c69etnfqi60sifairfnboefh4238pdg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.921176909069-4c69etnfqi60sifairfnboefh4238pdg</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBGdfQfS859JrcngTmhMTkL5fYNVNNj3TE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>921176909069</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.canopyInteractive.noTouch</string>
+	<key>PROJECT_ID</key>
+	<string>notouch-1f523</string>
+	<key>STORAGE_BUCKET</key>
+	<string>notouch-1f523.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:921176909069:ios:4f68adce35acec7ce2bc44</string>
+	<key>DATABASE_URL</key>
+	<string>https://notouch-1f523.firebaseio.com</string>
+</dict>
+</plist>
