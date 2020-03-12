@@ -5,6 +5,7 @@ Abstract:
 Contains the sample's app delegate.
 */
 
+import Firebase
 import UIKit
 
 @UIApplicationMain
@@ -13,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        
         UIApplication.shared.isIdleTimerDisabled = true
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

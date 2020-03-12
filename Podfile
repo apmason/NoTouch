@@ -8,6 +8,6 @@ target 'NoTouch' do
   # Pods for NoTouch
 # add pods for desired Firebase products
 # https://firebase.google.com/docs/ios/setup#available-pods
-	pod 'Fabric'
-	pod 'Crashlytics'
+	pod 'Firebase/Crashlytics'
+	
 end
