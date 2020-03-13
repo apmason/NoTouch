@@ -10,16 +10,14 @@ import AVFoundation
 import Vision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
-    
-    //var rootLayer: CALayer! = nil
-    
+        
     @IBOutlet weak private var previewView: UIView!
     
     private var captureConnection: AVCaptureConnection?
     
     private let session = AVCaptureSession()
     
-    private var previewLayer: AVCaptureVideoPreviewLayer! = nil
+    private var previewLayer: AVCaptureVideoPreviewLayer?
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
@@ -41,7 +39,29 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     override func viewDidLoad() {
         super.viewDidLoad()
         alertVM.setupAlerts()
-        setupAVCapture()
+        
+        // Create alert to go to settings to change camera status.
+        
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized: // The user has previously granted access to the camera.
+            setupAVCapture()
+            
+        case .notDetermined: // The user has not yet been asked for camera access.
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                if granted {
+                    self?.setupAVCapture()
+                }
+            }
+            
+        case .denied: // The user has previously denied access.
+            return
+            
+        case .restricted: // The user can't grant access due to restrictions.
+            return
+            
+        default:
+            return
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -111,11 +131,13 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         session.commitConfiguration()
         
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
+        guard let previewLayer = previewLayer else {
+            return
+        }
+        
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        //rootLayer = previewView.layer
         previewLayer.frame = previewView.bounds
         previewView.layer.insertSublayer(previewLayer, at: 0)
-        //rootLayer.insertSublayer(previewLayer, at: 0)
     }
     
     func startCaptureSession() {
@@ -124,7 +146,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     // Clean up capture setup.
     func teardownAVCapture() {
-        previewLayer.removeFromSuperlayer()
+        previewLayer?.removeFromSuperlayer()
         previewLayer = nil
     }
     
@@ -153,23 +175,24 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        previewLayer.frame = previewView.bounds
+        previewLayer?.frame = previewView.bounds
         
         switch UIDevice.current.orientation {
         case .landscapeLeft:
-            previewLayer.connection?.videoOrientation = .landscapeRight
+            previewLayer?.connection?.videoOrientation = .landscapeRight
             
         case .landscapeRight:
-            previewLayer.connection?.videoOrientation = .landscapeLeft
+            previewLayer?.connection?.videoOrientation = .landscapeLeft
             
         case .portrait:
-            previewLayer.connection?.videoOrientation = .portrait
+            previewLayer?.connection?.videoOrientation = .portrait
             
         case .portraitUpsideDown:
-            previewLayer.connection?.videoOrientation = .portraitUpsideDown
+            previewLayer?.connection?.videoOrientation = .portraitUpsideDown
             
         default:
-            print("Default state")
+            return
+            
         }
     }
 }
