@@ -40,28 +40,21 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         super.viewDidLoad()
         alertVM.setupAlerts()
         
-        // Create alert to go to settings to change camera status.
-        
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized: // The user has previously granted access to the camera.
-            setupAVCapture()
-            
-        case .notDetermined: // The user has not yet been asked for camera access.
-            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
-                if granted {
-                    self?.setupAVCapture()
-                }
+        CameraAuthModel.authorizeCameraForUsage { [weak self] result in
+            switch result {
+            case .success:
+                self?.setupAVCapture()
+                
+            case .failure(let error):
+                print("Failed, who should present the error? We should call for that to be done, that's functional.")
+                
             }
-            
-        case .denied: // The user has previously denied access.
-            return
-            
-        case .restricted: // The user can't grant access due to restrictions.
-            return
-            
-        default:
-            return
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("View will appear called")
     }
     
     override func didReceiveMemoryWarning() {

@@ -27,6 +27,9 @@
 		C3679611241488DC00886163 /* FirstIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3679610241488DC00886163 /* FirstIntroView.swift */; };
 		C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C167240F1363008C47F5 /* AlertViewModel.swift */; };
 		C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C16A240F1EC3008C47F5 /* AudioAlert.swift */; };
+		C38D3D50241BC4F00077C68E /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38D3D4F241BC4F00077C68E /* UIViewController+Alert.swift */; };
+		C38D3D52241BC8170077C68E /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38D3D51241BC8170077C68E /* AlertView.swift */; };
+		C38D3D54241BC9F80077C68E /* CameraAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38D3D53241BC9F80077C68E /* CameraAuthModel.swift */; };
 		C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */; };
 		C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5853024130604002DDCCB /* adam-official-6.mlmodel */; };
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
@@ -100,6 +103,9 @@
 		C3679610241488DC00886163 /* FirstIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstIntroView.swift; sourceTree = "<group>"; };
 		C387C167240F1363008C47F5 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		C387C16A240F1EC3008C47F5 /* AudioAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAlert.swift; sourceTree = "<group>"; };
+		C38D3D4F241BC4F00077C68E /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		C38D3D51241BC8170077C68E /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		C38D3D53241BC9F80077C68E /* CameraAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAuthModel.swift; sourceTree = "<group>"; };
 		C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official4.mlmodel"; sourceTree = "<group>"; };
 		C3B5853024130604002DDCCB /* adam-official-6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official-6.mlmodel"; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
@@ -217,7 +223,9 @@
 		C355B88C2415625600FE69A9 /* SharedViews */ = {
 			isa = PBXGroup;
 			children = (
+				C38D3D4F241BC4F00077C68E /* UIViewController+Alert.swift */,
 				C355B88D2415626F00FE69A9 /* GradientButton.swift */,
+				C38D3D51241BC8170077C68E /* AlertView.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 				C387C167240F1363008C47F5 /* AlertViewModel.swift */,
 				C387C16A240F1EC3008C47F5 /* AudioAlert.swift */,
 				C32B70B524152D52008F1D39 /* FirstRunModel.swift */,
+				C38D3D53241BC9F80077C68E /* CameraAuthModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -474,11 +483,14 @@
 				FAD500A11ED668B60074D713 /* ViewController.swift in Sources */,
 				C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */,
 				C32406C4241456F100D5AC9E /* TutorialViewController.swift in Sources */,
+				C38D3D54241BC9F80077C68E /* CameraAuthModel.swift in Sources */,
 				C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */,
 				FAD5009F1ED668B60074D713 /* AppDelegate.swift in Sources */,
 				C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */,
+				C38D3D50241BC4F00077C68E /* UIViewController+Alert.swift in Sources */,
 				C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */,
 				C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */,
+				C38D3D52241BC8170077C68E /* AlertView.swift in Sources */,
 				FADF58442110D83200DE9236 /* FlowerShop.mlmodel in Sources */,
 				C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */,
 				C355B89124156C5B00FE69A9 /* InfoTutorialProvider.swift in Sources */,
@@ -689,7 +701,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				INFOPLIST_FILE = "$(SRCROOT)/NoTouch/Info.plist";
@@ -711,7 +723,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				INFOPLIST_FILE = "$(SRCROOT)/NoTouch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

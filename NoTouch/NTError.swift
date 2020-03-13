@@ -11,4 +11,5 @@ import Foundation
 enum NTError: Error {
     case noDeviceInput
     case inputDeviceCreationFailure
+    case cameraAccessDenied
 }

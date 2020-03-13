@@ -42,5 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print("+++ Application did become active")
+        // Determine AVCapture status, block usage if no camera is activated.
+        
+    }
 }
 
