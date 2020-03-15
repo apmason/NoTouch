@@ -11,7 +11,7 @@ import Vision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
         
-    @IBOutlet weak private var previewView: UIView!
+    @IBOutlet weak var previewView: UIView!
     
     private var captureConnection: AVCaptureConnection?
     
@@ -43,18 +43,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         CameraAuthModel.authorizeCameraForUsage { [weak self] result in
             switch result {
             case .success:
+                CameraAuthModel.removeCameraRequirementOverlay()
                 self?.setupAVCapture()
                 
-            case .failure(let error):
-                print("Failed, who should present the error? We should call for that to be done, that's functional.")
+            case .failure:
+                CameraAuthModel.addCameraRequirementOverlay()
                 
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("View will appear called")
     }
     
     override func didReceiveMemoryWarning() {
@@ -144,13 +140,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     func captureOutput(_ captureOutput: AVCaptureOutput, didDrop didDropSampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        print("The capture output dropped a frame.")
+        //print("The capture output dropped a frame.")
     }
     
     public func exifOrientationFromDeviceOrientation() -> CGImagePropertyOrientation {
         let curDeviceOrientation = UIDevice.current.orientation
         let exifOrientation: CGImagePropertyOrientation
         
+        // TODO: Needs to be fixed to handle all orientations.
         switch curDeviceOrientation {
         case UIDeviceOrientation.portraitUpsideDown:  // Device oriented vertically, Home button on the top
             exifOrientation = .left

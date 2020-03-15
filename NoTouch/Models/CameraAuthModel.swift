@@ -8,6 +8,7 @@
 
 import AVFoundation
 import Foundation
+import UIKit
 
 class CameraAuthModel {
     
@@ -18,8 +19,12 @@ class CameraAuthModel {
         case denied
     }
     
+    // If non-nil this is the currently presented CameraRequirementAlertView.
+    static var alertView: AlertView?
+    
     static func authorizeCameraForUsage(completion: @escaping ((Result<Void, NTError>) -> Void)) {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        
+        switch determineIfAuthorized() {
         case .authorized: // The user has previously granted access to the camera.
             DispatchQueue.main.async {
                 completion(.success(()))
@@ -32,33 +37,71 @@ class CameraAuthModel {
                 }
             }
             
-        case .denied, .restricted: // The user has previously denied access or the user can't grant access due to restrictions
+        case .denied:
             completion(.failure(NTError.cameraAccessDenied))
             
-        default:
-            return
         }
     }
     
-    static func determineIfAuthorized(completion: @escaping ((CameraAuthState) -> Void)) {
+    /// A wrapper around `AVCaptureDevice.authorizationStatus(for:)` that returns a simplified enum, `CameraAuthState`
+    static func determineIfAuthorized() -> CameraAuthState {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            completion(.authorized)
+            return .authorized
             
         case .notDetermined:
-            completion(.notDetermined)
+            return .notDetermined
             
         case .denied, .restricted:
-            completion(.denied)
+            return .denied
             
         default:
-            completion(.denied)
+            return .denied
             
         }
     }
     
     // Present the camera requirement screen to the user.
-    static func showCameraRequirementScreen() {
+    static func addCameraRequirementOverlay() {
+        guard alertView == nil, let keyWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
+            print("Alert view exists or keyWindow failed")
+            return
+        }
         
+        if var topController = keyWindow.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+
+            // load Xib.
+            guard let av: AlertView = Bundle.main.loadNibNamed("AlertView",
+                                                               owner: nil,
+                                                               options: nil)?.first as? AlertView
+                else {
+                print("No alert view")
+                return
+            }
+            
+            self.alertView = av
+            
+            guard let alertView = self.alertView else {
+                return
+            }
+            
+            alertView.translatesAutoresizingMaskIntoConstraints = false
+            topController.view.addSubview(alertView) // Is the VisionViewController's `view` property all fucked up? Will this work right?
+            
+            NSLayoutConstraint.activate([
+                alertView.topAnchor.constraint(equalTo: topController.view.topAnchor),
+                alertView.bottomAnchor.constraint(equalTo: topController.view.bottomAnchor),
+                alertView.leadingAnchor.constraint(equalTo: topController.view.leadingAnchor),
+                alertView.trailingAnchor.constraint(equalTo: topController.view.trailingAnchor)
+            ])
+        }
+    }
+    
+    static func removeCameraRequirementOverlay() {
+        alertView?.removeFromSuperview()
+        alertView = nil
     }
 }

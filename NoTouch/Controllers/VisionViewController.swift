@@ -5,8 +5,9 @@ Abstract:
 Implements the Vision view controller.
 */
 
-import UIKit
 import AVFoundation
+import UIKit
+import VideoToolbox
 import Vision
 
 class VisionViewController: ViewController {
@@ -29,6 +30,8 @@ class VisionViewController: ViewController {
     
     private var coreMLRequest: VNCoreMLRequest!
     private var faceRequest: VNDetectFaceRectanglesRequest!
+    
+    private let ciContext = CIContext()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +68,7 @@ class VisionViewController: ViewController {
                 return
             }
             
-            guard let results = request.results as? [VNDetectedObjectObservation],
+            guard let results = request.results as? [VNFaceObservation],
                 let boundingBox = results.first?.boundingBox else {
                 //print("#Face detect failed")
                 
@@ -85,28 +88,123 @@ class VisionViewController: ViewController {
                 return
             }
             
-            defer { self.currentlyAnalyzedPixelBuffer = nil }
-            
-            //print("#Have face results here")
-            let ciImage = CIImage(cvImageBuffer: pixelBuffer)
-            ciImage.cropped(to: boundingBox)
-            
-            let touchRequest = VNImageRequestHandler(ciImage: ciImage, orientation: self.exifOrientationFromDeviceOrientation(), options: [:])
-            self.visionQueue.async {
-                do {
-                    try touchRequest.perform([self.coreMLRequest])
-                    //print("#Using bounding box, just finished")
-                } catch {
-                    print("Error: Vision request failed with error \"\(error)\"")
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+//                // width and height are switched here because we're in the CIImage coordinate space where the origin is in the bottom left corner.
+//                let coordinateRect = VNImageRectForNormalizedRect(boundingBox, Int(self.previewView.bounds.height), Int(self.previewView.bounds.width))
+//                let newYValue = coordinateRect.origin.y - boundingBox.height
+//                let croppingRect = CGRect(x: coordinateRect.origin.x, y: newYValue, width: coordinateRect.width, height: coordinateRect.height)
+//                // This is correct for the front facing camera, how to flip it for the back facing camera? Mirroring it? Then what about other orientations
+//                var heegs = CIImage(cvPixelBuffer: pixelBuffer)
+//                print("Coordinate rect is: \(coordinateRect)")
+//                let newHeegs = heegs.cropped(to: coordinateRect)
+//                //print("Extent after: \(newHeegs.extent)")
+//                //let daNew = context.createCGImage(ciCroppedImage, from:ciCroppedImage.extent)
+//                let cgImage = self.ciContext.createCGImage(newHeegs, from: newHeegs.extent)
+                
+                let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+                print("CI Image initial extent is: \(ciImage.extent)")
+                
+                let translate = CGAffineTransform.identity.scaledBy(x: self.previewView.bounds.height, y: self.previewView.bounds.width)
+                let bounds = boundingBox.applying(translate)
+                
+                let faceBounds = VNImageRectForNormalizedRect(boundingBox, Int(self.previewView.bounds.height), Int(self.previewView.bounds.width))
+                let croppedImage = ciImage.cropped(to: bounds)
+                print("CI Image cropped extent is: \(croppedImage.extent)")
+                
+                //let cgImage = self.ciContext.createCGImage(ciImage, from: ciImage.extent) // Last try. Not going to work!! This isn't using the croppedImage!!
+                // RESULTS: Yeah, this is just the whole image.
+                
+                // ALEX, TODO, Try this next:
+                //let cgImage = self.ciContext.createCGImage(croppedImage, from: croppedImage.extent) // Now we're using the cropped image, but we're using the croppedImage extent. Is that wrong?
+                // RESULTS: Too zoomed in.
+                
+                // ALEX, TODO. Use the whole CI Image but just render the bounding box
+                //let cgImage = self.ciContext.createCGImage(ciImage, from: bounds)
+                // RESULTS: Too zoomed in again, what the fuck?
+                
+                // Use the whole CIImage, but used the croppedImage's extent (in case that changed or did anything for any reason).
+                let cgImage = self.ciContext.createCGImage(ciImage, from: bounds)
+                
+                // ALEX, TODO. Change the translate function to flip width and height (to test with the UIKit coordinate system)
+                
+                // It looks like the bounding box simply isn't scaling properly. Test with VNImageRectForNormalized, or maybe do own hack to deal with scaling (Compart VNImageRectForNormalized with what I'm getting from the new bounds.
+                
+                guard let unwrappedCGImage = cgImage else {
+                    print("You fucked everything up")
+                    self.currentlyAnalyzedPixelBuffer = nil
+                    return
+                }
+                
+
+                let uiImage = UIImage(cgImage: unwrappedCGImage)
+                ImageStorer.storeNewImage(image: uiImage)
+                
+//                guard let unwrappedCGImage = cgImage, let newCropped = unwrappedCGImage.cropping(to: coordinateRect) else {
+//                    print("You fucked everything up")
+//                    self.currentlyAnalyzedPixelBuffer = nil
+//                    return
+//                }
+                
+                
+                let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: self.exifOrientationFromDeviceOrientation())
+                //let touchRequest = VNImageRequestHandler(cgImage: yesQueen, orientation: self.exifOrientationFromDeviceOrientation())
+                self.visionQueue.async {
+                    do {
+                        defer { self.currentlyAnalyzedPixelBuffer = nil }
+                        try touchRequest.perform([self.coreMLRequest])
+                        //print("#Using bounding box, just finished")
+                    } catch {
+                        print("Error: Vision request failed with error \"\(error)\"")
+                    }
                 }
             }
-            // Run new request with this new data.
         }
-        
-        //print("#End of my pipeline")
-        
+                
         return request
     }
+    
+//    func exifOrientationForDeviceOrientation(_ deviceOrientation: UIDeviceOrientation, capturePosition: AVCaptureDevice.Position) -> CGImagePropertyOrientation {
+//        switch capturePosition {
+//        case .front:
+//            switch deviceOrientation {
+//            case .portraitUpsideDown:
+//                return .rightMirrored
+//                
+//            case .landscapeLeft:
+//                return .downMirrored
+//                
+//            case .landscapeRight:
+//                return .upMirrored
+//                
+//            default:
+//                return .leftMirrored
+//            }
+//            
+//        case .back:
+//            switch deviceOrientation {
+//            case .portraitUpsideDown:
+//                return .right
+//                
+//            case .landscapeLeft:
+//                return .down
+//                
+//            case .landscapeRight:
+//                return .up
+//                
+//            default:
+//                return .left
+//            }
+//            
+//        default:
+//            break
+//        }
+//        
+//        return .left
+//    }
     
     private func createClassificationRequest(modelURL: URL) -> VNCoreMLRequest? {
         do {

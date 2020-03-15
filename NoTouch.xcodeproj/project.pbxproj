@@ -30,12 +30,14 @@
 		C38D3D50241BC4F00077C68E /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38D3D4F241BC4F00077C68E /* UIViewController+Alert.swift */; };
 		C38D3D52241BC8170077C68E /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38D3D51241BC8170077C68E /* AlertView.swift */; };
 		C38D3D54241BC9F80077C68E /* CameraAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38D3D53241BC9F80077C68E /* CameraAuthModel.swift */; };
+		C3B10AF2241D566300613EE9 /* ImageStorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B10AF1241D566300613EE9 /* ImageStorer.swift */; };
 		C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */; };
 		C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5853024130604002DDCCB /* adam-official-6.mlmodel */; };
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
 		C3E09D9C24148B3A00698A29 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
 		C3E09D9D24148B6C00698A29 /* SF-Pro-Display-Medium.otf in Sources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
 		C3F746AB2419AB99001EB7D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */; };
+		C3FA8E74241C34EE00CB79B5 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3FA8E73241C34EE00CB79B5 /* AlertView.xib */; };
 		FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0F95BE20B8883700378A66 /* ProductCatalog.plist */; };
 		FAA391EA20B5D2480085DA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391E920B5D2480085DA28 /* UIKit.framework */; };
 		FAA391EC20B5D2510085DA28 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391EB20B5D2510085DA28 /* Vision.framework */; };
@@ -106,11 +108,13 @@
 		C38D3D4F241BC4F00077C68E /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		C38D3D51241BC8170077C68E /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		C38D3D53241BC9F80077C68E /* CameraAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAuthModel.swift; sourceTree = "<group>"; };
+		C3B10AF1241D566300613EE9 /* ImageStorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorer.swift; sourceTree = "<group>"; };
 		C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official4.mlmodel"; sourceTree = "<group>"; };
 		C3B5853024130604002DDCCB /* adam-official-6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official-6.mlmodel"; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
 		C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
 		C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C3FA8E73241C34EE00CB79B5 /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		C81F01C582D21994DA276E31 /* Pods-NoTouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouch.debug.xcconfig"; path = "Target Support Files/Pods-NoTouch/Pods-NoTouch.debug.xcconfig"; sourceTree = "<group>"; };
 		FA0F95BE20B8883700378A66 /* ProductCatalog.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductCatalog.plist; sourceTree = "<group>"; };
 		FAA391E920B5D2480085DA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -226,6 +230,7 @@
 				C38D3D4F241BC4F00077C68E /* UIViewController+Alert.swift */,
 				C355B88D2415626F00FE69A9 /* GradientButton.swift */,
 				C38D3D51241BC8170077C68E /* AlertView.swift */,
+				C3FA8E73241C34EE00CB79B5 /* AlertView.xib */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				C387C16A240F1EC3008C47F5 /* AudioAlert.swift */,
 				C32B70B524152D52008F1D39 /* FirstRunModel.swift */,
 				C38D3D53241BC9F80077C68E /* CameraAuthModel.swift */,
+				C3B10AF1241D566300613EE9 /* ImageStorer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 				C355B8B72415849300FE69A9 /* SlideView.xib in Resources */,
 				C36795FC24146A1500886163 /* Localizable.strings in Resources */,
 				C3F746AB2419AB99001EB7D0 /* GoogleService-Info.plist in Resources */,
+				C3FA8E74241C34EE00CB79B5 /* AlertView.xib in Resources */,
 				FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */,
 				FAD500A41ED668B60074D713 /* Main.storyboard in Resources */,
 			);
@@ -475,6 +482,7 @@
 				C367960F241485C300886163 /* TutorialProvider.swift in Sources */,
 				C35C3F882415486E008DDB5B /* NTError.swift in Sources */,
 				C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */,
+				C3B10AF2241D566300613EE9 /* ImageStorer.swift in Sources */,
 				C3679611241488DC00886163 /* FirstIntroView.swift in Sources */,
 				C355B88E2415626F00FE69A9 /* GradientButton.swift in Sources */,
 				FAB417F62099308400494E9C /* VisionViewController.swift in Sources */,
@@ -701,7 +709,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				INFOPLIST_FILE = "$(SRCROOT)/NoTouch/Info.plist";
@@ -723,7 +731,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				INFOPLIST_FILE = "$(SRCROOT)/NoTouch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
