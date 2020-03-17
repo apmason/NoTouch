@@ -44,7 +44,7 @@ class VisionViewController: ViewController {
         // Setup Vision parts.
         
         // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "adam-official-6", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "cropped-official", withExtension: "mlmodelc") else {
             return NSError(domain: "VisionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "The model file is missing."])
         }
         
@@ -89,15 +89,10 @@ class VisionViewController: ViewController {
                     return
             }
             
-            // Does this need to be on the main thread? We're not using any UIKit methods anymore, might be more performant.
-            //            DispatchQueue.main.async { [weak self] in
-            //                guard let self = self else {
-            //                    return
-            //                }
-            
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
-            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
+            // Add some height for chin touching
+            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height + 30)
             let bounds = boundingBox.applying(translate)
             
             let cgImage = self.ciContext.createCGImage(ciImage, from: bounds)
@@ -124,7 +119,6 @@ class VisionViewController: ViewController {
                     print("Error: Vision request failed with error \"\(error)\"")
                 }
             }
-            //}
         }
         return request
     }
@@ -136,10 +130,10 @@ class VisionViewController: ViewController {
                 if let results = request.results as? [VNClassificationObservation],
                     let first = results.first {
                     if first.identifier == "Touching" {
-                        //print("Confidence is: \(first.confidence)")
+                        print("Confidence is: \(first.confidence)")
                     }
                 
-                    if first.identifier == "Touching" && first.confidence > 12.5 {
+                    if first.identifier == "Touching" && first.confidence > 10 {
                         print("Qualified")
                         DispatchQueue.main.async { [weak self] in
                             self?.alertVM.fireAlert()

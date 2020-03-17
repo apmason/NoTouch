@@ -33,6 +33,7 @@
 		C3B10AF2241D566300613EE9 /* ImageStorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B10AF1241D566300613EE9 /* ImageStorer.swift */; };
 		C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */; };
 		C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5853024130604002DDCCB /* adam-official-6.mlmodel */; };
+		C3C7E7182420F25400FFA7D2 /* cropped-official.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3C7E7172420F25400FFA7D2 /* cropped-official.mlmodel */; };
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
 		C3E09D9C24148B3A00698A29 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
 		C3E09D9D24148B6C00698A29 /* SF-Pro-Display-Medium.otf in Sources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
@@ -111,6 +112,7 @@
 		C3B10AF1241D566300613EE9 /* ImageStorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorer.swift; sourceTree = "<group>"; };
 		C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official4.mlmodel"; sourceTree = "<group>"; };
 		C3B5853024130604002DDCCB /* adam-official-6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official-6.mlmodel"; sourceTree = "<group>"; };
+		C3C7E7172420F25400FFA7D2 /* cropped-official.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "cropped-official.mlmodel"; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
 		C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
 		C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				C3D9554A240C74E600A03D25 /* Faces.mlmodel */,
 				C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */,
 				C3B5853024130604002DDCCB /* adam-official-6.mlmodel */,
+				C3C7E7172420F25400FFA7D2 /* cropped-official.mlmodel */,
 				FADF58432110D83200DE9236 /* FlowerShop.mlmodel */,
 				C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */,
 				C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */,
@@ -491,6 +494,7 @@
 				FAD500A11ED668B60074D713 /* ViewController.swift in Sources */,
 				C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */,
 				C32406C4241456F100D5AC9E /* TutorialViewController.swift in Sources */,
+				C3C7E7182420F25400FFA7D2 /* cropped-official.mlmodel in Sources */,
 				C38D3D54241BC9F80077C68E /* CameraAuthModel.swift in Sources */,
 				C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */,
 				FAD5009F1ED668B60074D713 /* AppDelegate.swift in Sources */,
