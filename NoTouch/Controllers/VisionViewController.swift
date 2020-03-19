@@ -44,7 +44,7 @@ class VisionViewController: ViewController {
         // Setup Vision parts.
         
         // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "cropped-official", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "fine-tuned", withExtension: "mlmodelc") else {
             return NSError(domain: "VisionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "The model file is missing."])
         }
         
@@ -133,7 +133,7 @@ class VisionViewController: ViewController {
                         print("Confidence is: \(first.confidence)")
                     }
                 
-                    if first.identifier == "Touching" && first.confidence > 10 {
+                    if first.identifier == "Touching" && first.confidence > 25.0 {
                         print("Qualified")
                         DispatchQueue.main.async { [weak self] in
                             self?.alertVM.fireAlert()
