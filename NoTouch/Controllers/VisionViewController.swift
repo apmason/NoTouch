@@ -293,6 +293,12 @@ class VisionViewController: ViewController {
             }
         }
     }
+    
+    @IBAction func beginFineTuning(_ sender: Any) {
+        print("Begin fine tuning tapped")
+        // kick off flow
+        modelUpdater?.startCollecting()
+    }
 }
 
 

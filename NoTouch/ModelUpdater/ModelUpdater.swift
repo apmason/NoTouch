@@ -70,9 +70,10 @@ class ModelUpdater {
         return !(collectionState == .notCollecting)
     }
  
-    /// The state machine that tracks the collection state. When a new value is set, when applicable, a new timer is kicked off to update the state after an alloted period of time.
+    /// The state machine that tracks the collection state. When a new value is set, when applicable, a new timer is kicked off to update the state after an allotted period of time.
     private var collectionState: CollectionState = .notCollecting {
         didSet {
+            print("Collection state updated to: \(collectionState)")
             switch collectionState {
             case .notCollecting:
                 break
@@ -119,10 +120,16 @@ class ModelUpdater {
         self.delegate = delegate
     }
     
+    /// Kick off the model fine tuning flow.
     public func startCollecting() {
         collectionState = .primingNotTouching
     }
     
+    /// Feed in an image that is to be used in fine-tuning the touching model. The model's internal state will determine how the image should be classified ('Touching' or 'Not_Touching').
+    /// The model may internally decide not to use a `cgImage` that was input if the state machine is not in the proper state.
+    /// The caller need not worry about the internal state of the model, the model will handle that.
+    /// The caller also shouldn't transform the image's orientation, the model will handle that.
+    /// - Parameter cgImage: An unaltered `CGImage` object. Do not transform/transpose the image, the model will handle orientations when it needs to.
     public func addImage(_ cgImage: CGImage) {
         // Only collect images while actually collecting.
         guard (collectionState == .collectingTouching || collectionState == .collectingNotTouching) else {
