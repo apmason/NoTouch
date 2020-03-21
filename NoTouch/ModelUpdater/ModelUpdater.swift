@@ -71,7 +71,7 @@ class ModelUpdater {
     }
  
     /// The state machine that tracks the collection state. When a new value is set, when applicable, a new timer is kicked off to update the state after an allotted period of time.
-    private var collectionState: CollectionState = .notCollecting {
+    private(set) var collectionState: CollectionState = .notCollecting {
         didSet {
             print("Collection state updated to: \(collectionState)")
             switch collectionState {
@@ -122,7 +122,7 @@ class ModelUpdater {
     
     /// Kick off the model fine tuning flow.
     public func startCollecting() {
-        collectionState = .primingNotTouching
+        collectionState = .primingTouching
     }
     
     /// Feed in an image that is to be used in fine-tuning the touching model. The model's internal state will determine how the image should be classified ('Touching' or 'Not_Touching').
