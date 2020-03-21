@@ -78,7 +78,7 @@ class VisionViewController: ViewController {
             guard let results = request.results as? [VNFaceObservation],
                 let boundingBox = results.first?.boundingBox else {
                     // As a fallback run with the whole pixel buffer, rather than just focusing on the face.
-                    let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: self.exifOrientationFromDeviceOrientation())
+                    let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: Orienter.exifOrientationFromDeviceOrientation())
                     self.visionQueue.async { [weak self] in
                         guard let self = self else {
                             return
@@ -119,7 +119,7 @@ class VisionViewController: ViewController {
             //                let uiImage = UIImage(cgImage: unwrappedCGImage)
             //                ImageStorer.storeNewImage(image: uiImage)
             
-            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: self.exifOrientationFromDeviceOrientation())
+            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.exifOrientationFromDeviceOrientation())
             self.visionQueue.async { [weak self] in
                 guard let self = self else {
                     return
@@ -166,13 +166,12 @@ class VisionViewController: ViewController {
     /// - Tag: AnalyzeImage
     private func findFace() {
         // Most computer vision tasks are not rotation-agnostic, so it is important to pass in the orientation of the image with respect to device.
-        let orientation = exifOrientationFromDeviceOrientation()
-        
         guard let pixelBuffer = currentlyAnalyzedPixelBuffer else {
             return
         }
         
-        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation)
+        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,
+                                                   orientation: Orienter.exifOrientationFromDeviceOrientation())
         //print("#Kick off find face")
         visionQueue.async {
             do {
