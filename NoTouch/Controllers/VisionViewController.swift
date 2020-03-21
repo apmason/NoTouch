@@ -33,6 +33,8 @@ class VisionViewController: ViewController {
     
     private let ciContext = CIContext()
     
+    private var modelUpdater: ModelUpdater?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         alertVM.addObserver(self)
@@ -40,24 +42,30 @@ class VisionViewController: ViewController {
     
     /// - Tag: SetupVisionRequest
     @discardableResult
-    func setupVision() -> NSError? {
+    func setupVision() -> NTError? {
         // Setup Vision parts.
         
         // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "fine-tuned", withExtension: "mlmodelc") else {
-            return NSError(domain: "VisionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "The model file is missing."])
+        guard let modelURL = Bundle.main.url(forResource: "NoTouch-New", withExtension: "mlmodelc") else {
+            return NTError.missingModelFile
         }
-        
-        guard let objectRecognition = createClassificationRequest(modelURL: modelURL) else {
-            return NSError(domain: "VisionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "The classification request failed."])
+        do {
+            let mlModel = try MLModel(contentsOf: modelURL)
+            modelUpdater = ModelUpdater(originalModel: mlModel, delegate: self)
+            
+            guard let touchingRequest = createTouchingRequest(mlModel: mlModel) else {
+                return NTError.visionRequestFailure
+            }
+            
+            self.coreMLRequest = touchingRequest
+            self.faceRequest = createFaceRequest()
+            
+            // Analysis requests will always call for the Face Request
+            self.analysisRequests.append(faceRequest)
+            return nil
+        } catch {
+            return NTError.modelCreationFailure
         }
-        
-        self.coreMLRequest = objectRecognition
-        self.faceRequest = createFaceRequest()
-        
-        // Analysis requests will always call for the Face Request
-        self.analysisRequests.append(faceRequest)
-        return nil
     }
     
     private func createFaceRequest() -> VNDetectFaceRectanglesRequest {
@@ -69,33 +77,38 @@ class VisionViewController: ViewController {
             
             guard let results = request.results as? [VNFaceObservation],
                 let boundingBox = results.first?.boundingBox else {
-                //print("#Face detect failed")
-                
-                // As a fallback run with the whole pixel buffer, rather than just focusing on the face.
-                let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: self.exifOrientationFromDeviceOrientation())
-                self.visionQueue.async { [weak self] in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    do {
-                        // Release the pixel buffer when done, allowing the next buffer to be processed.
-                        defer { self.currentlyAnalyzedPixelBuffer = nil }
-                        try touchRequest.perform([self.coreMLRequest])
-                    } catch {
-                        print("Error: Vision request failed with error \"\(error)\"")
-                    }
+                    // As a fallback run with the whole pixel buffer, rather than just focusing on the face.
+                    let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: self.exifOrientationFromDeviceOrientation())
+                    self.visionQueue.async { [weak self] in
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        do {
+                            // Release the pixel buffer when done, allowing the next buffer to be processed.
+                            defer { self.currentlyAnalyzedPixelBuffer = nil }
+                            try touchRequest.perform([self.coreMLRequest])
+                        } catch {
+                            print("Error: Vision request failed with error \"\(error)\"")
+                        }
                     }
                     return
             }
             
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
-            // Add some height for chin touching
-            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height + 30)
+            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
             let bounds = boundingBox.applying(translate)
             
             let cgImage = self.ciContext.createCGImage(ciImage, from: bounds)
+            
+            // Can we update the model with a CGImage?
+            if let modelUpdater = self.modelUpdater,
+                modelUpdater.isCollecting,
+                let cgImage = cgImage {
+                print("The model is collecting, now what.")
+                modelUpdater.addImage(cgImage)
+            }
             
             guard let unwrappedCGImage = cgImage else {
                 self.currentlyAnalyzedPixelBuffer = nil
@@ -123,9 +136,9 @@ class VisionViewController: ViewController {
         return request
     }
     
-    private func createClassificationRequest(modelURL: URL) -> VNCoreMLRequest? {
+    private func createTouchingRequest(mlModel: MLModel) -> VNCoreMLRequest? {
         do {
-            let objectClassifier = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
+            let objectClassifier = try VNCoreMLModel(for: mlModel)
             let classificationRequest = VNCoreMLRequest(model: objectClassifier, completionHandler: { [weak self] (request, error) in
                 if let results = request.results as? [VNClassificationObservation],
                     let first = results.first {
@@ -133,7 +146,7 @@ class VisionViewController: ViewController {
                         print("Confidence is: \(first.confidence)")
                     }
                 
-                    if first.identifier == "Touching" && first.confidence > 25.0 {
+                    if first.identifier == "Touching" && first.confidence > 0.80 {
                         print("Qualified")
                         DispatchQueue.main.async { [weak self] in
                             self?.alertVM.fireAlert()
@@ -306,5 +319,24 @@ extension VisionViewController: AlertObserver {
                 print("No success")
             }
         }
+    }
+}
+
+extension VisionViewController: ModelUpdaterDelegate {
+    
+    func startPrimingTouching() {
+        print("Start priming touching")
+    }
+    
+    func startPrimingNotTouching() {
+        print("Start priming not touching")
+    }
+    
+    func startCollectingTouching() {
+        print("Start collecting touching")
+    }
+    
+    func startCollectingNotTouching() {
+        print("Start collecting not touching")
     }
 }
