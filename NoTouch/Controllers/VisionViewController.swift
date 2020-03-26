@@ -46,12 +46,12 @@ class VisionViewController: ViewController {
         // Setup Vision parts.
         
         // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "NoTouch-New", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "yes", withExtension: "mlmodelc") else {
             return NTError.missingModelFile
         }
         do {
             let mlModel = try MLModel(contentsOf: modelURL)
-            modelUpdater = ModelUpdater(originalModel: mlModel, delegate: self)
+            modelUpdater = ModelUpdater(originalModel: mlModel, originalModelURL: modelURL, delegate: self)
             
             guard let touchingRequest = createTouchingRequest(mlModel: mlModel) else {
                 return NTError.visionRequestFailure
@@ -78,7 +78,7 @@ class VisionViewController: ViewController {
             guard let results = request.results as? [VNFaceObservation],
                 let boundingBox = results.first?.boundingBox else {
                     // As a fallback run with the whole pixel buffer, rather than just focusing on the face.
-                    let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: Orienter.exifOrientationFromDeviceOrientation())
+                    let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: Orienter.currentCGOrientation())
                     self.visionQueue.async { [weak self] in
                         guard let self = self else {
                             return
@@ -119,7 +119,7 @@ class VisionViewController: ViewController {
             //                let uiImage = UIImage(cgImage: unwrappedCGImage)
             //                ImageStorer.storeNewImage(image: uiImage)
             
-            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.exifOrientationFromDeviceOrientation())
+            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
             self.visionQueue.async { [weak self] in
                 guard let self = self else {
                     return
@@ -141,18 +141,23 @@ class VisionViewController: ViewController {
             let objectClassifier = try VNCoreMLModel(for: mlModel)
             let classificationRequest = VNCoreMLRequest(model: objectClassifier, completionHandler: { [weak self] (request, error) in
                 if let results = request.results as? [VNClassificationObservation],
-                    let first = results.first {
-                    if first.identifier == "Touching" {
-                        print("Confidence is: \(first.confidence)")
-                    }
-                
-                    if first.identifier == "Touching" && first.confidence > 0.80 {
-                        print("Qualified")
-                        DispatchQueue.main.async { [weak self] in
-                            self?.alertVM.fireAlert()
-                        }
-                    }
+                    let touching = results.first(where: {$0.identifier == "Touching" }) {
+                    //print("In here, touching: \(touching.confidence)")
                 }
+                // don't get the first result, get Touching
+//                if let results = request.results as? [VNClassificationObservation],
+//                    let first = results.first {
+//                    if first.identifier == "Touching" {
+//                        print("Confidence is: \(first.confidence)")
+//                    }
+//
+//                    if first.identifier == "Touching" && first.confidence > 0.80 {
+//                        print("Qualified")
+//                        DispatchQueue.main.async { [weak self] in
+//                            self?.alertVM.fireAlert()
+//                        }
+//                    }
+//                }
             })
             classificationRequest.imageCropAndScaleOption = .centerCrop // @ALEX: Test this with different options, does it work best?
             return classificationRequest
@@ -171,7 +176,7 @@ class VisionViewController: ViewController {
         }
         
         let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,
-                                                   orientation: Orienter.exifOrientationFromDeviceOrientation())
+                                                   orientation: Orienter.currentCGOrientation())
         //print("#Kick off find face")
         visionQueue.async {
             do {

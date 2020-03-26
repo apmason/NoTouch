@@ -13,7 +13,7 @@ class Orienter {
     
     /// Based on the current device orientation calculate the desired CGImagePropertyOrientation
     /// - Returns: The orientation
-    public static func exifOrientationFromDeviceOrientation() -> CGImagePropertyOrientation {
+    public static func currentCGOrientation() -> CGImagePropertyOrientation {
         let curDeviceOrientation = UIDevice.current.orientation
         let exifOrientation: CGImagePropertyOrientation
         
