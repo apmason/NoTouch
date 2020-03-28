@@ -28,8 +28,12 @@ class VisionViewController: ViewController {
     @IBOutlet var audioButton: UIButton!
     @IBOutlet var announcementLabel: UILabel!
     
-    private var coreMLRequest: VNCoreMLRequest!
-    private var faceRequest: VNDetectFaceRectanglesRequest!
+    @IBOutlet var rightStackView: UIStackView!
+    @IBOutlet var segmentedControl: UISegmentedControl!
+    
+    
+    private var touchingRequest: VNCoreMLRequest?
+    private var faceBoundingRequest: VNDetectFaceRectanglesRequest!
     
     private let ciContext = CIContext()
     
@@ -46,7 +50,7 @@ class VisionViewController: ViewController {
         // Setup Vision parts.
         
         // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "yes", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "no-touch-1-updatable", withExtension: "mlmodelc") else {
             return NTError.missingModelFile
         }
         do {
@@ -57,18 +61,18 @@ class VisionViewController: ViewController {
                 return NTError.visionRequestFailure
             }
             
-            self.coreMLRequest = touchingRequest
-            self.faceRequest = createFaceRequest()
+            self.touchingRequest = touchingRequest
+            self.faceBoundingRequest = createFaceBoundingRequest()
             
             // Analysis requests will always call for the Face Request
-            self.analysisRequests.append(faceRequest)
+            self.analysisRequests.append(faceBoundingRequest)
             return nil
         } catch {
             return NTError.modelCreationFailure
         }
     }
     
-    private func createFaceRequest() -> VNDetectFaceRectanglesRequest {
+    private func createFaceBoundingRequest() -> VNDetectFaceRectanglesRequest {
         // Release the pixel buffer when done, allowing the next buffer to be processed.
         let request = VNDetectFaceRectanglesRequest { [weak self] request, error in
             guard let self = self, let pixelBuffer = self.currentlyAnalyzedPixelBuffer else {
@@ -87,7 +91,11 @@ class VisionViewController: ViewController {
                         do {
                             // Release the pixel buffer when done, allowing the next buffer to be processed.
                             defer { self.currentlyAnalyzedPixelBuffer = nil }
-                            try touchRequest.perform([self.coreMLRequest])
+                            guard let touchingRequest = self.touchingRequest else {
+                                return
+                            }
+                            
+                            try touchRequest.perform([touchingRequest])
                         } catch {
                             print("Error: Vision request failed with error \"\(error)\"")
                         }
@@ -127,7 +135,11 @@ class VisionViewController: ViewController {
                 
                 do {
                     defer { self.currentlyAnalyzedPixelBuffer = nil }
-                    try touchRequest.perform([self.coreMLRequest])
+                    guard let touchingRequest = self.touchingRequest else {
+                        return
+                    }
+                    
+                    try touchRequest.perform([touchingRequest])
                 } catch {
                     print("Error: Vision request failed with error \"\(error)\"")
                 }
@@ -142,7 +154,7 @@ class VisionViewController: ViewController {
             let classificationRequest = VNCoreMLRequest(model: objectClassifier, completionHandler: { [weak self] (request, error) in
                 if let results = request.results as? [VNClassificationObservation],
                     let touching = results.first(where: {$0.identifier == "Touching" }) {
-                    //print("In here, touching: \(touching.confidence)")
+                    print("Touching confidence: \(touching.confidence)")
                 }
                 // don't get the first result, get Touching
 //                if let results = request.results as? [VNClassificationObservation],
@@ -177,7 +189,7 @@ class VisionViewController: ViewController {
         
         let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,
                                                    orientation: Orienter.currentCGOrientation())
-        //print("#Kick off find face")
+
         visionQueue.async {
             do {
                 try requestHandler.perform(self.analysisRequests)
@@ -303,6 +315,17 @@ class VisionViewController: ViewController {
         print("Begin fine tuning tapped")
         // kick off flow
         modelUpdater?.startCollecting()
+        
+        // Add top view
+        
+        // Hide underlying views
+        UIView.animate(withDuration: 0.2, animations: { [weak self] in
+            self?.rightStackView.alpha = 0
+            self?.audioButton.alpha = 0
+            self?.segmentedControl.alpha = 0
+        }) { _ in
+            
+        }
     }
 }
 
@@ -348,5 +371,13 @@ extension VisionViewController: ModelUpdaterDelegate {
     
     func startCollectingNotTouching() {
         print("Start collecting not touching")
+    }
+    
+    func didUpdateMLModelToUse(_ mlModel: MLModel) {
+        guard let request = createTouchingRequest(mlModel: mlModel) else {
+            return
+        }
+        
+        self.touchingRequest = request
     }
 }

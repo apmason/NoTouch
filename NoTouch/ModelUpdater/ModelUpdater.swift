@@ -24,7 +24,7 @@ protocol ModelUpdaterDelegate: class {
     func startPrimingNotTouching()
     func startCollectingTouching()
     func startCollectingNotTouching()
-    // TODO: Add new delegate method here to alert when we start training?
+    func didUpdateMLModelToUse(_ mlModel: MLModel)
 }
 
 /// Handles the model's state machine.

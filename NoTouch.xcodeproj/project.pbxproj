@@ -15,6 +15,7 @@
 		C32406C6241459F500D5AC9E /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32406C5241459F500D5AC9E /* SlideView.swift */; };
 		C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B70B524152D52008F1D39 /* FirstRunModel.swift */; };
+		C346E282242FB22B001DC34A /* no-touch-1-updatable.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C346E281242FB22B001DC34A /* no-touch-1-updatable.mlmodel */; };
 		C34920EF242398FE00708DDA /* not-fine-tuned-2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C34920EE242398FE00708DDA /* not-fine-tuned-2.mlmodel */; };
 		C34920F124239A6600708DDA /* fine-tuned.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C34920F024239A6600708DDA /* fine-tuned.mlmodel */; };
 		C34920F32423B33300708DDA /* NoTouch-New.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C34920F22423B33300708DDA /* NoTouch-New.mlmodel */; };
@@ -90,6 +91,7 @@
 		C32406C5241459F500D5AC9E /* SlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
 		C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		C32B70B524152D52008F1D39 /* FirstRunModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunModel.swift; sourceTree = "<group>"; };
+		C346E281242FB22B001DC34A /* no-touch-1-updatable.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "no-touch-1-updatable.mlmodel"; sourceTree = "<group>"; };
 		C34920EE242398FE00708DDA /* not-fine-tuned-2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "not-fine-tuned-2.mlmodel"; sourceTree = "<group>"; };
 		C34920F024239A6600708DDA /* fine-tuned.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "fine-tuned.mlmodel"; sourceTree = "<group>"; };
 		C34920F22423B33300708DDA /* NoTouch-New.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "NoTouch-New.mlmodel"; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				C36795FE24146A1500886163 /* Localizable.strings */,
+				C346E281242FB22B001DC34A /* no-touch-1-updatable.mlmodel */,
 				C35BC44C242D612C00054AED /* best-model-notrain2.mlmodel */,
 				C3A1F36D242CCD14006C7DF1 /* UpdatableMNISTDigitClassifier.mlmodel */,
 				C3A1F36B242CC90B006C7DF1 /* yes-queen.mlmodel */,
@@ -664,6 +667,7 @@
 				C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */,
 				FAD5009F1ED668B60074D713 /* AppDelegate.swift in Sources */,
 				C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */,
+				C346E282242FB22B001DC34A /* no-touch-1-updatable.mlmodel in Sources */,
 				C3766226242803C000AFA391 /* overfit.mlmodel in Sources */,
 				C38D3D50241BC4F00077C68E /* UIViewController+Alert.swift in Sources */,
 				C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */,
@@ -936,7 +940,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				INFOPLIST_FILE = "$(SRCROOT)/NoTouch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -944,7 +947,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
 				PRODUCT_NAME = NoTouch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -958,7 +961,6 @@
 				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
-				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				INFOPLIST_FILE = "$(SRCROOT)/NoTouch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -966,7 +968,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
 				PRODUCT_NAME = NoTouch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
