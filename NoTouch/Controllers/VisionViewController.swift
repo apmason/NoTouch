@@ -37,8 +37,6 @@ class VisionViewController: ViewController {
     
     private let ciContext = CIContext()
     
-    private var modelUpdater: ModelUpdater?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         alertVM.addObserver(self)
@@ -48,9 +46,7 @@ class VisionViewController: ViewController {
     @discardableResult
     func setupVision() -> NTError? {
         let modelURL: URL
-        if let updatedURL = ModelUpdater.existingUpdatedURL {
-            modelURL = updatedURL
-        } else if let updatedURL = Bundle.main.url(forResource: "128-fine-update-2", withExtension: "mlmodelc") {
+        if let updatedURL = Bundle.main.url(forResource: "no-touch-2-updatable", withExtension: "mlmodelc") {
             modelURL = updatedURL
         } else {
             fatalError("A model wasn't able to be retrieved")
@@ -60,7 +56,6 @@ class VisionViewController: ViewController {
         // First try with the updated URL, if anything is there continue
         do {
             let mlModel = try MLModel(contentsOf: modelURL)
-            modelUpdater = ModelUpdater(originalModel: mlModel, originalModelURL: modelURL, delegate: self)
             
             guard let touchingRequest = createTouchingRequest(mlModel: mlModel) else {
                 return NTError.visionRequestFailure
@@ -96,7 +91,7 @@ class VisionViewController: ViewController {
                         
                         // TODO: Tell the user we can't find their face so they update their position. (If we can't find their face then should we stop analysis? Will need to test, maybe if they do it a certain number of times, how much does it degrade the performance?)
                         
-                        // TODO: Also do we we do bollow with `modelUpdater.addImage`, we should not perform a touching request here.
+                        // TODO: Also do as we do bellow with `modelUpdater.addImage`, we should not perform a touching request here.
                         
                         do {
                             // Release the pixel buffer when done, allowing the next buffer to be processed.
@@ -115,21 +110,11 @@ class VisionViewController: ViewController {
             
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
-            // Add twenty percent to the height (more chin)
+            // TODO: Add twenty percent to the height (more chin)
             let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height) // TODO: Test extending the face detection area, maybe get more chin touches?
             let bounds = boundingBox.applying(translate)
             
             let cgImage = self.ciContext.createCGImage(ciImage, from: bounds)
-            
-            // Can we update the model with a CGImage?
-            if let modelUpdater = self.modelUpdater,
-                modelUpdater.isCollecting,
-                let cgImage = cgImage {
-                print("Collecting, adding image")
-                modelUpdater.addImage(cgImage)
-                self.currentlyAnalyzedPixelBuffer = nil
-                return
-            }
             
             guard let unwrappedCGImage = cgImage else {
                 self.currentlyAnalyzedPixelBuffer = nil
@@ -165,25 +150,19 @@ class VisionViewController: ViewController {
         do {
             let objectClassifier = try VNCoreMLModel(for: mlModel)
             let classificationRequest = VNCoreMLRequest(model: objectClassifier, completionHandler: { [weak self] (request, error) in
-                if let results = request.results as? [VNClassificationObservation],
-                    let touching = results.first(where: {$0.identifier == "Touching" }) {
-                    print("Touching confidence: \(touching.confidence)")
+                guard let results = request.results as? [VNClassificationObservation],
+                    let touching = results.first(where: {$0.identifier == "Touching" }) else {
+                        return
                 }
-                // don't get the first result, get Touching
-//                if let results = request.results as? [VNClassificationObservation],
-//                    let first = results.first {
-//                    if first.identifier == "Touching" {
-//                        print("Confidence is: \(first.confidence)")
-//                    }
-//
-//                    if first.identifier == "Touching" && first.confidence > 0.80 {
-//                        print("Qualified")
-//                        DispatchQueue.main.async { [weak self] in
-//                            self?.alertVM.fireAlert()
-//                        }
-//                    }
-//                }
+                
+                print("Touching confidence: \(touching.confidence)")
+                if touching.confidence > 0.97 {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.alertVM.fireAlert()
+                    }
+                }
             })
+            
             classificationRequest.imageCropAndScaleOption = .centerCrop // @ALEX: Test this with different options, does it work best?
             return classificationRequest
             
@@ -214,7 +193,7 @@ class VisionViewController: ViewController {
     }
     
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer), !(modelUpdater?.finalConversion ?? false) else {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
         
@@ -324,21 +303,7 @@ class VisionViewController: ViewController {
         }
     }
     
-    @IBAction func beginFineTuning(_ sender: Any) {
-        // kick off flow
-        modelUpdater?.startCollecting()
-        
-        // TODO: Add top view
-        
-        // Hide underlying views
-        UIView.animate(withDuration: 0.2, animations: { [weak self] in
-            self?.rightStackView.alpha = 0
-            self?.audioButton.alpha = 0
-            self?.segmentedControl.alpha = 0
-        }) { _ in
-            
-        }
-    }
+    @IBAction func beginFineTuning(_ sender: Any) {}
 }
 
 
@@ -368,16 +333,7 @@ extension VisionViewController: AlertObserver {
 }
 
 extension VisionViewController: ModelUpdaterDelegate {
-    func loadModelWithURL(_ url: URL) {
-//        guard let request = createTouchingRequest(mlModel: mlModel) else {
-//            return
-//        }
-//        
-//        self.touchingRequest = nil
-//        //self.touchingRequest = request
-//        self.modelUpdater = nil
-    }
-    
+    func loadModelWithURL(_ url: URL) {}
     
     func startPrimingTouching() {
         print("Start priming touching")
