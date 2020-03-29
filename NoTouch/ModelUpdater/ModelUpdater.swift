@@ -71,6 +71,8 @@ class ModelUpdater {
     var isCollecting: Bool {
         return !(collectionState == .notCollecting)
     }
+    
+    var finalConversion: Bool = false
  
     /// The state machine that tracks the collection state. When a new value is set, when applicable, a new timer is kicked off to update the state after an allotted period of time.
     private(set) var collectionState: CollectionState = .notCollecting {
@@ -90,13 +92,13 @@ class ModelUpdater {
                 rotateStateAfter(seconds: 3)
                 
             case .collectingTouching:
-                rotateStateAfter(seconds: 3)
+                rotateStateAfter(seconds: 10)
                 
             case .primingNotTouching:
                 rotateStateAfter(seconds: 3)
                 
             case .collectingNotTouching:
-                rotateStateAfter(seconds: 3)
+                rotateStateAfter(seconds: 10)
                 
             }
         }
@@ -108,10 +110,25 @@ class ModelUpdater {
     /// The URL of the original model to be used when fine tuning.
     private let originalModelURL: URL
     
+    /// The location of the app's Application Support directory for the user.
+    private let appDirectory = FileManager.default.urls(for: .applicationSupportDirectory,
+                                                               in: .userDomainMask).first
+    
+    /// The location of the user's latest updated model
+    private var updatedModelURL: URL? {
+        return appDirectory?.appendingPathComponent("perzonalized.mlmodelc")
+    }
+    
+    /// The temporary location of the updated Drawing Classifier model
+    private var tempUpdatedModelURL: URL? {
+        return appDirectory?.appendingPathComponent("personalize_tmp.mlmodelc")
+    }
+    
+    
     weak var delegate: ModelUpdaterDelegate?
     
     // Touching and NotTouching will share these values.
-    fileprivate let inputName = "mobilenetv2_1.00_224_input"
+    fileprivate let inputName = "image"
     
     private var imageInputConstraint: MLImageConstraint {
         guard let constraint = originalModel
@@ -125,14 +142,14 @@ class ModelUpdater {
         return constraint
     }
     
-    // TODO: Add touching image feature batch
-    
-    // TODO: Add not touching image feature batch
-    
     init(originalModel: MLModel, originalModelURL: URL, delegate: ModelUpdaterDelegate) {
         self.originalModel = originalModel
         self.originalModelURL = originalModelURL
         self.delegate = delegate
+    }
+    
+    deinit {
+        print("Releasing this")
     }
     
     /// Kick off the model fine tuning flow.
@@ -151,6 +168,7 @@ class ModelUpdater {
             return
         }
         
+        print("An image has been added")
         let trainingImage = TrainingImage(cgImage: cgImage,
                                           imageConstraint: imageInputConstraint,
                                           orientation: Orienter.currentCGOrientation())
@@ -183,7 +201,6 @@ class ModelUpdater {
     func createBatchProvider() {
         let providers = touchingProvider.createFeatureProviders() + notTouchingProvider.createFeatureProviders()
         let batchProvider = MLArrayBatchProvider(array: providers)
-        
         updateModel(with: batchProvider)
     }
 }
@@ -193,33 +210,82 @@ class ModelUpdater {
 extension ModelUpdater {
     
     func updateModel(with trainingData: MLBatchProvider) {
+        finalConversion = true
         
-        let handlers = MLUpdateProgressHandlers(forEvents: [.epochEnd, .trainingBegin, .miniBatchEnd], progressHandler: { (context) in
-            print("In this context: \(context.event)")
-        }) { (finalContext) in
-            print("In final context")
+        let progressHandlers = MLUpdateProgressHandlers(forEvents: [.trainingBegin, .epochEnd, .miniBatchEnd], progressHandler: { (context) in
+            switch context.event {
+            case .epochEnd:
+                print("Epoch end")
+                
+            case .miniBatchEnd:
+                //print("Mini batch end")
+                break
+                
+            case .trainingBegin:
+                print("Training began")
+                
+            default:
+                print("Default case")
+                
+            }
+        }) { [weak self] (context) in
+            print("in final completion")
+            let updatedModel = context.model
+            self?.delegate?.didUpdateMLModelToUse(updatedModel)
+
+            let fileManager = FileManager.default
+            guard let tempUpdatedModelURL = self?.tempUpdatedModelURL,
+                let updatedModelURL = self?.updatedModelURL else {
+                    return
+            }
+            
+            do {
+                // Create a directory for the updated model.
+                try fileManager.createDirectory(at: tempUpdatedModelURL,
+                                                withIntermediateDirectories: true,
+                                                attributes: nil)
+                
+                // Save the updated model to temporary filename.
+                try updatedModel.write(to: tempUpdatedModelURL)
+                
+                // Replace any previously updated model with this one.
+                _ = try fileManager.replaceItemAt(updatedModelURL,
+                                                  withItemAt: tempUpdatedModelURL)
+                
+                // TODO: - If a user starts the app again load there trained model. (Save to UserDefaults to know latest?)
+                print("Updated model saved to:\n\t\(updatedModelURL)")
+            } catch let error {
+                print("Could not save updated model to the file system: \(error)")
+                return
+            }
         }
         
         do {
-            let updateTask = try MLUpdateTask(forModelAt: originalModelURL, trainingData: trainingData, configuration: nil, progressHandlers: handlers)
+            let updateTask = try MLUpdateTask(forModelAt: originalModelURL, trainingData: trainingData, configuration: nil, progressHandlers: progressHandlers)
             updateTask.resume()
         } catch {
-            print("Error in update task: \(error.localizedDescription)")
+            print("Error creating MLUpdateTask: \(error.localizedDescription)")
         }
         
-        //let updateTask = try? MLUpdateTask(forModelAt: originalModelURL,
-                                           //trainingData: trainingData,
-                                           //configuration: nil,
-                                           //completionHandler: { context in
-                                            //print("We made it bitch")
-                                            //print("Context event: \(context.event)")
-                                            
-                                         //   let updatedModel = context.model
-                                            // create a new directory for the model
-                                            // write to the directroy
-                                            // replace any previously updated model with new one
-                                            
-                                            /** EXAMPLE BELOW */
+//        let updateTask = try? MLUpdateTask(forModelAt: originalModelURL,
+//                                           trainingData: trainingData,
+//                                           configuration: nil,
+//                                           completionHandler: { [weak self] context in
+//                                            print("We made it bitch")
+//                                            self?.touchingProvider.clearOutTrainingImages()
+//                                            self?.notTouchingProvider.clearOutTrainingImages()
+//                                            print("Context event: \(context.event.rawValue)")
+//                                            self?.finalConversion = false
+//
+//                                            // TODO: Progress bar in here using different completion?
+//
+//                                            let updatedModel = context.model
+//                                            let fileManager = FileManager.default
+//                                            guard let tempUpdatedModelURL = self?.tempUpdatedModelURL,
+//                                                let updatedModelURL = self?.updatedModelURL else {
+//                                                    return
+//                                            }
+//
 //                                            do {
 //                                                // Create a directory for the updated model.
 //                                                try fileManager.createDirectory(at: tempUpdatedModelURL,
@@ -233,18 +299,15 @@ extension ModelUpdater {
 //                                                _ = try fileManager.replaceItemAt(updatedModelURL,
 //                                                                                  withItemAt: tempUpdatedModelURL)
 //
+//                                                // TODO: - If a user starts the app again load there trained model. (Save to UserDefaults to know latest?)
 //                                                print("Updated model saved to:\n\t\(updatedModelURL)")
 //                                            } catch let error {
 //                                                print("Could not save updated model to the file system: \(error)")
 //                                                return
 //                                            }
-                                            /** EXAMPLE END */
-                                            
-                                            // alert delegate that we've updated
-                                            // In the delegate we now need to update our faceTouchingRequest with this new model.
-                                            
-                                            // TODO: Empty out the arrays of training data.
-      //  })
-        
+//
+//                                            self?.delegate?.didUpdateMLModelToUse(context.model)
+//
+//        })
     }
 }

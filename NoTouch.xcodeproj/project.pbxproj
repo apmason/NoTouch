@@ -16,7 +16,7 @@
 		C32406CA24145C7100D5AC9E /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32B70B524152D52008F1D39 /* FirstRunModel.swift */; };
 		C346E282242FB22B001DC34A /* no-touch-1-updatable.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C346E281242FB22B001DC34A /* no-touch-1-updatable.mlmodel */; };
-		C34920EF242398FE00708DDA /* not-fine-tuned-2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C34920EE242398FE00708DDA /* not-fine-tuned-2.mlmodel */; };
+		C346E284242FC326001DC34A /* no-touch-2-updatable.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C346E283242FC326001DC34A /* no-touch-2-updatable.mlmodel */; };
 		C34920F124239A6600708DDA /* fine-tuned.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C34920F024239A6600708DDA /* fine-tuned.mlmodel */; };
 		C34920F32423B33300708DDA /* NoTouch-New.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C34920F22423B33300708DDA /* NoTouch-New.mlmodel */; };
 		C34A85102426575C00161F28 /* TrainingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34A850F2426575C00161F28 /* TrainingImage.swift */; };
@@ -27,29 +27,25 @@
 		C355B89124156C5B00FE69A9 /* InfoTutorialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355B89024156C5B00FE69A9 /* InfoTutorialProvider.swift */; };
 		C355B89C2415836C00FE69A9 /* FirstIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C355B89E2415836C00FE69A9 /* FirstIntroView.xib */; };
 		C355B8B72415849300FE69A9 /* SlideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C355B8B92415849300FE69A9 /* SlideView.xib */; };
-		C35BC44D242D612C00054AED /* best-model-notrain2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C35BC44C242D612C00054AED /* best-model-notrain2.mlmodel */; };
 		C35C3F882415486E008DDB5B /* NTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C3F872415486E008DDB5B /* NTError.swift */; };
 		C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */ = {isa = PBXBuildFile; fileRef = C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */; };
 		C36795FC24146A1500886163 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C36795FE24146A1500886163 /* Localizable.strings */; };
 		C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367960C24146B1300886163 /* TutorialViewModel.swift */; };
 		C367960F241485C300886163 /* TutorialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367960E241485C300886163 /* TutorialProvider.swift */; };
 		C3679611241488DC00886163 /* FirstIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3679610241488DC00886163 /* FirstIntroView.swift */; };
-		C3766226242803C000AFA391 /* overfit.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3766225242803C000AFA391 /* overfit.mlmodel */; };
-		C3766228242805CE00AFA391 /* overfit2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3766227242805CE00AFA391 /* overfit2.mlmodel */; };
 		C376622A24280A3600AFA391 /* new_test.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C376622924280A3600AFA391 /* new_test.mlmodel */; };
+		C382AD99242FE0F100981B4A /* no-touch-8batch.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C382AD98242FE0F100981B4A /* no-touch-8batch.mlmodel */; };
+		C382AD9D242FE30F00981B4A /* no-touch-1batch-update.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C382AD9C242FE30F00981B4A /* no-touch-1batch-update.mlmodel */; };
+		C382AD9F242FE7DB00981B4A /* no-touch-128-update.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C382AD9E242FE7DB00981B4A /* no-touch-128-update.mlmodel */; };
+		C382ADA92430187F00981B4A /* 128-fine-update-2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C382ADA82430187F00981B4A /* 128-fine-update-2.mlmodel */; };
 		C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C167240F1363008C47F5 /* AlertViewModel.swift */; };
 		C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C387C16A240F1EC3008C47F5 /* AudioAlert.swift */; };
 		C38D3D50241BC4F00077C68E /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38D3D4F241BC4F00077C68E /* UIViewController+Alert.swift */; };
 		C38D3D52241BC8170077C68E /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38D3D51241BC8170077C68E /* AlertView.swift */; };
 		C38D3D54241BC9F80077C68E /* CameraAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38D3D53241BC9F80077C68E /* CameraAuthModel.swift */; };
 		C3908DA824269CFF0055BC97 /* ImageFeatureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3908DA724269CFF0055BC97 /* ImageFeatureProvider.swift */; };
-		C3908DAA2426C6B80055BC97 /* trainable.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3908DA92426C6B80055BC97 /* trainable.mlmodel */; };
-		C3A1F36A242CC725006C7DF1 /* yes.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3A1F369242CC725006C7DF1 /* yes.mlmodel */; };
-		C3A1F36C242CC90B006C7DF1 /* yes-queen.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3A1F36B242CC90B006C7DF1 /* yes-queen.mlmodel */; };
 		C3A1F36E242CCD14006C7DF1 /* UpdatableMNISTDigitClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3A1F36D242CCD14006C7DF1 /* UpdatableMNISTDigitClassifier.mlmodel */; };
 		C3B10AF2241D566300613EE9 /* ImageStorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B10AF1241D566300613EE9 /* ImageStorer.swift */; };
-		C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */; };
-		C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B5853024130604002DDCCB /* adam-official-6.mlmodel */; };
 		C3C7E7182420F25400FFA7D2 /* cropped-official.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3C7E7172420F25400FFA7D2 /* cropped-official.mlmodel */; };
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
 		C3E09D9C24148B3A00698A29 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
@@ -92,7 +88,7 @@
 		C32406C924145C7100D5AC9E /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		C32B70B524152D52008F1D39 /* FirstRunModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunModel.swift; sourceTree = "<group>"; };
 		C346E281242FB22B001DC34A /* no-touch-1-updatable.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "no-touch-1-updatable.mlmodel"; sourceTree = "<group>"; };
-		C34920EE242398FE00708DDA /* not-fine-tuned-2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "not-fine-tuned-2.mlmodel"; sourceTree = "<group>"; };
+		C346E283242FC326001DC34A /* no-touch-2-updatable.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "no-touch-2-updatable.mlmodel"; sourceTree = "<group>"; };
 		C34920F024239A6600708DDA /* fine-tuned.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "fine-tuned.mlmodel"; sourceTree = "<group>"; };
 		C34920F22423B33300708DDA /* NoTouch-New.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "NoTouch-New.mlmodel"; sourceTree = "<group>"; };
 		C34A850F2426575C00161F28 /* TrainingImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingImage.swift; sourceTree = "<group>"; };
@@ -128,7 +124,6 @@
 		C355B8C82415859400FE69A9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		C355B8C92415859400FE69A9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		C355B8CA2415859400FE69A9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		C35BC44C242D612C00054AED /* best-model-notrain2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "best-model-notrain2.mlmodel"; sourceTree = "<group>"; };
 		C35C3F8624153A74008DDB5B /* NoTouch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NoTouch.entitlements; sourceTree = "<group>"; };
 		C35C3F872415486E008DDB5B /* NTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTError.swift; sourceTree = "<group>"; };
 		C36795F8241469B400886163 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -145,22 +140,19 @@
 		C367960C24146B1300886163 /* TutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
 		C367960E241485C300886163 /* TutorialProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialProvider.swift; sourceTree = "<group>"; };
 		C3679610241488DC00886163 /* FirstIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstIntroView.swift; sourceTree = "<group>"; };
-		C3766225242803C000AFA391 /* overfit.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = overfit.mlmodel; sourceTree = "<group>"; };
-		C3766227242805CE00AFA391 /* overfit2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = overfit2.mlmodel; sourceTree = "<group>"; };
 		C376622924280A3600AFA391 /* new_test.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = new_test.mlmodel; sourceTree = "<group>"; };
+		C382AD98242FE0F100981B4A /* no-touch-8batch.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "no-touch-8batch.mlmodel"; sourceTree = "<group>"; };
+		C382AD9C242FE30F00981B4A /* no-touch-1batch-update.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "no-touch-1batch-update.mlmodel"; sourceTree = "<group>"; };
+		C382AD9E242FE7DB00981B4A /* no-touch-128-update.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "no-touch-128-update.mlmodel"; sourceTree = "<group>"; };
+		C382ADA82430187F00981B4A /* 128-fine-update-2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "128-fine-update-2.mlmodel"; sourceTree = "<group>"; };
 		C387C167240F1363008C47F5 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		C387C16A240F1EC3008C47F5 /* AudioAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAlert.swift; sourceTree = "<group>"; };
 		C38D3D4F241BC4F00077C68E /* UIViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		C38D3D51241BC8170077C68E /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		C38D3D53241BC9F80077C68E /* CameraAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAuthModel.swift; sourceTree = "<group>"; };
 		C3908DA724269CFF0055BC97 /* ImageFeatureProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeatureProvider.swift; sourceTree = "<group>"; };
-		C3908DA92426C6B80055BC97 /* trainable.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = trainable.mlmodel; sourceTree = "<group>"; };
-		C3A1F369242CC725006C7DF1 /* yes.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = yes.mlmodel; sourceTree = "<group>"; };
-		C3A1F36B242CC90B006C7DF1 /* yes-queen.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "yes-queen.mlmodel"; sourceTree = "<group>"; };
 		C3A1F36D242CCD14006C7DF1 /* UpdatableMNISTDigitClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = UpdatableMNISTDigitClassifier.mlmodel; sourceTree = "<group>"; };
 		C3B10AF1241D566300613EE9 /* ImageStorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorer.swift; sourceTree = "<group>"; };
-		C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official4.mlmodel"; sourceTree = "<group>"; };
-		C3B5853024130604002DDCCB /* adam-official-6.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "adam-official-6.mlmodel"; sourceTree = "<group>"; };
 		C3C7E7172420F25400FFA7D2 /* cropped-official.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "cropped-official.mlmodel"; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
 		C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
@@ -209,21 +201,17 @@
 			isa = PBXGroup;
 			children = (
 				C36795FE24146A1500886163 /* Localizable.strings */,
+				C382ADA82430187F00981B4A /* 128-fine-update-2.mlmodel */,
+				C382AD9C242FE30F00981B4A /* no-touch-1batch-update.mlmodel */,
+				C382AD9E242FE7DB00981B4A /* no-touch-128-update.mlmodel */,
+				C382AD98242FE0F100981B4A /* no-touch-8batch.mlmodel */,
+				C346E283242FC326001DC34A /* no-touch-2-updatable.mlmodel */,
 				C346E281242FB22B001DC34A /* no-touch-1-updatable.mlmodel */,
-				C35BC44C242D612C00054AED /* best-model-notrain2.mlmodel */,
 				C3A1F36D242CCD14006C7DF1 /* UpdatableMNISTDigitClassifier.mlmodel */,
-				C3A1F36B242CC90B006C7DF1 /* yes-queen.mlmodel */,
-				C3A1F369242CC725006C7DF1 /* yes.mlmodel */,
 				C376622924280A3600AFA391 /* new_test.mlmodel */,
-				C3766227242805CE00AFA391 /* overfit2.mlmodel */,
-				C3908DA92426C6B80055BC97 /* trainable.mlmodel */,
-				C3766225242803C000AFA391 /* overfit.mlmodel */,
 				C34920F22423B33300708DDA /* NoTouch-New.mlmodel */,
 				C34920F024239A6600708DDA /* fine-tuned.mlmodel */,
 				C3D9554A240C74E600A03D25 /* Faces.mlmodel */,
-				C34920EE242398FE00708DDA /* not-fine-tuned-2.mlmodel */,
-				C3B5852E241303DF002DDCCB /* adam-official4.mlmodel */,
-				C3B5853024130604002DDCCB /* adam-official-6.mlmodel */,
 				C3C7E7172420F25400FFA7D2 /* cropped-official.mlmodel */,
 				FADF58432110D83200DE9236 /* FlowerShop.mlmodel */,
 				C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */,
@@ -646,18 +634,15 @@
 				C36795F72414643300886163 /* SF-Pro-Display-Heavy.otf in Sources */,
 				C3908DA824269CFF0055BC97 /* ImageFeatureProvider.swift in Sources */,
 				C376622A24280A3600AFA391 /* new_test.mlmodel in Sources */,
-				C34920EF242398FE00708DDA /* not-fine-tuned-2.mlmodel in Sources */,
 				C3B10AF2241D566300613EE9 /* ImageStorer.swift in Sources */,
 				C3679611241488DC00886163 /* FirstIntroView.swift in Sources */,
 				C34A85102426575C00161F28 /* TrainingImage.swift in Sources */,
-				C3766228242805CE00AFA391 /* overfit2.mlmodel in Sources */,
 				C355B88E2415626F00FE69A9 /* GradientButton.swift in Sources */,
 				FAB417F62099308400494E9C /* VisionViewController.swift in Sources */,
 				C34920F124239A6600708DDA /* fine-tuned.mlmodel in Sources */,
 				C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */,
 				C32406C6241459F500D5AC9E /* SlideView.swift in Sources */,
 				FAD500A11ED668B60074D713 /* ViewController.swift in Sources */,
-				C3A1F36C242CC90B006C7DF1 /* yes-queen.mlmodel in Sources */,
 				C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */,
 				C32406C4241456F100D5AC9E /* TutorialViewController.swift in Sources */,
 				C3C7E7182420F25400FFA7D2 /* cropped-official.mlmodel in Sources */,
@@ -665,22 +650,21 @@
 				C38D3D54241BC9F80077C68E /* CameraAuthModel.swift in Sources */,
 				C34920F32423B33300708DDA /* NoTouch-New.mlmodel in Sources */,
 				C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */,
+				C346E284242FC326001DC34A /* no-touch-2-updatable.mlmodel in Sources */,
 				FAD5009F1ED668B60074D713 /* AppDelegate.swift in Sources */,
-				C3B5853124130605002DDCCB /* adam-official-6.mlmodel in Sources */,
 				C346E282242FB22B001DC34A /* no-touch-1-updatable.mlmodel in Sources */,
-				C3766226242803C000AFA391 /* overfit.mlmodel in Sources */,
+				C382ADA92430187F00981B4A /* 128-fine-update-2.mlmodel in Sources */,
+				C382AD9F242FE7DB00981B4A /* no-touch-128-update.mlmodel in Sources */,
 				C38D3D50241BC4F00077C68E /* UIViewController+Alert.swift in Sources */,
 				C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */,
 				C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */,
 				C38D3D52241BC8170077C68E /* AlertView.swift in Sources */,
 				C3F7AAE92425838F00BBF34C /* ModelUpdater.swift in Sources */,
+				C382AD9D242FE30F00981B4A /* no-touch-1batch-update.mlmodel in Sources */,
+				C382AD99242FE0F100981B4A /* no-touch-8batch.mlmodel in Sources */,
 				FADF58442110D83200DE9236 /* FlowerShop.mlmodel in Sources */,
-				C3B5852F241303DF002DDCCB /* adam-official4.mlmodel in Sources */,
-				C35BC44D242D612C00054AED /* best-model-notrain2.mlmodel in Sources */,
-				C3A1F36A242CC725006C7DF1 /* yes.mlmodel in Sources */,
 				C355B89124156C5B00FE69A9 /* InfoTutorialProvider.swift in Sources */,
 				C355B88B2415602F00FE69A9 /* InfoViewController.swift in Sources */,
-				C3908DAA2426C6B80055BC97 /* trainable.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

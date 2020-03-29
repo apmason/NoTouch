@@ -50,9 +50,11 @@ class VisionViewController: ViewController {
         // Setup Vision parts.
         
         // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "no-touch-1-updatable", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "128-fine-update-2", withExtension: "mlmodelc") else {
             return NTError.missingModelFile
         }
+        
+        // First try with the updated URL, if anything is there continue
         do {
             let mlModel = try MLModel(contentsOf: modelURL)
             modelUpdater = ModelUpdater(originalModel: mlModel, originalModelURL: modelURL, delegate: self)
@@ -88,6 +90,10 @@ class VisionViewController: ViewController {
                             return
                         }
                         
+                        // TODO: Tell the user we can't find their face so they update their position. (If we can't find their face then should we stop analysis? Will need to test, maybe if they do it a certain number of times, how much does it degrade the performance?)
+                        
+                        // TODO: Also do we we do bollow with `modelUpdater.addImage`, we should not perform a touching request here.
+                        
                         do {
                             // Release the pixel buffer when done, allowing the next buffer to be processed.
                             defer { self.currentlyAnalyzedPixelBuffer = nil }
@@ -105,7 +111,8 @@ class VisionViewController: ViewController {
             
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
-            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
+            // Add twenty percent to the height (more chin)
+            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height) // TODO: Test extending the face detection area, maybe get more chin touches?
             let bounds = boundingBox.applying(translate)
             
             let cgImage = self.ciContext.createCGImage(ciImage, from: bounds)
@@ -114,8 +121,10 @@ class VisionViewController: ViewController {
             if let modelUpdater = self.modelUpdater,
                 modelUpdater.isCollecting,
                 let cgImage = cgImage {
-                print("The model is collecting, now what.")
+                print("Collecting, adding image")
                 modelUpdater.addImage(cgImage)
+                self.currentlyAnalyzedPixelBuffer = nil
+                return
             }
             
             guard let unwrappedCGImage = cgImage else {
@@ -201,7 +210,7 @@ class VisionViewController: ViewController {
     }
     
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer), !(modelUpdater?.finalConversion ?? false) else {
             return
         }
         
@@ -312,11 +321,10 @@ class VisionViewController: ViewController {
     }
     
     @IBAction func beginFineTuning(_ sender: Any) {
-        print("Begin fine tuning tapped")
         // kick off flow
         modelUpdater?.startCollecting()
         
-        // Add top view
+        // TODO: Add top view
         
         // Hide underlying views
         UIView.animate(withDuration: 0.2, animations: { [weak self] in
@@ -378,6 +386,8 @@ extension VisionViewController: ModelUpdaterDelegate {
             return
         }
         
+        self.touchingRequest = nil
         self.touchingRequest = request
+        self.modelUpdater = nil
     }
 }

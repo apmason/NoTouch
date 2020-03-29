@@ -10,6 +10,7 @@ import CoreML
 import Foundation
 
 class ImageFeatureProvider {
+    // Create Constants for input output names, looks like the keys are wrong.
     
     enum OutputValue: String {
         case touching = "Touching"
@@ -19,8 +20,8 @@ class ImageFeatureProvider {
     private let outputValue: OutputValue
     private var trainingImages: [TrainingImage] = []
     
-    fileprivate let inputKey = "mobilenetv2_1.00_224_input"
-    fileprivate let outputKey = "classLabel"
+    fileprivate let inputKey = "image"
+    fileprivate let outputKey = "label"
     
     init(outputValue: OutputValue) {
         self.outputValue = outputValue
