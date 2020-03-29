@@ -47,11 +47,14 @@ class VisionViewController: ViewController {
     /// - Tag: SetupVisionRequest
     @discardableResult
     func setupVision() -> NTError? {
-        // Setup Vision parts.
-        
-        // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "128-fine-update-2", withExtension: "mlmodelc") else {
-            return NTError.missingModelFile
+        let modelURL: URL
+        if let updatedURL = ModelUpdater.existingUpdatedURL {
+            modelURL = updatedURL
+        } else if let updatedURL = Bundle.main.url(forResource: "128-fine-update-2", withExtension: "mlmodelc") {
+            modelURL = updatedURL
+        } else {
+            fatalError("A model wasn't able to be retrieved")
+            return NTError.missingModelFile // TODO: Add logging.
         }
         
         // First try with the updated URL, if anything is there continue
@@ -66,11 +69,12 @@ class VisionViewController: ViewController {
             self.touchingRequest = touchingRequest
             self.faceBoundingRequest = createFaceBoundingRequest()
             
-            // Analysis requests will always call for the Face Request
+            // analysisRequests will always only contain the Face Request
             self.analysisRequests.append(faceBoundingRequest)
             return nil
         } catch {
-            return NTError.modelCreationFailure
+            print("Error creating MLModel: \(error.localizedDescription)")
+            return NTError.modelCreationFailure(error)
         }
     }
     
@@ -364,6 +368,16 @@ extension VisionViewController: AlertObserver {
 }
 
 extension VisionViewController: ModelUpdaterDelegate {
+    func loadModelWithURL(_ url: URL) {
+//        guard let request = createTouchingRequest(mlModel: mlModel) else {
+//            return
+//        }
+//        
+//        self.touchingRequest = nil
+//        //self.touchingRequest = request
+//        self.modelUpdater = nil
+    }
+    
     
     func startPrimingTouching() {
         print("Start priming touching")
@@ -379,15 +393,5 @@ extension VisionViewController: ModelUpdaterDelegate {
     
     func startCollectingNotTouching() {
         print("Start collecting not touching")
-    }
-    
-    func didUpdateMLModelToUse(_ mlModel: MLModel) {
-        guard let request = createTouchingRequest(mlModel: mlModel) else {
-            return
-        }
-        
-        self.touchingRequest = nil
-        self.touchingRequest = request
-        self.modelUpdater = nil
     }
 }

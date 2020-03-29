@@ -24,7 +24,7 @@ protocol ModelUpdaterDelegate: class {
     func startPrimingNotTouching()
     func startCollectingTouching()
     func startCollectingNotTouching()
-    func didUpdateMLModelToUse(_ mlModel: MLModel)
+    func loadModelWithURL(_ url: URL)
 }
 
 /// Handles the model's state machine.
@@ -92,13 +92,13 @@ class ModelUpdater {
                 rotateStateAfter(seconds: 3)
                 
             case .collectingTouching:
-                rotateStateAfter(seconds: 10)
+                rotateStateAfter(seconds: 5)
                 
             case .primingNotTouching:
                 rotateStateAfter(seconds: 3)
                 
             case .collectingNotTouching:
-                rotateStateAfter(seconds: 10)
+                rotateStateAfter(seconds: 5)
                 
             }
         }
@@ -110,24 +110,36 @@ class ModelUpdater {
     /// The URL of the original model to be used when fine tuning.
     private let originalModelURL: URL
     
-    /// The location of the app's Application Support directory for the user.
-    private let appDirectory = FileManager.default.urls(for: .applicationSupportDirectory,
-                                                               in: .userDomainMask).first
+    /// The file manager being used to save and read files
+    private static let fileManager = FileManager.default
     
-    /// The location of the user's latest updated model
-    private var updatedModelURL: URL? {
-        return appDirectory?.appendingPathComponent("perzonalized.mlmodelc")
+    /// The location of the app's Application Support directory for the user.
+    private static var appDirectory: URL? {
+        return fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
     }
     
     /// The temporary location of the updated Drawing Classifier model
-    private var tempUpdatedModelURL: URL? {
+    private static var tempUpdatedModelURL: URL? {
         return appDirectory?.appendingPathComponent("personalize_tmp.mlmodelc")
     }
     
+    /// The location of the user's latest updated model
+    private static var updatedModelURL: URL? {
+        return appDirectory?.appendingPathComponent("perzonalized.mlmodelc")
+    }
+    
+    /// The existing updated model. This means that the URL exists AND that a file exists at this location.
+    public static var existingUpdatedURL: URL? {
+        guard let modelURL = updatedModelURL else {
+            return nil
+        }
+        
+        // If a file exists at the modelURL return that URL, otherwise return nil.
+        return fileManager.fileExists(atPath: modelURL.path) ? modelURL : nil
+    }
     
     weak var delegate: ModelUpdaterDelegate?
     
-    // Touching and NotTouching will share these values.
     fileprivate let inputName = "image"
     
     private var imageInputConstraint: MLImageConstraint {
@@ -231,11 +243,10 @@ extension ModelUpdater {
         }) { [weak self] (context) in
             print("in final completion")
             let updatedModel = context.model
-            self?.delegate?.didUpdateMLModelToUse(updatedModel)
 
             let fileManager = FileManager.default
-            guard let tempUpdatedModelURL = self?.tempUpdatedModelURL,
-                let updatedModelURL = self?.updatedModelURL else {
+            guard let tempUpdatedModelURL = ModelUpdater.tempUpdatedModelURL,
+                let updatedModelURL = ModelUpdater.updatedModelURL else {
                     return
             }
             
@@ -252,7 +263,9 @@ extension ModelUpdater {
                 _ = try fileManager.replaceItemAt(updatedModelURL,
                                                   withItemAt: tempUpdatedModelURL)
                 
-                // TODO: - If a user starts the app again load there trained model. (Save to UserDefaults to know latest?)
+                self?.delegate?.loadModelWithURL(updatedModelURL)
+                
+                // TODO: - If a user starts the app again load their trained model. (Save to UserDefaults to know latest?)
                 print("Updated model saved to:\n\t\(updatedModelURL)")
             } catch let error {
                 print("Could not save updated model to the file system: \(error)")

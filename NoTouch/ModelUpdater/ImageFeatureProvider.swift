@@ -48,6 +48,8 @@ class ImageFeatureProvider {
                 } catch {
                     print("Error creating MLDictionaryFeatureProvider: \(error)")
                 }
+            } else {
+                print("FEATURE VALUE FAILED")
             }
         }
         

@@ -12,7 +12,7 @@ enum NTError: Error {
     case noDeviceInput
     case inputDeviceCreationFailure
     case cameraAccessDenied
-    case modelCreationFailure
+    case modelCreationFailure(Error)
     case missingModelFile
     case visionRequestFailure
 }

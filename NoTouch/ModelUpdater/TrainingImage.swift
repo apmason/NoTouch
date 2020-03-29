@@ -18,6 +18,11 @@ struct TrainingImage {
     let orientation: CGImagePropertyOrientation
     
     var featureValue: MLFeatureValue? {
-        return try? MLFeatureValue(cgImage: cgImage, orientation: orientation, constraint: imageConstraint, options: nil)
+        do {
+            return try MLFeatureValue(cgImage: cgImage, orientation: orientation, constraint: imageConstraint, options: nil)
+        } catch {
+            print("Error creating feature value: \(error.localizedDescription)")
+            return nil
+        }
     }
 }

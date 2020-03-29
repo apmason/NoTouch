@@ -50,6 +50,7 @@
 		C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3D9554A240C74E600A03D25 /* Faces.mlmodel */; };
 		C3E09D9C24148B3A00698A29 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
 		C3E09D9D24148B6C00698A29 /* SF-Pro-Display-Medium.otf in Sources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
+		C3F11F7F2430F8D200078BFB /* 128-fine-update-3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3F11F7E2430F8D200078BFB /* 128-fine-update-3.mlmodel */; };
 		C3F746AB2419AB99001EB7D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */; };
 		C3F7AAE92425838F00BBF34C /* ModelUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F7AAE82425838F00BBF34C /* ModelUpdater.swift */; };
 		C3FA8E74241C34EE00CB79B5 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3FA8E73241C34EE00CB79B5 /* AlertView.xib */; };
@@ -156,6 +157,7 @@
 		C3C7E7172420F25400FFA7D2 /* cropped-official.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "cropped-official.mlmodel"; sourceTree = "<group>"; };
 		C3D9554A240C74E600A03D25 /* Faces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Faces.mlmodel; sourceTree = "<group>"; };
 		C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		C3F11F7E2430F8D200078BFB /* 128-fine-update-3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "128-fine-update-3.mlmodel"; sourceTree = "<group>"; };
 		C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3F7AAE82425838F00BBF34C /* ModelUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUpdater.swift; sourceTree = "<group>"; };
 		C3FA8E73241C34EE00CB79B5 /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				C36795FE24146A1500886163 /* Localizable.strings */,
+				C3F11F7E2430F8D200078BFB /* 128-fine-update-3.mlmodel */,
 				C382ADA82430187F00981B4A /* 128-fine-update-2.mlmodel */,
 				C382AD9C242FE30F00981B4A /* no-touch-1batch-update.mlmodel */,
 				C382AD9E242FE7DB00981B4A /* no-touch-128-update.mlmodel */,
@@ -658,6 +661,7 @@
 				C38D3D50241BC4F00077C68E /* UIViewController+Alert.swift in Sources */,
 				C387C16B240F1EC3008C47F5 /* AudioAlert.swift in Sources */,
 				C3D9554B240C74E600A03D25 /* Faces.mlmodel in Sources */,
+				C3F11F7F2430F8D200078BFB /* 128-fine-update-3.mlmodel in Sources */,
 				C38D3D52241BC8170077C68E /* AlertView.swift in Sources */,
 				C3F7AAE92425838F00BBF34C /* ModelUpdater.swift in Sources */,
 				C382AD9D242FE30F00981B4A /* no-touch-1batch-update.mlmodel in Sources */,
