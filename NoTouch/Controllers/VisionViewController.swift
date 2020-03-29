@@ -111,10 +111,17 @@ class VisionViewController: ViewController {
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
             // TODO: Add twenty percent to the height (more chin)
+            let extraRoom = ciImage.extent.width * 0.3
             let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height) // TODO: Test extending the face detection area, maybe get more chin touches?
-            let bounds = boundingBox.applying(translate)
             
-            let cgImage = self.ciContext.createCGImage(ciImage, from: bounds)
+            // translated by? move it a little further away?
+            let shiftUp = CGAffineTransform.identity.translatedBy(x: -extraRoom / 2, y: 0)
+            let bounds = boundingBox.applying(translate).applying(shiftUp)
+            
+            // Add other translatiion
+            //boundingBox.applying(.translatedBy(x: -twentyPercent * 3, y: 0))
+            
+            let cgImage = self.ciContext.createCGImage(ciImage, from: ciImage.extent)
             
             guard let unwrappedCGImage = cgImage else {
                 self.currentlyAnalyzedPixelBuffer = nil
@@ -122,8 +129,8 @@ class VisionViewController: ViewController {
             }
             
             // Don't need to analyze the images currently.
-            //                let uiImage = UIImage(cgImage: unwrappedCGImage)
-            //                ImageStorer.storeNewImage(image: uiImage)
+            let uiImage = UIImage(cgImage: unwrappedCGImage)
+            ImageStorer.storeNewImage(image: uiImage)
             
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
             self.visionQueue.async { [weak self] in

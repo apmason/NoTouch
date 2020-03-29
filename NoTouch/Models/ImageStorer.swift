@@ -28,6 +28,8 @@ class ImageStorer {
         if let pngRepresentation = image.pngData() {
             if let filePath = filePath(forKey: randomString(length: 12)) {
                 do  {
+                    print("Trying to write to: \(filePath)")
+                    
                     try pngRepresentation.write(to: filePath,
                                                 options: .atomic)
                 } catch let err {
