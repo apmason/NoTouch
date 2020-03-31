@@ -111,12 +111,18 @@ class VisionViewController: ViewController {
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
             // TODO: Add twenty percent to the height (more chin)
-            let extraRoom = ciImage.extent.width * 0.3
             let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height) // TODO: Test extending the face detection area, maybe get more chin touches?
             
-            // translated by? move it a little further away?
-            let shiftUp = CGAffineTransform.identity.translatedBy(x: -extraRoom / 2, y: 0)
-            let bounds = boundingBox.applying(translate).applying(shiftUp)
+            let bounds = boundingBox.applying(translate)
+            
+            // Flipping width and height here.
+            let chinOffset = ciImage.extent.width * 0.1
+            let widthOffset: CGFloat = ciImage.extent.height * 0.025
+            
+            let finalBounds = CGRect(x: bounds.origin.x - widthOffset,
+                                     y: bounds.origin.y - chinOffset,
+                                     width: bounds.width + (widthOffset * 2),
+                                     height: bounds.height + (chinOffset * 2))
             
             // Add other translatiion
             //boundingBox.applying(.translatedBy(x: -twentyPercent * 3, y: 0))

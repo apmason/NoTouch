@@ -5,19 +5,8 @@ import UIKit
 
 extension UIImage {
     var ciImage: CIImage? {
-        guard let data = self.pngData() else { return nil }
+        guard let data = self.jpegData(compressionQuality: 1) else { return nil }
         return CIImage(data: data)
-    }
-    
-    // Face Detection with CIDetector
-    var faces: [UIImage] {
-        guard let ciImage = ciImage else { return [] }
-        return (CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])?
-            .features(in: ciImage) as? [CIFaceFeature])?
-            .map {
-                let ciimage = ciImage.cropped(to: $0.bounds)
-                return UIImage(ciImage: ciimage)
-            }  ?? []
     }
     
     // Face Detection with Vision Framework
@@ -29,58 +18,44 @@ extension UIImage {
         
         guard let results = faceDetectionRequest.results as? [VNFaceObservation] else { return [] }
         
-        return results.map {
-            let translate = CGAffineTransform.identity.scaledBy(x: size.width, y: size.height)
-            let bounds = $0.boundingBox.applying(translate)
-            let ciimage = ciImage.cropped(to: bounds)
-            return UIImage(ciImage: ciimage)
-        }
-    }
-}
-
-let fileManager = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-
-func writeImageToFile(_ image: UIImage) {
-    // Use Vision because that's how we're detecting things.
-    for face in image.faces_Vision {
-        // create as jpeg, write
-        guard let data = face.jpegData(compressionQuality: 1) else {
-            print("This is fucked up")
-            break
-        }
         
-        do {
-            try data.write(to: fileManager.appendingPathComponent("Training")
-                .appendingPathComponent("Touching")
-                .appendingPathComponent("\(randomName()).jpeg"))
-        } catch {
-            print("Error writing: \(error.localizedDescription)")
+        // TODO: Add twenty percent to the height (more chin)
+//        let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height) // TODO: Test extending the face detection area, maybe get more chin touches?
+        
+        // translated by? move it a little further away?
+        //let shiftUp = CGAffineTransform.identity.translatedBy(x: -extraRoom / 2, y: 0)
+        //let bounds = boundingBox.applying(translate).applying(shiftUp)
+        
+        // Add other translatiion
+        //boundingBox.applying(.translatedBy(x: -twentyPercent * 3, y: 0))
+                
+        return results.map {
+            //let extraRoom: CGFloat = ciImage.extent.height * 0.3
+            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
+            let bounds = $0.boundingBox.applying(translate)
+            print("Initial bounds: \(bounds)")
+            
+            let chinOffset = ciImage.extent.height * 0.1
+            let widthOffset: CGFloat = ciImage.extent.width * 0.025
+            
+            // NOTE: x and y will be flipped when bringing into NoTouch
+            let finalBounds = CGRect(x: bounds.origin.x - widthOffset,
+                                     y: bounds.origin.y - chinOffset,
+                                     width: bounds.width + (widthOffset * 2),
+                                     height: bounds.height + (chinOffset * 2))
+            
+            let cgImage = CIContext().createCGImage(ciImage, from: finalBounds)!
+            
+            return UIImage(cgImage: cgImage)
         }
     }
 }
-
-func randomName() -> String {
-  let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-  return String((0..<16).map{ _ in letters.randomElement()! })
-}
-
-// name it something random?
-
-let jpegPaths = Bundle.main.paths(forResourcesOfType: "jpg", inDirectory: "Touching")
-
-for jpegPath in jpegPaths {
-    let url = URL(fileURLWithPath: jpegPath)
-    let data = try! Data(contentsOf: url)
-    if let image = UIImage(data: data) {
-        writeImageToFile(image)
-    }
-}
-
-//print("JPEGs count is \(jpegs.count)")
 
 // Get an image from URL
-//let file = Bundle.main.path(forResource: "Touching/1AA012AA-8A63-4740-A8E9-7286EABEFB91", ofType: "jpeg")!
-//print("Image file is: \(file)")
+let fileString = Bundle.main.path(forResource: "Touching/277641F6-E5EE-466C-9AF6-B321617B8C99", ofType: "jpeg")!
+let fileURL = URL(fileURLWithPath: fileString)
+let data = try! Data(contentsOf: fileURL)
+let image = UIImage(data: data)!
 
-
-
+let face = image.faces_Vision.first!
+print(face)

@@ -64,7 +64,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		271D95A14E17B43E0AB2B735 /* Pods-NoTouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouch.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoTouch/Pods-NoTouch.release.xcconfig"; sourceTree = "<group>"; };
 		438ACC009489100DC0103A88 /* Pods_NoTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		477ED183B446C6023E46C2FA /* Pods-NoTouchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoTouchTests/Pods-NoTouchTests.debug.xcconfig"; sourceTree = "<group>"; };
+		56282AC0367BCE090BDECBAD /* Pods-NoTouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoTouch/Pods-NoTouch.debug.xcconfig"; sourceTree = "<group>"; };
+		56EA538BED602C23E4FEB5CE /* Pods-NoTouchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoTouchTests/Pods-NoTouchTests.release.xcconfig"; sourceTree = "<group>"; };
 		76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		943E2DFA0A82BD3BE8864207 /* Pods-NoTouchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouchTests.release.xcconfig"; path = "Target Support Files/Pods-NoTouchTests/Pods-NoTouchTests.release.xcconfig"; sourceTree = "<group>"; };
 		9C5574F4C953EB889ECC5B5A /* Pods-NoTouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouch.release.xcconfig"; path = "Target Support Files/Pods-NoTouch/Pods-NoTouch.release.xcconfig"; sourceTree = "<group>"; };
@@ -307,6 +311,10 @@
 				9C5574F4C953EB889ECC5B5A /* Pods-NoTouch.release.xcconfig */,
 				B3EF523C2EF7103F0FB09193 /* Pods-NoTouchTests.debug.xcconfig */,
 				943E2DFA0A82BD3BE8864207 /* Pods-NoTouchTests.release.xcconfig */,
+				56282AC0367BCE090BDECBAD /* Pods-NoTouch.debug.xcconfig */,
+				271D95A14E17B43E0AB2B735 /* Pods-NoTouch.release.xcconfig */,
+				477ED183B446C6023E46C2FA /* Pods-NoTouchTests.debug.xcconfig */,
+				56EA538BED602C23E4FEB5CE /* Pods-NoTouchTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -521,7 +529,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NoTouch/Pods-NoTouch-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-NoTouch/Pods-NoTouch-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-framework/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC-framework/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb-framework/nanopb.framework",
@@ -534,7 +542,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NoTouch/Pods-NoTouch-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NoTouch/Pods-NoTouch-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C3CBEBFA2419F3170021D519 /* ShellScript */ = {
@@ -709,7 +717,7 @@
 /* Begin XCBuildConfiguration section */
 		C34A85212426742B00161F28 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3EF523C2EF7103F0FB09193 /* Pods-NoTouchTests.debug.xcconfig */;
+			baseConfigurationReference = 477ED183B446C6023E46C2FA /* Pods-NoTouchTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -731,7 +739,7 @@
 		};
 		C34A85222426742B00161F28 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 943E2DFA0A82BD3BE8864207 /* Pods-NoTouchTests.release.xcconfig */;
+			baseConfigurationReference = 56EA538BED602C23E4FEB5CE /* Pods-NoTouchTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -869,7 +877,7 @@
 		};
 		FAD500AE1ED668B60074D713 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C81F01C582D21994DA276E31 /* Pods-NoTouch.debug.xcconfig */;
+			baseConfigurationReference = 56282AC0367BCE090BDECBAD /* Pods-NoTouch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
@@ -891,7 +899,7 @@
 		};
 		FAD500AF1ED668B60074D713 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C5574F4C953EB889ECC5B5A /* Pods-NoTouch.release.xcconfig */;
+			baseConfigurationReference = 271D95A14E17B43E0AB2B735 /* Pods-NoTouch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouch/NoTouch.entitlements;
