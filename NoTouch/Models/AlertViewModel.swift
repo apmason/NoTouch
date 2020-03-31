@@ -15,7 +15,6 @@ protocol AlertObserver: class {
 
 class AlertViewModel {
     
-    private var timeoutPeriod: TimeInterval = 3
     private var observations = [ObjectIdentifier : Observation]()
     
     private var audioVM = AudioAlert()
@@ -43,6 +42,7 @@ class AlertViewModel {
     public func fireAlert() {
         lastFire = Date().timeIntervalSince1970
         
+        // If a timer has been created that means that we are already firing an alert, so don't enter
         guard timer == nil else {
             return
         }
@@ -65,7 +65,7 @@ class AlertViewModel {
     @objc func fireTimer() {
         let now = Date().timeIntervalSince1970
         
-        // More than `delayTime` ago
+        // More than `delayTime` has past. We have not received an update in the alloted period of time so stop everything.
         if (now - lastFire) > delayTime {
             timer?.invalidate()
             timer = nil
@@ -83,13 +83,19 @@ class AlertViewModel {
             }
         }
         else {
+            // Our timer has fired but we've received an update prior to the `delayTime` expiring
+            // Create a new timer based on the last received update.
             timer?.invalidate()
             timer = nil
             
             let timeDifference: TimeInterval = now - lastFire
             let timeToWait = delayTime - timeDifference
         
-            timer = Timer.scheduledTimer(timeInterval: timeToWait, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: timeToWait,
+                                         target: self,
+                                         selector: #selector(fireTimer),
+                                         userInfo: nil,
+                                         repeats: false)
         }
     }
 }

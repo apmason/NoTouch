@@ -115,19 +115,16 @@ class VisionViewController: ViewController {
             
             let bounds = boundingBox.applying(translate)
             
-            // Flipping width and height here.
-            let chinOffset = ciImage.extent.width * 0.1
-            let widthOffset: CGFloat = ciImage.extent.height * 0.025
+            // Image is rotated 90 degrees to the left
+            let cheekOffset = ciImage.extent.height * 0.025
+            let chinOffset: CGFloat = ciImage.extent.width * 0.09
             
-            let finalBounds = CGRect(x: bounds.origin.x - widthOffset,
-                                     y: bounds.origin.y - chinOffset,
-                                     width: bounds.width + (widthOffset * 2),
-                                     height: bounds.height + (chinOffset * 2))
+            let updatedBounds = CGRect(x: bounds.origin.x - chinOffset,
+                                       y: bounds.origin.y - cheekOffset,
+                                       width: bounds.width + (chinOffset * 2),
+                                       height: bounds.height + (cheekOffset * 2))
             
-            // Add other translatiion
-            //boundingBox.applying(.translatedBy(x: -twentyPercent * 3, y: 0))
-            
-            let cgImage = self.ciContext.createCGImage(ciImage, from: ciImage.extent)
+            let cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
             
             guard let unwrappedCGImage = cgImage else {
                 self.currentlyAnalyzedPixelBuffer = nil
@@ -135,8 +132,8 @@ class VisionViewController: ViewController {
             }
             
             // Don't need to analyze the images currently.
-            let uiImage = UIImage(cgImage: unwrappedCGImage)
-            ImageStorer.storeNewImage(image: uiImage)
+//            let uiImage = UIImage(cgImage: unwrappedCGImage)
+//            ImageStorer.storeNewImage(image: uiImage)
             
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
             self.visionQueue.async { [weak self] in
@@ -169,7 +166,7 @@ class VisionViewController: ViewController {
                 }
                 
                 print("Touching confidence: \(touching.confidence)")
-                if touching.confidence > 0.97 {
+                if touching.confidence > 0.986 {
                     DispatchQueue.main.async { [weak self] in
                         self?.alertVM.fireAlert()
                     }
