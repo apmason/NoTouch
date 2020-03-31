@@ -166,9 +166,12 @@ class VisionViewController: ViewController {
                 }
                 
                 print("Touching confidence: \(touching.confidence)")
-                if touching.confidence > 0.986 {
-                    DispatchQueue.main.async { [weak self] in
+                // Should this be on a background thread? Probably, because it is getting triggered so often. Anyone who needs to be on the main thread should do it themselves.
+                DispatchQueue.main.async { [weak self] in
+                    if touching.confidence > 0.986 {
                         self?.alertVM.fireAlert()
+                    } else {
+                        self?.alertVM.notTouchingDetected()
                     }
                 }
             })

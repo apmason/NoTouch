@@ -35,6 +35,11 @@ class AlertViewModel {
         }
     }
     
+    /// How many `fireAlert()` calls have we received? Once we reach the `triggerThreshold` we will send an alert to all observers and reset this value to 0.
+    private var triggerCount = 0
+    /// How many `fireAlert()` calls should be received before sending an alert to all observers.
+    private var triggerThreshold = 3
+    
     public func setupAlerts() {
         addObserver(audioVM)
     }
@@ -42,10 +47,21 @@ class AlertViewModel {
     public func fireAlert() {
         lastFire = Date().timeIntervalSince1970
         
-        // If a timer has been created that means that we are already firing an alert, so don't enter
+        // If a timer has been created that means that we are already firing an alert, so don't enter.
         guard timer == nil else {
             return
         }
+        
+        // We only reach this point if firing has stopped and the timer has expired, therefore we want to do a threshold check.
+        
+        triggerCount += 1
+        guard triggerCount >= triggerThreshold else {
+            // We have not surpassed the threshold, return and wait for new alerts.
+            return
+        }
+        
+        // We can now fire an alert.
+        triggerCount = 0
         
         timer = Timer.scheduledTimer(timeInterval: delayTime, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
         
@@ -86,7 +102,6 @@ class AlertViewModel {
             // Our timer has fired but we've received an update prior to the `delayTime` expiring
             // Create a new timer based on the last received update.
             timer?.invalidate()
-            timer = nil
             
             let timeDifference: TimeInterval = now - lastFire
             let timeToWait = delayTime - timeDifference
@@ -97,6 +112,12 @@ class AlertViewModel {
                                          userInfo: nil,
                                          repeats: false)
         }
+    }
+    
+    /// If a touching observation was made but was below our confidence threshold call this function. The `AlertViewModel` will update its internal state to determine when a real alert should be fired.
+    public func notTouchingDetected() {
+        // Triggers need to be successively succesful to avoid non-discrete random triggers from adding up and causing a trigger.
+        triggerCount = 0
     }
 }
 
