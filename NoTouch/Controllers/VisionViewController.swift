@@ -91,7 +91,7 @@ class VisionViewController: ViewController {
                         
                         // TODO: Tell the user we can't find their face so they update their position. (If we can't find their face then should we stop analysis? Will need to test, maybe if they do it a certain number of times, how much does it degrade the performance?)
                         
-                        // TODO: Also do as we do bellow with `modelUpdater.addImage`, we should not perform a touching request here.
+                        // TODO: Also do as we do below with `modelUpdater.addImage`, we should not perform a touching request here.
                         
                         do {
                             // Release the pixel buffer when done, allowing the next buffer to be processed.
@@ -110,8 +110,7 @@ class VisionViewController: ViewController {
             
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
-            // TODO: Add twenty percent to the height (more chin)
-            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height) // TODO: Test extending the face detection area, maybe get more chin touches?
+            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
             
             let bounds = boundingBox.applying(translate)
             
@@ -168,7 +167,7 @@ class VisionViewController: ViewController {
                 print("Touching confidence: \(touching.confidence)")
                 // Should this be on a background thread? Probably, because it is getting triggered so often. Anyone who needs to be on the main thread should do it themselves.
                 DispatchQueue.main.async { [weak self] in
-                    if touching.confidence > 0.986 {
+                    if touching.confidence > 0.99 {
                         self?.alertVM.fireAlert()
                     } else {
                         self?.alertVM.notTouchingDetected()
@@ -264,7 +263,6 @@ class VisionViewController: ViewController {
                 break
                 
             case .failure(let error):
-                // TODO: present error and localized description
                 print("Error changing capture position: \(error.localizedDescription)")
                 
             }

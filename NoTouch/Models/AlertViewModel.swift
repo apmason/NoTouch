@@ -25,7 +25,7 @@ class AlertViewModel {
     private var timer: Timer?
     
     // The number of seconds to wait to see if we should move out of the alert state.
-    private let delayTime: TimeInterval = 0.35
+    private let delayTime: TimeInterval = 0.4
     
     var audioIsMuted: Bool {
         get {
@@ -56,7 +56,7 @@ class AlertViewModel {
         
         triggerCount += 1
         guard triggerCount >= triggerThreshold else {
-            // We have not surpassed the threshold, return and wait for new alerts.
+            // We have not surpassed the threshold, return and wait for more triggers.
             return
         }
         

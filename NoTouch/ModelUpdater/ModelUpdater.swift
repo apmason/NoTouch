@@ -279,48 +279,5 @@ extension ModelUpdater {
         } catch {
             print("Error creating MLUpdateTask: \(error.localizedDescription)")
         }
-        
-//        let updateTask = try? MLUpdateTask(forModelAt: originalModelURL,
-//                                           trainingData: trainingData,
-//                                           configuration: nil,
-//                                           completionHandler: { [weak self] context in
-//                                            print("We made it bitch")
-//                                            self?.touchingProvider.clearOutTrainingImages()
-//                                            self?.notTouchingProvider.clearOutTrainingImages()
-//                                            print("Context event: \(context.event.rawValue)")
-//                                            self?.finalConversion = false
-//
-//                                            // TODO: Progress bar in here using different completion?
-//
-//                                            let updatedModel = context.model
-//                                            let fileManager = FileManager.default
-//                                            guard let tempUpdatedModelURL = self?.tempUpdatedModelURL,
-//                                                let updatedModelURL = self?.updatedModelURL else {
-//                                                    return
-//                                            }
-//
-//                                            do {
-//                                                // Create a directory for the updated model.
-//                                                try fileManager.createDirectory(at: tempUpdatedModelURL,
-//                                                                                withIntermediateDirectories: true,
-//                                                                                attributes: nil)
-//
-//                                                // Save the updated model to temporary filename.
-//                                                try updatedModel.write(to: tempUpdatedModelURL)
-//
-//                                                // Replace any previously updated model with this one.
-//                                                _ = try fileManager.replaceItemAt(updatedModelURL,
-//                                                                                  withItemAt: tempUpdatedModelURL)
-//
-//                                                // TODO: - If a user starts the app again load there trained model. (Save to UserDefaults to know latest?)
-//                                                print("Updated model saved to:\n\t\(updatedModelURL)")
-//                                            } catch let error {
-//                                                print("Could not save updated model to the file system: \(error)")
-//                                                return
-//                                            }
-//
-//                                            self?.delegate?.didUpdateMLModelToUse(context.model)
-//
-//        })
     }
 }
