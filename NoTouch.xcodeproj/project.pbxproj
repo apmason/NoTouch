@@ -40,7 +40,6 @@
 		C3F746AB2419AB99001EB7D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */; };
 		C3F7AAE92425838F00BBF34C /* ModelUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F7AAE82425838F00BBF34C /* ModelUpdater.swift */; };
 		C3FA8E74241C34EE00CB79B5 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3FA8E73241C34EE00CB79B5 /* AlertView.xib */; };
-		FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA0F95BE20B8883700378A66 /* ProductCatalog.plist */; };
 		FAA391EA20B5D2480085DA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391E920B5D2480085DA28 /* UIKit.framework */; };
 		FAA391EC20B5D2510085DA28 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391EB20B5D2510085DA28 /* Vision.framework */; };
 		FAA391EE20B5D2570085DA28 /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA391ED20B5D2570085DA28 /* CoreML.framework */; };
@@ -139,7 +138,6 @@
 		C3F7AAE82425838F00BBF34C /* ModelUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUpdater.swift; sourceTree = "<group>"; };
 		C3FA8E73241C34EE00CB79B5 /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		C81F01C582D21994DA276E31 /* Pods-NoTouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoTouch.debug.xcconfig"; path = "Target Support Files/Pods-NoTouch/Pods-NoTouch.debug.xcconfig"; sourceTree = "<group>"; };
-		FA0F95BE20B8883700378A66 /* ProductCatalog.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProductCatalog.plist; sourceTree = "<group>"; };
 		FAA391E920B5D2480085DA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FAA391EB20B5D2510085DA28 /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
 		FAA391ED20B5D2570085DA28 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
@@ -317,14 +315,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		FA0F95C220B8BE9E00378A66 /* Product Resources */ = {
-			isa = PBXGroup;
-			children = (
-				FA0F95BE20B8883700378A66 /* ProductCatalog.plist */,
-			);
-			path = "Product Resources";
-			sourceTree = "<group>";
-		};
 		FAA391E820B5D2480085DA28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,7 +364,6 @@
 				FAD500A71ED668B60074D713 /* LaunchScreen.storyboard */,
 				FAD500A21ED668B60074D713 /* Main.storyboard */,
 				C35C3F872415486E008DDB5B /* NTError.swift */,
-				FA0F95C220B8BE9E00378A66 /* Product Resources */,
 				76D66BC4213A1AF300AEF9D9 /* Assets.xcassets */,
 			);
 			path = NoTouch;
@@ -491,7 +480,6 @@
 				C36795FC24146A1500886163 /* Localizable.strings in Resources */,
 				C3F746AB2419AB99001EB7D0 /* GoogleService-Info.plist in Resources */,
 				C3FA8E74241C34EE00CB79B5 /* AlertView.xib in Resources */,
-				FA0F95BF20B8883700378A66 /* ProductCatalog.plist in Resources */,
 				FAD500A41ED668B60074D713 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

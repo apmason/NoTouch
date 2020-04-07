@@ -16,18 +16,9 @@ extension UIImage {
         let faceDetectionRequest = VNDetectFaceRectanglesRequest()
         try! VNImageRequestHandler(ciImage: ciImage).perform([faceDetectionRequest])
         
-        guard let results = faceDetectionRequest.results as? [VNFaceObservation] else { return [] }
-        
-        
-        // TODO: Add twenty percent to the height (more chin)
-//        let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height) // TODO: Test extending the face detection area, maybe get more chin touches?
-        
-        // translated by? move it a little further away?
-        //let shiftUp = CGAffineTransform.identity.translatedBy(x: -extraRoom / 2, y: 0)
-        //let bounds = boundingBox.applying(translate).applying(shiftUp)
-        
-        // Add other translatiion
-        //boundingBox.applying(.translatedBy(x: -twentyPercent * 3, y: 0))
+        guard let results = faceDetectionRequest.results as? [VNFaceObservation] else {
+            return []
+        }
                 
         return results.map {
             //let extraRoom: CGFloat = ciImage.extent.height * 0.3
