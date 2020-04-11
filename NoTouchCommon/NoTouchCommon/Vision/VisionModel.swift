@@ -46,7 +46,7 @@ public class VisionModel {
     private func setupVision() -> NoTouchError? {
         let modelURL: URL
         // TODO: This should be the YOLO model.
-        if let updatedURL = Bundle.main.url(forResource: "no-touch-2-updatable", withExtension: "mlmodelc") {
+        if let updatedURL = Bundle(for: type(of: self)).url(forResource: "NoTouch_YOLO_2", withExtension: "mlmodelc") {
             modelURL = updatedURL
         } else {
             assertionFailure("A model wasn't able to be retrieved")
@@ -157,26 +157,44 @@ public class VisionModel {
     
     private func createTouchingRequest(mlModel: MLModel) -> VNCoreMLRequest? {
         do {
-            let objectClassifier = try VNCoreMLModel(for: mlModel)
-            let classificationRequest = VNCoreMLRequest(model: objectClassifier, completionHandler: { [weak self] (request, error) in
-                guard let results = request.results as? [VNClassificationObservation],
-                    let touching = results.first(where: {$0.identifier == "Touching" }) else {
-                        return
+            let yoloModel = try VNCoreMLModel(for: mlModel)
+            let observationRequest = VNCoreMLRequest(model: yoloModel, completionHandler: { [weak self] (request, error) in
+                guard let results = request.results else {
+                    return
                 }
                 
-                print("Touching confidence: \(touching.confidence)")
-                // Should this be on a background thread? Probably, because it is getting triggered so often. Anyone who needs to be on the main thread should do it themselves.
-                DispatchQueue.main.async { [weak self] in
-                    if touching.confidence > 0.99 {
-                        self?.delegate?.fireAlert()
-                    } else {
-                        self?.delegate?.notTouchingDetected()
+                for observation in results where observation is VNRecognizedObjectObservation {
+                    guard let objectObservation = observation as? VNRecognizedObjectObservation else {
+                        continue
+                    }
+                    
+                    print("Object observation labels are: \(objectObservation.labels)")
+                    print("Object observation confidence is: \(objectObservation.confidence)")
+                    print("Object observation label one class name: \(objectObservation.labels[0].identifier)")
+                    print("Object observation label one confidence is: \(objectObservation.labels[0].confidence)")
+                    
+                    // Make sure we have at least one item detected.
+                    if objectObservation.labels.count > 0 {
+                        let bestObservation = objectObservation.labels[0]
+                        
+                        let confidence = bestObservation.confidence
+                        
+//                        print("Hand confidence: \(confidence)")
+//                        print("Overall confidence: \(objectObservation.confidence)")
+                        
+                        DispatchQueue.main.async { [weak self] in
+                            if objectObservation.confidence > 0.40 {
+                                self?.delegate?.fireAlert()
+                            } else {
+                                self?.delegate?.notTouchingDetected()
+                            }
+                        }
                     }
                 }
             })
             
-            classificationRequest.imageCropAndScaleOption = .centerCrop // @ALEX: Test this with different options, does it work best?
-            return classificationRequest
+            observationRequest.imageCropAndScaleOption = .scaleFill // @ALEX: Test this with different options, does it work best?
+            return observationRequest
             
         } catch let error as NSError {
             print("Model failed to load: \(error).")
