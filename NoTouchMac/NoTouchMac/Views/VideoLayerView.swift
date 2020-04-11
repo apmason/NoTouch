@@ -7,6 +7,7 @@
 //
 
 import AppKit
+import CoreMedia
 import Foundation
 import SwiftUI
 import NoTouchCommon
@@ -26,14 +27,51 @@ class UpdatableView: NSView, NativewView {
     }
 }
 
-struct VideoLayerView: NSViewRepresentable {
+final class VideoLayerView: NSViewRepresentable {
+    
+    var feed: VideoFeed?
+    let visionModel = VisionModel()
     
     func makeNSView(context: Context) -> NSView {
         let view = UpdatableView()
+        feed = VideoFeed(previewView: view)
+        feed?.delegate = self
+        feed?.startup()
+        
+        visionModel.delegate = self
+        
         return view
     }
     
     func updateNSView(_ nsView: NSView, context: Context) {
+        // FIXME what usually gets called here? I think we'd update the bounds of everything here.
+        print(nsView.bounds)
+        feed?.updatePreviewLayerFrame(to: nsView.bounds)
+    }
+}
+
+// MARK: - VideoFeedDelegate
+
+extension VideoLayerView: VideoFeedDelegate {
+
+    // Here we receive a new sample buffer from the camera feed. Pass this to the Vision model for analysis.
+    func captureOutput(didOutput sampleBuffer: CMSampleBuffer) {
+        visionModel.analyzeNewSampleBuffer(sampleBuffer)
+    }
+}
+
+// MARK: - VisionModelDelegate
+
+extension VideoLayerView: VisionModelDelegate {
+    
+    // Propogate these errors to SwiftUI. How? a binding mayhaps? A bool that we do a conditional check of in the main body.
+    // How do we animate intros/change?
+    func fireAlert() {
+        //
+        print("We are touching son!")
+    }
+    
+    func notTouchingDetected() {
         //
     }
 }

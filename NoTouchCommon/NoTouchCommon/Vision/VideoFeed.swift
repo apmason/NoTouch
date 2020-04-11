@@ -8,11 +8,15 @@
 
 import AVFoundation
 import Foundation
-//import UIKit
 import VideoToolbox
 import Vision
 
-class VideoFeed: NSObject {
+public protocol VideoFeedDelegate: class {
+    func captureOutput(didOutput sampleBuffer: CMSampleBuffer)
+}
+
+// FIXME: Change this name to VideoFeedProvider? Or something of the sort?
+public class VideoFeed: NSObject {
     
     private var captureConnection: AVCaptureConnection?
     
@@ -29,16 +33,18 @@ class VideoFeed: NSObject {
     // FIXME: No UIView's in this strange new world of ours.
     //private var coverView: UIView?
     
-    var devicePosition: AVCaptureDevice.Position? {
+    private var devicePosition: AVCaptureDevice.Position? {
         return currentDeviceInput?.device.position
     }
     
-    init(previewView: NativewView) {
+    public weak var delegate: VideoFeedDelegate?
+    
+    public init(previewView: NativewView) {
         self.previewView = previewView
         super.init()
     }
     
-    func startup() {
+    public func startup() {
         getCameraUsage()
     }
     
@@ -48,6 +54,7 @@ class VideoFeed: NSObject {
             case .success:
                 CameraAuthModel.removeCameraRequirementOverlay()
                 self?.setupAVCapture()
+                self?.startCaptureSession()
                 
             case .failure:
                 CameraAuthModel.addCameraRequirementOverlay()
@@ -66,7 +73,7 @@ class VideoFeed: NSObject {
         let inputDevice: AVCaptureDevice?
         
         // TODO: This should change.
-        #if targetEnvironment(macCatalyst)
+        #if os(OSX)
         inputDevice = AVCaptureDevice.default(for: .video)
         #else
         inputDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
@@ -75,7 +82,7 @@ class VideoFeed: NSObject {
         #endif
         
         guard let unwrappedInputDevice = inputDevice else {
-            //assertionFailure("Couldn't create video device.")
+            assertionFailure("Couldn't create video device.")
             return
         }
         
@@ -87,6 +94,7 @@ class VideoFeed: NSObject {
         }
         
         guard let deviceInput = currentDeviceInput else {
+            assertionFailure("Can't create device")
             return
         }
         
@@ -130,6 +138,10 @@ class VideoFeed: NSObject {
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         previewLayer.frame = previewView.nativeBounds
         previewView.nativeLayer?.insertSublayer(previewLayer, at: 0)
+    }
+    
+    public func updatePreviewLayerFrame(to rect: CGRect) {
+        previewLayer?.frame = rect
     }
     
     func startCaptureSession() {
@@ -267,11 +279,11 @@ class VideoFeed: NSObject {
 extension VideoFeed: AVCaptureVideoDataOutputSampleBufferDelegate {
     
     // FIXME: Kick this back to the VisionModel somehow.
-    func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    public func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         //
     }
     
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        //
+    public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        delegate?.captureOutput(didOutput: sampleBuffer)
     }
 }

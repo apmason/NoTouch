@@ -12,12 +12,12 @@ import CoreImage
 import Vision
 import VideoToolbox
 
-protocol VisionModelDelegate: class {
+public protocol VisionModelDelegate: class {
     func fireAlert()
     func notTouchingDetected()
 }
 
-class VisionModel {
+public class VisionModel {
     // Vision parts
     private var analysisRequests = [VNRequest]()
     
@@ -34,12 +34,11 @@ class VisionModel {
     
     private let ciContext = CIContext()
     
-    weak var delegate: VisionModelDelegate?
+    public weak var delegate: VisionModelDelegate?
     
-    func setupVisionModel() {
+    // FIXME: Is this proper form?
+    public init() {
         setupVision()
-        // startCaptureSession() (or equivalent) needs to be called.
-        // who is going to do this?
     }
     
     /// - Tag: SetupVisionRequest
@@ -207,9 +206,10 @@ class VisionModel {
 }
 
 // MARK: - Handling new sample buffers
+
 extension VisionModel {
     
-    func analyzeNewSampleBuffer(_ sampleBuffer: CMSampleBuffer) {
+    public func analyzeNewSampleBuffer(_ sampleBuffer: CMSampleBuffer) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
