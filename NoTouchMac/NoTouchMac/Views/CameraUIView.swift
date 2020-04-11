@@ -20,3 +20,9 @@ struct CameraUIView_Previews: PreviewProvider {
         CameraUIView()
     }
 }
+
+// Feed the video data into a layer.
+// Pass in a layer to the video feed to be updated
+// Get the layer from an NSView or UIView (need to test this)
+// Make a XXView representable struct.
+// Pass that to a SwiftUI view.

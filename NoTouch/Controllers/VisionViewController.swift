@@ -25,6 +25,7 @@ class VisionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         alertVM.addObserver(self)
+        view.layer
     }
     
     // FIXME: Note that this is here as a model for how things were setup previously.

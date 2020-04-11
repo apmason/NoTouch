@@ -1,5 +1,5 @@
 //
-//  NTError.swift
+//  NoTouchError.swift
 //  NoTouch
 //
 //  Created by Alexander Mason on 3/8/20.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-// FIXME: Change NTError to NoTouchError
-enum NTError: Error {
+// FIXME: Change NoTouchError to NoTouchError
+enum NoTouchError: Error {
     case noDeviceInput
     case inputDeviceCreationFailure
     case cameraAccessDenied

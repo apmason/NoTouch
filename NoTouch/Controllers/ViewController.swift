@@ -165,7 +165,7 @@
 //
 //extension ViewController {
 //    
-//    func changeCapturePosition(position: AVCaptureDevice.Position, completion: @escaping (Result<Void, NTError>) -> Void) {
+//    func changeCapturePosition(position: AVCaptureDevice.Position, completion: @escaping (Result<Void, NoTouchError>) -> Void) {
 //        guard let currentInput = self.currentDeviceInput else {
 //            completion(.failure(.noDeviceInput))
 //            return

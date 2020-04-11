@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIKit
+//import UIKit
 
 class ImageStorer {
     
@@ -24,21 +24,22 @@ class ImageStorer {
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
-    static func storeNewImage(image: UIImage) {
-        if let pngRepresentation = image.pngData() {
-            if let filePath = filePath(forKey: randomString(length: 12)) {
-                do  {
-                    print("Trying to write to: \(filePath)")
-                    
-                    try pngRepresentation.write(to: filePath,
-                                                options: .atomic)
-                } catch let err {
-                    print("Saving file resulted in error: ", err)
-                }
-            }
-            
-        } else {
-            print("No PNG data, you fucked up")
-        }
-    }
+    // FIXME: Less important but may be good for testing. Pass in CGImage mayhaps?
+//    static func storeNewImage(image: UIImage) {
+//        if let pngRepresentation = image.pngData() {
+//            if let filePath = filePath(forKey: randomString(length: 12)) {
+//                do  {
+//                    print("Trying to write to: \(filePath)")
+//
+//                    try pngRepresentation.write(to: filePath,
+//                                                options: .atomic)
+//                } catch let err {
+//                    print("Saving file resulted in error: ", err)
+//                }
+//            }
+//
+//        } else {
+//            print("No PNG data, you fucked up")
+//        }
+//    }
 }
