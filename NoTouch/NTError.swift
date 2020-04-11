@@ -8,6 +8,7 @@
 
 import Foundation
 
+// FIXME: Change NTError to NoTouchError
 enum NTError: Error {
     case noDeviceInput
     case inputDeviceCreationFailure

@@ -84,23 +84,6 @@
                                             <segue destination="EL5-AN-CtT" kind="show" id="HHl-qa-fYG"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="saj-vU-TkQ" userLabel="Customize Button">
-                                        <rect key="frame" x="0.0" y="106" width="45" height="45"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.070009903169999999" alpha="0.74686399650000002" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="saj-vU-TkQ" secondAttribute="height" multiplier="1:1" id="7S3-e5-F1D"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="tuningfork" catalog="system"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="beginFineTuning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pa9-ct-BCj"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We'll flash the screen when a face touch is detected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4c-5t-GY2">
@@ -197,7 +180,6 @@
                 <navigationController id="EL5-AN-CtT" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="P5x-cW-JSy"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tML-H2-Ubv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -213,7 +195,7 @@
             <objects>
                 <viewController id="sab-FR-Oa7" customClass="InfoViewController" customModule="NoTouch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EyU-rY-vQZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fth-Gg-KpK">
@@ -279,6 +261,5 @@
         <image name="nosign" catalog="system" width="128" height="121"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="speaker" catalog="system" width="128" height="121"/>
-        <image name="tuningfork" catalog="system" width="128" height="116"/>
     </resources>
 </document>

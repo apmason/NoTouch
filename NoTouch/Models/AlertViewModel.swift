@@ -40,7 +40,11 @@ class AlertViewModel {
     /// How many `fireAlert()` calls should be received before sending an alert to all observers.
     private var triggerThreshold = 3
     
-    public func setupAlerts() {
+    init() {
+        addAudioObserver()
+    }
+    
+    public func addAudioObserver() {
         addObserver(audioVM)
     }
     

@@ -36,6 +36,8 @@
 		C3908DA824269CFF0055BC97 /* ImageFeatureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3908DA724269CFF0055BC97 /* ImageFeatureProvider.swift */; };
 		C3B10AF2241D566300613EE9 /* ImageStorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B10AF1241D566300613EE9 /* ImageStorer.swift */; };
 		C3E09D9C24148B3A00698A29 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */; };
+		C3EE5983243FE06800461EB4 /* VideoFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE5982243FE06800461EB4 /* VideoFeed.swift */; };
+		C3EE59852440784100461EB4 /* VisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE59842440784100461EB4 /* VisionModel.swift */; };
 		C3F11F83243142CC00078BFB /* no-touch-2-updatable.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3F11F82243142CC00078BFB /* no-touch-2-updatable.mlmodel */; };
 		C3F746AB2419AB99001EB7D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */; };
 		C3F7AAE92425838F00BBF34C /* ModelUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F7AAE82425838F00BBF34C /* ModelUpdater.swift */; };
@@ -133,6 +135,8 @@
 		C3908DA724269CFF0055BC97 /* ImageFeatureProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeatureProvider.swift; sourceTree = "<group>"; };
 		C3B10AF1241D566300613EE9 /* ImageStorer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorer.swift; sourceTree = "<group>"; };
 		C3E09D9B24148B3A00698A29 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		C3EE5982243FE06800461EB4 /* VideoFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFeed.swift; sourceTree = "<group>"; };
+		C3EE59842440784100461EB4 /* VisionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionModel.swift; sourceTree = "<group>"; };
 		C3F11F82243142CC00078BFB /* no-touch-2-updatable.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "no-touch-2-updatable.mlmodel"; sourceTree = "<group>"; };
 		C3F746AA2419AB98001EB7D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3F7AAE82425838F00BBF34C /* ModelUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUpdater.swift; sourceTree = "<group>"; };
@@ -286,6 +290,8 @@
 				C38D3D53241BC9F80077C68E /* CameraAuthModel.swift */,
 				C3B10AF1241D566300613EE9 /* ImageStorer.swift */,
 				C34A851124265C9200161F28 /* Orienter.swift */,
+				C3EE5982243FE06800461EB4 /* VideoFeed.swift */,
+				C3EE59842440784100461EB4 /* VisionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -596,9 +602,11 @@
 				C32B70B624152D52008F1D39 /* FirstRunModel.swift in Sources */,
 				C32406C6241459F500D5AC9E /* SlideView.swift in Sources */,
 				FAD500A11ED668B60074D713 /* ViewController.swift in Sources */,
+				C3EE5983243FE06800461EB4 /* VideoFeed.swift in Sources */,
 				C367960D24146B1300886163 /* TutorialViewModel.swift in Sources */,
 				C32406C4241456F100D5AC9E /* TutorialViewController.swift in Sources */,
 				C34A851224265C9200161F28 /* Orienter.swift in Sources */,
+				C3EE59852440784100461EB4 /* VisionModel.swift in Sources */,
 				C38D3D54241BC9F80077C68E /* CameraAuthModel.swift in Sources */,
 				C3F11F83243142CC00078BFB /* no-touch-2-updatable.mlmodel in Sources */,
 				C387C168240F1363008C47F5 /* AlertViewModel.swift in Sources */,
