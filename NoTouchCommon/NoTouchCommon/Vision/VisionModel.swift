@@ -49,7 +49,7 @@ public class VisionModel {
         if let updatedURL = Bundle.main.url(forResource: "no-touch-2-updatable", withExtension: "mlmodelc") {
             modelURL = updatedURL
         } else {
-            fatalError("A model wasn't able to be retrieved")
+            assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
         
