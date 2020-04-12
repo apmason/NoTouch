@@ -13,7 +13,7 @@ protocol AlertObserver: class {
     func stopAlerting()
 }
 
-class AlertViewModel {
+public class AlertViewModel {
     
     private var observations = [ObjectIdentifier : Observation]()
     
@@ -40,15 +40,15 @@ class AlertViewModel {
     /// How many `fireAlert()` calls should be received before sending an alert to all observers.
     private var triggerThreshold = 3
     
-    init() {
+    public init() {
         addAudioObserver()
     }
     
-    public func addAudioObserver() {
+    func addAudioObserver() {
         addObserver(audioVM)
     }
     
-    public func fireAlert() {
+    public func touchingDetected() {
         lastFire = Date().timeIntervalSince1970
         
         // If a timer has been created that means that we are already firing an alert, so don't enter.
@@ -80,6 +80,12 @@ class AlertViewModel {
                 observer.startAlerting()
             }
         }
+    }
+    
+    /// If a touching observation was made but was below our confidence threshold call this function. The `AlertViewModel` will update its internal state to determine when a real alert should be fired.
+    public func notTouchingDetected() {
+        // Triggers need to be successively succesful to avoid non-discrete random triggers from adding up and causing a trigger.
+        triggerCount = 0
     }
     
     @objc func fireTimer() {
@@ -116,12 +122,6 @@ class AlertViewModel {
                                          userInfo: nil,
                                          repeats: false)
         }
-    }
-    
-    /// If a touching observation was made but was below our confidence threshold call this function. The `AlertViewModel` will update its internal state to determine when a real alert should be fired.
-    public func notTouchingDetected() {
-        // Triggers need to be successively succesful to avoid non-discrete random triggers from adding up and causing a trigger.
-        triggerCount = 0
     }
 }
 

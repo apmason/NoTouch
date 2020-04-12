@@ -10,7 +10,14 @@ import SwiftUI
 
 struct VideoView: View {
     var body: some View {
-        VideoLayerView()
+        ZStack {
+            Button(action: {
+                // toggle sound
+            }) {
+                Image(systemName: "ass")
+            }
+            VideoLayerView()
+        }
     }
 }
 

@@ -29,8 +29,10 @@ class UpdatableView: NSView, NativewView {
 
 final class VideoLayerView: NSViewRepresentable {
     
-    var feed: VideoFeed?
-    let visionModel = VisionModel()
+    private var feed: VideoFeed?
+    private let visionModel = VisionModel()
+    private let alertVM = AlertViewModel()
+    // alerting model should live here.
     
     func makeNSView(context: Context) -> NSView {
         let view = UpdatableView()
@@ -77,14 +79,13 @@ extension VideoLayerView: VideoFeedDelegate {
 
 extension VideoLayerView: VisionModelDelegate {
     
-    // Propogate these errors to SwiftUI. How? a binding mayhaps? A bool that we do a conditional check of in the main body.
+    // Propogate these errors to SwiftUI. How? a binding mayhaps? A bool that we do a conditional check on in the main body.
     // How do we animate intros/change?
     func fireAlert() {
-        //
-        print("We are touching son!")
+        alertVM.touchingDetected()
     }
     
     func notTouchingDetected() {
-        //
+        alertVM.notTouchingDetected()
     }
 }

@@ -14,6 +14,10 @@ class AudioAlert: NSObject {
     private var player: AVAudioPlayer?
     private let fileName = "beep-offic"
     
+    private var audioEngine = AVAudioEngine()
+    
+    // TODO: On iOS we should setup an audio session
+    
     var isMuted: Bool = false {
         didSet {
             guard isMuted, let player = player, player.isPlaying else {
@@ -28,24 +32,18 @@ class AudioAlert: NSObject {
         super.init()
         
         // setup Audio Session
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "m4a") else {
-            fatalError("No URL")
-            return
+        guard let url = Bundle(for: type(of: self)).url(forResource: fileName, withExtension: "m4a") else {
+            fatalError("No audio file")
         }
 
         do {
-            // FIXME: I believe we can use an AVAudioEngine here instead: https://stackoverflow.com/questions/56333940/record-audio-on-osx-avaudiosession-not-available
-//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .mixWithOthers)
-//            try AVAudioSession.sharedInstance().setActive(true)
-
-            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.m4a.rawValue)
             player?.delegate = self
             player?.numberOfLoops = -1
             player?.prepareToPlay()
-
-        } catch let error {
-            print(error.localizedDescription)
+            
+        } catch {
+            assertionFailure("Error creating audio player: \(error.localizedDescription)")
         }
     }
 }
@@ -76,5 +74,3 @@ extension AudioAlert: AVAudioPlayerDelegate {
         print("Finished playing succesfully: \(flag)")
     }
 }
-
-

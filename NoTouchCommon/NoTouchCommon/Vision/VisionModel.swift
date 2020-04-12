@@ -176,8 +176,10 @@ public class VisionModel {
                             return
                         }
                         
+                        print("Confidence is: \(objectObservation.confidence)")
+                        
                         DispatchQueue.main.async { [weak self] in
-                            if objectObservation.confidence > 0.40 {
+                            if objectObservation.confidence > 0.23 {
                                 self?.delegate?.fireAlert()
                             } else {
                                 self?.delegate?.notTouchingDetected()

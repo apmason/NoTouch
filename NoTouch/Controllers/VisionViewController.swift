@@ -40,6 +40,7 @@ class VisionViewController: UIViewController {
     
     // MARK: - IBActions
     
+    // FIXME: iOS only
     @IBAction func flipCamera(_ sender: Any) {
         // FIXME: Allow flipping of camera.
 //        guard let oldPosition = devicePosition else {

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NoTouchMac</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>x86_64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>E32A9741926D652DF9C4E4510E5CB6A6F0D1A969</string>
+				<key>dateExpires</key>
+				<string>3/31/21</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>x86_64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>E32A9741926D652DF9C4E4510E5CB6A6F0D1A969</string>
+						<key>dateExpires</key>
+						<string>3/31/21</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>NoTouchCommon.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>79TR88QV2P</string>
+						<key>name</key>
+						<string>Canopy Interactive, LLC</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>com.apple.security.app-sandbox</key>
+				<true/>
+				<key>com.apple.security.device.camera</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>NoTouchMac.app</string>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>79TR88QV2P</string>
+				<key>name</key>
+				<string>Canopy Interactive, LLC</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

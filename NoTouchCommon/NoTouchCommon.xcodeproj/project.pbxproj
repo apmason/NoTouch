@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
 		C3BF2A7F244215FF004BDEE4 /* NoTouchCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2A75244215FE004BDEE4 /* NoTouchCommon.framework */; };
 		C3BF2A84244215FF004BDEE4 /* NoTouchCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A83244215FF004BDEE4 /* NoTouchCommonTests.swift */; };
 		C3BF2A86244215FF004BDEE4 /* NoTouchCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BF2A78244215FF004BDEE4 /* NoTouchCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C3BF2A75244215FE004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BF2A78244215FF004BDEE4 /* NoTouchCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoTouchCommon.h; sourceTree = "<group>"; };
 		C3BF2A79244215FF004BDEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 		C3F4BE8E2442635F003CBD59 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
 				C3F4BE8F24426373003CBD59 /* NoTouch_YOLO_2.mlmodel */,
 			);
 			path = Resources;
@@ -243,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
