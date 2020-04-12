@@ -14,7 +14,7 @@ struct VideoView: View {
             Button(action: {
                 // toggle sound
             }) {
-                Image(systemName: "ass")
+                Image("speaker")
             }
             VideoLayerView()
         }
