@@ -167,20 +167,14 @@ public class VisionModel {
                     guard let objectObservation = observation as? VNRecognizedObjectObservation else {
                         continue
                     }
-                    
-                    print("Object observation labels are: \(objectObservation.labels)")
-                    print("Object observation confidence is: \(objectObservation.confidence)")
-                    print("Object observation label one class name: \(objectObservation.labels[0].identifier)")
-                    print("Object observation label one confidence is: \(objectObservation.labels[0].confidence)")
-                    
+
                     // Make sure we have at least one item detected.
                     if objectObservation.labels.count > 0 {
                         let bestObservation = objectObservation.labels[0]
                         
-                        let confidence = bestObservation.confidence
-                        
-//                        print("Hand confidence: \(confidence)")
-//                        print("Overall confidence: \(objectObservation.confidence)")
+                        guard bestObservation.identifier == "hand" else {
+                            return
+                        }
                         
                         DispatchQueue.main.async { [weak self] in
                             if objectObservation.confidence > 0.40 {

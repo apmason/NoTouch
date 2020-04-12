@@ -9,8 +9,8 @@
 import AppKit
 import CoreMedia
 import Foundation
-import SwiftUI
 import NoTouchCommon
+import SwiftUI
 
 class UpdatableView: NSView, NativewView {    
     
@@ -39,14 +39,27 @@ final class VideoLayerView: NSViewRepresentable {
         feed?.startup()
         
         visionModel.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(windowWillResize(_:)), name: .windowWillResize, object: nil)
         
         return view
     }
     
     func updateNSView(_ nsView: NSView, context: Context) {
         // FIXME what usually gets called here? I think we'd update the bounds of everything here.
-        print(nsView.bounds)
-        feed?.updatePreviewLayerFrame(to: nsView.bounds)
+        //print(nsView.bounds)
+        //feed?.updatePreviewLayerFrame(to: nsView.bounds)
+    }
+    
+    @objc func windowWillResize(_ notification: Notification) {
+        guard let userInfo = notification.userInfo as? [String: CGFloat],
+            let height = userInfo["height"],
+            let width = userInfo["width"]
+            else {
+                return
+        }
+        
+        let newRect = CGRect(x: 0, y: 0, width: width, height: height)
+        feed?.updatePreviewLayerFrame(to: newRect)
     }
 }
 

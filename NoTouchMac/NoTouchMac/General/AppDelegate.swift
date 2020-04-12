@@ -8,6 +8,7 @@
 
 import Cocoa
 import SwiftUI
+import Foundation
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -27,13 +28,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.center()
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
+        window.delegate = self
+        window.aspectRatio = NSSize(width: 480, height: 300)
         window.makeKeyAndOrderFront(nil)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
+}
 
-
+extension AppDelegate: NSWindowDelegate {
+    func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
+        let dataDict: [String: Any] = [
+            "height": frameSize.height,
+            "width": frameSize.width
+        ]
+        
+        NotificationCenter.default.post(name: .windowWillResize, object: nil, userInfo: dataDict)
+        return frameSize
+    }
 }
 

@@ -25,7 +25,10 @@ public class VideoFeed: NSObject {
     private var previewLayer: AVCaptureVideoPreviewLayer?
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
-    private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
+    private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput",
+                                                     qos: .userInitiated,
+                                                     attributes: [],
+                                                     autoreleaseFrequency: .workItem)
     
     private var currentDeviceInput: AVCaptureDeviceInput?
     
@@ -127,7 +130,6 @@ public class VideoFeed: NSObject {
         // Always process the frames.
         captureConnection?.isEnabled = true
         self.captureConnection = captureConnection
-        
         session.commitConfiguration()
         
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -135,6 +137,8 @@ public class VideoFeed: NSObject {
             return
         }
         
+        previewLayer.connection?.automaticallyAdjustsVideoMirroring = false
+        previewLayer.connection?.isVideoMirrored = true
         previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         previewLayer.frame = previewView.nativeBounds
         previewView.nativeLayer?.insertSublayer(previewLayer, at: 0)
@@ -142,6 +146,7 @@ public class VideoFeed: NSObject {
     
     public func updatePreviewLayerFrame(to rect: CGRect) {
         previewLayer?.frame = rect
+        // FIXME: A way to update this right away?
     }
     
     func startCaptureSession() {

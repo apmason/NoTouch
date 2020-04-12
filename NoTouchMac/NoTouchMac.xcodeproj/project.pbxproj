@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C3B361AD2442342B004FC547 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B361AC2442342B004FC547 /* VideoView.swift */; };
 		C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */; };
 		C3BF2AB524422464004BDEE4 /* NoTouchCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; };
 		C3BF2AB624422464004BDEE4 /* NoTouchCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -18,7 +17,8 @@
 		C3EE595A243DFE9000461EB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3EE5958243DFE9000461EB4 /* Main.storyboard */; };
 		C3EE5966243DFE9100461EB4 /* NoTouchMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE5965243DFE9100461EB4 /* NoTouchMacTests.swift */; };
 		C3EE5971243DFE9100461EB4 /* NoTouchMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE5970243DFE9100461EB4 /* NoTouchMacUITests.swift */; };
-		C3EE597F243DFEE500461EB4 /* CameraUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE597E243DFEE500461EB4 /* CameraUIView.swift */; };
+		C3F4BE9224429324003CBD59 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F4BE9124429324003CBD59 /* VideoView.swift */; };
+		C3F4BE942442968B003CBD59 /* NoTouchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F4BE932442968B003CBD59 /* NoTouchNotifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +53,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C3B361AC2442342B004FC547 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLayerView.swift; sourceTree = "<group>"; };
 		C3BF2AAB2442223E004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,7 +70,8 @@
 		C3EE596C243DFE9100461EB4 /* NoTouchMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoTouchMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3EE5970243DFE9100461EB4 /* NoTouchMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTouchMacUITests.swift; sourceTree = "<group>"; };
 		C3EE5972243DFE9100461EB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3EE597E243DFEE500461EB4 /* CameraUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUIView.swift; sourceTree = "<group>"; };
+		C3F4BE9124429324003CBD59 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		C3F4BE932442968B003CBD59 /* NoTouchNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTouchNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +103,7 @@
 		C3BF2AA6244220F7004BDEE4 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				C3F4BE932442968B003CBD59 /* NoTouchNotifications.swift */,
 				C3EE594F243DFE8B00461EB4 /* AppDelegate.swift */,
 				C3EE5953243DFE9000461EB4 /* Assets.xcassets */,
 				C3EE5958243DFE9000461EB4 /* Main.storyboard */,
@@ -114,9 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				C3EE5951243DFE8B00461EB4 /* ContentView.swift */,
-				C3EE597E243DFEE500461EB4 /* CameraUIView.swift */,
 				C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */,
-				C3B361AC2442342B004FC547 /* VideoView.swift */,
+				C3F4BE9124429324003CBD59 /* VideoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,8 +321,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3EE597F243DFEE500461EB4 /* CameraUIView.swift in Sources */,
-				C3B361AD2442342B004FC547 /* VideoView.swift in Sources */,
+				C3F4BE942442968B003CBD59 /* NoTouchNotifications.swift in Sources */,
+				C3F4BE9224429324003CBD59 /* VideoView.swift in Sources */,
 				C3EE5952243DFE8B00461EB4 /* ContentView.swift in Sources */,
 				C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */,
 				C3EE5950243DFE8B00461EB4 /* AppDelegate.swift in Sources */,
