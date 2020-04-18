@@ -17,7 +17,6 @@
 		C3EE595A243DFE9000461EB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3EE5958243DFE9000461EB4 /* Main.storyboard */; };
 		C3EE5966243DFE9100461EB4 /* NoTouchMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE5965243DFE9100461EB4 /* NoTouchMacTests.swift */; };
 		C3EE5971243DFE9100461EB4 /* NoTouchMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE5970243DFE9100461EB4 /* NoTouchMacUITests.swift */; };
-		C3F4BE9224429324003CBD59 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F4BE9124429324003CBD59 /* VideoView.swift */; };
 		C3F4BE942442968B003CBD59 /* NoTouchNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F4BE932442968B003CBD59 /* NoTouchNotifications.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +69,6 @@
 		C3EE596C243DFE9100461EB4 /* NoTouchMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoTouchMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3EE5970243DFE9100461EB4 /* NoTouchMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTouchMacUITests.swift; sourceTree = "<group>"; };
 		C3EE5972243DFE9100461EB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3F4BE9124429324003CBD59 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		C3F4BE932442968B003CBD59 /* NoTouchNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTouchNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,7 +114,6 @@
 			children = (
 				C3EE5951243DFE8B00461EB4 /* ContentView.swift */,
 				C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */,
-				C3F4BE9124429324003CBD59 /* VideoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,7 +319,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F4BE942442968B003CBD59 /* NoTouchNotifications.swift in Sources */,
-				C3F4BE9224429324003CBD59 /* VideoView.swift in Sources */,
 				C3EE5952243DFE8B00461EB4 /* ContentView.swift in Sources */,
 				C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */,
 				C3EE5950243DFE8B00461EB4 /* AppDelegate.swift in Sources */,
