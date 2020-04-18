@@ -6,6 +6,7 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import Combine
 import Foundation
 
 protocol AlertObserver: class {
@@ -47,10 +48,12 @@ public class AlertViewModel {
         addAudioObserver()
     }
     
+    private var cancellableObservation: AnyCancellable?
+    
     func addAudioObserver() {
         addObserver(audioVM)
         
-        let _ = userSettings.$muteSound.sink { muteSound in
+        cancellableObservation = userSettings.$muteSound.sink { muteSound in
             self.audioIsMuted = muteSound
         }
     }
