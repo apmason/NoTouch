@@ -41,13 +41,6 @@ final class VideoLayerView: NSViewRepresentable {
     
     func updateNSView(_ nsView: NSView, context: Context) {}
     
-    private func addTrackingView() {
-//        trackingView.frame = .zero
-//        trackingView.wantsLayer = true
-//        trackingView.layer?.backgroundColor = CGColor.black.copy(alpha: 0.4)
-//        nativeView?.addSubview(trackingView)
-    }
-    
     class Coordinator: VideoFeedDelegate, VisionModelDelegate {
         var parent: VideoLayerView
         
@@ -71,10 +64,10 @@ final class VideoLayerView: NSViewRepresentable {
             
             visionModel.delegate = self
             
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(windowWillResize(_:)),
-                                                   name: .windowWillResize,
-                                                   object: nil)
+//            NotificationCenter.default.addObserver(self,
+//                                                   selector: #selector(windowWillResize(_:)),
+//                                                   name: .windowWillResize,
+//                                                   object: nil)
         }
         
         // MARK: - VideoFeedDelegate
@@ -107,17 +100,17 @@ final class VideoLayerView: NSViewRepresentable {
         
         // MARK: - NotificationObserver
         
-        @objc func windowWillResize(_ notification: Notification) {
-            guard let userInfo = notification.userInfo as? [String: CGFloat],
-                let height = userInfo["height"],
-                let width = userInfo["width"]
-                else {
-                    return
-            }
-            
-            let newRect = CGRect(x: 0, y: 0, width: width, height: height)
-            feed?.updatePreviewLayerFrame(to: newRect)
-        }
+//        @objc func windowWillResize(_ notification: Notification) {
+//            guard let userInfo = notification.userInfo as? [String: CGFloat],
+//                let height = userInfo["height"],
+//                let width = userInfo["width"]
+//                else {
+//                    return
+//            }
+//
+//            let newRect = CGRect(x: 0, y: 0, width: width, height: height)
+//            feed?.updatePreviewLayerFrame(to: newRect)
+//        }
     }
     
     func makeCoordinator() -> Coordinator {

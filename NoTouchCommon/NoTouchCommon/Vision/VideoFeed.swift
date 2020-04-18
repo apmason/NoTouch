@@ -126,16 +126,16 @@ public class VideoFeed: NSObject {
 
         session.commitConfiguration()
         
-        previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        guard let previewLayer = previewLayer else {
-            return
-        }
-        
-        previewLayer.connection?.automaticallyAdjustsVideoMirroring = false
-        previewLayer.connection?.isVideoMirrored = true
-        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        previewLayer.frame = previewView.nativeBounds
-        previewView.nativeLayer?.insertSublayer(previewLayer, at: 0)
+//        previewLayer = AVCaptureVideoPreviewLayer(session: session)
+//        guard let previewLayer = previewLayer else {
+//            return
+//        }
+//        
+//        previewLayer.connection?.automaticallyAdjustsVideoMirroring = false
+//        previewLayer.connection?.isVideoMirrored = true
+//        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+//        previewLayer.frame = previewView.nativeBounds
+//        previewView.nativeLayer?.insertSublayer(previewLayer, at: 0)
     }
     
     public func updatePreviewLayerFrame(to rect: CGRect) {
@@ -153,71 +153,71 @@ public class VideoFeed: NSObject {
         previewLayer = nil
     }
     
-    func changeCapturePosition(position: AVCaptureDevice.Position, completion: @escaping (Result<Void, NoTouchError>) -> Void) {
-        guard let currentInput = self.currentDeviceInput else {
-            completion(.failure(.noDeviceInput))
-            return
-        }
-        
-        // FIXME: How to animate this? Should we pass a UIView in?
-//        addCoverView()
-//
-//        let delay: TimeInterval = 0.2
-//
-//        UIView.animate(withDuration: delay, animations: { [weak self] in
-//            self?.coverView?.alpha = 1
-//        }) { [weak self] _ in
-//            guard let self = self else {
-//                return
-//            }
-//
-//            self.session.removeInput(currentInput)
-//
-//            self.currentDeviceInput = nil
-//
-//            // create new device
-//            guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else {
-//                self.removeCoverView()
-//                completion(.failure(.inputDeviceCreationFailure))
-//                return
-//            }
-//
-//            do {
-//                self.currentDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
-//            } catch {
-//                print("Could not create video device input: \(error).")
-//                self.removeCoverView()
-//                completion(.failure(.inputDeviceCreationFailure))
-//                return
-//            }
-//
-//            guard let newInput = self.currentDeviceInput else {
-//                self.removeCoverView()
-//                completion(.failure(.inputDeviceCreationFailure))
-//                return
-//            }
-//
-//            guard self.session.canAddInput(newInput) else {
-//                print("Could not add video device input to the session.")
-//                self.removeCoverView()
-//                self.session.commitConfiguration()
-//                completion(.failure(.inputDeviceCreationFailure))
-//                return
-//            }
-//
-//            self.session.addInput(newInput)
-//            self.session.commitConfiguration()
-//
-//            UIView.animate(withDuration: delay, animations: { [weak self] in
-//                self?.coverView?.alpha = 0
-//
-//            }) { [weak self] _ in
-//                self?.removeCoverView()
-//                completion(.success(()))
-//
-//            }
+//    func changeCapturePosition(position: AVCaptureDevice.Position, completion: @escaping (Result<Void, NoTouchError>) -> Void) {
+//        guard let currentInput = self.currentDeviceInput else {
+//            completion(.failure(.noDeviceInput))
+//            return
 //        }
-    }
+//
+//        // FIXME: How to animate this? Should we pass a UIView in?
+////        addCoverView()
+////
+////        let delay: TimeInterval = 0.2
+////
+////        UIView.animate(withDuration: delay, animations: { [weak self] in
+////            self?.coverView?.alpha = 1
+////        }) { [weak self] _ in
+////            guard let self = self else {
+////                return
+////            }
+////
+////            self.session.removeInput(currentInput)
+////
+////            self.currentDeviceInput = nil
+////
+////            // create new device
+////            guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else {
+////                self.removeCoverView()
+////                completion(.failure(.inputDeviceCreationFailure))
+////                return
+////            }
+////
+////            do {
+////                self.currentDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
+////            } catch {
+////                print("Could not create video device input: \(error).")
+////                self.removeCoverView()
+////                completion(.failure(.inputDeviceCreationFailure))
+////                return
+////            }
+////
+////            guard let newInput = self.currentDeviceInput else {
+////                self.removeCoverView()
+////                completion(.failure(.inputDeviceCreationFailure))
+////                return
+////            }
+////
+////            guard self.session.canAddInput(newInput) else {
+////                print("Could not add video device input to the session.")
+////                self.removeCoverView()
+////                self.session.commitConfiguration()
+////                completion(.failure(.inputDeviceCreationFailure))
+////                return
+////            }
+////
+////            self.session.addInput(newInput)
+////            self.session.commitConfiguration()
+////
+////            UIView.animate(withDuration: delay, animations: { [weak self] in
+////                self?.coverView?.alpha = 0
+////
+////            }) { [weak self] _ in
+////                self?.removeCoverView()
+////                completion(.success(()))
+////
+////            }
+////        }
+//    }
     
     // FIXME: Make a protocol that can handle UIViews and NSViews.
     func addCoverView() {
