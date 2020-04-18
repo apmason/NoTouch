@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import NoTouchCommon
 
 struct ContentView: View {
     

@@ -40,13 +40,19 @@ public class AlertViewModel {
     /// How many `fireAlert()` calls should be received before sending an alert to all observers.
     private var triggerThreshold = 3
     
-    // TODO: Pass user settings.
-    public init() {
+    private let userSettings: UserSettings
+    
+    public init(userSettings: UserSettings) {
+        self.userSettings = userSettings
         addAudioObserver()
     }
     
     func addAudioObserver() {
         addObserver(audioVM)
+        
+        let _ = userSettings.$muteSound.sink { muteSound in
+            self.audioIsMuted = muteSound
+        }
     }
     
     public func touchingDetected() {

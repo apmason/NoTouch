@@ -9,6 +9,7 @@
 import Cocoa
 import SwiftUI
 import Foundation
+import NoTouchCommon
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -23,13 +24,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var disableVideoMenuItem = NSMenuItem(title: "Disable Video",
                                                   action: #selector(AppDelegate.muteSound(_:)),
                                                   keyEquivalent: "d")
-    
-    public let userSettings: UserSettings = UserSettings()
+
+    public static let userSettings: UserSettings = UserSettings()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
-            .environmentObject(userSettings)
+            .environmentObject(AppDelegate.userSettings)
 
         // Create the window and set the content view. 
         window = NSWindow(
@@ -53,8 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func muteSound(_ sender: Any?) {
-        print("menu tapped")
-        userSettings.muteSound = !userSettings.muteSound
+        AppDelegate.userSettings.muteSound = !AppDelegate.userSettings.muteSound
     }
     
     func constructMenu() {

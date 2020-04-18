@@ -8,6 +8,8 @@
 
 import Foundation
 
-class UserSettings: ObservableObject {
-    @Published var muteSound = false
+public class UserSettings: ObservableObject {
+    @Published public var muteSound = false
+    
+    public init() {}
 }

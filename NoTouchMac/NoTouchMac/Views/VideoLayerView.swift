@@ -31,7 +31,7 @@ final class VideoLayerView: NSViewRepresentable {
     
     private var feed: VideoFeed?
     private let visionModel = VisionModel()
-    private let alertVM = AlertViewModel()
+    private let alertVM = AlertViewModel(userSettings: AppDelegate.userSettings)
     private let trackingView = NSView()
     private var nativeView: UpdatableMacView?
     
