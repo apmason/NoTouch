@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C31871EB244BACA300F079FC /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31871EA244BACA300F079FC /* UserSettings.swift */; };
 		C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */; };
 		C3BF2AB524422464004BDEE4 /* NoTouchCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; };
 		C3BF2AB624422464004BDEE4 /* NoTouchCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C31871EA244BACA300F079FC /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLayerView.swift; sourceTree = "<group>"; };
 		C3BF2AAB2442223E004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C31871E9244BAC8100F079FC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C31871EA244BACA300F079FC /* UserSettings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C3BF2AA6244220F7004BDEE4 /* General */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +161,7 @@
 		C3EE594E243DFE8B00461EB4 /* NoTouchMac */ = {
 			isa = PBXGroup;
 			children = (
+				C31871E9244BAC8100F079FC /* Models */,
 				C3EE595C243DFE9000461EB4 /* NoTouchMac.entitlements */,
 				C3EE595B243DFE9000461EB4 /* Info.plist */,
 				C3BF2AA7244221A2004BDEE4 /* Views */,
@@ -321,6 +332,7 @@
 				C3F4BE942442968B003CBD59 /* NoTouchNotifications.swift in Sources */,
 				C3EE5952243DFE8B00461EB4 /* ContentView.swift in Sources */,
 				C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */,
+				C31871EB244BACA300F079FC /* UserSettings.swift in Sources */,
 				C3EE5950243DFE8B00461EB4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -40,6 +40,7 @@ public class AlertViewModel {
     /// How many `fireAlert()` calls should be received before sending an alert to all observers.
     private var triggerThreshold = 3
     
+    // TODO: Pass user settings.
     public init() {
         addAudioObserver()
     }

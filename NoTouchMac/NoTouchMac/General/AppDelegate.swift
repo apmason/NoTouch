@@ -14,11 +14,22 @@ import Foundation
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    
+    private var muteMenuItem = NSMenuItem(title: "Mute Sound",
+                                          action: #selector(AppDelegate.muteSound(_:)),
+                                          keyEquivalent: "m")
 
+    private var disableVideoMenuItem = NSMenuItem(title: "Disable Video",
+                                                  action: #selector(AppDelegate.muteSound(_:)),
+                                                  keyEquivalent: "d")
+    
+    public let userSettings: UserSettings = UserSettings()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
+            .environmentObject(userSettings)
 
         // Create the window and set the content view. 
         window = NSWindow(
@@ -31,8 +42,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.delegate = self
         window.aspectRatio = NSSize(width: 480, height: 300)
         window.makeKeyAndOrderFront(nil)
+        
+        // Add button
+        if let button = statusItem.button {
+          button.image = NSImage(named:NSImage.Name("mac_menu_icon"))
+          button.action = #selector(muteSound)
+        }
+        
+        constructMenu()
     }
 
+    @objc func muteSound(_ sender: Any?) {
+        print("menu tapped")
+        userSettings.muteSound = !userSettings.muteSound
+    }
+    
+    func constructMenu() {
+        let menu = NSMenu()
+        muteMenuItem.state = .off
+        
+        menu.addItem(muteMenuItem)
+        //menu.addItem(disableVideoMenuItem)
+        
+        statusItem.menu = menu
+    }
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }

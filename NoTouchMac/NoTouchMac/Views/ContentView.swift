@@ -9,14 +9,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var userSettings: UserSettings
+    
     var body: some View {
         ZStack(alignment: .topLeading) {
             VideoLayerView()
             Button(action: {
-                print("Bitch we're here")
-                // flip audio on and off. change audio. have an alert?
+                self.userSettings.muteSound.toggle()
             }) {
-                Image("speaker")
+                Image(userSettings.muteSound ? "speaker.slash" : "speaker")
                     .resizable()
                     .padding(8)
                     .foregroundColor(Color.white)
@@ -34,5 +36,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserSettings())
     }
 }
