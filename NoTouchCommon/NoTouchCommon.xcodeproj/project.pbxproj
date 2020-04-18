@@ -13,7 +13,7 @@
 		C3BF2A86244215FF004BDEE4 /* NoTouchCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = C3BF2A78244215FF004BDEE4 /* NoTouchCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3BF2A902442163B004BDEE4 /* VideoFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A8F2442163A004BDEE4 /* VideoFeed.swift */; };
 		C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A91244216AD004BDEE4 /* NativeView.swift */; };
-		C3BF2A94244218E6004BDEE4 /* NTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A93244218E6004BDEE4 /* NTError.swift */; };
+		C3BF2A94244218E6004BDEE4 /* NoTouchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A93244218E6004BDEE4 /* NoTouchError.swift */; };
 		C3BF2A9B244219AE004BDEE4 /* ImageStorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A95244219AE004BDEE4 /* ImageStorer.swift */; };
 		C3BF2A9C244219AE004BDEE4 /* FirstRunModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A96244219AE004BDEE4 /* FirstRunModel.swift */; };
 		C3BF2A9D244219AE004BDEE4 /* CameraAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A97244219AE004BDEE4 /* CameraAuthModel.swift */; };
@@ -44,7 +44,7 @@
 		C3BF2A85244215FF004BDEE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3BF2A8F2442163A004BDEE4 /* VideoFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFeed.swift; sourceTree = "<group>"; };
 		C3BF2A91244216AD004BDEE4 /* NativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeView.swift; sourceTree = "<group>"; };
-		C3BF2A93244218E6004BDEE4 /* NTError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTError.swift; sourceTree = "<group>"; };
+		C3BF2A93244218E6004BDEE4 /* NoTouchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoTouchError.swift; sourceTree = "<group>"; };
 		C3BF2A95244219AE004BDEE4 /* ImageStorer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStorer.swift; sourceTree = "<group>"; };
 		C3BF2A96244219AE004BDEE4 /* FirstRunModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstRunModel.swift; sourceTree = "<group>"; };
 		C3BF2A97244219AE004BDEE4 /* CameraAuthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraAuthModel.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 				C3BF2A96244219AE004BDEE4 /* FirstRunModel.swift */,
 				C3BF2AA124421A1D004BDEE4 /* Orienter.swift */,
 				C3BF2A95244219AE004BDEE4 /* ImageStorer.swift */,
-				C3BF2A93244218E6004BDEE4 /* NTError.swift */,
+				C3BF2A93244218E6004BDEE4 /* NoTouchError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -273,7 +273,7 @@
 				C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */,
 				C3BF2A9B244219AE004BDEE4 /* ImageStorer.swift in Sources */,
 				C3BF2AA0244219AE004BDEE4 /* VisionModel.swift in Sources */,
-				C3BF2A94244218E6004BDEE4 /* NTError.swift in Sources */,
+				C3BF2A94244218E6004BDEE4 /* NoTouchError.swift in Sources */,
 				C3BF2A9E244219AE004BDEE4 /* AudioAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

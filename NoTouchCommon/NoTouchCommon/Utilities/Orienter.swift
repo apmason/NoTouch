@@ -38,8 +38,10 @@ class Orienter {
             exifOrientation = .up
         }
         return exifOrientation
+        
+        // NOTE: Mac will ALWAYS be up. Do all calculations as if things were 'up' and NOT mirrored, just adjust the UI to make things look mirrored.
         #elseif os(OSX)
-        return .upMirrored
+        return .up
         #endif
     }
 }

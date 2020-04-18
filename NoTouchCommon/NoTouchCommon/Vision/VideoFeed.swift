@@ -17,9 +17,7 @@ public protocol VideoFeedDelegate: class {
 
 // FIXME: Change this name to VideoFeedProvider? Or something of the sort?
 public class VideoFeed: NSObject {
-    
-    private var captureConnection: AVCaptureConnection?
-    
+        
     private let session = AVCaptureSession()
     
     private var previewLayer: AVCaptureVideoPreviewLayer?
@@ -125,11 +123,7 @@ public class VideoFeed: NSObject {
             session.commitConfiguration()
             return
         }
-        let captureConnection = videoDataOutput.connection(with: .video)
-        
-        // Always process the frames.
-        captureConnection?.isEnabled = true
-        self.captureConnection = captureConnection
+
         session.commitConfiguration()
         
         previewLayer = AVCaptureVideoPreviewLayer(session: session)

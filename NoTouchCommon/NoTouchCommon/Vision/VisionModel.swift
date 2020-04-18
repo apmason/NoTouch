@@ -6,6 +6,9 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+#if os(OSX)
+import AppKit
+#endif
 import AVFoundation
 import Foundation
 import CoreImage
@@ -15,14 +18,15 @@ import VideoToolbox
 public protocol VisionModelDelegate: class {
     func fireAlert()
     func notTouchingDetected()
+    #if DEBUG
+    func faceBoundingBoxUpdated(_ rect: CGRect)
+    #endif
 }
 
 public class VisionModel {
     // Vision parts
     private var analysisRequests = [VNRequest]()
-    
-    private var previousPixelBuffer: CVPixelBuffer?
-    
+        
     // The current pixel buffer undergoing analysis. Run requests in a serial fashion, one after another.
     private var currentlyAnalyzedPixelBuffer: CVPixelBuffer?
     
@@ -36,7 +40,6 @@ public class VisionModel {
     
     public weak var delegate: VisionModelDelegate?
     
-    // FIXME: Is this proper form?
     public init() {
         setupVision()
     }
@@ -44,16 +47,11 @@ public class VisionModel {
     /// - Tag: SetupVisionRequest
     @discardableResult
     private func setupVision() -> NoTouchError? {
-        let modelURL: URL
-        // TODO: This should be the YOLO model.
-        if let updatedURL = Bundle(for: type(of: self)).url(forResource: "NoTouch_YOLO_2", withExtension: "mlmodelc") {
-            modelURL = updatedURL
-        } else {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "NoTouch_YOLO_2", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
         
-        // First try with the updated URL, if anything is there continue
         do {
             let mlModel = try MLModel(contentsOf: modelURL)
             
@@ -82,6 +80,8 @@ public class VisionModel {
             
             guard let results = request.results as? [VNFaceObservation],
                 let boundingBox = results.first?.boundingBox else {
+                    // TODO: tell the user they're in this state (also, check the confidence, we don't want people trying to run this in a dark room that doesn't work well.)
+                    print("can't detect face!")
                     // As a fallback run with the whole pixel buffer, rather than just focusing on the face.
                     let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: Orienter.currentCGOrientation())
                     self.visionQueue.async { [weak self] in
@@ -95,7 +95,7 @@ public class VisionModel {
                         
                         do {
                             // Release the pixel buffer when done, allowing the next buffer to be processed.
-                            defer { self.currentlyAnalyzedPixelBuffer = nil }
+                            
                             guard let touchingRequest = self.touchingRequest else {
                                 return
                             }
@@ -107,14 +107,14 @@ public class VisionModel {
                     }
                     return
             }
-            
+                        
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
+            #if os(iOS)
+            // Image is rotated 90 degrees to the left
             let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
-            
             let bounds = boundingBox.applying(translate)
             
-            // Image is rotated 90 degrees to the left
             let cheekOffset = ciImage.extent.height * 0.025
             let chinOffset: CGFloat = ciImage.extent.width * 0.09
             
@@ -122,17 +122,38 @@ public class VisionModel {
                                        y: bounds.origin.y - cheekOffset,
                                        width: bounds.width + (chinOffset * 2),
                                        height: bounds.height + (cheekOffset * 2))
+            #elseif os(OSX)
+            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
+            //let bounds = boundingBox.applying(translate)
+            
+            let bounds = VNImageRectForNormalizedRect(boundingBox, Int(ciImage.extent.width), Int(ciImage.extent.height))
+                        
+            let chinOffset = ciImage.extent.height * 0.08
+            let widthOffset: CGFloat = ciImage.extent.width * 0.025
+            
+            // NOTE: x and y will be flipped when bringing into NoTouch
+            let updatedBounds = CGRect(x: bounds.origin.x - widthOffset,
+                                     y: bounds.origin.y - chinOffset,
+                                     width: bounds.width + (widthOffset * 2),
+                                     height: bounds.height + (chinOffset * 2))
+            // NOTE: Not scaled.
+            //let updatedBounds = bounds
+            #endif
+            
+            #if DEBUG
+            self.delegate?.faceBoundingBoxUpdated(updatedBounds)
+            #endif
             
             let cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
             
-            guard let unwrappedCGImage = cgImage else {
+            guard let unwrappedCGImage = cgImage else { // Things broke for some reason, just exit.
                 self.currentlyAnalyzedPixelBuffer = nil
                 return
             }
             
             // Don't need to analyze the images currently.
-            //            let uiImage = UIImage(cgImage: unwrappedCGImage)
-            //            ImageStorer.storeNewImage(image: uiImage)
+//            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
+//            ImageStorer.storeNewImage(image: image)
             
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
             self.visionQueue.async { [weak self] in
@@ -141,7 +162,6 @@ public class VisionModel {
                 }
                 
                 do {
-                    defer { self.currentlyAnalyzedPixelBuffer = nil }
                     guard let touchingRequest = self.touchingRequest else {
                         return
                     }
@@ -179,7 +199,7 @@ public class VisionModel {
                         print("Confidence is: \(objectObservation.confidence)")
                         
                         DispatchQueue.main.async { [weak self] in
-                            if objectObservation.confidence > 0.23 {
+                            if objectObservation.confidence > 0.3 {
                                 self?.delegate?.fireAlert()
                             } else {
                                 self?.delegate?.notTouchingDetected()
@@ -202,16 +222,22 @@ public class VisionModel {
     private func findFace() {
         // Most computer vision tasks are not rotation-agnostic, so it is important to pass in the orientation of the image with respect to device.
         guard let pixelBuffer = currentlyAnalyzedPixelBuffer else {
+            assertionFailure("No pixelbuffer, this shouldn't happen, who removed it?")
             return
         }
         
         let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,
                                                    orientation: Orienter.currentCGOrientation())
         
-        visionQueue.async {
+        visionQueue.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
             do {
+                // We can now clear out the pixel buffer
+                defer { self.currentlyAnalyzedPixelBuffer = nil }
                 try requestHandler.perform(self.analysisRequests)
-                //print("#Perform find face")
             } catch {
                 print("Error: Vision request failed with error \"\(error)\"")
             }
@@ -227,14 +253,7 @@ extension VisionModel {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
-        
-        guard previousPixelBuffer != nil else {
-            previousPixelBuffer = pixelBuffer
-            return
-        }
-        
-        previousPixelBuffer = pixelBuffer
-        
+                
         if currentlyAnalyzedPixelBuffer == nil {
             // Retain the image buffer for Vision processing.
             currentlyAnalyzedPixelBuffer = pixelBuffer

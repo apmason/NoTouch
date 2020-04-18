@@ -12,7 +12,7 @@ import Foundation
 import NoTouchCommon
 import SwiftUI
 
-class UpdatableView: NSView, NativewView {    
+class UpdatableMacView: NSView, NativewView {    
     
     var nativeLayer: CALayer? {
         return self.layer
@@ -32,18 +32,24 @@ final class VideoLayerView: NSViewRepresentable {
     private var feed: VideoFeed?
     private let visionModel = VisionModel()
     private let alertVM = AlertViewModel()
-    // alerting model should live here.
+    private let trackingView = NSView()
+    private var nativeView: UpdatableMacView?
     
     func makeNSView(context: Context) -> NSView {
-        let view = UpdatableView()
-        feed = VideoFeed(previewView: view)
+        nativeView = UpdatableMacView()
+        feed = VideoFeed(previewView: nativeView!)
         feed?.delegate = self
         feed?.startup()
+        
+        trackingView.frame = .zero
+        trackingView.wantsLayer = true
+        trackingView.layer?.backgroundColor = CGColor.black.copy(alpha: 0.4)
+        nativeView?.addSubview(trackingView)
         
         visionModel.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(windowWillResize(_:)), name: .windowWillResize, object: nil)
         
-        return view
+        return nativeView!
     }
     
     func updateNSView(_ nsView: NSView, context: Context) {
@@ -88,4 +94,13 @@ extension VideoLayerView: VisionModelDelegate {
     func notTouchingDetected() {
         alertVM.notTouchingDetected()
     }
+    
+    #if DEBUG
+    func faceBoundingBoxUpdated(_ rect: CGRect) {
+        // We're not calling this now, but we would only ever use it in debug modes.
+//        DispatchQueue.main.async {
+//            self.trackingView.frame = rect
+//        }
+    }
+    #endif
 }
