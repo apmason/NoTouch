@@ -13,9 +13,11 @@ struct ContentView: View {
     
     @EnvironmentObject var userSettings: UserSettings
     
+    let contentViewModel = ContentViewModel()
+    
     var body: some View {
         ZStack(alignment: .topLeading) {
-            VideoLayerView()
+            VideoLayerView(inputtingTo: contentViewModel.feed)
             Button(action: {
                 self.userSettings.muteSound.toggle()
             }) {
@@ -32,7 +34,6 @@ struct ContentView: View {
         }
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -30,25 +30,17 @@ public class VideoFeed: NSObject {
     
     private var currentDeviceInput: AVCaptureDeviceInput?
     
-    private let previewView: NativewView
-    // FIXME: No UIView's in this strange new world of ours.
-    //private var coverView: UIView?
-    
     private var devicePosition: AVCaptureDevice.Position? {
         return currentDeviceInput?.device.position
     }
     
     public weak var delegate: VideoFeedDelegate?
     
-    public init(previewView: NativewView) {
-        self.previewView = previewView
-        super.init()
-    }
-    
     public func startup() {
         getCameraUsage()
     }
     
+    /// Determine if a user can use the camera or not. If a user can use the camera proceed with settings up the capture session. If they cannot, add a message telling the user that they need to authorize camera usage.
     func getCameraUsage() {
         CameraAuthModel.authorizeCameraForUsage { [weak self] result in
             switch result {
@@ -64,11 +56,7 @@ public class VideoFeed: NSObject {
         }
     }
     
-    // The order of setup goes:
-    // setupAVCapture
-    // setupVision
-    // setupCaptureSession
-    
+    /// Setup the video device inputs and capture session.
     func setupAVCapture() {
         // Select a video device and make an input.
         let inputDevice: AVCaptureDevice?
@@ -125,155 +113,39 @@ public class VideoFeed: NSObject {
         }
 
         session.commitConfiguration()
+    }
+    
+    /// Resets the `VideoFeed`'s `previewLayer` property, and sets it to fit within the `nativeView`'s bounds, and inserts it as a layer.
+    public func setPreviewView(to nativeView: NativewView) {
+        print("Set preview layer called")
+        previewLayer = AVCaptureVideoPreviewLayer(session: session)
+        guard let previewLayer = previewLayer else {
+            return
+        }
         
-//        previewLayer = AVCaptureVideoPreviewLayer(session: session)
-//        guard let previewLayer = previewLayer else {
-//            return
-//        }
-//        
-//        previewLayer.connection?.automaticallyAdjustsVideoMirroring = false
-//        previewLayer.connection?.isVideoMirrored = true
-//        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-//        previewLayer.frame = previewView.nativeBounds
-//        previewView.nativeLayer?.insertSublayer(previewLayer, at: 0)
+        previewLayer.connection?.automaticallyAdjustsVideoMirroring = false
+        previewLayer.connection?.isVideoMirrored = true
+        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        previewLayer.frame = nativeView.nativeBounds
+        nativeView.nativeLayer?.insertSublayer(previewLayer, at: 0)
     }
     
-    public func updatePreviewLayerFrame(to rect: CGRect) {
-        previewLayer?.frame = rect
-        // FIXME: A way to update this right away?
-    }
-    
-    func startCaptureSession() {
-        session.startRunning()
-    }
-    
-    // Clean up capture setup.
+    /// Remove the previewLayer from any super layer and destroy it.
     func teardownAVCapture() {
         previewLayer?.removeFromSuperlayer()
         previewLayer = nil
     }
     
-//    func changeCapturePosition(position: AVCaptureDevice.Position, completion: @escaping (Result<Void, NoTouchError>) -> Void) {
-//        guard let currentInput = self.currentDeviceInput else {
-//            completion(.failure(.noDeviceInput))
-//            return
-//        }
-//
-//        // FIXME: How to animate this? Should we pass a UIView in?
-////        addCoverView()
-////
-////        let delay: TimeInterval = 0.2
-////
-////        UIView.animate(withDuration: delay, animations: { [weak self] in
-////            self?.coverView?.alpha = 1
-////        }) { [weak self] _ in
-////            guard let self = self else {
-////                return
-////            }
-////
-////            self.session.removeInput(currentInput)
-////
-////            self.currentDeviceInput = nil
-////
-////            // create new device
-////            guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else {
-////                self.removeCoverView()
-////                completion(.failure(.inputDeviceCreationFailure))
-////                return
-////            }
-////
-////            do {
-////                self.currentDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
-////            } catch {
-////                print("Could not create video device input: \(error).")
-////                self.removeCoverView()
-////                completion(.failure(.inputDeviceCreationFailure))
-////                return
-////            }
-////
-////            guard let newInput = self.currentDeviceInput else {
-////                self.removeCoverView()
-////                completion(.failure(.inputDeviceCreationFailure))
-////                return
-////            }
-////
-////            guard self.session.canAddInput(newInput) else {
-////                print("Could not add video device input to the session.")
-////                self.removeCoverView()
-////                self.session.commitConfiguration()
-////                completion(.failure(.inputDeviceCreationFailure))
-////                return
-////            }
-////
-////            self.session.addInput(newInput)
-////            self.session.commitConfiguration()
-////
-////            UIView.animate(withDuration: delay, animations: { [weak self] in
-////                self?.coverView?.alpha = 0
-////
-////            }) { [weak self] _ in
-////                self?.removeCoverView()
-////                completion(.success(()))
-////
-////            }
-////        }
-//    }
-    
-    // FIXME: Make a protocol that can handle UIViews and NSViews.
-    func addCoverView() {
-//        let blurEffect = UIBlurEffect(style: .systemThickMaterial)
-//        coverView = UIVisualEffectView(effect: blurEffect)
-//        
-//        coverView?.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        guard let coverView = coverView else {
-//            return
-//        }
-//        
-//        coverView.backgroundColor = UIColor.white
-//        coverView.alpha = 0
-        
-        // FIXME: SwiftUI may be able to add the cover view.
-//        previewView.addSubview(coverView)
-//
-//        NSLayoutConstraint.activate([
-//            coverView.leadingAnchor.constraint(equalTo: previewView.leadingAnchor),
-//            coverView.trailingAnchor.constraint(equalTo: previewView.trailingAnchor),
-//            coverView.topAnchor.constraint(equalTo: previewView.topAnchor),
-//            coverView.bottomAnchor.constraint(equalTo: previewView.bottomAnchor)
-//        ])
+    public func updatePreviewLayerFrame(to rect: CGRect) {
+        previewLayer?.frame = rect
     }
     
-    // FIXME: Nothing is getting removed now
-    func removeCoverView() {
-//        coverView?.removeFromSuperview()
-//        coverView = nil
+    func startCaptureSession() {
+        session.startRunning()
     }
-    
-    // FIXME: This should be in the iOS side only (Mac won't flip)
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        previewLayer?.frame = previewView.bounds
-//
-//        switch UIDevice.current.orientation {
-//        case .landscapeLeft:
-//            previewLayer?.connection?.videoOrientation = .landscapeRight
-//
-//        case .landscapeRight:
-//            previewLayer?.connection?.videoOrientation = .landscapeLeft
-//
-//        case .portrait:
-//            previewLayer?.connection?.videoOrientation = .portrait
-//
-//        case .portraitUpsideDown:
-//            previewLayer?.connection?.videoOrientation = .portraitUpsideDown
-//
-//        default:
-//            return
-//
-//        }
-//    }
 }
+
+// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
 extension VideoFeed: AVCaptureVideoDataOutputSampleBufferDelegate {
     
@@ -286,3 +158,126 @@ extension VideoFeed: AVCaptureVideoDataOutputSampleBufferDelegate {
         delegate?.captureOutput(didOutput: sampleBuffer)
     }
 }
+
+//// THINGS TO DO:
+//
+////    func changeCapturePosition(position: AVCaptureDevice.Position, completion: @escaping (Result<Void, NoTouchError>) -> Void) {
+////        guard let currentInput = self.currentDeviceInput else {
+////            completion(.failure(.noDeviceInput))
+////            return
+////        }
+////
+////        // FIXME: How to animate this? Should we pass a UIView in?
+//////        addCoverView()
+//////
+//////        let delay: TimeInterval = 0.2
+//////
+//////        UIView.animate(withDuration: delay, animations: { [weak self] in
+//////            self?.coverView?.alpha = 1
+//////        }) { [weak self] _ in
+//////            guard let self = self else {
+//////                return
+//////            }
+//////
+//////            self.session.removeInput(currentInput)
+//////
+//////            self.currentDeviceInput = nil
+//////
+//////            // create new device
+//////            guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else {
+//////                self.removeCoverView()
+//////                completion(.failure(.inputDeviceCreationFailure))
+//////                return
+//////            }
+//////
+//////            do {
+//////                self.currentDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
+//////            } catch {
+//////                print("Could not create video device input: \(error).")
+//////                self.removeCoverView()
+//////                completion(.failure(.inputDeviceCreationFailure))
+//////                return
+//////            }
+//////
+//////            guard let newInput = self.currentDeviceInput else {
+//////                self.removeCoverView()
+//////                completion(.failure(.inputDeviceCreationFailure))
+//////                return
+//////            }
+//////
+//////            guard self.session.canAddInput(newInput) else {
+//////                print("Could not add video device input to the session.")
+//////                self.removeCoverView()
+//////                self.session.commitConfiguration()
+//////                completion(.failure(.inputDeviceCreationFailure))
+//////                return
+//////            }
+//////
+//////            self.session.addInput(newInput)
+//////            self.session.commitConfiguration()
+//////
+//////            UIView.animate(withDuration: delay, animations: { [weak self] in
+//////                self?.coverView?.alpha = 0
+//////
+//////            }) { [weak self] _ in
+//////                self?.removeCoverView()
+//////                completion(.success(()))
+//////
+//////            }
+//////        }
+////    }
+//
+//    // FIXME: Make a protocol that can handle UIViews and NSViews.
+//    func addCoverView() {
+////        let blurEffect = UIBlurEffect(style: .systemThickMaterial)
+////        coverView = UIVisualEffectView(effect: blurEffect)
+////
+////        coverView?.translatesAutoresizingMaskIntoConstraints = false
+////
+////        guard let coverView = coverView else {
+////            return
+////        }
+////
+////        coverView.backgroundColor = UIColor.white
+////        coverView.alpha = 0
+//
+//        // FIXME: SwiftUI may be able to add the cover view.
+////        previewView.addSubview(coverView)
+////
+////        NSLayoutConstraint.activate([
+////            coverView.leadingAnchor.constraint(equalTo: previewView.leadingAnchor),
+////            coverView.trailingAnchor.constraint(equalTo: previewView.trailingAnchor),
+////            coverView.topAnchor.constraint(equalTo: previewView.topAnchor),
+////            coverView.bottomAnchor.constraint(equalTo: previewView.bottomAnchor)
+////        ])
+//    }
+//
+//    // FIXME: Nothing is getting removed now
+//    func removeCoverView() {
+////        coverView?.removeFromSuperview()
+////        coverView = nil
+//    }
+//
+//    // FIXME: This should be in the iOS side only (Mac won't flip)
+////    override func viewDidLayoutSubviews() {
+////        super.viewDidLayoutSubviews()
+////        previewLayer?.frame = previewView.bounds
+////
+////        switch UIDevice.current.orientation {
+////        case .landscapeLeft:
+////            previewLayer?.connection?.videoOrientation = .landscapeRight
+////
+////        case .landscapeRight:
+////            previewLayer?.connection?.videoOrientation = .landscapeLeft
+////
+////        case .portrait:
+////            previewLayer?.connection?.videoOrientation = .portrait
+////
+////        case .portraitUpsideDown:
+////            previewLayer?.connection?.videoOrientation = .portraitUpsideDown
+////
+////        default:
+////            return
+////
+////        }
+////    }
