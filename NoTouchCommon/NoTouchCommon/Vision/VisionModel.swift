@@ -72,6 +72,7 @@ public class VisionModel {
     }
     
     private func createFaceBoundingRequest() -> VNDetectFaceRectanglesRequest {
+        print("Create face bounding request called")
         // Release the pixel buffer when done, allowing the next buffer to be processed.
         let request = VNDetectFaceRectanglesRequest { [weak self] request, error in
             guard let self = self, let pixelBuffer = self.currentlyAnalyzedPixelBuffer else {
@@ -123,9 +124,6 @@ public class VisionModel {
                                        width: bounds.width + (chinOffset * 2),
                                        height: bounds.height + (cheekOffset * 2))
             #elseif os(OSX)
-            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
-            //let bounds = boundingBox.applying(translate)
-            
             let bounds = VNImageRectForNormalizedRect(boundingBox, Int(ciImage.extent.width), Int(ciImage.extent.height))
                         
             let chinOffset = ciImage.extent.height * 0.08
@@ -136,12 +134,6 @@ public class VisionModel {
                                      y: bounds.origin.y - chinOffset,
                                      width: bounds.width + (widthOffset * 2),
                                      height: bounds.height + (chinOffset * 2))
-            // NOTE: Not scaled.
-            //let updatedBounds = bounds
-            #endif
-            
-            #if DEBUG
-            self.delegate?.faceBoundingBoxUpdated(updatedBounds)
             #endif
             
             let cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
@@ -154,6 +146,9 @@ public class VisionModel {
             // Don't need to analyze the images currently.
 //            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
 //            ImageStorer.storeNewImage(image: image)
+            self.currentlyAnalyzedPixelBuffer = nil
+            return
+            
             
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
             self.visionQueue.async { [weak self] in

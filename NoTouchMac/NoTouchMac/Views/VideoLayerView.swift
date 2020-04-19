@@ -29,19 +29,40 @@ class UpdatableMacView: NSView, NativewView {
 
 final class VideoLayerView: NSViewRepresentable {
     
-    private var nativeView: UpdatableMacView?
-    
-    init(inputtingTo videoFeed: VideoFeed) {
-        videoFeed.setPreviewView(to: nativeView!)
-    }
+    private let nativeView = UpdatableMacView()
+//    private let model: ContentViewModel
+////    init(inputtingTo videoFeed: VideoFeed) {
+////        videoFeed.setPreviewView(to: nativeView!)
+////    }
+//    init(model: ContentViewModel) {
+//        print("Video layer view init")
+//        self.model = model
+//    }
     
     func makeNSView(context: Context) -> NSView {
         print("Make ns view called")
-        nativeView = UpdatableMacView()
+        //context.coordinator.contentViewModel.setPreviewView(to: nativeView!)
+        //model.setPreviewView(to: nativeView)
         
-        return nativeView!
+        return nativeView
     }
     
-    func updateNSView(_ nsView: NSView, context: Context) {}
+    func updateNSView(_ nsView: NSView, context: Context) {
+        //context.coordinator.contentViewModel.setPreviewView(to: nativeView!)
+        //model.setPreviewView(to: nativeView)
+    }
+    
+//    class Coordinator: NSObject {
+//        var parent: VideoLayerView
+//        let contentViewModel = ContentViewModel()
+//
+//        init(_ videoLayerView: VideoLayerView) {
+//            self.parent = videoLayerView
+//        }
+//    }
+//
+//    func makeCoordinator() -> Coordinator {
+//        Coordinator(self)
+//    }
 }
 

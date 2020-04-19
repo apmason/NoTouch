@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    let contentViewModel = ContentViewModel()
     
     private var muteMenuItem = NSMenuItem(title: "Mute Sound",
                                           action: #selector(AppDelegate.muteSound(_:)),

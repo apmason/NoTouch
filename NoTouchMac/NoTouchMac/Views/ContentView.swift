@@ -12,12 +12,12 @@ import NoTouchCommon
 struct ContentView: View {
     
     @EnvironmentObject var userSettings: UserSettings
-    
-    let contentViewModel = ContentViewModel()
+        
+    //let contentViewModel = ContentViewModel()
     
     var body: some View {
         ZStack(alignment: .topLeading) {
-            VideoLayerView(inputtingTo: contentViewModel.feed)
+            VideoLayerView()
             Button(action: {
                 self.userSettings.muteSound.toggle()
             }) {
