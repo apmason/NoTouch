@@ -38,10 +38,6 @@ public class VisionModel {
     
     private let ciContext = CIContext()
     
-    private var cgImage: CGImage?
-    
-    private var ciImage: CIImage?
-    
     public weak var delegate: VisionModelDelegate?
     
     public init() {
@@ -113,10 +109,7 @@ public class VisionModel {
                     return
             }
                         
-            self.ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-            guard let ciImage = self.ciImage else {
-                return
-            }
+            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
             #if os(iOS)
             // Image is rotated 90 degrees to the left
@@ -143,10 +136,9 @@ public class VisionModel {
                                      height: bounds.height + (chinOffset * 2))
             #endif
             
-            self.cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
+            let cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
             
-            
-            guard let unwrappedCGImage = self.cgImage else { // Things broke for some reason, just exit.
+            guard let unwrappedCGImage = cgImage else { // Things broke for some reason, just exit.
                 self.currentlyAnalyzedPixelBuffer = nil
                 return
             }
@@ -154,14 +146,9 @@ public class VisionModel {
             // Don't need to analyze the images currently.
 //            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
 //            ImageStorer.storeNewImage(image: image)
-            self.currentlyAnalyzedPixelBuffer = nil
-            self.cgImage = nil
-            self.ciImage = nil
-            return
             
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
             self.visionQueue.async { [weak self] in
-                defer { self?.cgImage = nil }
                 guard let self = self else {
                     return
                 }
@@ -184,6 +171,7 @@ public class VisionModel {
         do {
             let yoloModel = try VNCoreMLModel(for: mlModel)
             let observationRequest = VNCoreMLRequest(model: yoloModel, completionHandler: { [weak self] (request, error) in
+                self?.currentlyAnalyzedPixelBuffer = nil
                 guard let results = request.results else {
                     return
                 }
@@ -240,8 +228,6 @@ public class VisionModel {
             }
             
             do {
-                // We can now clear out the pixel buffer
-                defer { self.currentlyAnalyzedPixelBuffer = nil }
                 try requestHandler.perform(self.analysisRequests)
             } catch {
                 print("Error: Vision request failed with error \"\(error)\"")
