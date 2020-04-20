@@ -38,6 +38,10 @@ public class VisionModel {
     
     private let ciContext = CIContext()
     
+    private var cgImage: CGImage?
+    
+    private var ciImage: CIImage?
+    
     public weak var delegate: VisionModelDelegate?
     
     public init() {
@@ -109,7 +113,10 @@ public class VisionModel {
                     return
             }
                         
-            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+            self.ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+            guard let ciImage = self.ciImage else {
+                return
+            }
             
             #if os(iOS)
             // Image is rotated 90 degrees to the left
@@ -136,9 +143,10 @@ public class VisionModel {
                                      height: bounds.height + (chinOffset * 2))
             #endif
             
-            let cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
+            self.cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
             
-            guard let unwrappedCGImage = cgImage else { // Things broke for some reason, just exit.
+            
+            guard let unwrappedCGImage = self.cgImage else { // Things broke for some reason, just exit.
                 self.currentlyAnalyzedPixelBuffer = nil
                 return
             }
@@ -147,11 +155,13 @@ public class VisionModel {
 //            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
 //            ImageStorer.storeNewImage(image: image)
             self.currentlyAnalyzedPixelBuffer = nil
+            self.cgImage = nil
+            self.ciImage = nil
             return
-            
             
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
             self.visionQueue.async { [weak self] in
+                defer { self?.cgImage = nil }
                 guard let self = self else {
                     return
                 }
