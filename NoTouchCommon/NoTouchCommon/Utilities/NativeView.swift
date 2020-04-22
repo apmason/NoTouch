@@ -13,7 +13,7 @@ import QuartzCore
 /// A protocol that defines a cross-platform view.
 public protocol NativewView: class {
     
-    var nativeLayer: CALayer? { get }
+    var nativeLayer: CALayer? { get set }
     var nativeFrame: CGRect { get }
     var nativeBounds: CGRect { get }
 }

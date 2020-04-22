@@ -10,6 +10,7 @@ import AVFoundation
 import Foundation
 import VideoToolbox
 import Vision
+import AppKit
 
 public protocol VideoFeedDelegate: class {
     func captureOutput(didOutput sampleBuffer: CMSampleBuffer)
@@ -116,18 +117,34 @@ public class VideoFeed: NSObject {
     }
     
     /// Resets the `VideoFeed`'s `previewLayer` property, and sets it to fit within the `nativeView`'s bounds, and inserts it as a layer.
-    public func setPreviewView(to nativeView: NativewView) {
-        print("Set preview layer called")
-        previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        guard let previewLayer = previewLayer else {
-            return
+    public func setPreviewView(to nativeView: NSView, withRect rect: CGRect) {
+        DispatchQueue.main.async {
+            guard let previewLayer = self.previewLayer else {
+                self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
+                self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
+                self.previewLayer?.connection?.isVideoMirrored = true
+                self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                self.previewLayer?.frame = nativeView.bounds
+                nativeView.layer = self.previewLayer
+                nativeView.wantsLayer = true
+                return
+            }
+            
+            if nativeView.layer == previewLayer {
+                previewLayer.frame = nativeView.bounds
+                if !(previewLayer.connection?.isVideoMirrored ?? false) {
+                    //assertionFailure("What are you doing?")
+                }
+            } else {
+                self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
+                self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
+                self.previewLayer?.connection?.isVideoMirrored = true
+                self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                self.previewLayer?.frame = nativeView.bounds
+                self.previewLayer?.removeFromSuperlayer()
+                nativeView.layer = self.previewLayer
+            }
         }
-        
-        previewLayer.connection?.automaticallyAdjustsVideoMirroring = false
-        previewLayer.connection?.isVideoMirrored = true
-        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        previewLayer.frame = nativeView.nativeBounds
-        nativeView.nativeLayer?.insertSublayer(previewLayer, at: 0)
     }
     
     /// Remove the previewLayer from any super layer and destroy it.

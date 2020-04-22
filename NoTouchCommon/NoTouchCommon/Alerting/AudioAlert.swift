@@ -20,6 +20,12 @@ class AudioAlert: NSObject {
     
     var isMuted: Bool = false {
         didSet {
+            if !isMuted, shouldBeAlerting {
+                // ask to play?
+                startAlerting()
+                return
+            }
+            
             guard isMuted, let player = player, player.isPlaying else {
                 return
             }
@@ -27,6 +33,8 @@ class AudioAlert: NSObject {
             player.stop()
         }
     }
+    
+    private var shouldBeAlerting: Bool = false
     
     override init() {
         super.init()
@@ -51,6 +59,7 @@ class AudioAlert: NSObject {
 extension AudioAlert: AlertObserver {
     
     func startAlerting() {
+        shouldBeAlerting = true
         guard let player = player, !isMuted else {
             return
         }
@@ -63,6 +72,7 @@ extension AudioAlert: AlertObserver {
     }
     
     func stopAlerting() {
+        shouldBeAlerting = false
         player?.stop()
         player?.currentTime = 0
         player?.prepareToPlay()

@@ -12,11 +12,8 @@ import Foundation
 import NoTouchCommon
 import SwiftUI
 
-class UpdatableMacView: NSView, NativewView {    
-    
-    var nativeLayer: CALayer? {
-        return self.layer
-    }
+class UpdatableMacView: NSView, NativewView {
+    var nativeLayer: CALayer?
 
     var nativeFrame: CGRect {
         return self.frame
@@ -25,11 +22,21 @@ class UpdatableMacView: NSView, NativewView {
     var nativeBounds: CGRect {
         return self.bounds
     }
+    
+//    init() {
+//        super.init(frame: .zero)
+//        self.nativeLayer = layer
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
+//        self.nativeLayer = layer
+//    }
 }
 
 final class VideoLayerView: NSViewRepresentable {
     
-    private let nativeView = UpdatableMacView()
+//    private let nativeView = UpdatableMacView()
 //    private let model: ContentViewModel
 ////    init(inputtingTo videoFeed: VideoFeed) {
 ////        videoFeed.setPreviewView(to: nativeView!)
@@ -39,30 +46,35 @@ final class VideoLayerView: NSViewRepresentable {
 //        self.model = model
 //    }
     
-    func makeNSView(context: Context) -> NSView {
+    func makeNSView(context: Context) -> UpdatableMacView {
         print("Make ns view called")
-        //context.coordinator.contentViewModel.setPreviewView(to: nativeView!)
-        //model.setPreviewView(to: nativeView)
-        
+        let nativeView = UpdatableMacView()
         return nativeView
     }
     
-    func updateNSView(_ nsView: NSView, context: Context) {
+    func updateNSView(_ nsView: UpdatableMacView, context: Context) {
         //context.coordinator.contentViewModel.setPreviewView(to: nativeView!)
         //model.setPreviewView(to: nativeView)
+        if nsView.wantsLayer {
+            print("Wants update layer!!")
+        } else {
+            print("No update layer!!")
+        }
+        
+        context.coordinator.contentViewModel.setPreviewView(to: nsView, withRect: nsView.bounds)
     }
     
-//    class Coordinator: NSObject {
-//        var parent: VideoLayerView
-//        let contentViewModel = ContentViewModel()
-//
-//        init(_ videoLayerView: VideoLayerView) {
-//            self.parent = videoLayerView
-//        }
-//    }
-//
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(self)
-//    }
+    class Coordinator: NSObject {
+        var parent: VideoLayerView
+        let contentViewModel = ContentViewModel()
+
+        init(_ videoLayerView: VideoLayerView) {
+            self.parent = videoLayerView
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
 }
 

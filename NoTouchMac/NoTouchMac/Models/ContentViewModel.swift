@@ -6,6 +6,7 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import AppKit
 import CoreMedia
 import NoTouchCommon
 import Foundation
@@ -25,9 +26,9 @@ class ContentViewModel {
         visionModel.delegate = self
     }
     
-    public func setPreviewView(to nativeView: NativewView) {
+    public func setPreviewView(to nativeView: NSView, withRect rect: CGRect) {
         print("Set preview view called")
-        feed.setPreviewView(to: nativeView)
+        feed.setPreviewView(to: nativeView, withRect: rect)
     }
 }
 
