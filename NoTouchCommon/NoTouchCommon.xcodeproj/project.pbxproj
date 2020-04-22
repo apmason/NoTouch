@@ -97,6 +97,7 @@
 		C3BF2A77244215FE004BDEE4 /* NoTouchCommon */ = {
 			isa = PBXGroup;
 			children = (
+				C3EF684024506F2900741E50 /* Models */,
 				C3F4BE8E2442635F003CBD59 /* Resources */,
 				C3BF2AA52442206E004BDEE4 /* Utilities */,
 				C3BF2AA424422042004BDEE4 /* Vision */,
@@ -143,9 +144,16 @@
 				C3BF2AA124421A1D004BDEE4 /* Orienter.swift */,
 				C3BF2A95244219AE004BDEE4 /* ImageStorer.swift */,
 				C3BF2A93244218E6004BDEE4 /* NoTouchError.swift */,
-				C31871EC244BB5BC00F079FC /* UserSettings.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		C3EF684024506F2900741E50 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C31871EC244BB5BC00F079FC /* UserSettings.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C3F4BE8E2442635F003CBD59 /* Resources */ = {

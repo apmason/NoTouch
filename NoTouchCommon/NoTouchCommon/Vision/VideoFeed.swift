@@ -6,11 +6,12 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import AppKit
 import AVFoundation
+import Combine
 import Foundation
 import VideoToolbox
 import Vision
-import AppKit
 
 public protocol VideoFeedDelegate: class {
     func captureOutput(didOutput sampleBuffer: CMSampleBuffer)
@@ -36,6 +37,36 @@ public class VideoFeed: NSObject {
     }
     
     public weak var delegate: VideoFeedDelegate?
+    
+    private var cancellableObservation: AnyCancellable?
+    
+    /// Cache the last view that had it's layer set as the preview layer. We will use this when turning on and off the camera feed.
+    private var nativeView: NSView?
+//    func addAudioObserver() {
+//        addObserver(audioVM)
+//
+//        cancellableObservation = userSettings.$muteSound.sink { muteSound in
+//            self.audioIsMuted = muteSound
+//        }
+//    }
+    
+    public init(userSettings: UserSettings) {
+        super.init()
+        
+        cancellableObservation = userSettings.$hideCameraFeed.sink(receiveValue: { hideCameraFeed in
+            if !hideCameraFeed {
+                // add feed
+                self.teardownPreviewLayer()
+            } else {
+                // don't add feed
+                guard let view = self.nativeView else {
+                    return
+                }
+                
+                self.setPreviewView(to: view, withRect: view.bounds)
+            }
+        })
+    }
     
     public func startup() {
         getCameraUsage()
@@ -118,6 +149,7 @@ public class VideoFeed: NSObject {
     
     /// Resets the `VideoFeed`'s `previewLayer` property, and sets it to fit within the `nativeView`'s bounds, and inserts it as a layer.
     public func setPreviewView(to nativeView: NSView, withRect rect: CGRect) {
+        self.nativeView = nativeView
         DispatchQueue.main.async {
             guard let previewLayer = self.previewLayer else {
                 self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
@@ -148,7 +180,7 @@ public class VideoFeed: NSObject {
     }
     
     /// Remove the previewLayer from any super layer and destroy it.
-    func teardownAVCapture() {
+    func teardownPreviewLayer() {
         previewLayer?.removeFromSuperlayer()
         previewLayer = nil
     }

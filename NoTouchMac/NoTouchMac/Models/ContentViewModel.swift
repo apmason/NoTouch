@@ -13,7 +13,7 @@ import Foundation
 
 class ContentViewModel {
     
-    let feed: VideoFeed = VideoFeed()
+    let feed: VideoFeed = VideoFeed(userSettings: AppDelegate.userSettings)
     private let feedResizer: FeedResizer
     private let visionModel = VisionModel()
     private let alertVM = AlertViewModel(userSettings: AppDelegate.userSettings)

@@ -21,8 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                           action: #selector(AppDelegate.muteSound(_:)),
                                           keyEquivalent: "m")
 
-    private var disableVideoMenuItem = NSMenuItem(title: "Disable Video",
-                                                  action: #selector(AppDelegate.muteSound(_:)),
+    private var hideCameraFeedItem = NSMenuItem(title: "Hide Video Feed",
+                                                  action: #selector(AppDelegate.hideCameraFeed(_:)),
                                                   keyEquivalent: "d")
 
     public static let userSettings: UserSettings = UserSettings()
@@ -47,7 +47,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Add button
         if let button = statusItem.button {
           button.image = NSImage(named:NSImage.Name("mac_menu_icon"))
-          button.action = #selector(muteSound)
         }
         
         constructMenu()
@@ -55,20 +54,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func muteSound(_ sender: Any?) {
         AppDelegate.userSettings.muteSound = !AppDelegate.userSettings.muteSound
+        muteMenuItem.state = AppDelegate.userSettings.muteSound ? .on : .off
+    }
+    
+    @objc func hideCameraFeed(_ sender: Any?) {
+        AppDelegate.userSettings.hideCameraFeed = !AppDelegate.userSettings.hideCameraFeed
+        hideCameraFeedItem.state = AppDelegate.userSettings.hideCameraFeed ? .on : .off
     }
     
     func constructMenu() {
         let menu = NSMenu()
         muteMenuItem.state = .off
+        hideCameraFeedItem.state = .off
         
         menu.addItem(muteMenuItem)
-        //menu.addItem(disableVideoMenuItem)
+        menu.addItem(hideCameraFeedItem)
         
         statusItem.menu = menu
-    }
-    
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
     }
 }
 
