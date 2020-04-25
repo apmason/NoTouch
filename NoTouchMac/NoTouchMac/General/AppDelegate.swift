@@ -6,6 +6,7 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import Combine
 import Cocoa
 import SwiftUI
 import Foundation
@@ -27,6 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     public static let userSettings: UserSettings = UserSettings()
 
+    private var muteObservation: AnyCancellable?
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
@@ -50,6 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         constructMenu()
+        listenForUserSettingsUpdates()
     }
 
     @objc func muteSound(_ sender: Any?) {
@@ -62,7 +66,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         hideCameraFeedItem.state = AppDelegate.userSettings.hideCameraFeed ? .on : .off
     }
     
-    func constructMenu() {
+    private func constructMenu() {
         let menu = NSMenu()
         muteMenuItem.state = .off
         hideCameraFeedItem.state = .off
@@ -71,6 +75,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(hideCameraFeedItem)
         
         statusItem.menu = menu
+    }
+    
+    private func listenForUserSettingsUpdates() {
+        muteObservation = AppDelegate.userSettings.$muteSound.sink(receiveValue: { muteSound in
+            self.muteMenuItem.state = muteSound ? .on : .off
+        })
     }
 }
 

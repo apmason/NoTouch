@@ -42,13 +42,6 @@ public class VideoFeed: NSObject {
     
     /// Cache the last view that had it's layer set as the preview layer. We will use this when turning on and off the camera feed.
     private var nativeView: NSView?
-//    func addAudioObserver() {
-//        addObserver(audioVM)
-//
-//        cancellableObservation = userSettings.$muteSound.sink { muteSound in
-//            self.audioIsMuted = muteSound
-//        }
-//    }
     
     private let userSettings: UserSettings
     
