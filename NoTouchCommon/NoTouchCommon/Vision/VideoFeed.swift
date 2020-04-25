@@ -50,20 +50,22 @@ public class VideoFeed: NSObject {
 //        }
 //    }
     
+    private let userSettings: UserSettings
+    
     public init(userSettings: UserSettings) {
+        self.userSettings = userSettings
         super.init()
         
         cancellableObservation = userSettings.$hideCameraFeed.sink(receiveValue: { hideCameraFeed in
-            if !hideCameraFeed {
+            if hideCameraFeed {
                 // add feed
                 self.teardownPreviewLayer()
             } else {
-                // don't add feed
                 guard let view = self.nativeView else {
                     return
                 }
                 
-                self.setPreviewView(to: view, withRect: view.bounds)
+                self.setPreviewView(to: view)
             }
         })
     }
@@ -145,44 +147,68 @@ public class VideoFeed: NSObject {
         }
 
         session.commitConfiguration()
+        createPreviewLayer()
+    }
+    
+    func createPreviewLayer() {
+        self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
     }
     
     /// Resets the `VideoFeed`'s `previewLayer` property, and sets it to fit within the `nativeView`'s bounds, and inserts it as a layer.
-    public func setPreviewView(to nativeView: NSView, withRect rect: CGRect) {
+    public func setPreviewView(to nativeView: NSView) {
+        if userSettings.hideCameraFeed {
+            return
+        }
+        
+        func configurePreviewLayer() {
+            self.previewLayer?.connection?.isEnabled = true
+            self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
+            self.previewLayer?.connection?.isVideoMirrored = true
+            self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+            self.previewLayer?.frame = nativeView.bounds
+            nativeView.wantsLayer = true
+            if let previewLayer = self.previewLayer {
+                nativeView.layer?.addSublayer(previewLayer)
+            }
+        }
+        
         self.nativeView = nativeView
-        DispatchQueue.main.async {
-            guard let previewLayer = self.previewLayer else {
-                self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
-                self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
-                self.previewLayer?.connection?.isVideoMirrored = true
-                self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-                self.previewLayer?.frame = nativeView.bounds
-                nativeView.layer = self.previewLayer
-                nativeView.wantsLayer = true
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {
                 return
             }
             
-            if nativeView.layer == previewLayer {
-                previewLayer.frame = nativeView.bounds
-                if !(previewLayer.connection?.isVideoMirrored ?? false) {
-                    //assertionFailure("What are you doing?")
+            // If for some reason we don't have a layer make one then configure the layer.
+            guard let previewLayer = self.previewLayer else {
+                self.createPreviewLayer()
+                configurePreviewLayer()
+                return
+            }
+            
+            // We should really never hit the else part of this conditonal.
+            if previewLayer == nativeView.layer,
+                let connection = previewLayer.connection {
+                
+                // If the video isn't mirrored reconfigure
+                if !connection.isVideoMirrored || !connection.isEnabled {
+                    configurePreviewLayer()
+                    return
                 }
-            } else {
-                self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
-                self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
-                self.previewLayer?.connection?.isVideoMirrored = true
-                self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-                self.previewLayer?.frame = nativeView.bounds
-                self.previewLayer?.removeFromSuperlayer()
-                nativeView.layer = self.previewLayer
+                
+                previewLayer.frame = nativeView.bounds
+            }
+            else {
+                configurePreviewLayer()
+                return
             }
         }
     }
     
     /// Remove the previewLayer from any super layer and destroy it.
     func teardownPreviewLayer() {
-        previewLayer?.removeFromSuperlayer()
-        previewLayer = nil
+        DispatchQueue.main.async { [weak self] in
+            self?.previewLayer?.removeFromSuperlayer()
+        }
     }
     
     public func updatePreviewLayerFrame(to rect: CGRect) {
@@ -190,7 +216,12 @@ public class VideoFeed: NSObject {
     }
     
     func startCaptureSession() {
-        session.startRunning()
+        /*
+         The startRunning() method is a blocking call which can take some time, therefore you should perform session setup on a serial queue so that the main queue isn’t blocked (which keeps the UI responsive)
+         */
+        videoDataOutputQueue.sync { [weak self] in
+            self?.session.startRunning()
+        }
     }
 }
 

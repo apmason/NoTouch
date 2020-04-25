@@ -26,9 +26,9 @@ class ContentViewModel {
         visionModel.delegate = self
     }
     
-    public func setPreviewView(to nativeView: NSView, withRect rect: CGRect) {
+    public func setPreviewView(to nativeView: NSView) {
         print("Set preview view called")
-        feed.setPreviewView(to: nativeView, withRect: rect)
+        feed.setPreviewView(to: nativeView)
     }
 }
 

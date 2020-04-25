@@ -10,7 +10,7 @@ import Foundation
 
 public class UserSettings: ObservableObject {
     @Published public var muteSound = false
-    @Published public var hideCameraFeed = true
+    @Published public var hideCameraFeed = false
     
     public init() {}
 }

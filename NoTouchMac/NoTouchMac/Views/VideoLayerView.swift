@@ -36,16 +36,6 @@ class UpdatableMacView: NSView, NativewView {
 
 final class VideoLayerView: NSViewRepresentable {
     
-//    private let nativeView = UpdatableMacView()
-//    private let model: ContentViewModel
-////    init(inputtingTo videoFeed: VideoFeed) {
-////        videoFeed.setPreviewView(to: nativeView!)
-////    }
-//    init(model: ContentViewModel) {
-//        print("Video layer view init")
-//        self.model = model
-//    }
-    
     func makeNSView(context: Context) -> UpdatableMacView {
         print("Make ns view called")
         let nativeView = UpdatableMacView()
@@ -53,15 +43,8 @@ final class VideoLayerView: NSViewRepresentable {
     }
     
     func updateNSView(_ nsView: UpdatableMacView, context: Context) {
-        //context.coordinator.contentViewModel.setPreviewView(to: nativeView!)
-        //model.setPreviewView(to: nativeView)
-        if nsView.wantsLayer {
-            print("Wants update layer!!")
-        } else {
-            print("No update layer!!")
-        }
-        
-        context.coordinator.contentViewModel.setPreviewView(to: nsView, withRect: nsView.bounds)
+        // Update our video layer.
+        context.coordinator.contentViewModel.setPreviewView(to: nsView)
     }
     
     class Coordinator: NSObject {
