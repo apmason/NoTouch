@@ -5,221 +5,75 @@ Abstract:
 Implements the Vision view controller.
 */
 
-import UIKit
 import AVFoundation
+import UIKit
+import VideoToolbox
 import Vision
 
-class VisionViewController: ViewController {
-        
-    // Vision parts
-    private var analysisRequests = [VNRequest]()
-
-    private var previousPixelBuffer: CVPixelBuffer?
-    
-    // The current pixel buffer undergoing analysis. Run requests in a serial fashion, one after another.
-    private var currentlyAnalyzedPixelBuffer: CVPixelBuffer?
-    
-    // Queue for dispatching vision classification and barcode requests
-    private let visionQueue = DispatchQueue(label: "com.example.apple-samplecode.NoTouch.serialVisionQueue")
+class VisionViewController: UIViewController {
     
     @IBOutlet var coverageView: UIView!
     @IBOutlet var flashingView: UIView!
     @IBOutlet var audioButton: UIButton!
     @IBOutlet var announcementLabel: UILabel!
     
-    private var coreMLRequest: VNCoreMLRequest!
-    private var faceRequest: VNDetectFaceRectanglesRequest!
+    @IBOutlet var rightStackView: UIStackView!
+    @IBOutlet var segmentedControl: UISegmentedControl!
+    
+    private let alertVM = AlertViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         alertVM.addObserver(self)
     }
     
-    /// - Tag: SetupVisionRequest
-    @discardableResult
-    func setupVision() -> NSError? {
-        // Setup Vision parts.
-        
-        // Setup a classification request.
-        guard let modelURL = Bundle.main.url(forResource: "adam-official-6", withExtension: "mlmodelc") else {
-            return NSError(domain: "VisionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "The model file is missing."])
-        }
-        
-        guard let objectRecognition = createClassificationRequest(modelURL: modelURL) else {
-            return NSError(domain: "VisionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "The classification request failed."])
-        }
-        
-        self.coreMLRequest = objectRecognition
-        self.faceRequest = createFaceRequest()
-        
-        // Analysis requests will always call for the Face Request
-        self.analysisRequests.append(faceRequest)
-        return nil
-    }
-    
-    private func createFaceRequest() -> VNDetectFaceRectanglesRequest {
-        // Release the pixel buffer when done, allowing the next buffer to be processed.
-        let request = VNDetectFaceRectanglesRequest { request, error in
-            
-            guard let pixelBuffer = self.currentlyAnalyzedPixelBuffer else {
-                return
-            }
-            
-            guard let results = request.results as? [VNDetectedObjectObservation],
-                let boundingBox = results.first?.boundingBox else {
-                //print("#Face detect failed")
-                
-                // As a fallback run with the whole pixel buffer, rather than just focusing on the face.
-                let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: self.exifOrientationFromDeviceOrientation())
-                self.visionQueue.async {
-                    do {
-                        // Release the pixel buffer when done, allowing the next buffer to be processed.
-                        defer { self.currentlyAnalyzedPixelBuffer = nil }
-                        try touchRequest.perform([self.coreMLRequest])
-                        //print("#No bounding box, just requested")
-                    } catch {
-                        print("Error: Vision request failed with error \"\(error)\"")
-                    }
-                }
-                //print("#Outside of async request with no bounding box")
-                return
-            }
-            
-            defer { self.currentlyAnalyzedPixelBuffer = nil }
-            
-            //print("#Have face results here")
-            let ciImage = CIImage(cvImageBuffer: pixelBuffer)
-            ciImage.cropped(to: boundingBox)
-            
-            let touchRequest = VNImageRequestHandler(ciImage: ciImage, orientation: self.exifOrientationFromDeviceOrientation(), options: [:])
-            self.visionQueue.async {
-                do {
-                    try touchRequest.perform([self.coreMLRequest])
-                    //print("#Using bounding box, just finished")
-                } catch {
-                    print("Error: Vision request failed with error \"\(error)\"")
-                }
-            }
-            // Run new request with this new data.
-        }
-        
-        //print("#End of my pipeline")
-        
-        return request
-    }
-    
-    private func createClassificationRequest(modelURL: URL) -> VNCoreMLRequest? {
-        do {
-            let objectClassifier = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
-            let classificationRequest = VNCoreMLRequest(model: objectClassifier, completionHandler: { [weak self] (request, error) in
-                if let results = request.results as? [VNClassificationObservation],
-                    let first = results.first {
-                    if first.identifier == "Touching" {
-                        //print("Confidence is: \(first.confidence)")
-                    }
-                
-                    if first.identifier == "Touching" && first.confidence > 12.5 {
-                        print("Qualified")
-                        DispatchQueue.main.async { [weak self] in
-                            self?.alertVM.fireAlert()
-                        }
-                    }
-                }
-            })
-            classificationRequest.imageCropAndScaleOption = .centerCrop // @ALEX: Test this with different options, does it work best?
-            return classificationRequest
-            
-        } catch let error as NSError {
-            print("Model failed to load: \(error).")
-            return nil
-        }
-    }
-    
-    /// - Tag: AnalyzeImage
-    private func findFace() {
-        // Most computer vision tasks are not rotation-agnostic, so it is important to pass in the orientation of the image with respect to device.
-        let orientation = exifOrientationFromDeviceOrientation()
-        
-        guard let pixelBuffer = currentlyAnalyzedPixelBuffer else {
-            return
-        }
-        
-        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: orientation)
-        //print("#Kick off find face")
-        visionQueue.async {
-            do {
-                try requestHandler.perform(self.analysisRequests)
-                //print("#Perform find face")
-            } catch {
-                print("Error: Vision request failed with error \"\(error)\"")
-            }
-        }
-    }
-    
-    override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            return
-        }
-        
-        guard previousPixelBuffer != nil else {
-            previousPixelBuffer = pixelBuffer
-            return
-        }
-        
-        previousPixelBuffer = pixelBuffer
-        
-        if currentlyAnalyzedPixelBuffer == nil {
-            // Retain the image buffer for Vision processing.
-            currentlyAnalyzedPixelBuffer = pixelBuffer
-            findFace()
-        }
-    }
-    
-    override func setupAVCapture() {
-        super.setupAVCapture()
-        
-        // setup Vision parts
-        setupVision()
-        
-        // start the capture
-        startCaptureSession()
-    }
+    // FIXME: Note that this is here as a model for how things were setup previously.
+//    override func setupAVCapture() {
+//        super.setupAVCapture()
+//
+//        // setup Vision parts
+//        setupVision()
+//
+//        // start the capture
+//        startCaptureSession()
+//    }
     
     // MARK: - IBActions
     
+    // FIXME: iOS only
     @IBAction func flipCamera(_ sender: Any) {
-        guard let oldPosition = devicePosition else {
-            return
-        }
-        
-        let newPosition: AVCaptureDevice.Position
-        
-        switch oldPosition {
-        case .front:
-            // set to back
-            newPosition = .back
-            
-        case .back:
-            // set to front
-            newPosition = .front
-            
-        default:
-            newPosition = .front
-            break
-        }
-        
-        changeCapturePosition(position: newPosition) { result in
-            switch result {
-            case .success:
-                // Do nothing
-                break
-                
-            case .failure(let error):
-                // TODO: present error and localized description
-                print("Error changing capture position: \(error.localizedDescription)")
-                
-            }
-        }
+        // FIXME: Allow flipping of camera.
+//        guard let oldPosition = devicePosition else {
+//            return
+//        }
+//
+//        let newPosition: AVCaptureDevice.Position
+//
+//        switch oldPosition {
+//        case .front:
+//            // set to back
+//            newPosition = .back
+//
+//        case .back:
+//            // set to front
+//            newPosition = .front
+//
+//        default:
+//            newPosition = .front
+//            break
+//        }
+//
+//        changeCapturePosition(position: newPosition) { result in
+//            switch result {
+//            case .success:
+//                // Do nothing
+//                break
+//
+//            case .failure(let error):
+//                print("Error changing capture position: \(error.localizedDescription)")
+//
+//            }
+//        }
     }
     
     @IBAction func muteUnmuteSound(_ sender: Any) {
@@ -267,7 +121,6 @@ class VisionViewController: ViewController {
         }
     }
 }
-
 
 extension VisionViewController: AlertObserver {
     

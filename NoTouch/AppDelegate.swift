@@ -46,7 +46,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         print("+++ Application did become active")
         // Determine AVCapture status, block usage if no camera is activated.
-        
+        switch CameraAuthModel.determineIfAuthorized() {
+        case .authorized:
+            CameraAuthModel.removeCameraRequirementOverlay() // Remove just in case things were just updated.
+            
+        case .denied:
+            CameraAuthModel.addCameraRequirementOverlay()
+            
+        case .notDetermined:
+            break // They haven't been asked yet, do nothing.
+            
+        }
     }
 }
 

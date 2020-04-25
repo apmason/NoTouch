@@ -3,7 +3,7 @@
 //  NoTouch
 //
 //  Created by Alexander Mason on 3/8/20.
-//  Copyright © 2020 Apple. All rights reserved.
+//  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
 import UIKit
