@@ -26,8 +26,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                                   action: #selector(AppDelegate.hideFeedTapped(_:)),
                                                   keyEquivalent: "d")
     
+    // MARK: - Dock Menu Items
     @IBOutlet weak var dockMuteItem: NSMenuItem!
     @IBOutlet weak var dockVideoItem: NSMenuItem!
+    
+    // MARK: - Main Menu items
+    @IBOutlet weak var mainMenuMuteItem: NSMenuItem!
+    @IBOutlet weak var mainMenuVideoItem: NSMenuItem!
     
     public static let userSettings: UserSettings = UserSettings()
 
@@ -86,11 +91,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         muteObservation = AppDelegate.userSettings.$muteSound.sink(receiveValue: { muteSound in
             self.menuBarMuteItem.state = muteSound ? .on : .off
             self.dockMuteItem.state = self.menuBarMuteItem.state
+            self.mainMenuMuteItem.state = self.menuBarMuteItem.state
         })
         
         videoObservation = AppDelegate.userSettings.$hideCameraFeed.sink(receiveValue: { hideFeed in
             self.menuBarVideoItem.state = hideFeed ? .on : .off
             self.dockVideoItem.state = self.menuBarVideoItem.state
+            self.mainMenuVideoItem.state = self.menuBarVideoItem.state
         })
     }
 }

@@ -41,6 +41,23 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Options" id="t51-Km-ZCn">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Options" systemMenu="apple" id="Lfi-pb-Nac">
+                                    <items>
+                                        <menuItem title="Mute Sound" keyEquivalent="m" id="7an-Jk-s4d">
+                                            <connections>
+                                                <action selector="muteSoundTapped:" target="Voe-Tx-rLC" id="0J8-dV-mFC"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Hide Video" keyEquivalent="d" id="aem-RN-AWi">
+                                            <connections>
+                                                <action selector="hideFeedTapped:" target="Voe-Tx-rLC" id="Mcq-Ff-IBL"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
@@ -52,6 +69,8 @@
                     <connections>
                         <outlet property="dockMuteItem" destination="rFQ-xl-t0V" id="avS-qg-dnE"/>
                         <outlet property="dockVideoItem" destination="I5M-zo-YyN" id="vHb-bp-Esa"/>
+                        <outlet property="mainMenuMuteItem" destination="7an-Jk-s4d" id="fnC-iL-hSg"/>
+                        <outlet property="mainMenuVideoItem" destination="aem-RN-AWi" id="uJ4-lx-0sZ"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -72,19 +91,6 @@
                     </items>
                 </menu>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <menu id="QpV-nv-Gwt">
-                    <items>
-                        <menuItem title="Item 1" id="Nsk-Pk-Dm4">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                        <menuItem title="Item 2" id="Rv0-tv-5ZU">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                        <menuItem title="Item 3" id="QNt-pN-f6T">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
-                    </items>
-                </menu>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
