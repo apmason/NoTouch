@@ -18,17 +18,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
-    private var muteMenuItem = NSMenuItem(title: "Mute Sound",
-                                          action: #selector(AppDelegate.muteSound(_:)),
+    private var menuBarMuteItem = NSMenuItem(title: "Mute Sound",
+                                          action: #selector(AppDelegate.muteSoundTapped(_:)),
                                           keyEquivalent: "m")
-
-    private var hideCameraFeedItem = NSMenuItem(title: "Hide Video Feed",
-                                                  action: #selector(AppDelegate.hideCameraFeed(_:)),
+    
+    private var menuBarVideoItem = NSMenuItem(title: "Hide Video Feed",
+                                                  action: #selector(AppDelegate.hideFeedTapped(_:)),
                                                   keyEquivalent: "d")
-
+    
+    @IBOutlet weak var dockMuteItem: NSMenuItem!
+    @IBOutlet weak var dockVideoItem: NSMenuItem!
+    
     public static let userSettings: UserSettings = UserSettings()
 
+    /// A cancellable observation that tracks whether the user has muted sound.
     private var muteObservation: AnyCancellable?
+    
+    /// A cancellable observation that tracks whether the user has stopped showing video in the view.
+    private var videoObservation: AnyCancellable?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
@@ -56,30 +63,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         listenForUserSettingsUpdates()
     }
 
-    @objc func muteSound(_ sender: Any?) {
+    @IBAction func muteSoundTapped(_ sender: Any) {
         AppDelegate.userSettings.muteSound = !AppDelegate.userSettings.muteSound
-        muteMenuItem.state = AppDelegate.userSettings.muteSound ? .on : .off
     }
     
-    @objc func hideCameraFeed(_ sender: Any?) {
+    @IBAction func hideFeedTapped(_ sender: Any) {
         AppDelegate.userSettings.hideCameraFeed = !AppDelegate.userSettings.hideCameraFeed
-        hideCameraFeedItem.state = AppDelegate.userSettings.hideCameraFeed ? .on : .off
     }
     
     private func constructMenu() {
         let menu = NSMenu()
-        muteMenuItem.state = .off
-        hideCameraFeedItem.state = .off
+        menuBarMuteItem.state = .off
+        menuBarVideoItem.state = .off
         
-        menu.addItem(muteMenuItem)
-        menu.addItem(hideCameraFeedItem)
+        menu.addItem(menuBarMuteItem)
+        menu.addItem(menuBarVideoItem)
         
         statusItem.menu = menu
     }
     
     private func listenForUserSettingsUpdates() {
         muteObservation = AppDelegate.userSettings.$muteSound.sink(receiveValue: { muteSound in
-            self.muteMenuItem.state = muteSound ? .on : .off
+            self.menuBarMuteItem.state = muteSound ? .on : .off
+            self.dockMuteItem.state = self.menuBarMuteItem.state
+        })
+        
+        videoObservation = AppDelegate.userSettings.$hideCameraFeed.sink(receiveValue: { hideFeed in
+            self.menuBarVideoItem.state = hideFeed ? .on : .off
+            self.dockVideoItem.state = self.menuBarVideoItem.state
         })
     }
 }

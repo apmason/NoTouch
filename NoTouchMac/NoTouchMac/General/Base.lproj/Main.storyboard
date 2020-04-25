@@ -20,13 +20,6 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
-                                        <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
-                                        <menuItem title="Services" id="NMo-om-nkz">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
                                         <menuItem title="Hide NoTouchMac" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
@@ -37,12 +30,6 @@
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="hideOtherApplications:" target="Ady-hI-5gd" id="VT4-aY-XCT"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Show All" id="Kd2-mp-pUS">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="unhideAllApplications:" target="Ady-hI-5gd" id="Dhg-Le-xox"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
@@ -58,11 +45,46 @@
                     </menu>
                     <connections>
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                        <outlet property="dockMenu" destination="cAG-fj-o3A" id="uZr-dZ-6SJ"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="NoTouchMac" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="NoTouchMac" customModuleProvider="target">
+                    <connections>
+                        <outlet property="dockMuteItem" destination="rFQ-xl-t0V" id="avS-qg-dnE"/>
+                        <outlet property="dockVideoItem" destination="I5M-zo-YyN" id="vHb-bp-Esa"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+                <menu id="cAG-fj-o3A">
+                    <items>
+                        <menuItem title="Mute Sound" id="rFQ-xl-t0V" userLabel="Mute Sound">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="muteSoundTapped:" target="Voe-Tx-rLC" id="Asy-rf-GqI"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Hide Video Feed" id="I5M-zo-YyN" userLabel="Hide Video Feed">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="hideFeedTapped:" target="Voe-Tx-rLC" id="Rba-YH-Qld"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="QpV-nv-Gwt">
+                    <items>
+                        <menuItem title="Item 1" id="Nsk-Pk-Dm4">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 2" id="Rv0-tv-5ZU">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 3" id="QNt-pN-f6T">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>

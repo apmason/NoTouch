@@ -27,7 +27,6 @@ class ContentViewModel {
     }
     
     public func setPreviewView(to nativeView: NSView) {
-        print("Set preview view called")
         feed.setPreviewView(to: nativeView)
     }
 }
