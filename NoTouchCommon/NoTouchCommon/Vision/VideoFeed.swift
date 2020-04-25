@@ -200,6 +200,11 @@ public class VideoFeed: NSObject {
     /// Remove the previewLayer from any super layer and destroy it.
     func teardownPreviewLayer() {
         DispatchQueue.main.async { [weak self] in
+            self?.nativeView?.wantsLayer = false
+            self?.nativeView?.layer?.sublayers?.forEach({
+                $0.removeFromSuperlayer()
+            })
+            
             self?.previewLayer?.removeFromSuperlayer()
         }
     }
