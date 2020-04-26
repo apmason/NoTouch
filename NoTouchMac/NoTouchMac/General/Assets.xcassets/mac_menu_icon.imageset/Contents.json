@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "small_hands_3.png",
+      "filename" : "small_black_hand.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -17,5 +17,8 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
   }
 }
