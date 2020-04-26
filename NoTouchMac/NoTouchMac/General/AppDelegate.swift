@@ -54,6 +54,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var pauseObservation: AnyCancellable?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        setCameraAuthState()
+        
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
             .environmentObject(AppDelegate.userSettings)
@@ -61,13 +63,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Create the window and set the content view. 
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+            styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
             backing: .buffered, defer: false)
         window.center()
         window.setFrameAutosaveName("Main Window")
-        window.contentView = NSHostingView(rootView: contentView)
         window.delegate = self
         window.aspectRatio = NSSize(width: 480, height: 300)
+        window.minSize = NSSize(width: 300, height: 187.5)
+        window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
         
         // Add button
@@ -128,6 +131,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // Automatically close the app, video isn't working in the background right now. We'll want to fix that.
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
+    }
+    
+    private func setCameraAuthState() {
+        switch CameraAuthModel.determineIfAuthorized() {
+        case .authorized:
+            AppDelegate.userSettings.cameraAuthState = .authorized
+            
+        case .denied:
+            AppDelegate.userSettings.cameraAuthState = .denied
+            
+        case .notDetermined:
+            AppDelegate.userSettings.cameraAuthState = .notDetermined
+            
+        }
     }
 }
 

@@ -87,12 +87,12 @@ public class VideoFeed: NSObject {
         CameraAuthModel.authorizeCameraForUsage { [weak self] result in
             switch result {
             case .success:
-                CameraAuthModel.removeCameraRequirementOverlay()
+                self?.userSettings.cameraAuthState = .authorized
                 self?.setupAVCapture()
                 self?.startCaptureSession()
                 
             case .failure:
-                CameraAuthModel.addCameraRequirementOverlay()
+                self?.userSettings.cameraAuthState = .denied
                 
             }
         }
