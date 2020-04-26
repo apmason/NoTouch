@@ -72,7 +72,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Add button
         if let button = statusItem.button {
-          button.image = NSImage(named:NSImage.Name("mac_menu_icon"))
+          button.image = NSImage(named: NSImage.Name("mac_menu_icon"))
         }
         
         constructMenu()
@@ -123,6 +123,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.dockPauseItem.state = self.mainMenuPauseItem.state
             self.menuBarPauseItem.state = self.mainMenuPauseItem.state
         })
+    }
+    
+    // Automatically close the app, video isn't working in the background right now. We'll want to fix that.
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
     }
 }
 
