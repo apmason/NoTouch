@@ -22,16 +22,6 @@ class UpdatableMacView: NSView, NativewView {
     var nativeBounds: CGRect {
         return self.bounds
     }
-    
-//    init() {
-//        super.init(frame: .zero)
-//        self.nativeLayer = layer
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//        self.nativeLayer = layer
-//    }
 }
 
 final class VideoLayerView: NSViewRepresentable {

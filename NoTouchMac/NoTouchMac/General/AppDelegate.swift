@@ -18,19 +18,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
-    private var menuBarMuteItem = NSMenuItem(title: "Mute Sound",
-                                          action: #selector(AppDelegate.muteSoundTapped(_:)),
-                                          keyEquivalent: "m")
+    // MARK: - Menu Bar Items
     
+    private var menuBarMuteItem = NSMenuItem(title: "Mute Sound",
+                                             action: #selector(AppDelegate.muteSoundTapped(_:)),
+                                             keyEquivalent: "m")
     private var menuBarVideoItem = NSMenuItem(title: "Hide Video Feed",
-                                                  action: #selector(AppDelegate.hideFeedTapped(_:)),
-                                                  keyEquivalent: "d")
+                                              action: #selector(AppDelegate.hideFeedTapped(_:)),
+                                              keyEquivalent: "d")
+    private var menuBarPauseItem = NSMenuItem(title: "Pause Detection",
+                                              action: #selector(AppDelegate.pauseTapped(_:)),
+                                              keyEquivalent: "p")
     
     // MARK: - Dock Menu Items
+    
     @IBOutlet weak var dockMuteItem: NSMenuItem!
     @IBOutlet weak var dockVideoItem: NSMenuItem!
+    @IBOutlet weak var dockPauseItem: NSMenuItem!
     
     // MARK: - Main Menu items
+    
     @IBOutlet weak var mainMenuMuteItem: NSMenuItem!
     @IBOutlet weak var mainMenuVideoItem: NSMenuItem!
     @IBOutlet weak var mainMenuPauseItem: NSMenuItem!
@@ -42,6 +49,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     /// A cancellable observation that tracks whether the user has stopped showing video in the view.
     private var videoObservation: AnyCancellable?
+    
+    /// A cancellable observation that tracks whether we should stop or start recording.
+    private var pauseObservation: AnyCancellable?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
@@ -90,6 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         menu.addItem(menuBarMuteItem)
         menu.addItem(menuBarVideoItem)
+        menu.addItem(menuBarPauseItem)
         
         statusItem.menu = menu
     }
@@ -105,6 +116,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.menuBarVideoItem.state = hideFeed ? .on : .off
             self.dockVideoItem.state = self.menuBarVideoItem.state
             self.mainMenuVideoItem.state = self.menuBarVideoItem.state
+        })
+        
+        pauseObservation = AppDelegate.userSettings.$pauseDetection.sink(receiveValue: { pauseDetection in
+            self.mainMenuPauseItem.state = pauseDetection ? .on : .off
+            self.dockPauseItem.state = self.mainMenuPauseItem.state
+            self.menuBarPauseItem.state = self.mainMenuPauseItem.state
         })
     }
 }

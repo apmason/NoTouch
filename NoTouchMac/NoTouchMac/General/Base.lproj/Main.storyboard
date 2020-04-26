@@ -55,7 +55,7 @@
                                                 <action selector="hideFeedTapped:" target="Voe-Tx-rLC" id="Mcq-Ff-IBL"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Pause Detection" keyEquivalent="p" id="Jh2-jQ-lT2" userLabel="Stop">
+                                        <menuItem title="Pause Detection" keyEquivalent="p" id="Jh2-jQ-lT2" userLabel="Pause">
                                             <connections>
                                                 <action selector="pauseTapped:" target="Voe-Tx-rLC" id="e0a-Df-V4u"/>
                                             </connections>
@@ -73,6 +73,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="NoTouchMac" customModuleProvider="target">
                     <connections>
                         <outlet property="dockMuteItem" destination="rFQ-xl-t0V" id="avS-qg-dnE"/>
+                        <outlet property="dockPauseItem" destination="Xtp-HB-Mob" id="UKb-7o-Yb3"/>
                         <outlet property="dockVideoItem" destination="I5M-zo-YyN" id="vHb-bp-Esa"/>
                         <outlet property="mainMenuMuteItem" destination="7an-Jk-s4d" id="fnC-iL-hSg"/>
                         <outlet property="mainMenuPauseItem" destination="Jh2-jQ-lT2" id="o5d-KA-2Mc"/>
@@ -82,16 +83,19 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <menu id="cAG-fj-o3A">
                     <items>
-                        <menuItem title="Mute Sound" id="rFQ-xl-t0V" userLabel="Mute Sound">
-                            <modifierMask key="keyEquivalentModifierMask"/>
+                        <menuItem title="Mute Sound" keyEquivalent="m" id="rFQ-xl-t0V" userLabel="Mute Sound">
                             <connections>
                                 <action selector="muteSoundTapped:" target="Voe-Tx-rLC" id="Asy-rf-GqI"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Hide Video Feed" id="I5M-zo-YyN" userLabel="Hide Video Feed">
-                            <modifierMask key="keyEquivalentModifierMask"/>
+                        <menuItem title="Hide Video Feed" keyEquivalent="d" id="I5M-zo-YyN" userLabel="Hide Video Feed">
                             <connections>
                                 <action selector="hideFeedTapped:" target="Voe-Tx-rLC" id="Rba-YH-Qld"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Pause Detection" keyEquivalent="p" id="Xtp-HB-Mob" userLabel="Pause">
+                            <connections>
+                                <action selector="pauseTapped:" target="Voe-Tx-rLC" id="Y73-cP-v16"/>
                             </connections>
                         </menuItem>
                     </items>

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "video_output.pdf",
+      "filename" : "play@2x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "play@3x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "play@4x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
