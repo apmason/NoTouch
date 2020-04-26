@@ -33,6 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Main Menu items
     @IBOutlet weak var mainMenuMuteItem: NSMenuItem!
     @IBOutlet weak var mainMenuVideoItem: NSMenuItem!
+    @IBOutlet weak var mainMenuPauseItem: NSMenuItem!
     
     public static let userSettings: UserSettings = UserSettings()
 
@@ -67,13 +68,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         constructMenu()
         listenForUserSettingsUpdates()
     }
+    
+    // MARK: - IBActions
 
     @IBAction func muteSoundTapped(_ sender: Any) {
-        AppDelegate.userSettings.muteSound = !AppDelegate.userSettings.muteSound
+        AppDelegate.userSettings.muteSound.toggle()
     }
     
     @IBAction func hideFeedTapped(_ sender: Any) {
-        AppDelegate.userSettings.hideCameraFeed = !AppDelegate.userSettings.hideCameraFeed
+        AppDelegate.userSettings.hideCameraFeed.toggle()
+    }
+    
+    @IBAction func pauseTapped(_ sender: Any) {
+        AppDelegate.userSettings.pauseDetection.toggle()
     }
     
     private func constructMenu() {

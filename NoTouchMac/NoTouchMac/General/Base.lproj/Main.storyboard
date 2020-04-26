@@ -55,6 +55,11 @@
                                                 <action selector="hideFeedTapped:" target="Voe-Tx-rLC" id="Mcq-Ff-IBL"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Pause Detection" keyEquivalent="p" id="Jh2-jQ-lT2" userLabel="Stop">
+                                            <connections>
+                                                <action selector="pauseTapped:" target="Voe-Tx-rLC" id="e0a-Df-V4u"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -70,6 +75,7 @@
                         <outlet property="dockMuteItem" destination="rFQ-xl-t0V" id="avS-qg-dnE"/>
                         <outlet property="dockVideoItem" destination="I5M-zo-YyN" id="vHb-bp-Esa"/>
                         <outlet property="mainMenuMuteItem" destination="7an-Jk-s4d" id="fnC-iL-hSg"/>
+                        <outlet property="mainMenuPauseItem" destination="Jh2-jQ-lT2" id="o5d-KA-2Mc"/>
                         <outlet property="mainMenuVideoItem" destination="aem-RN-AWi" id="uJ4-lx-0sZ"/>
                     </connections>
                 </customObject>

@@ -38,7 +38,11 @@ public class VideoFeed: NSObject {
     
     public weak var delegate: VideoFeedDelegate?
     
+    /// Tracks if we should be showing the video output.
     private var cancellableObservation: AnyCancellable?
+    
+    /// Tracks if we should be pausing/playing the feed.
+    private var detectionObservation: AnyCancellable?
     
     /// Cache the last view that had it's layer set as the preview layer. We will use this when turning on and off the camera feed.
     private var nativeView: NSView?
@@ -59,6 +63,17 @@ public class VideoFeed: NSObject {
                 }
                 
                 self.setPreviewView(to: view)
+            }
+        })
+        
+        detectionObservation = userSettings.$pauseDetection.sink(receiveValue: { pause in
+            // Tear everything down.
+            if pause {
+                self.session.stopRunning()
+                self.teardownPreviewLayer()
+            }
+            else { // Activate everything
+                self.startup()
             }
         })
     }
