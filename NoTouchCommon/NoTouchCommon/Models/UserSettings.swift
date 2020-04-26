@@ -12,6 +12,7 @@ public class UserSettings: ObservableObject {
     @Published public var muteSound = false
     @Published public var hideCameraFeed = false
     @Published public var pauseDetection = false
+    @Published public var hasCameraAuth = false
     
     public init() {}
 }

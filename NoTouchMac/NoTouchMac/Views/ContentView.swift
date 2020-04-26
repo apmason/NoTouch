@@ -13,55 +13,13 @@ import NoTouchCommon
 struct ContentView: View {
     
     @EnvironmentObject var userSettings: UserSettings
-        
-    private let buttonHeight: CGFloat = 40
     
+    @ViewBuilder
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            VideoLayerView()
-            VStack {
-                Button(action: {
-                    self.userSettings.muteSound.toggle()
-                }) {
-                    Image(userSettings.muteSound ? "speaker.slash" : "speaker")
-                        .resizable()
-                        .padding(8)
-                        .foregroundColor(Color.white)
-                        .background(Color.black.opacity(0.75))
-                        .cornerRadius(10)
-                }
-                .buttonStyle(PlainButtonStyle())
-                .frame(width: buttonHeight, height: buttonHeight)
-                .padding(8)
-                
-                Button(action: {
-                    self.userSettings.hideCameraFeed.toggle()
-                }) {
-                    Image(userSettings.hideCameraFeed ? "eye.slash" : "eye")
-                        .resizable()
-                        .padding(5)
-                        .foregroundColor(Color.white)
-                        .background(Color.black.opacity(0.75))
-                        .cornerRadius(10)
-                }
-                .buttonStyle(PlainButtonStyle())
-                .frame(width: buttonHeight, height: buttonHeight)
-                .padding(8)
-                
-                Button(action: {
-                    self.userSettings.pauseDetection.toggle()
-                }) {
-                    Image(userSettings.pauseDetection ? "play" : "pause")
-                        .resizable()
-                        .padding(7.5)
-                        .foregroundColor(Color.white)
-                        .background(Color.black.opacity(0.75))
-                        .cornerRadius(10)
-                }
-                .buttonStyle(PlainButtonStyle())
-                .frame(width: buttonHeight, height: buttonHeight)
-                .padding(8)
-            }
+        if userSettings.hasCameraAuth {
+            InteractiveVideoView()
+        } else {
+            Text("Shoot!")
         }
     }
 }
