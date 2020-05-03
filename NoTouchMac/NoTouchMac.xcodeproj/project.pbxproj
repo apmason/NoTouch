@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C31B31BE244C7089009C8A57 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31B31BD244C7089009C8A57 /* ContentViewModel.swift */; };
+		C39193D1245E20C800789E35 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39193D0245E20C800789E35 /* CloudKit.framework */; };
 		C394DA95244C6DEF00608CFC /* FeedResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C394DA94244C6DEF00608CFC /* FeedResizer.swift */; };
 		C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */; };
 		C3BF2AB524422464004BDEE4 /* NoTouchCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		C31B31BD244C7089009C8A57 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		C39193D0245E20C800789E35 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		C394DA94244C6DEF00608CFC /* FeedResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResizer.swift; sourceTree = "<group>"; };
 		C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLayerView.swift; sourceTree = "<group>"; };
 		C3BF2AAB2442223E004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3BF2AB524422464004BDEE4 /* NoTouchCommon.framework in Frameworks */,
+				C39193D1245E20C800789E35 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +140,7 @@
 		C3BF2AAA2442223E004BDEE4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C39193D0245E20C800789E35 /* CloudKit.framework */,
 				C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */,
 				C3BF2AAB2442223E004BDEE4 /* NoTouchCommon.framework */,
 			);
@@ -509,7 +513,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"NoTouchMac/Preview Content\"";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -536,7 +540,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"NoTouchMac/Preview Content\"";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				ENABLE_HARDENED_RUNTIME = YES;

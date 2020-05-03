@@ -6,6 +6,7 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import CloudKit
 import Combine
 import Cocoa
 import SwiftUI
@@ -43,6 +44,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var mainMenuPauseItem: NSMenuItem!
     
     public static let userSettings: UserSettings = UserSettings()
+    
+    /// Manages the CloudKit database that populates our historical data.
+    private var ckManager: CloudKitManager = CloudKitManager()
 
     /// A cancellable observation that tracks whether the user has muted sound.
     private var muteObservation: AnyCancellable?
@@ -80,6 +84,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         constructMenu()
         listenForUserSettingsUpdates()
+        
+        // Used for silent push notifications for CloudKit updates.
+        NSApplication.shared.registerForRemoteNotifications()
+    }
+    
+    func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String : Any]) {
+        guard let dict = userInfo as? [String: Any],
+            let ckNotification = CKNotification(fromRemoteNotificationDictionary: dict) as? CKDatabaseNotification else {
+                return
+        }
+        
+        ckManager.fetchChanges(in: ckNotification.databaseScope) {
+            print("Got Results!")
+        }
     }
     
     // MARK: - IBActions
