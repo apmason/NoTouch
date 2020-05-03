@@ -11,14 +11,6 @@ import Foundation
 
 struct TouchRecord {
     let deviceName: String
-    let touchTime: Date
+    let timestamp: Date
     let version: String
-    let id: UUID = UUID()
-}
-
-extension TouchRecord {
-    
-    func asCKRecord() {
-        let recordID = CKRecord(recordType: NetworkingConstants.touchRecordType)
-    }
 }
