@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct HorizontalLines: View {
+struct HorizontalLinesView: View {
     
     let xOffset: CGFloat
     let offsetFromBottom: CGFloat
@@ -43,7 +43,7 @@ struct HorizontalLines: View {
 
 struct HorizontalLines_Previews: PreviewProvider {
     static var previews: some View {
-        HorizontalLines(xOffset: 20, offsetFromBottom: 20, topOffset: 20)
+        HorizontalLinesView(xOffset: 20, offsetFromBottom: 20, topOffset: 20)
             .frame(width: 300, height: 300)
     }
 }
