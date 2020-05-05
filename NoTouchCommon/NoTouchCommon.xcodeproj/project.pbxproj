@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C31871ED244BB5BC00F079FC /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31871EC244BB5BC00F079FC /* UserSettings.swift */; };
+		C330CE5424617F0A00FCA49A /* OffsetCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330CE5324617F0A00FCA49A /* OffsetCalculator.swift */; };
 		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
 		C391EA44245F4B690062A07D /* AxisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391EA43245F4B690062A07D /* AxisView.swift */; };
 		C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		C31871EC244BB5BC00F079FC /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		C330CE5324617F0A00FCA49A /* OffsetCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetCalculator.swift; sourceTree = "<group>"; };
 		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C391EA43245F4B690062A07D /* AxisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisView.swift; sourceTree = "<group>"; };
 		C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAxisLabel.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */,
 				C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */,
 				C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */,
+				C330CE5324617F0A00FCA49A /* OffsetCalculator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 			files = (
 				C3BF2A9D244219AE004BDEE4 /* CameraAuthModel.swift in Sources */,
 				C3B0E053245F209F00BC4946 /* DatabaseWriter.swift in Sources */,
+				C330CE5424617F0A00FCA49A /* OffsetCalculator.swift in Sources */,
 				C31871ED244BB5BC00F079FC /* UserSettings.swift in Sources */,
 				C3BF2A9C244219AE004BDEE4 /* FirstRunModel.swift in Sources */,
 				C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */,

@@ -13,13 +13,8 @@ struct HorizontalLinesView: View {
     let xOffset: CGFloat
     let offsetFromBottom: CGFloat
     let topOffset: CGFloat
+    let offsetCalculator: OffsetCalculator
     private let numLines: Int = 3
-    
-    func offsetForIndex(_ index: Int, contentHeight: CGFloat) -> CGFloat {
-        let graphSize = contentHeight - topOffset - offsetFromBottom
-        let sectionSize = graphSize / 3
-        return sectionSize * CGFloat(index)
-    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -27,12 +22,14 @@ struct HorizontalLinesView: View {
                 for i in 0..<self.numLines {
                     path.move(to:
                         CGPoint(x: self.xOffset,
-                                y: self.topOffset + self.offsetForIndex(i, contentHeight: geometry.size.height))
+                                y: self.offsetCalculator.yAxisLabelOffsetFor(index: i,
+                                                                             contentHeight: geometry.size.height))
                     )
                     
                     path.addLine(to:
                         CGPoint(x: geometry.size.width,
-                                y: self.topOffset + self.offsetForIndex(i, contentHeight: geometry.size.height))
+                                y: self.offsetCalculator.yAxisLabelOffsetFor(index: i,
+                                                                             contentHeight: geometry.size.height))
                     )
                 }
             }
@@ -42,8 +39,18 @@ struct HorizontalLinesView: View {
 }
 
 struct HorizontalLines_Previews: PreviewProvider {
+    
+    static let xOffset: CGFloat = 20
+    static let offsetFromBottom: CGFloat = 20
+    static let topOffset: CGFloat = 20
+    
     static var previews: some View {
-        HorizontalLinesView(xOffset: 20, offsetFromBottom: 20, topOffset: 20)
+        HorizontalLinesView(xOffset: xOffset,
+                            offsetFromBottom: offsetFromBottom,
+                            topOffset: topOffset,
+                            offsetCalculator: OffsetCalculator(topYOffset: xOffset,
+                                                               bottomYOffset: offsetFromBottom,
+                                                               leadingXOffset: topOffset))
             .frame(width: 300, height: 300)
     }
 }
