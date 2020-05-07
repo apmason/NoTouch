@@ -7,6 +7,7 @@
 //
 
 import Combine
+import SwiftUI
 import Foundation
 
 protocol AlertObserver: class {
@@ -51,7 +52,7 @@ public class AlertViewModel {
     }
     
     private var cancellableObservation: AnyCancellable?
-    
+        
     func addAudioObserver() {
         addObserver(audioVM)
         
@@ -79,7 +80,11 @@ public class AlertViewModel {
         // We can now fire an alert.
         triggerCount = 0
         
-        timer = Timer.scheduledTimer(timeInterval: delayTime, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: delayTime,
+                                     target: self,
+                                     selector: #selector(fireTimer),
+                                     userInfo: nil,
+                                     repeats: false)
         
         // Observers will know whether they need to handle or not
         for (id, observation) in observations {
