@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C31B31BE244C7089009C8A57 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31B31BD244C7089009C8A57 /* ContentViewModel.swift */; };
-		C35792052464BAAA0092CAB1 /* OptionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35792042464BAAA0092CAB1 /* OptionButtonView.swift */; };
+		C39432612464CF4300BE47FE /* OptionButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39432602464CF4300BE47FE /* OptionButtonStack.swift */; };
 		C394DA95244C6DEF00608CFC /* FeedResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C394DA94244C6DEF00608CFC /* FeedResizer.swift */; };
 		C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */; };
 		C3BF2AB524422464004BDEE4 /* NoTouchCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; };
@@ -58,8 +58,8 @@
 
 /* Begin PBXFileReference section */
 		C31B31BD244C7089009C8A57 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
-		C35792042464BAAA0092CAB1 /* OptionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButtonView.swift; sourceTree = "<group>"; };
 		C39193D0245E20C800789E35 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		C39432602464CF4300BE47FE /* OptionButtonStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionButtonStack.swift; path = ../../../../OptionButtonStack.swift; sourceTree = "<group>"; };
 		C394DA94244C6DEF00608CFC /* FeedResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResizer.swift; sourceTree = "<group>"; };
 		C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLayerView.swift; sourceTree = "<group>"; };
 		C3BF2AAB2442223E004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +112,7 @@
 		C35792032464BA690092CAB1 /* Supporting Views */ = {
 			isa = PBXGroup;
 			children = (
-				C35792042464BAAA0092CAB1 /* OptionButtonView.swift */,
+				C39432602464CF4300BE47FE /* OptionButtonStack.swift */,
 			);
 			path = "Supporting Views";
 			sourceTree = "<group>";
@@ -351,11 +351,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F4BE942442968B003CBD59 /* NoTouchNotifications.swift in Sources */,
-				C35792052464BAAA0092CAB1 /* OptionButtonView.swift in Sources */,
 				C3EE5952243DFE8B00461EB4 /* ContentView.swift in Sources */,
 				C3DA3EF524562CD400FA02A3 /* InteractiveVideoView.swift in Sources */,
 				C31B31BE244C7089009C8A57 /* ContentViewModel.swift in Sources */,
 				C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */,
+				C39432612464CF4300BE47FE /* OptionButtonStack.swift in Sources */,
 				C394DA95244C6DEF00608CFC /* FeedResizer.swift in Sources */,
 				C3EE5950243DFE8B00461EB4 /* AppDelegate.swift in Sources */,
 			);

@@ -16,7 +16,7 @@ struct InteractiveVideoView: View {
         ZStack(alignment: .top) {
             VideoLayerView()
             HStack(alignment: .top) {
-                OptionButtonView()
+                OptionButtonStack()
                 Spacer()
                     Button(action: {
                         // open new thing
