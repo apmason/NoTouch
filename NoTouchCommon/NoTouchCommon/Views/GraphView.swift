@@ -75,7 +75,7 @@ struct GraphView: View {
                                   y: geometry.size.height - (self.offsetCalculator.bottomYOffset / 2))
                 }
                 
-                BarsView()
+                BarsView(touchObservances: self.$touchObservances)
                     .frame(width: geometry.size.width - self.offsetCalculator.leadingXOffset,
                            height: geometry.size.height - self.offsetCalculator.bottomYOffset - self.offsetCalculator.topYOffset)
                     .position(x: self.offsetCalculator.leadingXOffset + ((geometry.size.width - self.offsetCalculator.leadingXOffset) / 2),

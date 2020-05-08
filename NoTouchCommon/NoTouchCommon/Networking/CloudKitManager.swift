@@ -22,8 +22,13 @@ public class CloudKitManager: DatabaseManager, ObservableObject {
     
     var touchRecords: [TouchRecord] = [] {
         didSet {
-            print("did set!")
-            self.touchObservances = self.touchRecords.getTouchesPerHour()
+            do {
+                self.touchObservances = try self.touchRecords
+                                                            .todaysRecords()
+                                                            .getTouchesPerHour(forDay: Date())
+            } catch {
+                print("Error setting touches per hour")
+            }
         }
     }
     

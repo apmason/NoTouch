@@ -11,19 +11,6 @@ import XCTest
 
 class NoTouchCommonTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
     func testStringToDate() {
         let orig = Date(timeIntervalSince1970: 1588719436.0)
         let testDate = Date.dbStringToDate("2020-05-05T22:57:16 GMT",
@@ -53,7 +40,8 @@ class NoTouchCommonTests: XCTestCase {
     }
     
     func testTouchesPerHour() {
-        let start = Calendar.current.startOfDay(for: Date())
+        let today = Date()
+        let start = Calendar.current.startOfDay(for: today)
         
         let hourValue = 8
         // This will be 8AM
@@ -64,25 +52,60 @@ class NoTouchCommonTests: XCTestCase {
             dummyRecordWith(date: secondDate)
         ]
         
-        let touches = records.getTouchesPerHour()
-        
-        XCTAssert(touches.count == 24)
-        
-        for i in 0..<touches.count {
-            if i == 0 {
-                XCTAssert(touches[i] == 1)
-            } else if i == hourValue {
-                XCTAssert(touches[i] == 1)
-            } else {
-                XCTAssert(touches[i] == 0)
+        do {
+            let touches = try records.getTouchesPerHour(forDay: today)
+            
+            XCTAssert(touches.count == 24)
+            
+            for i in 0..<touches.count {
+                if i == 0 {
+                    XCTAssert(touches[i] == 1)
+                } else if i == hourValue {
+                    XCTAssert(touches[i] == 1)
+                } else {
+                    XCTAssert(touches[i] == 0)
+                }
             }
+        } catch {
+            XCTFail("Call threw when it should have succeeded")
+        }
+    }
+    
+    func testToucherPerHourFailure() {
+        let today = Date()
+        
+        let futureDate = Calendar.current.date(byAdding: .day, value: 3, to: today)!
+        let futureRecords: [TouchRecord] = [
+            dummyRecordWith(date: today),
+            dummyRecordWith(date: futureDate),
+            dummyRecordWith(date: futureDate)
+        ]
+        
+        do {
+            _ = try futureRecords.getTouchesPerHour(forDay: today)
+            XCTFail("Should have thrown")
+        } catch {
+            XCTAssert(true)
+        }
+        
+        let pastDate = Calendar.current.date(byAdding: .day, value: -3, to: today)!
+        let pastRecords: [TouchRecord] = [
+            dummyRecordWith(date: today),
+            dummyRecordWith(date: pastDate),
+            dummyRecordWith(date: pastDate)
+        ]
+        
+        do {
+            _ = try pastRecords.getTouchesPerHour(forDay: today)
+            XCTFail("Should have thrown")
+        } catch {
+            XCTAssert(true)
         }
     }
     
     private func dummyRecordWith(date: Date) -> TouchRecord {
         return TouchRecord(deviceName: "test",
                            timestamp: date,
-                           version: "123",
-                           uuid: "123")
+                           version: "123")
     }
 }

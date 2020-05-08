@@ -10,6 +10,9 @@
 		C31871ED244BB5BC00F079FC /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31871EC244BB5BC00F079FC /* UserSettings.swift */; };
 		C330CE5424617F0A00FCA49A /* OffsetCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330CE5324617F0A00FCA49A /* OffsetCalculator.swift */; };
 		C330CE562461980B00FCA49A /* BarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330CE552461980B00FCA49A /* BarsView.swift */; };
+		C355357B2466108900E991AA /* TouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357A2466108900E991AA /* TouchExtensions.swift */; };
+		C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357C246610AB00E991AA /* TouchRecordExtensions.swift */; };
+		C355357F2466121F00E991AA /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357E2466121F00E991AA /* TouchTests.swift */; };
 		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
 		C391EA44245F4B690062A07D /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391EA43245F4B690062A07D /* GraphView.swift */; };
 		C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */; };
@@ -53,6 +56,9 @@
 		C31871EC244BB5BC00F079FC /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		C330CE5324617F0A00FCA49A /* OffsetCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetCalculator.swift; sourceTree = "<group>"; };
 		C330CE552461980B00FCA49A /* BarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarsView.swift; sourceTree = "<group>"; };
+		C355357A2466108900E991AA /* TouchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchExtensions.swift; sourceTree = "<group>"; };
+		C355357C246610AB00E991AA /* TouchRecordExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordExtensions.swift; sourceTree = "<group>"; };
+		C355357E2466121F00E991AA /* TouchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTests.swift; sourceTree = "<group>"; };
 		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C391EA43245F4B690062A07D /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAxisLabel.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 		C3BF2A82244215FF004BDEE4 /* NoTouchCommonTests */ = {
 			isa = PBXGroup;
 			children = (
+				C355357E2466121F00E991AA /* TouchTests.swift */,
 				C3BF2A83244215FF004BDEE4 /* NoTouchCommonTests.swift */,
 				C3BF2A85244215FF004BDEE4 /* Info.plist */,
 			);
@@ -185,6 +192,8 @@
 				C3BF2A95244219AE004BDEE4 /* ImageStorer.swift */,
 				C3BF2A93244218E6004BDEE4 /* NoTouchError.swift */,
 				C3B0E056245F30E500BC4946 /* DeviceData.swift */,
+				C355357A2466108900E991AA /* TouchExtensions.swift */,
+				C355357C246610AB00E991AA /* TouchRecordExtensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -344,6 +353,7 @@
 				C3BF2A902442163B004BDEE4 /* VideoFeed.swift in Sources */,
 				C3BF2AA224421A1D004BDEE4 /* Orienter.swift in Sources */,
 				C3B0E055245F28CF00BC4946 /* CloudKitDatabase.swift in Sources */,
+				C355357B2466108900E991AA /* TouchExtensions.swift in Sources */,
 				C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */,
 				C3F4BE9024426373003CBD59 /* NoTouch_YOLO_2.mlmodel in Sources */,
 				C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */,
@@ -356,6 +366,7 @@
 				C3B0E051245E340D00BC4946 /* CloudKitManager.swift in Sources */,
 				C391EA44245F4B690062A07D /* GraphView.swift in Sources */,
 				C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */,
+				C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */,
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
 				C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */,
 				C3B58D3C2462A93100DF4D8D /* DateExtensions.swift in Sources */,
@@ -367,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3BF2A84244215FF004BDEE4 /* NoTouchCommonTests.swift in Sources */,
+				C355357F2466121F00E991AA /* TouchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

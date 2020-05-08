@@ -20,12 +20,6 @@ class OffsetCalculator {
     
     let lineWidth: CGFloat = 0.5
     
-//    init(topYOffset: CGFloat, bottomYOffset: CGFloat, leadingXOffset: CGFloat) {
-//        self.topYOffset = topYOffset
-//        self.bottomYOffset = bottomYOffset
-//        self.leadingXOffset = leadingXOffset
-//    }
-    
     func yAxisLabelOffsetFor(index: Int, contentHeight: CGFloat) -> CGFloat {
         let graphSize = contentHeight - topYOffset - bottomYOffset
         let sectionSize = graphSize / 3
