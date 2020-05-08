@@ -8,11 +8,23 @@
 
 import Foundation
 
-struct OffsetCalculator {
+class OffsetCalculator {
     
-    let topYOffset: CGFloat
-    let bottomYOffset: CGFloat
-    let leadingXOffset: CGFloat
+    let topYOffset: CGFloat = 20
+    
+    /// The offset of the y axis
+    let bottomYOffset: CGFloat = 30
+    
+    /// The offset of the x axis
+    let leadingXOffset: CGFloat = 40
+    
+    let lineWidth: CGFloat = 0.5
+    
+//    init(topYOffset: CGFloat, bottomYOffset: CGFloat, leadingXOffset: CGFloat) {
+//        self.topYOffset = topYOffset
+//        self.bottomYOffset = bottomYOffset
+//        self.leadingXOffset = leadingXOffset
+//    }
     
     func yAxisLabelOffsetFor(index: Int, contentHeight: CGFloat) -> CGFloat {
         let graphSize = contentHeight - topYOffset - bottomYOffset

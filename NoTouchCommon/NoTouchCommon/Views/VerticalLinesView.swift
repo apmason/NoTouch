@@ -44,9 +44,8 @@ struct TimeLinesView_Previews: PreviewProvider {
         VerticalLinesView(numberOfLines: 3,
                           bottomOffset: 2,
                           xOffset: xOffset,
-                          offsetCalculator: OffsetCalculator(topYOffset: 0,
-                                                             bottomYOffset: 0,
-                                                             leadingXOffset: xOffset))
+                          offsetCalculator: OffsetCalculator()
+        )
             .frame(width: 300, height: 300)
     }
 }

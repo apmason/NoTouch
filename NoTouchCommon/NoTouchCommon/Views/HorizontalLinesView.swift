@@ -48,9 +48,8 @@ struct HorizontalLines_Previews: PreviewProvider {
         HorizontalLinesView(xOffset: xOffset,
                             offsetFromBottom: offsetFromBottom,
                             topOffset: topOffset,
-                            offsetCalculator: OffsetCalculator(topYOffset: xOffset,
-                                                               bottomYOffset: offsetFromBottom,
-                                                               leadingXOffset: topOffset))
+                            offsetCalculator: OffsetCalculator()
+        )
             .frame(width: 300, height: 300)
     }
 }

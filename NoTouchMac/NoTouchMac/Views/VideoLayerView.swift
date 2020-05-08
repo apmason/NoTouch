@@ -26,6 +26,12 @@ class UpdatableMacView: NSView, NativewView {
 
 final class VideoLayerView: NSViewRepresentable {
     
+    let alertModel: AlertViewModel
+    
+    init(alertModel: AlertViewModel) {
+        self.alertModel = alertModel
+    }
+    
     func makeNSView(context: Context) -> UpdatableMacView {
         print("Make ns view called")
         let nativeView = UpdatableMacView()
@@ -39,15 +45,16 @@ final class VideoLayerView: NSViewRepresentable {
     
     class Coordinator: NSObject {
         var parent: VideoLayerView
-        let contentViewModel = ContentViewModel()
+        let contentViewModel: ContentViewModel
 
-        init(_ videoLayerView: VideoLayerView) {
+        init(_ videoLayerView: VideoLayerView, alertModel: AlertViewModel) {
             self.parent = videoLayerView
+            self.contentViewModel = ContentViewModel(alertModel: alertModel)
         }
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(self, alertModel: alertModel)
     }
 }
 

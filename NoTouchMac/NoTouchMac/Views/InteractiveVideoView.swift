@@ -12,9 +12,11 @@ import SwiftUI
 struct InteractiveVideoView: View {
     
     let buttonHeight: CGFloat = 40
+    let alertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings)
+    
     var body: some View {
         ZStack(alignment: .top) {
-            VideoLayerView()
+            VideoLayerView(alertModel: self.alertViewModel)
             HStack(alignment: .top) {
                 OptionButtonStack()
                 Spacer()
@@ -33,7 +35,6 @@ struct InteractiveVideoView: View {
                     .buttonStyle(PlainButtonStyle())
                     .frame(width: buttonHeight, height: buttonHeight, alignment: .top)
                     .padding(8)
-                
             }
         }
     }

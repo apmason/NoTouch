@@ -20,7 +20,14 @@ public class CloudKitManager: DatabaseManager, ObservableObject {
     
     private var database = CloudKitDatabase()
     
-    @Published var touchRecords: [TouchRecord] = []
+    var touchRecords: [TouchRecord] = [] {
+        didSet {
+            print("did set!")
+            self.touchObservances = self.touchRecords.getTouchesPerHour()
+        }
+    }
+    
+    @Published var touchObservances: [Touch] = []
     
     func createTouchRecord() {
         let deviceName = DeviceData.deviceName

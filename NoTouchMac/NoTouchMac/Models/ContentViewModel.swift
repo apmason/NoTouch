@@ -16,9 +16,10 @@ class ContentViewModel {
     let feed: VideoFeed = VideoFeed(userSettings: AppDelegate.userSettings)
     private let feedResizer: FeedResizer
     private let visionModel = VisionModel()
-    private let alertVM = AlertViewModel(userSettings: AppDelegate.userSettings)
+    private let alertVM: AlertViewModel
     
-    init() {
+    init(alertModel: AlertViewModel) {
+        self.alertVM = alertModel
         feedResizer = FeedResizer(feed)
         feed.delegate = self
         feed.startup()
