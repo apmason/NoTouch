@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GraphView: View {
     
-    private let offsetCalculator = OffsetCalculator()
+    private let positioner = Positioner()
     
     @Binding var touchObservances: [Touch]
     
@@ -18,35 +18,35 @@ struct GraphView: View {
         GeometryReader { geometry in
             // Vertical line
             ZStack {
-                AxisView(lineWidth: self.offsetCalculator.lineWidth,
-                         leadingXOffset: self.offsetCalculator.leadingXOffset,
-                         bottomYOffset: self.offsetCalculator.bottomYOffset)
+                AxisView(lineWidth: self.positioner.lineWidth,
+                         leadingXOffset: self.positioner.leadingXOffset,
+                         bottomYOffset: self.positioner.bottomYOffset)
                 
                 VerticalLinesView(numberOfLines: 3,
-                                  bottomOffset: self.offsetCalculator.bottomYOffset + self.offsetCalculator.lineWidth * 1.5,
-                                  xOffset: self.offsetCalculator.leadingXOffset,
-                                  offsetCalculator: self.offsetCalculator)
+                                  bottomOffset: self.positioner.bottomYOffset + self.positioner.lineWidth * 1.5,
+                                  xOffset: self.positioner.leadingXOffset,
+                                  offsetCalculator: self.positioner)
                 
-                HorizontalLinesView(xOffset: self.offsetCalculator.leadingXOffset + (self.offsetCalculator.lineWidth / 2),
-                                    offsetFromBottom: self.offsetCalculator.bottomYOffset,
-                                    topOffset: self.offsetCalculator.topYOffset,
-                                    offsetCalculator: self.offsetCalculator)
+                HorizontalLinesView(xOffset: self.positioner.leadingXOffset + (self.positioner.lineWidth / 2),
+                                    offsetFromBottom: self.positioner.bottomYOffset,
+                                    topOffset: self.positioner.topYOffset,
+                                    offsetCalculator: self.positioner)
                 
                 // Y Axis Labels
                 Group {
                     // Y Axis Labels
                     YAxisLabel(text: "200")
-                        .position(x: (self.offsetCalculator.leadingXOffset / 2),
-                                  y: self.offsetCalculator.topYOffset)
+                        .position(x: (self.positioner.leadingXOffset / 2),
+                                  y: self.positioner.topYOffset)
                     
                     YAxisLabel(text: "200")
-                        .position(x: (self.offsetCalculator.leadingXOffset / 2),
-                                  y: self.offsetCalculator.yAxisLabelOffsetFor(index: 1,
+                        .position(x: (self.positioner.leadingXOffset / 2),
+                                  y: self.positioner.yAxisLabelOffsetFor(index: 1,
                                                                                contentHeight: geometry.size.height))
                     
                     YAxisLabel(text: "200")
-                        .position(x: (self.offsetCalculator.leadingXOffset / 2),
-                                  y: self.offsetCalculator.yAxisLabelOffsetFor(index: 2,
+                        .position(x: (self.positioner.leadingXOffset / 2),
+                                  y: self.positioner.yAxisLabelOffsetFor(index: 2,
                                                                                contentHeight: geometry.size.height))
                 }
                 
@@ -54,32 +54,32 @@ struct GraphView: View {
                 Group {
                     Text("6am")
                         .frame(width: 40, height: 40, alignment: .leading)
-                        .position(x: self.offsetCalculator.leadingXOffset + 20,
-                                  y: geometry.size.height - (self.offsetCalculator.bottomYOffset / 2))
+                        .position(x: self.positioner.leadingXOffset + 20,
+                                  y: geometry.size.height - (self.positioner.bottomYOffset / 2))
                     
                     Text("12pm")
                         .frame(width: 40, height: 40, alignment: .center)
-                        .position(x: self.offsetCalculator.xAxisLabelOffsetFor(index: 1, contentWidth: geometry.size.width),
-                                  y: geometry.size.height - (self.offsetCalculator.bottomYOffset / 2))
+                        .position(x: self.positioner.xAxisLabelOffsetFor(index: 1, contentWidth: geometry.size.width),
+                                  y: geometry.size.height - (self.positioner.bottomYOffset / 2))
                     
                     Text("6pm")
                         .frame(width: 40, height: 40, alignment: .center)
-                        .position(x: self.offsetCalculator.xAxisLabelOffsetFor(index: 2,
+                        .position(x: self.positioner.xAxisLabelOffsetFor(index: 2,
                                                                                contentWidth: geometry.size.width),
-                                  y: geometry.size.height - (self.offsetCalculator.bottomYOffset / 2))
+                                  y: geometry.size.height - (self.positioner.bottomYOffset / 2))
                     
                     Text("12am")
                         .frame(width: 40, height: 40, alignment: .center)
-                        .position(x: self.offsetCalculator.xAxisLabelOffsetFor(index: 3,
+                        .position(x: self.positioner.xAxisLabelOffsetFor(index: 3,
                                                                                contentWidth: geometry.size.width),
-                                  y: geometry.size.height - (self.offsetCalculator.bottomYOffset / 2))
+                                  y: geometry.size.height - (self.positioner.bottomYOffset / 2))
                 }
                 
                 BarsView(touchObservances: self.$touchObservances)
-                    .frame(width: geometry.size.width - self.offsetCalculator.leadingXOffset,
-                           height: geometry.size.height - self.offsetCalculator.bottomYOffset - self.offsetCalculator.topYOffset)
-                    .position(x: self.offsetCalculator.leadingXOffset + ((geometry.size.width - self.offsetCalculator.leadingXOffset) / 2),
-                              y: self.offsetCalculator.topYOffset + (geometry.size.height - self.offsetCalculator.bottomYOffset - self.offsetCalculator.topYOffset) / 2)
+                    .frame(width: geometry.size.width - self.positioner.leadingXOffset,
+                           height: geometry.size.height - self.positioner.bottomYOffset - self.positioner.topYOffset)
+                    .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
+                              y: (geometry.size.height - self.positioner.topYOffset - self.positioner.bottomYOffset) / 2 + self.positioner.topYOffset)
             }
         }
     }

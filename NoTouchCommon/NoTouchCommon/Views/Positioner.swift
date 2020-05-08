@@ -1,5 +1,5 @@
 //
-//  OffsetCalculator.swift
+//  Positioner.swift
 //  NoTouchCommon
 //
 //  Created by Alexander Mason on 5/5/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OffsetCalculator {
+class Positioner {
     
     let topYOffset: CGFloat = 20
     

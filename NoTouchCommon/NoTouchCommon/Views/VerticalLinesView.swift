@@ -13,7 +13,7 @@ struct VerticalLinesView: View {
     let numberOfLines: Int
     let bottomOffset: CGFloat
     let xOffset: CGFloat
-    let offsetCalculator: OffsetCalculator
+    let offsetCalculator: Positioner
     
     var body: some View {
         GeometryReader { geometry in
@@ -44,7 +44,7 @@ struct TimeLinesView_Previews: PreviewProvider {
         VerticalLinesView(numberOfLines: 3,
                           bottomOffset: 2,
                           xOffset: xOffset,
-                          offsetCalculator: OffsetCalculator()
+                          offsetCalculator: Positioner()
         )
             .frame(width: 300, height: 300)
     }

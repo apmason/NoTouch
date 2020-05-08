@@ -19,7 +19,8 @@ struct BarsView: View {
                     Rectangle()
                         .frame(height: touch.ratio(withTopValue: self.touchObservances.topAxisValue()) * geometry.size.height)
                 }
-            }.padding(.horizontal, 5)
+            }
+            .padding(.horizontal, 5)
         }
     }
 }

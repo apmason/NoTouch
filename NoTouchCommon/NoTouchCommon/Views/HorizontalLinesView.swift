@@ -13,7 +13,7 @@ struct HorizontalLinesView: View {
     let xOffset: CGFloat
     let offsetFromBottom: CGFloat
     let topOffset: CGFloat
-    let offsetCalculator: OffsetCalculator
+    let positioner: Positioner
     private let numLines: Int = 3
     
     var body: some View {
@@ -22,13 +22,13 @@ struct HorizontalLinesView: View {
                 for i in 0..<self.numLines {
                     path.move(to:
                         CGPoint(x: self.xOffset,
-                                y: self.offsetCalculator.yAxisLabelOffsetFor(index: i,
+                                y: self.positioner.yAxisLabelOffsetFor(index: i,
                                                                              contentHeight: geometry.size.height))
                     )
                     
                     path.addLine(to:
                         CGPoint(x: geometry.size.width,
-                                y: self.offsetCalculator.yAxisLabelOffsetFor(index: i,
+                                y: self.positioner.yAxisLabelOffsetFor(index: i,
                                                                              contentHeight: geometry.size.height))
                     )
                 }
@@ -48,7 +48,7 @@ struct HorizontalLines_Previews: PreviewProvider {
         HorizontalLinesView(xOffset: xOffset,
                             offsetFromBottom: offsetFromBottom,
                             topOffset: topOffset,
-                            offsetCalculator: OffsetCalculator()
+                            offsetCalculator: Positioner()
         )
             .frame(width: 300, height: 300)
     }

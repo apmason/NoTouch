@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C31871ED244BB5BC00F079FC /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31871EC244BB5BC00F079FC /* UserSettings.swift */; };
-		C330CE5424617F0A00FCA49A /* OffsetCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330CE5324617F0A00FCA49A /* OffsetCalculator.swift */; };
+		C330CE5424617F0A00FCA49A /* Positioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330CE5324617F0A00FCA49A /* Positioner.swift */; };
 		C330CE562461980B00FCA49A /* BarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330CE552461980B00FCA49A /* BarsView.swift */; };
 		C355357B2466108900E991AA /* TouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357A2466108900E991AA /* TouchExtensions.swift */; };
 		C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357C246610AB00E991AA /* TouchRecordExtensions.swift */; };
@@ -54,7 +54,7 @@
 
 /* Begin PBXFileReference section */
 		C31871EC244BB5BC00F079FC /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
-		C330CE5324617F0A00FCA49A /* OffsetCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetCalculator.swift; sourceTree = "<group>"; };
+		C330CE5324617F0A00FCA49A /* Positioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positioner.swift; sourceTree = "<group>"; };
 		C330CE552461980B00FCA49A /* BarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarsView.swift; sourceTree = "<group>"; };
 		C355357A2466108900E991AA /* TouchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchExtensions.swift; sourceTree = "<group>"; };
 		C355357C246610AB00E991AA /* TouchRecordExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordExtensions.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 				C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */,
 				C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */,
 				C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */,
-				C330CE5324617F0A00FCA49A /* OffsetCalculator.swift */,
+				C330CE5324617F0A00FCA49A /* Positioner.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -344,7 +344,7 @@
 			files = (
 				C3BF2A9D244219AE004BDEE4 /* CameraAuthModel.swift in Sources */,
 				C3B0E053245F209F00BC4946 /* DatabaseWriter.swift in Sources */,
-				C330CE5424617F0A00FCA49A /* OffsetCalculator.swift in Sources */,
+				C330CE5424617F0A00FCA49A /* Positioner.swift in Sources */,
 				C31871ED244BB5BC00F079FC /* UserSettings.swift in Sources */,
 				C3BF2A9C244219AE004BDEE4 /* FirstRunModel.swift in Sources */,
 				C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */,
