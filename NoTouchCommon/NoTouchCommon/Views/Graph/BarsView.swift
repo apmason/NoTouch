@@ -26,14 +26,14 @@ struct BarsView: View {
         GeometryReader { geometry in
             // add a half spacer
             HStack(alignment: .bottom, spacing: 0) {
-                Rectangle().frame(width: self.spacing / 2, height: 100)
+                Rectangle().frame(width: self.spacing / 2, height: 0)
                 HStack(alignment: .bottom, spacing: self.spacing) {
                     ForEach(self.touchObservances, id: \.self) { touch in
                         Rectangle()
                             .frame(height: touch.ratio(withTopValue: self.touchObservances.topAxisValue()) * geometry.size.height)
                     }
                 }
-                Rectangle().frame(width: self.spacing / 2, height: 100)
+                Rectangle().frame(width: self.spacing / 2, height: 0)
             }
                 // add a half spacer
                 .frame(width: geometry.size.width,
@@ -45,14 +45,16 @@ struct BarsView: View {
 
 struct BarsView_Previews: PreviewProvider {
     
-    static let dummyData: [Touch] = [
-        1, 3, 4, 2, 5, 5,
-        2, 3, 34, 4, 3, 4,
-        5, 4, 3, 4, 5, 4,
-        23, 56, 23, 54, 2, 10
-    ]
+    static var dummyData: [Touch] {
+        var data: [Touch] = [Touch].init(repeating: 0, count: 24)
+        for i in 0..<data.count {
+            data[i] = Int.random(in: 0...100)
+        }
+        
+        return data
+    }
     
     static var previews: some View {
-        BarsView(touchObservances: .constant(dummyData), spacing: 10)
+        BarsView(touchObservances: .constant(dummyData), spacing: 5)
     }
 }
