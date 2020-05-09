@@ -6,6 +6,7 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import CoreGraphics
 import Foundation
 
 extension Collection where Element == Touch {
@@ -21,7 +22,7 @@ extension Collection where Element == Touch {
 
 extension Touch {
     
-    func ratio(withTopValue value: Touch) -> CGFloat{
+    func ratio(withTopValue value: Touch) -> CGFloat {
         return CGFloat(self) / CGFloat(value)
     }
 }

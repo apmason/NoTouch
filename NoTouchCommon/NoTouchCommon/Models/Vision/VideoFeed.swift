@@ -173,10 +173,10 @@ public class VideoFeed: NSObject {
             self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
             self.previewLayer?.connection?.isVideoMirrored = true
             self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            self.previewLayer?.frame = nativeView.bounds
-            nativeView.wantsLayer = true
+            self.previewLayer?.frame = nativeView.nativeBounds
+            nativeView.setToWantLayer(true)
             if let previewLayer = self.previewLayer {
-                nativeView.layer?.addSublayer(previewLayer)
+                nativeView.nativeLayer?.addSublayer(previewLayer)
             }
         }
         
@@ -194,7 +194,7 @@ public class VideoFeed: NSObject {
             }
             
             // We should really never hit the else part of this conditonal.
-            if previewLayer == nativeView.layer,
+            if previewLayer == nativeView.nativeLayer,
                 let connection = previewLayer.connection {
                 
                 // If the video isn't mirrored reconfigure
@@ -203,7 +203,7 @@ public class VideoFeed: NSObject {
                     return
                 }
                 
-                previewLayer.frame = nativeView.bounds
+                previewLayer.frame = nativeView.nativeBounds
             }
             else {
                 configurePreviewLayer()
@@ -215,8 +215,8 @@ public class VideoFeed: NSObject {
     /// Remove the previewLayer from any super layer and destroy it.
     func teardownPreviewLayer() {
         DispatchQueue.main.async { [weak self] in
-            self?.nativeView?.wantsLayer = false
-            self?.nativeView?.layer?.sublayers?.forEach({
+            self?.nativeView?.setToWantLayer(false)
+            self?.nativeView?.nativeLayer?.sublayers?.forEach({
                 $0.removeFromSuperlayer()
             })
             

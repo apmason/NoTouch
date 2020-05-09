@@ -22,6 +22,10 @@ class UpdatableMacView: NSView, NativewView {
     var nativeBounds: CGRect {
         return self.bounds
     }
+    
+    func setToWantLayer(_ wantsLayer: Bool) {
+        self.wantsLayer = wantsLayer
+    }
 }
 
 final class VideoLayerView: NSViewRepresentable {

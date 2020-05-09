@@ -6,6 +6,7 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import CoreGraphics
 import Foundation
 
 struct Positioner {
