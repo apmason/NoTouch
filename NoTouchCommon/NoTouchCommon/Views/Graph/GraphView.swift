@@ -25,7 +25,7 @@ struct GraphView: View {
                 VerticalLinesView(numberOfLines: 3,
                                   bottomOffset: self.positioner.bottomYOffset + self.positioner.lineWidth * 1.5,
                                   xOffset: self.positioner.leadingXOffset,
-                                  offsetCalculator: self.positioner)
+                                  positioner: self.positioner)
                 
                 HorizontalLinesView(xOffset: self.positioner.leadingXOffset + (self.positioner.lineWidth / 2),
                                     offsetFromBottom: self.positioner.bottomYOffset,

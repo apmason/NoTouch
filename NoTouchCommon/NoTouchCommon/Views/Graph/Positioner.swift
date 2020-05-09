@@ -19,7 +19,7 @@ struct Positioner {
     /// The offset of the x axis
     let leadingXOffset: CGFloat = 40
     
-    let lineWidth: CGFloat = 0.5
+    let lineWidth: CGFloat = 0.25
     
     func yAxisLabelOffsetFor(index: Int, contentHeight: CGFloat) -> CGFloat {
         let graphSize = contentHeight - topYOffset - bottomYOffset

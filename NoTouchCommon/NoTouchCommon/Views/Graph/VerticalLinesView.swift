@@ -13,26 +13,26 @@ struct VerticalLinesView: View {
     let numberOfLines: Int
     let bottomOffset: CGFloat
     let xOffset: CGFloat
-    let offsetCalculator: Positioner
+    let positioner: Positioner
     
     var body: some View {
         GeometryReader { geometry in
             Path { path in
                 for i in 1...self.numberOfLines {
                     path.move(to:
-                        CGPoint(x: self.offsetCalculator.xAxisLabelOffsetFor(index: i,
+                        CGPoint(x: self.positioner.xAxisLabelOffsetFor(index: i,
                                                                              contentWidth: geometry.size.width),
                                 y: geometry.size.height - self.bottomOffset)
                     )
                     
                     path.addLine(to:
-                        CGPoint(x: self.offsetCalculator.xAxisLabelOffsetFor(index: i,
+                        CGPoint(x: self.positioner.xAxisLabelOffsetFor(index: i,
                                                                              contentWidth: geometry.size.width),
                                 y: 0)
                     )
                 }
             }
-            .stroke(Color.black, lineWidth: 0.5)
+            .stroke(Color.black, lineWidth: self.positioner.lineWidth)
         }
     }
 }
@@ -44,7 +44,7 @@ struct TimeLinesView_Previews: PreviewProvider {
         VerticalLinesView(numberOfLines: 3,
                           bottomOffset: 2,
                           xOffset: xOffset,
-                          offsetCalculator: Positioner()
+                          positioner: Positioner()
         )
             .frame(width: 300, height: 300)
     }
