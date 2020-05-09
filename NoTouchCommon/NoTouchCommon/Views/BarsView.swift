@@ -14,13 +14,15 @@ struct BarsView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            HStack(alignment: .bottom, spacing: 10) {
+            HStack(alignment: .bottom) {
                 ForEach(self.touchObservances, id: \.self) { touch in
                     Rectangle()
                         .frame(height: touch.ratio(withTopValue: self.touchObservances.topAxisValue()) * geometry.size.height)
                 }
             }
-            .padding(.horizontal, 5)
+            .frame(width: geometry.size.width,
+                   height: geometry.size.height,
+                   alignment: .bottom)
         }
     }
 }

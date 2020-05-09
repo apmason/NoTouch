@@ -48,7 +48,7 @@ struct HorizontalLines_Previews: PreviewProvider {
         HorizontalLinesView(xOffset: xOffset,
                             offsetFromBottom: offsetFromBottom,
                             topOffset: topOffset,
-                            offsetCalculator: Positioner()
+                            positioner: Positioner()
         )
             .frame(width: 300, height: 300)
     }

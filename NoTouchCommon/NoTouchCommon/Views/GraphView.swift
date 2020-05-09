@@ -30,7 +30,7 @@ struct GraphView: View {
                 HorizontalLinesView(xOffset: self.positioner.leadingXOffset + (self.positioner.lineWidth / 2),
                                     offsetFromBottom: self.positioner.bottomYOffset,
                                     topOffset: self.positioner.topYOffset,
-                                    offsetCalculator: self.positioner)
+                                    positioner: self.positioner)
                 
                 // Y Axis Labels
                 Group {

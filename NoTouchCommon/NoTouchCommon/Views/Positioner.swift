@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Positioner {
+struct Positioner {
     
     let topYOffset: CGFloat = 20
     
