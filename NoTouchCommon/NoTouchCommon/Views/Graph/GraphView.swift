@@ -33,22 +33,7 @@ struct GraphView: View {
                                     positioner: self.positioner)
                 
                 // Y Axis Labels
-                Group {
-                    // Y Axis Labels
-                    YAxisLabel(text: "200")
-                        .position(x: (self.positioner.leadingXOffset / 2),
-                                  y: self.positioner.topYOffset)
-                    
-                    YAxisLabel(text: "200")
-                        .position(x: (self.positioner.leadingXOffset / 2),
-                                  y: self.positioner.yAxisLabelOffsetFor(index: 1,
-                                                                               contentHeight: geometry.size.height))
-                    
-                    YAxisLabel(text: "200")
-                        .position(x: (self.positioner.leadingXOffset / 2),
-                                  y: self.positioner.yAxisLabelOffsetFor(index: 2,
-                                                                               contentHeight: geometry.size.height))
-                }
+                GraphYLabels(positioner: self.positioner)
                 
                 // X Axis Labels
                 Group {

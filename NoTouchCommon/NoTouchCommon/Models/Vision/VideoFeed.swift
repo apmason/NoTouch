@@ -6,7 +6,7 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
-import AppKit
+//import AppKit
 import AVFoundation
 import Combine
 import Foundation
@@ -45,7 +45,7 @@ public class VideoFeed: NSObject {
     private var detectionObservation: AnyCancellable?
     
     /// Cache the last view that had it's layer set as the preview layer. We will use this when turning on and off the camera feed.
-    private var nativeView: NSView?
+    private var nativeView: NativeView?
     
     private let userSettings: UserSettings
     
@@ -162,8 +162,8 @@ public class VideoFeed: NSObject {
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
     }
     
-    /// Resets the `VideoFeed`'s `previewLayer` property, and sets it to fit within the `nativeView`'s bounds, and inserts it as a layer.
-    public func setPreviewView(to nativeView: NSView) {
+    /// Resets the `VideoFeed`'s `previewLayer` property, and sets it to fit within the `nativeView`'s bounds, and inserts it as a SVlayer.
+    public func setPreviewView(to nativeView: NativeView) {
         if userSettings.hideCameraFeed {
             return
         }
