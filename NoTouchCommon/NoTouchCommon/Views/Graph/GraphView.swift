@@ -33,32 +33,11 @@ struct GraphView: View {
                                     positioner: self.positioner)
                 
                 // Y Axis Labels
-                GraphYLabels(positioner: self.positioner)
+                GraphYLabels(positioner: self.positioner,
+                             highestYValue: self.touchObservances.topAxisValue())
                 
                 // X Axis Labels
-                Group {
-                    Text("6am")
-                        .frame(width: 40, height: 40, alignment: .leading)
-                        .position(x: self.positioner.leadingXOffset + 20,
-                                  y: geometry.size.height - (self.positioner.bottomYOffset / 2))
-                    
-                    Text("12pm")
-                        .frame(width: 40, height: 40, alignment: .center)
-                        .position(x: self.positioner.xAxisLabelOffsetFor(index: 1, contentWidth: geometry.size.width),
-                                  y: geometry.size.height - (self.positioner.bottomYOffset / 2))
-                    
-                    Text("6pm")
-                        .frame(width: 40, height: 40, alignment: .center)
-                        .position(x: self.positioner.xAxisLabelOffsetFor(index: 2,
-                                                                               contentWidth: geometry.size.width),
-                                  y: geometry.size.height - (self.positioner.bottomYOffset / 2))
-                    
-                    Text("12am")
-                        .frame(width: 40, height: 40, alignment: .center)
-                        .position(x: self.positioner.xAxisLabelOffsetFor(index: 3,
-                                                                               contentWidth: geometry.size.width),
-                                  y: geometry.size.height - (self.positioner.bottomYOffset / 2))
-                }
+                GraphXLabels(positioner: self.positioner)
                 
                 BarsView(touchObservances: self.$touchObservances)
                     .frame(width: geometry.size.width - self.positioner.leadingXOffset,
