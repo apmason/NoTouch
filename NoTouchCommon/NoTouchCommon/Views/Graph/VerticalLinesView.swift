@@ -20,13 +20,13 @@ struct VerticalLinesView: View {
             Path { path in
                 for i in 1...self.numberOfLines {
                     path.move(to:
-                        CGPoint(x: self.positioner.xAxisLabelOffsetFor(index: i,
+                        CGPoint(x: self.positioner.xAxisLabelOffsetFor(line: i,
                                                                              contentWidth: geometry.size.width),
                                 y: geometry.size.height - self.bottomOffset)
                     )
                     
                     path.addLine(to:
-                        CGPoint(x: self.positioner.xAxisLabelOffsetFor(index: i,
+                        CGPoint(x: self.positioner.xAxisLabelOffsetFor(line: i,
                                                                              contentWidth: geometry.size.width),
                                 y: 0)
                     )

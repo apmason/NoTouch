@@ -39,7 +39,7 @@ struct GraphView: View {
                 // X Axis Labels
                 GraphXLabels(positioner: self.positioner)
                 
-                BarsView(touchObservances: self.$touchObservances)
+                BarsView(touchObservances: self.$touchObservances, spacing: 10)
                     .frame(width: geometry.size.width - self.positioner.leadingXOffset,
                            height: geometry.size.height - self.positioner.bottomYOffset - self.positioner.topYOffset)
                     .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
@@ -51,12 +51,11 @@ struct GraphView: View {
 
 struct GraphView_Previews: PreviewProvider {
     
-    static let dummyData: [Touch] = [
-        1, 3, 4, 2, 5, 5,
-        2, 3, 34, 4, 3, 4,
-        5, 4, 3, 4, 5, 4,
-        23, 56, 23, 54, 2
-    ]
+    static var dummyData: [Touch] {
+        var data: [Touch] = [Touch]
+        
+        return data
+    }
     
     static var previews: some View {
         GraphView(touchObservances: .constant(dummyData))

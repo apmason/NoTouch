@@ -21,18 +21,18 @@ struct GraphXLabels: View {
                 
                 Text("12pm")
                     .frame(width: 40, height: 40, alignment: .center)
-                    .position(x: self.positioner.xAxisLabelOffsetFor(index: 1, contentWidth: geometry.size.width),
+                    .position(x: self.positioner.xAxisLabelOffsetFor(line: 1, contentWidth: geometry.size.width),
                               y: geometry.size.height - (self.positioner.bottomYOffset / 2))
                 
                 Text("6pm")
                     .frame(width: 40, height: 40, alignment: .center)
-                    .position(x: self.positioner.xAxisLabelOffsetFor(index: 2,
+                    .position(x: self.positioner.xAxisLabelOffsetFor(line: 2,
                                                                      contentWidth: geometry.size.width),
                               y: geometry.size.height - (self.positioner.bottomYOffset / 2))
                 
                 Text("12am")
                     .frame(width: 40, height: 40, alignment: .center)
-                    .position(x: self.positioner.xAxisLabelOffsetFor(index: 3,
+                    .position(x: self.positioner.xAxisLabelOffsetFor(line: 3,
                                                                      contentWidth: geometry.size.width),
                               y: geometry.size.height - (self.positioner.bottomYOffset / 2))
             }

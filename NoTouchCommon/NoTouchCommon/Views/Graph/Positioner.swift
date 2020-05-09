@@ -11,15 +11,25 @@ import Foundation
 
 struct Positioner {
     
-    let topYOffset: CGFloat = 20
+    let topYOffset: CGFloat
     
     /// The offset of the y axis
-    let bottomYOffset: CGFloat = 30
+    let bottomYOffset: CGFloat
     
     /// The offset of the x axis
-    let leadingXOffset: CGFloat = 40
+    let leadingXOffset: CGFloat
     
-    let lineWidth: CGFloat = 0.25
+    let lineWidth: CGFloat
+    
+    init(topYOffset: CGFloat = 20,
+         bottomYOffset: CGFloat = 30,
+         leadingXOffset: CGFloat = 40,
+         lineWidth: CGFloat = 0.25) {
+        self.topYOffset = topYOffset
+        self.bottomYOffset = bottomYOffset
+        self.leadingXOffset = leadingXOffset
+        self.lineWidth = lineWidth
+    }
     
     func yAxisLabelOffsetFor(index: Int, contentHeight: CGFloat) -> CGFloat {
         let graphSize = contentHeight - topYOffset - bottomYOffset
@@ -27,9 +37,9 @@ struct Positioner {
         return sectionSize * CGFloat(index) + self.topYOffset
     }
     
-    func xAxisLabelOffsetFor(index: Int, contentWidth: CGFloat) -> CGFloat {
+    func xAxisLabelOffsetFor(line: Int, contentWidth: CGFloat) -> CGFloat {
         let graphSize = contentWidth - leadingXOffset
         let sectionSize = graphSize / 4
-        return sectionSize * CGFloat(index) + leadingXOffset
+        return sectionSize * CGFloat(line) + leadingXOffset
     }
 }
