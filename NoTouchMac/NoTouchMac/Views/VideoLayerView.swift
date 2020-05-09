@@ -12,7 +12,7 @@ import Foundation
 import NoTouchCommon
 import SwiftUI
 
-class UpdatableMacView: NSView, NativewView {
+class UpdatableMacView: NSView, NativeView {
     var nativeLayer: CALayer?
 
     var nativeFrame: CGRect {
@@ -37,14 +37,13 @@ final class VideoLayerView: NSViewRepresentable {
     }
     
     func makeNSView(context: Context) -> UpdatableMacView {
-        print("Make ns view called")
         let nativeView = UpdatableMacView()
         return nativeView
     }
     
-    func updateNSView(_ nsView: UpdatableMacView, context: Context) {
+    func updateNSView(_ nativeView: UpdatableMacView, context: Context) {
         // Update our video layer.
-        context.coordinator.contentViewModel.setPreviewView(to: nsView)
+        context.coordinator.contentViewModel.setPreviewView(to: nativeView)
     }
     
     class Coordinator: NSObject {
