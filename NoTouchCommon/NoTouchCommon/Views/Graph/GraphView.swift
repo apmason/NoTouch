@@ -8,13 +8,17 @@
 
 import SwiftUI
 
-struct GraphView: View {
+public struct GraphView: View {
     
-    private let positioner = Positioner()
+    let positioner = Positioner()
     
-    @Binding var touchObservances: [Touch]
+    @ObservedObject public var recordHolder: RecordHolder
     
-    var body: some View {
+    public init(recordHolder: RecordHolder) {
+        self.recordHolder = recordHolder
+    }
+
+    public var body: some View {
         GeometryReader { geometry in
             // Vertical line
             ZStack {
@@ -34,12 +38,12 @@ struct GraphView: View {
                 
                 // Y Axis Labels
                 GraphYLabels(positioner: self.positioner,
-                             highestYValue: self.touchObservances.topAxisValue())
+                             highestYValue: self.recordHolder.topAxisValue)
                 
                 // X Axis Labels
                 GraphXLabels(positioner: self.positioner)
                 
-                BarsView(touchObservances: self.$touchObservances, spacing: 5)
+                BarsView(touchObservances: self.recordHolder.$touchObservances, spacing: 5)
                     .frame(width: geometry.size.width - self.positioner.leadingXOffset,
                            height: geometry.size.height - self.positioner.bottomYOffset - self.positioner.topYOffset)
                     .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
@@ -60,7 +64,8 @@ struct GraphView_Previews: PreviewProvider {
         return data
     }
     
+    // FIXME: fill with dummy data.
     static var previews: some View {
-        GraphView(touchObservances: .constant(dummyData))
+        GraphView(recordHolder: RecordHolder())
     }
 }

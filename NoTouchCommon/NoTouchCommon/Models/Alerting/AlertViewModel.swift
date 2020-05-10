@@ -44,8 +44,8 @@ public class AlertViewModel {
     
     private let userSettings: UserSettings
     
-    private let cloudKitManager = CloudKitManager()
-    
+    private(set) var dbManager = DBManager()
+      
     public init(userSettings: UserSettings) {
         self.userSettings = userSettings
         addAudioObserver()
@@ -99,7 +99,7 @@ public class AlertViewModel {
         }
         
         // TODO: Batch these up?
-        cloudKitManager.createTouchRecord()
+        dbManager.createTouchRecord()
     }
     
     /// If a touching observation was made but was below our confidence threshold call this function. The `AlertViewModel` will update its internal state to determine when a real alert should be fired.

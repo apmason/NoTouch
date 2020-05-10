@@ -13,14 +13,12 @@ import Foundation
 protocol DatabaseManager {
     func createTouchRecord()
     func readTouchRecord() -> [TouchRecord]
+    var recordHolder: RecordHolder { get }
 }
 
-// Maybe this class will conform to a certain type of protocol? Maybe not?
-public class CloudKitManager: DatabaseManager, ObservableObject {
+public class RecordHolder: ObservableObject {
     
-    private var database = CloudKitDatabase()
-    
-    var touchRecords: [TouchRecord] = [] {
+    private var touchRecords: [TouchRecord] = [] {
         didSet {
             do {
                 self.touchObservances = try self.touchRecords
@@ -32,9 +30,27 @@ public class CloudKitManager: DatabaseManager, ObservableObject {
         }
     }
     
-    @Published var touchObservances: [Touch] = []
+    @State public var touchObservances: [Touch] = [] {
+        didSet {
+            self.topAxisValue = touchObservances.topAxisValue()
+        }
+    }
     
-    func createTouchRecord() {
+    @State public var topAxisValue: Touch = 0
+    
+    public func addRecord(_ record: TouchRecord) {
+        self.touchRecords.append(record)
+    }
+}
+
+// Maybe this class will conform to a certain type of protocol? Maybe not?
+public class DBManager: DatabaseManager {
+    
+    public var recordHolder: RecordHolder = RecordHolder()
+    
+    private var database = CloudKitDatabase()
+    
+    internal func createTouchRecord() {
         let deviceName = DeviceData.deviceName
         let date = Date()
         let appVersion = DeviceData.appVersion
@@ -42,7 +58,7 @@ public class CloudKitManager: DatabaseManager, ObservableObject {
         let touchRecord = TouchRecord(deviceName: deviceName,
                                       timestamp: date,
                                       version: appVersion)
-        self.touchRecords.append(touchRecord)
+        self.recordHolder.addRecord(touchRecord)
         
         // create item.
         // send to DB
@@ -60,11 +76,11 @@ public class CloudKitManager: DatabaseManager, ObservableObject {
         }
     }
     
-    func readTouchRecord() -> [TouchRecord] {
+    internal func readTouchRecord() -> [TouchRecord] {
         return []
     }
     
-    public func fetchChanges(in databaseScope: CKDatabase.Scope) {
+    private func fetchChanges(in databaseScope: CKDatabase.Scope) {
         database.fetchChanges(in: databaseScope) {
             // done, reset data.
         }

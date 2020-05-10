@@ -19,7 +19,7 @@
 		C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */; };
 		C3B0E04D245E30CC00BC4946 /* TouchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */; };
 		C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */; };
-		C3B0E051245E340D00BC4946 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E050245E340D00BC4946 /* CloudKitManager.swift */; };
+		C3B0E051245E340D00BC4946 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E050245E340D00BC4946 /* DBManager.swift */; };
 		C3B0E053245F209F00BC4946 /* DatabaseWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E052245F209F00BC4946 /* DatabaseWriter.swift */; };
 		C3B0E055245F28CF00BC4946 /* CloudKitDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E054245F28CF00BC4946 /* CloudKitDatabase.swift */; };
 		C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E056245F30E500BC4946 /* DeviceData.swift */; };
@@ -68,7 +68,7 @@
 		C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAxisLabel.swift; sourceTree = "<group>"; };
 		C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecord.swift; sourceTree = "<group>"; };
 		C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingConstants.swift; sourceTree = "<group>"; };
-		C3B0E050245E340D00BC4946 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		C3B0E050245E340D00BC4946 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		C3B0E052245F209F00BC4946 /* DatabaseWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseWriter.swift; sourceTree = "<group>"; };
 		C3B0E054245F28CF00BC4946 /* CloudKitDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitDatabase.swift; sourceTree = "<group>"; };
 		C3B0E056245F30E500BC4946 /* DeviceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceData.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 			children = (
 				C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */,
 				C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */,
-				C3B0E050245E340D00BC4946 /* CloudKitManager.swift */,
+				C3B0E050245E340D00BC4946 /* DBManager.swift */,
 				C3B0E052245F209F00BC4946 /* DatabaseWriter.swift */,
 				C3B0E054245F28CF00BC4946 /* CloudKitDatabase.swift */,
 			);
@@ -390,7 +390,7 @@
 				C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */,
 				C3BF2A9E244219AE004BDEE4 /* AudioAlert.swift in Sources */,
 				C3B58D3A24621EF300DF4D8D /* AxisView.swift in Sources */,
-				C3B0E051245E340D00BC4946 /* CloudKitManager.swift in Sources */,
+				C3B0E051245E340D00BC4946 /* DBManager.swift in Sources */,
 				C391EA44245F4B690062A07D /* GraphView.swift in Sources */,
 				C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */,
 				C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */,

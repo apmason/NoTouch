@@ -35,7 +35,6 @@ struct BarsView: View {
                 }
                 Rectangle().frame(width: self.spacing / 2, height: 0)
             }
-                // add a half spacer
                 .frame(width: geometry.size.width,
                        height: geometry.size.height,
                        alignment: .bottom)
@@ -54,7 +53,8 @@ struct BarsView_Previews: PreviewProvider {
         return data
     }
     
+    // FIXME: Fill with dummy data.
     static var previews: some View {
-        BarsView(touchObservances: .constant(dummyData), spacing: 5)
+        BarsView(touchObservances: RecordHolder().$touchObservances, spacing: 10)
     }
 }

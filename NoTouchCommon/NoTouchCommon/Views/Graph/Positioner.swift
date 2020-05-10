@@ -9,7 +9,7 @@
 import CoreGraphics
 import Foundation
 
-struct Positioner {
+public struct Positioner {
     
     let topYOffset: CGFloat
     

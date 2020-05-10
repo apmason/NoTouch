@@ -9,14 +9,14 @@
 import CloudKit
 import Foundation
 
-struct TouchRecord: Identifiable {
-    let id = UUID()
+public struct TouchRecord: Identifiable {
+    public let id = UUID()
     let deviceName: String
     let timestamp: Date
     let version: String
 }
 
-typealias Touch = Int
+public typealias Touch = Int
 
 // Get all the TouchRecord's
 // Find one's that are happening on this day (in the user's timezone.)
