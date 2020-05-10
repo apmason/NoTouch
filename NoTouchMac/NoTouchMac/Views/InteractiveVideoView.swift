@@ -14,18 +14,19 @@ struct InteractiveVideoView: View {
     let buttonHeight: CGFloat = 40
     let alertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings)
     let thing = DBManager()
+    @State private var showGraph = false
     
     var body: some View {
         ZStack(alignment: .top) {
             VideoLayerView(alertModel: self.alertViewModel)
-            HStack(alignment: .top) {
-                OptionButtonStack()
-                Spacer()
-                NavigationLink.init(destination: GraphView(recordHolder: thing.recordHolder)) {
+            if !showGraph {
+                HStack(alignment: .top) {
+                    OptionButtonStack()
+                    Spacer()
                     Button(action: {
-                        // open new thing
-                        print("toggle")
-                        // navigation link, pass user data.
+                        withAnimation {
+                            self.showGraph.toggle()
+                        }
                     }) {
                         Image("graph")
                             .resizable()
@@ -38,6 +39,9 @@ struct InteractiveVideoView: View {
                     .frame(width: buttonHeight, height: buttonHeight, alignment: .top)
                     .padding(8)
                 }
+            }
+            else {
+                GraphView(recordHolder: thing.recordHolder)
             }
         }
     }

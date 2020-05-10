@@ -16,23 +16,21 @@ struct ContentView: View {
     
     @ViewBuilder
     var body: some View {
-        NavigationView {
-            if userSettings.cameraAuthState == .authorized || userSettings.cameraAuthState == .notDetermined {
-                InteractiveVideoView()
-            } else {
-                VStack {
-                    Text("Please authorize camera usage to continue.")
-                        .font(.headline)
-                        .padding(.bottom, 10)
-                    
-                    Text("Go to System Preferences -> Security & Privacy -> Privacy -> Camera and authorize HandsOff.")
-                        .font(.body)
-                        .padding(.horizontal)
-                        .multilineTextAlignment(.center)
-                    
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        if userSettings.cameraAuthState == .authorized || userSettings.cameraAuthState == .notDetermined {
+            InteractiveVideoView()
+        } else {
+            VStack {
+                Text("Please authorize camera usage to continue.")
+                    .font(.headline)
+                    .padding(.bottom, 10)
+                
+                Text("Go to System Preferences -> Security & Privacy -> Privacy -> Camera and authorize HandsOff.")
+                    .font(.body)
+                    .padding(.horizontal)
+                    .multilineTextAlignment(.center)
+                
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
