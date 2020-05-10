@@ -11,7 +11,8 @@ import Foundation
 
 extension Collection where Element == Touch {
     
-    func topAxisValue() -> Touch {
+    /// Based on the highest value in the collection, this value is the next highest `Touch` value that is divisible by 5 or 10, or the highest value itself if it is already divisible by 5 or 10.
+    var topAxisValue: Touch {
         var maxValue = self.max() ?? 0
         while maxValue % 5 != 0 && maxValue % 10 != 0 {
             maxValue += 1
@@ -22,6 +23,10 @@ extension Collection where Element == Touch {
 
 extension Touch {
     
+    
+    /// The ratio between the current `Touch` value and the `value` parameter.
+    /// - Parameter value: The denominator to use in the ratio calculation.
+    /// - Returns: The current value divided by the `value` parameter.
     func ratio(withTopValue value: Touch) -> CGFloat {
         return CGFloat(self) / CGFloat(value)
     }

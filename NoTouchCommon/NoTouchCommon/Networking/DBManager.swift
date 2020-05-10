@@ -18,30 +18,17 @@ protocol DatabaseManager {
 
 public class RecordHolder: ObservableObject {
     
-    private var touchRecords: [TouchRecord] = [] {
-        didSet {
-            do {
-                let todaysRecords = self.touchRecords
-                let touchesPerHour = try todaysRecords.getTouchesPerHour(forDay: Date())
-                //self.touchObservances = touchesPerHour
-                self.$touchObservances.wrappedValue = touchesPerHour
-            } catch {
-                print("Error setting touches per hour")
-            }
-        }
-    }
+    private var touchRecords: [TouchRecord] = []
     
-    @State public var touchObservances: [Touch] = [] {
-        didSet {
-            print(touchObservances)
-            self.topAxisValue = touchObservances.topAxisValue()
-        }
-    }
+    @Published public var touchObservances: [Touch] = []
     
-    public var topAxisValue: Touch = 0
+    @Published public var topAxisValue: Touch = 0
     
     public func addRecord(_ record: TouchRecord) {
         self.touchRecords.append(record)
+        let todaysRecords = self.touchRecords.todaysRecords()
+        self.touchObservances = todaysRecords.getTouchesPerHour(forDay: Date())
+        self.topAxisValue = touchObservances.topAxisValue
     }
 }
 

@@ -57,7 +57,7 @@ class PositioningTests: XCTestCase {
     func testBarViewSizing() {
         // Allocate with dummy data
         let spacing: CGFloat = 10
-        let barsView = BarsView(touchObservances: .constant([1]), spacing: spacing)
+        let barsView = BarsView(recordHolder: RecordHolder(), spacing: spacing)
         let rectangleWidth = barsView.rectangleWidth(for: 400)
         print(rectangleWidth)
         XCTAssert(rectangleWidth == 6.666666666666667)

@@ -52,22 +52,18 @@ class NoTouchCommonTests: XCTestCase {
             dummyRecordWith(date: secondDate)
         ]
         
-        do {
-            let touches = try records.getTouchesPerHour(forDay: today)
-            
-            XCTAssert(touches.count == 24)
-            
-            for i in 0..<touches.count {
-                if i == 0 {
-                    XCTAssert(touches[i] == 1)
-                } else if i == hourValue {
-                    XCTAssert(touches[i] == 1)
-                } else {
-                    XCTAssert(touches[i] == 0)
-                }
+        let touches = records.getTouchesPerHour(forDay: today)
+        
+        XCTAssert(touches.count == 24)
+        
+        for i in 0..<touches.count {
+            if i == 0 {
+                XCTAssert(touches[i] == 1)
+            } else if i == hourValue {
+                XCTAssert(touches[i] == 1)
+            } else {
+                XCTAssert(touches[i] == 0)
             }
-        } catch {
-            XCTFail("Call threw when it should have succeeded")
         }
     }
     
@@ -76,30 +72,52 @@ class NoTouchCommonTests: XCTestCase {
         
         let futureDate = Calendar.current.date(byAdding: .day, value: 3, to: today)!
         let futureRecords: [TouchRecord] = [
-            dummyRecordWith(date: today),
             dummyRecordWith(date: futureDate),
             dummyRecordWith(date: futureDate)
         ]
         
-        do {
-            _ = try futureRecords.getTouchesPerHour(forDay: today)
-            XCTFail("Should have thrown")
-        } catch {
-            XCTAssert(true)
+        let futureHours = futureRecords.getTouchesPerHour(forDay: today)
+        XCTAssert(futureHours.count == 24)
+        for hour in futureHours {
+            XCTAssert(hour == 0)
         }
         
         let pastDate = Calendar.current.date(byAdding: .day, value: -3, to: today)!
         let pastRecords: [TouchRecord] = [
-            dummyRecordWith(date: today),
             dummyRecordWith(date: pastDate),
             dummyRecordWith(date: pastDate)
         ]
+        let pastHours = pastRecords.getTouchesPerHour(forDay: today)
+        XCTAssert(futureHours.count == 24)
+        for hour in pastHours {
+            XCTAssert(hour == 0)
+        }
+    }
+    
+    func testTodaysTouchesPerHours() {
+        let beginningOfDay = Calendar.current.startOfDay(for: Date())
+        let todayRecord = dummyRecordWith(date: beginningOfDay)
         
-        do {
-            _ = try pastRecords.getTouchesPerHour(forDay: today)
-            XCTFail("Should have thrown")
-        } catch {
-            XCTAssert(true)
+        let oldDate = Calendar.current.date(byAdding: .day, value: -4, to: Date())!
+        let oldRecord = dummyRecordWith(date: oldDate)
+        
+        let futureDate = Calendar.current.date(byAdding: .day, value: 4, to: Date())!
+        let futureRecord = dummyRecordWith(date: futureDate)
+        
+        let records: [TouchRecord] = [todayRecord, oldRecord, futureRecord]
+        let todaysRecords = records.todaysRecords()
+        XCTAssert(todaysRecords.count == 1)
+        
+        let touches = todaysRecords.getTouchesPerHour(forDay: Date())
+        
+        XCTAssert(touches.count == 24)
+        
+        for i in 0..<touches.count {
+            if i == 0 {
+                XCTAssert(touches[i] == 1)
+            } else {
+                XCTAssert(touches[i] == 0)
+            }
         }
     }
     

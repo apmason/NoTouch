@@ -43,7 +43,7 @@ public struct GraphView: View {
                 // X Axis Labels
                 GraphXLabels(positioner: self.positioner)
                 
-                BarsView(touchObservances: self.recordHolder.$touchObservances, spacing: 5)
+                BarsView(recordHolder: self.recordHolder, spacing: 5)
                     .frame(width: geometry.size.width - self.positioner.leadingXOffset,
                            height: geometry.size.height - self.positioner.bottomYOffset - self.positioner.topYOffset)
                     .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),

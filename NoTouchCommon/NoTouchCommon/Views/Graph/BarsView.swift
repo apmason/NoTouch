@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BarsView: View {
     
-    @Binding var touchObservances: [Touch]
+    @ObservedObject public var recordHolder: RecordHolder
     
     let spacing: CGFloat
     
@@ -28,9 +28,9 @@ struct BarsView: View {
             HStack(alignment: .bottom, spacing: 0) {
                 Rectangle().frame(width: self.spacing / 2, height: 0)
                 HStack(alignment: .bottom, spacing: self.spacing) {
-                    ForEach(self.touchObservances, id: \.self) { touch in
+                    ForEach(self.recordHolder.touchObservances, id: \.self) { touch in
                         Rectangle()
-                            .frame(height: touch.ratio(withTopValue: self.touchObservances.topAxisValue()) * geometry.size.height)
+                            .frame(height: touch.ratio(withTopValue: self.recordHolder.touchObservances.topAxisValue) * geometry.size.height)
                     }
                 }
                 Rectangle().frame(width: self.spacing / 2, height: 0)
@@ -55,6 +55,6 @@ struct BarsView_Previews: PreviewProvider {
     
     // FIXME: Fill with dummy data.
     static var previews: some View {
-        BarsView(touchObservances: RecordHolder().$touchObservances, spacing: 10)
+        BarsView(recordHolder: RecordHolder(), spacing: 10)
     }
 }
