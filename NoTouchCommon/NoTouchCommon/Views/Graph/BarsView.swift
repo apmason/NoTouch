@@ -30,7 +30,8 @@ struct BarsView: View {
                 HStack(alignment: .bottom, spacing: self.spacing) {
                     ForEach(self.recordHolder.touchObservances, id: \.self) { touch in
                         Rectangle()
-                            .frame(height: touch.ratio(withTopValue: self.recordHolder.touchObservances.topAxisValue) * geometry.size.height)
+                            .frame(width: self.rectangleWidth(for: geometry.size.width),
+                                   height: touch.ratio(withTopValue: self.recordHolder.touchObservances.topAxisValue) * geometry.size.height)
                     }
                 }
                 Rectangle().frame(width: self.spacing / 2, height: 0)
@@ -44,17 +45,13 @@ struct BarsView: View {
 
 struct BarsView_Previews: PreviewProvider {
     
-    static var dummyData: [Touch] {
-        var data: [Touch] = [Touch].init(repeating: 0, count: 24)
-        for i in 0..<data.count {
-            data[i] = Int.random(in: 0...100)
-        }
-        
-        return data
+    static var dummyRecordHolder: RecordHolder {
+        let recordHolder = RecordHolder()
+        recordHolder.addRecord(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
+        return recordHolder
     }
     
-    // FIXME: Fill with dummy data.
     static var previews: some View {
-        BarsView(recordHolder: RecordHolder(), spacing: 10)
+        BarsView(recordHolder: dummyRecordHolder, spacing: 10)
     }
 }

@@ -16,22 +16,6 @@ protocol DatabaseManager {
     var recordHolder: RecordHolder { get }
 }
 
-public class RecordHolder: ObservableObject {
-    
-    private var touchRecords: [TouchRecord] = []
-    
-    @Published public var touchObservances: [Touch] = []
-    
-    @Published public var topAxisValue: Touch = 0
-    
-    public func addRecord(_ record: TouchRecord) {
-        self.touchRecords.append(record)
-        let todaysRecords = self.touchRecords.todaysRecords()
-        self.touchObservances = todaysRecords.getTouchesPerHour(forDay: Date())
-        self.topAxisValue = touchObservances.topAxisValue
-    }
-}
-
 // Maybe this class will conform to a certain type of protocol? Maybe not?
 public class DBManager: DatabaseManager {
     

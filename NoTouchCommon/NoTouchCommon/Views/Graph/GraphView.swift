@@ -55,17 +55,14 @@ public struct GraphView: View {
 
 struct GraphView_Previews: PreviewProvider {
     
-    static var dummyData: [Touch] {
-        var data: [Touch] = [Touch].init(repeating: 0, count: 24)
-        for i in 0..<data.count {
-            data[i] = Int.random(in: 0...100)
-        }
-        
-        return data
+    static var dummyRecordHolder: RecordHolder {
+        let recordHolder = RecordHolder()
+        recordHolder.addRecord(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
+        return recordHolder
     }
     
     // FIXME: fill with dummy data.
     static var previews: some View {
-        GraphView(recordHolder: RecordHolder())
+        GraphView(recordHolder: dummyRecordHolder)
     }
 }

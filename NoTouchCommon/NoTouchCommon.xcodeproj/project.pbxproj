@@ -14,6 +14,7 @@
 		C355357B2466108900E991AA /* TouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357A2466108900E991AA /* TouchExtensions.swift */; };
 		C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357C246610AB00E991AA /* TouchRecordExtensions.swift */; };
 		C355357F2466121F00E991AA /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357E2466121F00E991AA /* TouchTests.swift */; };
+		C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35EA90E246897E8005A6942 /* RecordHolder.swift */; };
 		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
 		C37BE7BD246783E00012A299 /* RecordHolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE7BC246783E00012A299 /* RecordHolderTests.swift */; };
 		C391EA44245F4B690062A07D /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391EA43245F4B690062A07D /* GraphView.swift */; };
@@ -64,6 +65,7 @@
 		C355357A2466108900E991AA /* TouchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchExtensions.swift; sourceTree = "<group>"; };
 		C355357C246610AB00E991AA /* TouchRecordExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordExtensions.swift; sourceTree = "<group>"; };
 		C355357E2466121F00E991AA /* TouchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTests.swift; sourceTree = "<group>"; };
+		C35EA90E246897E8005A6942 /* RecordHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolder.swift; sourceTree = "<group>"; };
 		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C37BE7BC246783E00012A299 /* RecordHolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolderTests.swift; sourceTree = "<group>"; };
 		C391EA43245F4B690062A07D /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -122,8 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				C391EA43245F4B690062A07D /* GraphView.swift */,
-				C3B58D3924621EF300DF4D8D /* AxisView.swift */,
 				C330CE552461980B00FCA49A /* BarsView.swift */,
+				C3B58D3924621EF300DF4D8D /* AxisView.swift */,
 				C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */,
 				C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */,
 				C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */,
@@ -134,9 +136,18 @@
 			path = Graph;
 			sourceTree = "<group>";
 		};
+		C35EA90D246897DF005A6942 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C35EA90E246897E8005A6942 /* RecordHolder.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C3B0E04B245E30BC00BC4946 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C35EA90D246897DF005A6942 /* Models */,
 				C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */,
 				C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */,
 				C3B0E050245E340D00BC4946 /* DBManager.swift */,
@@ -398,6 +409,7 @@
 				C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */,
 				C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */,
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
+				C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */,
 				C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */,
 				C3B58D3C2462A93100DF4D8D /* DateExtensions.swift in Sources */,
 			);
