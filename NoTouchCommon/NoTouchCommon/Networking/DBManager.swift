@@ -21,9 +21,10 @@ public class RecordHolder: ObservableObject {
     private var touchRecords: [TouchRecord] = [] {
         didSet {
             do {
-                self.touchObservances = try self.touchRecords
-                                                            .todaysRecords()
-                                                            .getTouchesPerHour(forDay: Date())
+                let todaysRecords = self.touchRecords
+                let touchesPerHour = try todaysRecords.getTouchesPerHour(forDay: Date())
+                //self.touchObservances = touchesPerHour
+                self.$touchObservances.wrappedValue = touchesPerHour
             } catch {
                 print("Error setting touches per hour")
             }
@@ -32,11 +33,12 @@ public class RecordHolder: ObservableObject {
     
     @State public var touchObservances: [Touch] = [] {
         didSet {
+            print(touchObservances)
             self.topAxisValue = touchObservances.topAxisValue()
         }
     }
     
-    @State public var topAxisValue: Touch = 0
+    public var topAxisValue: Touch = 0
     
     public func addRecord(_ record: TouchRecord) {
         self.touchRecords.append(record)
