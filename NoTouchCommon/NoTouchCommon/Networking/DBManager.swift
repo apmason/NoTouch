@@ -10,18 +10,27 @@ import SwiftUI
 import CloudKit
 import Foundation
 
-protocol DatabaseManager {
-    func createTouchRecord()
-    func readTouchRecord() -> [TouchRecord]
-    var recordHolder: RecordHolder { get }
+public protocol DBManagerDelegate: class {
+    func add(_ record: TouchRecord)
 }
 
 // Maybe this class will conform to a certain type of protocol? Maybe not?
-public class DBManager: DatabaseManager {
+public class DBManager {
     
-    public var recordHolder: RecordHolder = RecordHolder()
+    //let recordHolder: RecordHolder
     
     private var database = CloudKitDatabase()
+    
+    //weak var delegate: DBManagerDelegate?
+    
+//    init(delegate: DBManagerDelegate) {
+//        self.delegate = delegate
+//    }
+    private let userSettings: UserSettings
+    
+    init(userSettings: UserSettings) {
+        self.userSettings = userSettings
+    }
     
     internal func createTouchRecord() {
         let deviceName = DeviceData.deviceName
@@ -31,7 +40,7 @@ public class DBManager: DatabaseManager {
         let touchRecord = TouchRecord(deviceName: deviceName,
                                       timestamp: date,
                                       version: appVersion)
-        self.recordHolder.addRecord(touchRecord)
+        self.userSettings.recordHolder.add(touchRecord)
         
         // create item.
         // send to DB
@@ -44,7 +53,7 @@ public class DBManager: DatabaseManager {
             if let error = error {
                 print("Attempt to save item failed: \(error.localizedDescription)")
             } else {
-                print("Success!")
+             //   print("Success!")
             }
         }
     }
@@ -57,9 +66,5 @@ public class DBManager: DatabaseManager {
         database.fetchChanges(in: databaseScope) {
             // done, reset data.
         }
-    }
-    
-    public init() {
-        
     }
 }

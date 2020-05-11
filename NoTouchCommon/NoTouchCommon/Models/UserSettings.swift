@@ -13,6 +13,7 @@ public class UserSettings: ObservableObject {
     @Published public var hideCameraFeed = false
     @Published public var pauseDetection = false
     @Published public var cameraAuthState: CameraAuthModel.CameraAuthState = .notDetermined
+    @Published public var recordHolder = RecordHolder()
     
     public init() {}
 }

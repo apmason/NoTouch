@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BarsView: View {
     
-    @ObservedObject public var recordHolder: RecordHolder
+    @EnvironmentObject var userSettings: UserSettings
     
     let spacing: CGFloat
     
@@ -28,10 +28,10 @@ struct BarsView: View {
             HStack(alignment: .bottom, spacing: 0) {
                 Rectangle().frame(width: self.spacing / 2, height: 0)
                 HStack(alignment: .bottom, spacing: self.spacing) {
-                    ForEach(self.recordHolder.touchObservances, id: \.self) { touch in
+                    ForEach(self.userSettings.recordHolder.touchObservances, id: \.self) { touch in
                         Rectangle()
                             .frame(width: self.rectangleWidth(for: geometry.size.width),
-                                   height: touch.ratio(withTopValue: self.recordHolder.touchObservances.topAxisValue) * geometry.size.height)
+                                   height: touch.ratio(withTopValue: self.userSettings.recordHolder.touchObservances.topAxisValue) * geometry.size.height)
                     }
                 }
                 Rectangle().frame(width: self.spacing / 2, height: 0)
@@ -45,13 +45,15 @@ struct BarsView: View {
 
 struct BarsView_Previews: PreviewProvider {
     
-    static var dummyRecordHolder: RecordHolder {
-        let recordHolder = RecordHolder()
-        recordHolder.addRecord(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
-        return recordHolder
-    }
+//    static var dummyRecordHolder: RecordHolder {
+//        let recordHolder = RecordHolder()
+//        //recordHolder.addRecord(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
+//        recordHolder.touchObservances = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+//        return recordHolder
+//    }
     
     static var previews: some View {
-        BarsView(recordHolder: dummyRecordHolder, spacing: 10)
+        BarsView(spacing: 10)
+            .environmentObject(UserSettings())
     }
 }

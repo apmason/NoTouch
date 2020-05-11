@@ -12,9 +12,21 @@ import SwiftUI
 struct InteractiveVideoView: View {
     
     let buttonHeight: CGFloat = 40
-    let alertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings)
-    let thing = DBManager()
+    let alertViewModel: AlertViewModel
     @State private var showGraph = false
+    //let recordHolder = RecordHolder()
+    
+    init() {
+        self.alertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings)
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            self.recordHolder.touchObservances = [0, 0, 0, 0, 0, 0, 0, 4, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//                self.recordHolder.touchObservances = [1, 1, 1, 0, 0, 0, 0, 4, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0]
+//            }
+//        }
+    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -41,7 +53,7 @@ struct InteractiveVideoView: View {
                 }
             }
             else {
-                GraphView(recordHolder: thing.recordHolder)
+                GraphView()
             }
         }
     }

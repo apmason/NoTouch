@@ -14,6 +14,12 @@ public struct TouchRecord: Identifiable {
     let deviceName: String
     let timestamp: Date
     let version: String
+    
+    public init(deviceName: String, timestamp: Date, version: String) {
+        self.deviceName = deviceName
+        self.timestamp = timestamp
+        self.version = version
+    }
 }
 
 public typealias Touch = Int

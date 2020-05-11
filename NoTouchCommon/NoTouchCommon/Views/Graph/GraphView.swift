@@ -12,12 +12,13 @@ public struct GraphView: View {
     
     let positioner = Positioner()
     
-    @ObservedObject public var recordHolder: RecordHolder
+//    @ObservedObject public var recordHolder: RecordHolder
+//    
+//    public init(recordHolder: RecordHolder) {
+//        self.recordHolder = recordHolder
+//    }
+    public init() {}
     
-    public init(recordHolder: RecordHolder) {
-        self.recordHolder = recordHolder
-    }
-
     public var body: some View {
         GeometryReader { geometry in
             // Vertical line
@@ -37,13 +38,12 @@ public struct GraphView: View {
                                     positioner: self.positioner)
                 
                 // Y Axis Labels
-                GraphYLabels(positioner: self.positioner,
-                             highestYValue: self.recordHolder.topAxisValue)
+                GraphYLabels(positioner: self.positioner)
                 
                 // X Axis Labels
                 GraphXLabels(positioner: self.positioner)
                 
-                BarsView(recordHolder: self.recordHolder, spacing: 5)
+                BarsView(spacing: 5)
                     .frame(width: geometry.size.width - self.positioner.leadingXOffset,
                            height: geometry.size.height - self.positioner.bottomYOffset - self.positioner.topYOffset)
                     .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
@@ -55,14 +55,9 @@ public struct GraphView: View {
 
 struct GraphView_Previews: PreviewProvider {
     
-    static var dummyRecordHolder: RecordHolder {
-        let recordHolder = RecordHolder()
-        recordHolder.addRecord(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
-        return recordHolder
-    }
-    
     // FIXME: fill with dummy data.
     static var previews: some View {
-        GraphView(recordHolder: dummyRecordHolder)
+        GraphView()
+            .environmentObject(UserSettings())
     }
 }

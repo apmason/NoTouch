@@ -24,11 +24,9 @@ extension Collection where Element == TouchRecord {
         for record in self {
             let hour = Calendar.current.component(.hour, from: record.timestamp)
             
-            if !Calendar.current.isDate(record.timestamp, inSameDayAs: date) {
-                continue
+            if Calendar.current.isDate(record.timestamp, inSameDayAs: date) {
+                returnArray[hour] += 1
             }
-            
-            returnArray[hour] += 1
         }
         
         return returnArray

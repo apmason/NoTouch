@@ -10,6 +10,8 @@ import SwiftUI
 
 struct GraphYLabels: View {
     
+    @EnvironmentObject var userSettings: UserSettings
+    
     enum LabelPosition {
         case top
         case middle
@@ -17,7 +19,6 @@ struct GraphYLabels: View {
     }
     
     let positioner: Positioner
-    let highestYValue: Touch
     
     var body: some View {
         GeometryReader { geometry in
@@ -42,13 +43,13 @@ struct GraphYLabels: View {
     func valueForYLabel(for position: LabelPosition) -> Touch {
         switch position {
         case .top:
-            return self.highestYValue
+            return self.userSettings.recordHolder.topAxisValue
             
         case .middle:
-            return (self.highestYValue / 3) * 2
+            return (self.userSettings.recordHolder.topAxisValue / 3) * 2
             
         case .bottom:
-            return (self.highestYValue / 3)
+            return (self.userSettings.recordHolder.topAxisValue / 3)
             
         }
         
@@ -57,7 +58,8 @@ struct GraphYLabels: View {
 
 struct GraphYLabels_Previews: PreviewProvider {
     static var previews: some View {
-        GraphYLabels(positioner: Positioner(), highestYValue: 200)
+        GraphYLabels(positioner: Positioner())
             .frame(width: 200, height: 200)
+            .environmentObject(UserSettings())
     }
 }

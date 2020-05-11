@@ -82,7 +82,7 @@ public class VisionModel {
             guard let results = request.results as? [VNFaceObservation],
                 let boundingBox = results.first?.boundingBox else {
                     // TODO: tell the user they're in this state (also, check the confidence, we don't want people trying to run this in a dark room that doesn't work well.)
-                    print("can't detect face!")
+                    //print("can't detect face!")
                     // As a fallback run with the whole pixel buffer, rather than just focusing on the face.
                     let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: Orienter.currentCGOrientation())
                     self.visionQueue.async { [weak self] in

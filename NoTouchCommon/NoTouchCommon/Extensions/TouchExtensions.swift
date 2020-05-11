@@ -28,6 +28,11 @@ extension Touch {
     /// - Parameter value: The denominator to use in the ratio calculation.
     /// - Returns: The current value divided by the `value` parameter.
     func ratio(withTopValue value: Touch) -> CGFloat {
-        return CGFloat(self) / CGFloat(value)
+        if self == 0 {
+            return 0
+        }
+        let ratio = CGFloat(self) / CGFloat(value)
+        print("Ratio is \(ratio)")
+        return ratio
     }
 }

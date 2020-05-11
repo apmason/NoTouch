@@ -44,11 +44,14 @@ public class AlertViewModel {
     
     private let userSettings: UserSettings
     
-    private(set) var dbManager = DBManager()
+    private let dbManager: DBManager
       
     public init(userSettings: UserSettings) {
         self.userSettings = userSettings
+        self.dbManager = DBManager(userSettings: userSettings)
         addAudioObserver()
+        
+        //recordHolder.addRecord(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
     }
     
     private var cancellableObservation: AnyCancellable?
