@@ -11,10 +11,10 @@ import Foundation
 
 extension Collection where Element == Touch {
     
-    /// Based on the highest value in the collection, this value is the next highest `Touch` value that is divisible by 5 or 10, or the highest value itself if it is already divisible by 5 or 10.
+    /// Based on the highest value in the collection, this value is the next highest `Touch` value that is divisible by 3, or the highest value itself if it is already divisible by 3.
     var topAxisValue: Touch {
         var maxValue = self.max() ?? 0
-        while maxValue % 5 != 0 && maxValue % 10 != 0 {
+        while maxValue % 3 != 0 {
             maxValue += 1
         }
         return maxValue
