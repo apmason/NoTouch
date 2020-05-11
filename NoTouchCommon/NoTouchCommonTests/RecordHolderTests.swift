@@ -15,7 +15,10 @@ class RecordHolderTests: XCTestCase {
     func testRecordHolderAddition() throws {
         var recordHolder = RecordHolder()
         
-        XCTAssert(recordHolder.touchObservances.isEmpty)
+        XCTAssert(recordHolder.touchObservances.count == 24)
+        for touchCount in recordHolder.touchObservances {
+            XCTAssert(touchCount == 0)
+        }
         
         // Days in the past shouldn't be added.
         let past = Calendar.current.date(byAdding: .day, value: -5, to: Date())!
@@ -56,10 +59,10 @@ class RecordHolderTests: XCTestCase {
     func testTopAxisValueChange() {
         var recordHolder = RecordHolder()
         let startOfDay = Calendar.current.startOfDay(for: Date())
-        XCTAssert(recordHolder.topAxisValue == 0)
+        XCTAssert(recordHolder.axisValue(for: .top) == 0)
         
         recordHolder.add(dummyRecordWith(date: startOfDay))
-        XCTAssert(recordHolder.topAxisValue == 5)
+        XCTAssert(recordHolder.axisValue(for: .top) == 3)
     }
     
     private func dummyRecordWith(date: Date) -> TouchRecord {

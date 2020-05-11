@@ -53,6 +53,5 @@ struct GraphView_Previews: PreviewProvider {
     // FIXME: fill with dummy data.
     static var previews: some View {
         GraphView()
-            .environmentObject(UserSettings())
     }
 }

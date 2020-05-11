@@ -12,47 +12,26 @@ struct GraphYLabels: View {
     
     @EnvironmentObject var userSettings: UserSettings
     
-    enum LabelPosition {
-        case top
-        case middle
-        case bottom
-    }
-    
     let positioner: Positioner
     
     var body: some View {
         GeometryReader { geometry in
             Group {
-                YAxisLabel(text: "\(self.valueForYLabel(for: .top))")
+                YAxisLabel(text: "\(self.userSettings.recordHolder.axisValue(for: .top))")
                     .position(x: (self.positioner.leadingXOffset / 2),
                               y: self.positioner.topYOffset)
                 
-                YAxisLabel(text: "\(self.valueForYLabel(for: .middle))")
+                YAxisLabel(text: "\(self.userSettings.recordHolder.axisValue(for: .middle))")
                     .position(x: (self.positioner.leadingXOffset / 2),
                               y: self.positioner.yAxisLabelOffsetFor(index: 1,
                                                                      contentHeight: geometry.size.height))
                 
-                YAxisLabel(text: "\(self.valueForYLabel(for: .bottom))")
+                YAxisLabel(text: "\(self.userSettings.recordHolder.axisValue(for: .bottom))")
                     .position(x: (self.positioner.leadingXOffset / 2),
                               y: self.positioner.yAxisLabelOffsetFor(index: 2,
                                                                      contentHeight: geometry.size.height))
             }
         }
-    }
-    
-    func valueForYLabel(for position: LabelPosition) -> Touch {
-        switch position {
-        case .top:
-            return self.userSettings.recordHolder.topAxisValue
-            
-        case .middle:
-            return (self.userSettings.recordHolder.topAxisValue / 3) * 2
-            
-        case .bottom:
-            return (self.userSettings.recordHolder.topAxisValue / 3)
-            
-        }
-        
     }
 }
 

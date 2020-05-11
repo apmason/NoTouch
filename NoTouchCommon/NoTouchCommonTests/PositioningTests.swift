@@ -12,17 +12,17 @@ import XCTest
 class PositioningTests: XCTestCase {
 
     func testGraphYLabeling() throws {
-        let topValue = 200
-        let view = GraphYLabels(positioner: Positioner()).environmentObject(UserSettings()) as! GraphYLabels
+        var recordHolder = RecordHolder()
+        recordHolder.add(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
         
-        let topAxis = view.valueForYLabel(for: .top)
-        XCTAssert(topValue == topAxis)
+        let topAxis = recordHolder.axisValue(for: .top)
+        XCTAssert(topAxis == 3)
         
-        let middleAxis = view.valueForYLabel(for: .middle)
-        XCTAssert(middleAxis == 132)
+        let middleAxis = recordHolder.axisValue(for: .middle)
+        XCTAssert(middleAxis == 2)
         
-        let bottomAxis = view.valueForYLabel(for: .bottom)
-        XCTAssert(bottomAxis == 66)
+        let bottomAxis = recordHolder.axisValue(for: .bottom)
+        XCTAssert(bottomAxis == 1)
     }
     
     func testGraphXLabeling() throws {
