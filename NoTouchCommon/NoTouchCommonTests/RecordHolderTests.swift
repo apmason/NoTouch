@@ -13,13 +13,13 @@ import XCTest
 class RecordHolderTests: XCTestCase {
 
     func testRecordHolderAddition() throws {
-        let recordHolder = RecordHolder()
+        var recordHolder = RecordHolder()
         
         XCTAssert(recordHolder.touchObservances.isEmpty)
         
         // Days in the past shouldn't be added.
         let past = Calendar.current.date(byAdding: .day, value: -5, to: Date())!
-        recordHolder.addRecord(dummyRecordWith(date: past))
+        recordHolder.add(dummyRecordWith(date: past))
         
         // Count should be 24 but all values are 0.
         XCTAssert(recordHolder.touchObservances.count == 24)
@@ -30,7 +30,7 @@ class RecordHolderTests: XCTestCase {
         
         // Days in the future shouldn't be added.
         let future = Calendar.current.date(byAdding: .day, value: 3, to: Date())!
-        recordHolder.addRecord(dummyRecordWith(date: future))
+        recordHolder.add(dummyRecordWith(date: future))
         
         // Count should be 24 but all values are 0.
         XCTAssert(recordHolder.touchObservances.count == 24)
@@ -40,7 +40,7 @@ class RecordHolderTests: XCTestCase {
         
         // This is the current day so we should have 24 entries, all being zero except for index 0 (12:01 on the current day).
         let startOfDay = Calendar.current.startOfDay(for: Date())
-        recordHolder.addRecord(dummyRecordWith(date: startOfDay))
+        recordHolder.add(dummyRecordWith(date: startOfDay))
         print("Seeing touch observance as: \(recordHolder.touchObservances)")
         XCTAssert(recordHolder.touchObservances.count == 24)
         
@@ -54,11 +54,11 @@ class RecordHolderTests: XCTestCase {
     }
     
     func testTopAxisValueChange() {
-        let recordHolder = RecordHolder()
+        var recordHolder = RecordHolder()
         let startOfDay = Calendar.current.startOfDay(for: Date())
         XCTAssert(recordHolder.topAxisValue == 0)
         
-        recordHolder.addRecord(dummyRecordWith(date: startOfDay))
+        recordHolder.add(dummyRecordWith(date: startOfDay))
         XCTAssert(recordHolder.topAxisValue == 5)
     }
     

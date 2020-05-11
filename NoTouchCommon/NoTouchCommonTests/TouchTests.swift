@@ -23,5 +23,9 @@ class TouchTests: XCTestCase {
         let value3: Touch = 1
         let ratio3 = value3.ratio(withTopValue: 10)
         XCTAssert(ratio3 == 0.10)
+        
+        let value4: Touch = 0
+        let ratio4 = value4.ratio(withTopValue: 10)
+        XCTAssert(ratio4 == 0)
     }
 }

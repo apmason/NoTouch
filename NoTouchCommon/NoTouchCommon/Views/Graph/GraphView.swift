@@ -11,12 +11,7 @@ import SwiftUI
 public struct GraphView: View {
     
     let positioner = Positioner()
-    
-//    @ObservedObject public var recordHolder: RecordHolder
-//    
-//    public init(recordHolder: RecordHolder) {
-//        self.recordHolder = recordHolder
-//    }
+
     public init() {}
     
     public var body: some View {

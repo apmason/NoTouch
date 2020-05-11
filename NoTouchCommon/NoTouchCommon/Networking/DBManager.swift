@@ -10,22 +10,9 @@ import SwiftUI
 import CloudKit
 import Foundation
 
-public protocol DBManagerDelegate: class {
-    func add(_ record: TouchRecord)
-}
-
-// Maybe this class will conform to a certain type of protocol? Maybe not?
 public class DBManager {
     
-    //let recordHolder: RecordHolder
-    
     private var database = CloudKitDatabase()
-    
-    //weak var delegate: DBManagerDelegate?
-    
-//    init(delegate: DBManagerDelegate) {
-//        self.delegate = delegate
-//    }
     private let userSettings: UserSettings
     
     init(userSettings: UserSettings) {

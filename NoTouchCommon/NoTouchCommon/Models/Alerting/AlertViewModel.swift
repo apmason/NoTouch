@@ -50,8 +50,6 @@ public class AlertViewModel {
         self.userSettings = userSettings
         self.dbManager = DBManager(userSettings: userSettings)
         addAudioObserver()
-        
-        //recordHolder.addRecord(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
     }
     
     private var cancellableObservation: AnyCancellable?

@@ -45,13 +45,6 @@ struct BarsView: View {
 
 struct BarsView_Previews: PreviewProvider {
     
-//    static var dummyRecordHolder: RecordHolder {
-//        let recordHolder = RecordHolder()
-//        //recordHolder.addRecord(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
-//        recordHolder.touchObservances = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
-//        return recordHolder
-//    }
-    
     static var previews: some View {
         BarsView(spacing: 10)
             .environmentObject(UserSettings())
