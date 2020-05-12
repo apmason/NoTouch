@@ -40,8 +40,19 @@ struct AxisView: View {
                     CGPoint(x: geometry.size.width,
                             y: geometry.size.height - (self.lineWidth / 2) - self.bottomYOffset)
                 )
+                
+                // Line going across the top of graph
+                path.move(to:
+                    CGPoint(x: self.leadingXOffset,
+                            y: 0)
+                )
+                
+                path.addLine(to:
+                    CGPoint(x: geometry.size.width,
+                            y: 0)
+                )
             }
-            .stroke(Color.blue, lineWidth: self.lineWidth)
+            .stroke(Color.black, lineWidth: self.lineWidth * 2)
         }
     }
 }

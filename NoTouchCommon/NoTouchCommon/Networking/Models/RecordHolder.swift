@@ -46,4 +46,10 @@ public struct RecordHolder {
             
         }
     }
+    
+    public var totalTouchCount: Touch {
+        return self.touchObservances.reduce(0, {
+            $0 + $1
+        })
+    }
 }

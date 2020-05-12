@@ -10,9 +10,11 @@ import SwiftUI
 
 public struct GraphView: View {
     
-    let positioner = Positioner()
+    private let positioner: Positioner
 
-    public init() {}
+    public init(leadingXOffset: CGFloat) {
+        self.positioner = Positioner(leadingXOffset: leadingXOffset)
+    }
     
     public var body: some View {
         GeometryReader { geometry in
@@ -52,6 +54,7 @@ struct GraphView_Previews: PreviewProvider {
     
     // FIXME: fill with dummy data.
     static var previews: some View {
-        GraphView()
+        GraphView(leadingXOffset: 20)
+            .environmentObject(UserSettings())
     }
 }

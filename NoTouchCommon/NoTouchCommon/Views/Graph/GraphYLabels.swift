@@ -17,16 +17,19 @@ struct GraphYLabels: View {
     var body: some View {
         GeometryReader { geometry in
             Group {
-                YAxisLabel(text: "\(self.userSettings.recordHolder.axisValue(for: .top))")
+                YAxisLabel(text: "\(self.userSettings.recordHolder.axisValue(for: .top))",
+                    leadingXOffset: self.positioner.leadingXOffset)
                     .position(x: (self.positioner.leadingXOffset / 2),
                               y: self.positioner.topYOffset)
                 
-                YAxisLabel(text: "\(self.userSettings.recordHolder.axisValue(for: .middle))")
+                YAxisLabel(text: "\(self.userSettings.recordHolder.axisValue(for: .middle))",
+                    leadingXOffset: self.positioner.leadingXOffset)
                     .position(x: (self.positioner.leadingXOffset / 2),
                               y: self.positioner.yAxisLabelOffsetFor(index: 1,
                                                                      contentHeight: geometry.size.height))
                 
-                YAxisLabel(text: "\(self.userSettings.recordHolder.axisValue(for: .bottom))")
+                YAxisLabel(text: "\(self.userSettings.recordHolder.axisValue(for: .bottom))",
+                    leadingXOffset: self.positioner.leadingXOffset)
                     .position(x: (self.positioner.leadingXOffset / 2),
                               y: self.positioner.yAxisLabelOffsetFor(index: 2,
                                                                      contentHeight: geometry.size.height))

@@ -11,10 +11,12 @@ import SwiftUI
 struct YAxisLabel: View {
     
     let text: String
+    let leadingXOffset: CGFloat
     
     var body: some View {
         Text(text)
-            .frame(width: 35, height: 40, alignment: .trailing).lineLimit(1)
+            .frame(width: leadingXOffset - 5, height: 40, alignment: .trailing)
+            .lineLimit(1)
             .minimumScaleFactor(0.3)
             .allowsTightening(true)
             .font(.footnote)
@@ -23,6 +25,6 @@ struct YAxisLabel: View {
 
 struct YAxisLabel_Previews: PreviewProvider {
     static var previews: some View {
-        YAxisLabel(text: "Test")
+        YAxisLabel(text: "Test", leadingXOffset: 30)
     }
 }

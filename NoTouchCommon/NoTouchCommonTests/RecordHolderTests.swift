@@ -65,6 +65,20 @@ class RecordHolderTests: XCTestCase {
         XCTAssert(recordHolder.axisValue(for: .top) == 3)
     }
     
+    func testTotalTouchCount() {
+        var recordHolder = RecordHolder()
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+        let laterInDay = Calendar.current.date(byAdding: .hour, value: 3, to: startOfDay)!
+        
+        XCTAssert(recordHolder.totalTouchCount == 0)
+        
+        recordHolder.add(dummyRecordWith(date: startOfDay))
+        XCTAssert(recordHolder.totalTouchCount == 1)
+        
+        recordHolder.add(dummyRecordWith(date: laterInDay))
+        XCTAssert(recordHolder.totalTouchCount == 2)
+    }
+    
     private func dummyRecordWith(date: Date) -> TouchRecord {
         return TouchRecord(deviceName: "test",
                            timestamp: date,

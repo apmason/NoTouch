@@ -31,8 +31,6 @@ extension Touch {
         if self == 0 {
             return 0
         }
-        let ratio = CGFloat(self) / CGFloat(value)
-        print("Ratio is \(ratio)")
-        return ratio
+        return CGFloat(self) / CGFloat(value)
     }
 }

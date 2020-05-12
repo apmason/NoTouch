@@ -33,7 +33,7 @@ struct HorizontalLinesView: View {
                     )
                 }
             }
-            .stroke(Color.black, lineWidth: self.positioner.lineWidth)
+            .stroke(Color.gray, lineWidth: self.positioner.lineWidth)
         }
     }
 }

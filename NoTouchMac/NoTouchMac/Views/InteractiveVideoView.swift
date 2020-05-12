@@ -40,7 +40,7 @@ struct InteractiveVideoView: View {
                 }
             }
             else {
-                GraphView()
+                ResultsView()
             }
         }
     }

@@ -125,6 +125,7 @@
 		C33079EA2467028F005392A6 /* Graph */ = {
 			isa = PBXGroup;
 			children = (
+				C3C69770246B317A006FCD7C /* ResultsView.swift */,
 				C391EA43245F4B690062A07D /* GraphView.swift */,
 				C330CE552461980B00FCA49A /* BarsView.swift */,
 				C3B58D3924621EF300DF4D8D /* AxisView.swift */,
@@ -134,7 +135,6 @@
 				C330CE5324617F0A00FCA49A /* Positioner.swift */,
 				C33079EB246702CA005392A6 /* GraphYLabels.swift */,
 				C3B24E33246716B900E2A737 /* GraphXLabels.swift */,
-				C3C69770246B317A006FCD7C /* ResultsView.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
