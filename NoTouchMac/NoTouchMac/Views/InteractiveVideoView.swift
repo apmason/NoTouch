@@ -40,7 +40,7 @@ struct InteractiveVideoView: View {
                 }
             }
             else {
-                ResultsView()
+                ResultsView(showGraph: $showGraph)
             }
         }
     }

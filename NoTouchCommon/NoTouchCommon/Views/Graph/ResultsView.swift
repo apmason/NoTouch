@@ -14,12 +14,18 @@ public struct ResultsView: View {
     
     private let leadingXOffset: CGFloat = 30
     
-    public init() {}
+    @Binding private var showGraph: Bool
+    
+    public init(showGraph: Binding<Bool>) {
+        self._showGraph = showGraph
+    }
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Button.init(action: {
-                print("Go back")
+                withAnimation {
+                    self.showGraph.toggle()
+                }
             }) {
                 Text("Back")
             }
@@ -37,7 +43,7 @@ public struct ResultsView: View {
 
 struct ResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        ResultsView()
+        ResultsView(showGraph: .constant(true))
             .environmentObject(UserSettings())
     }
 }
