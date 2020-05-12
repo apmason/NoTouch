@@ -42,6 +42,7 @@
 		C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A99244219AE004BDEE4 /* AlertViewModel.swift */; };
 		C3BF2AA0244219AE004BDEE4 /* VisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A9A244219AE004BDEE4 /* VisionModel.swift */; };
 		C3BF2AA224421A1D004BDEE4 /* Orienter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2AA124421A1D004BDEE4 /* Orienter.swift */; };
+		C3C69771246B317A006FCD7C /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C69770246B317A006FCD7C /* ResultsView.swift */; };
 		C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */; };
 		C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */; };
 		C3F4BE9024426373003CBD59 /* NoTouch_YOLO_2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3F4BE8F24426373003CBD59 /* NoTouch_YOLO_2.mlmodel */; };
@@ -96,6 +97,7 @@
 		C3BF2A99244219AE004BDEE4 /* AlertViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		C3BF2A9A244219AE004BDEE4 /* VisionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionModel.swift; sourceTree = "<group>"; };
 		C3BF2AA124421A1D004BDEE4 /* Orienter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orienter.swift; sourceTree = "<group>"; };
+		C3C69770246B317A006FCD7C /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLinesView.swift; sourceTree = "<group>"; };
 		C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLinesView.swift; sourceTree = "<group>"; };
 		C3F4BE8F24426373003CBD59 /* NoTouch_YOLO_2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NoTouch_YOLO_2.mlmodel; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				C330CE5324617F0A00FCA49A /* Positioner.swift */,
 				C33079EB246702CA005392A6 /* GraphYLabels.swift */,
 				C3B24E33246716B900E2A737 /* GraphXLabels.swift */,
+				C3C69770246B317A006FCD7C /* ResultsView.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				C3B58D3A24621EF300DF4D8D /* AxisView.swift in Sources */,
 				C3B0E051245E340D00BC4946 /* DBManager.swift in Sources */,
 				C391EA44245F4B690062A07D /* GraphView.swift in Sources */,
+				C3C69771246B317A006FCD7C /* ResultsView.swift in Sources */,
 				C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */,
 				C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */,
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
@@ -560,6 +564,7 @@
 		C3BF2A8A244215FF004BDEE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -576,19 +581,20 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopy.NoTouchCommon;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386 x86_64";
+				VALID_ARCHS = "i386 x86_64 arm64";
 			};
 			name = Debug;
 		};
 		C3BF2A8B244215FF004BDEE4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -605,13 +611,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopy.NoTouchCommon;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386 x86_64";
+				VALID_ARCHS = "i386 x86_64 arm64";
 			};
 			name = Release;
 		};
