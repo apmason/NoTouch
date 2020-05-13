@@ -142,6 +142,7 @@
 		C35EA90D246897DF005A6942 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */,
 				C35EA90E246897E8005A6942 /* RecordHolder.swift */,
 			);
 			path = Models;
@@ -150,9 +151,8 @@
 		C3B0E04B245E30BC00BC4946 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C3DC7E40246BF6A30093B34B /* Utility */,
 				C35EA90D246897DF005A6942 /* Models */,
-				C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */,
-				C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */,
 				C3B0E050245E340D00BC4946 /* DBManager.swift */,
 				C3B0E052245F209F00BC4946 /* DatabaseWriter.swift */,
 				C3B0E054245F28CF00BC4946 /* CloudKitDatabase.swift */,
@@ -244,6 +244,14 @@
 				C3B0E056245F30E500BC4946 /* DeviceData.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		C3DC7E40246BF6A30093B34B /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		C3EF684024506F2900741E50 /* Models */ = {
