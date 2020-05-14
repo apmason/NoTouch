@@ -8,9 +8,11 @@
 
 import Foundation
 
-internal struct NetworkingConstants {
-    static let touchRecordType = "TouchRecord"
-    
+enum RecordType: String {
+    case touch = "Touch"
+}
+
+internal struct NetworkingConstants {    
     /// The date format that all data sent to the server is in.
     static let dateFormat = "yyyy-MM-dd'T'HH:mm:ss zzz"
 }

@@ -12,11 +12,28 @@ import Foundation
 
 public class DBManager {
     
-    private var database = CloudKitDatabase()
+    private var database: Database
     private let userSettings: UserSettings
     
-    init(userSettings: UserSettings) {
+    init(userSettings: UserSettings, database: Database) {
         self.userSettings = userSettings
+        self.database = database
+        
+        // Fetch all existing records for today.
+        database.fetchRecords(for: Date()) { result in
+            switch result {
+            case .success(let records):
+                // create function to add multiple records.
+                userSettings.recordHolder.add(records)
+                print(records.count)
+                break
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                break
+                
+            }
+        }
     }
     
     internal func createTouchRecord() {
@@ -50,9 +67,10 @@ public class DBManager {
     }
     
     private func fetchChanges(in databaseScope: CKDatabase.Scope) {
-        database.fetchChanges(in: databaseScope) {
+        // TODO: Fix these changes.
+        //database.fetchChanges(in: databaseScope) {
             // done, reset data.
-        }
+        //}
     }
     
     // What we want is: make a batched call to get records that occured on today (using a predicate).

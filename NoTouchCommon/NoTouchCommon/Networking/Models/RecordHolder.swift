@@ -27,10 +27,12 @@ public struct RecordHolder {
     // TODO: Make sure topAxisValue changes when we add a record.
     public mutating func add(_ record: TouchRecord) {
         self.touchRecords.append(record)
-        let todaysRecords = self.touchRecords.todaysRecords().getTouchesPerHour(forDay: Date())
-        self.touchObservances = todaysRecords
-        assert(self.touchObservances.count == 24)
-        self.topAxisValue = self.touchObservances.topAxisValue
+        updateAfterRecordAddition()
+    }
+    
+    public mutating func add(_ records: [TouchRecord]) {
+        self.touchRecords.append(contentsOf: records)
+        updateAfterRecordAddition()
     }
     
     public func axisValue(for position: LabelPosition) -> Touch {
@@ -51,5 +53,12 @@ public struct RecordHolder {
         return self.touchObservances.reduce(0, {
             $0 + $1
         })
+    }
+    
+    private mutating func updateAfterRecordAddition() {
+        let todaysRecords = self.touchRecords.todaysRecords().getTouchesPerHour(forDay: Date())
+        self.touchObservances = todaysRecords
+        assert(self.touchObservances.count == 24)
+        self.topAxisValue = self.touchObservances.topAxisValue
     }
 }

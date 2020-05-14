@@ -22,7 +22,6 @@
 		C3B0E04D245E30CC00BC4946 /* TouchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */; };
 		C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */; };
 		C3B0E051245E340D00BC4946 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E050245E340D00BC4946 /* DBManager.swift */; };
-		C3B0E053245F209F00BC4946 /* DatabaseWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E052245F209F00BC4946 /* DatabaseWriter.swift */; };
 		C3B0E055245F28CF00BC4946 /* CloudKitDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E054245F28CF00BC4946 /* CloudKitDatabase.swift */; };
 		C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E056245F30E500BC4946 /* DeviceData.swift */; };
 		C3B24E34246716B900E2A737 /* GraphXLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B24E33246716B900E2A737 /* GraphXLabels.swift */; };
@@ -74,7 +73,6 @@
 		C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecord.swift; sourceTree = "<group>"; };
 		C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingConstants.swift; sourceTree = "<group>"; };
 		C3B0E050245E340D00BC4946 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
-		C3B0E052245F209F00BC4946 /* DatabaseWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseWriter.swift; sourceTree = "<group>"; };
 		C3B0E054245F28CF00BC4946 /* CloudKitDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitDatabase.swift; sourceTree = "<group>"; };
 		C3B0E056245F30E500BC4946 /* DeviceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceData.swift; sourceTree = "<group>"; };
 		C3B24E33246716B900E2A737 /* GraphXLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphXLabels.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 				C3DC7E40246BF6A30093B34B /* Utility */,
 				C35EA90D246897DF005A6942 /* Models */,
 				C3B0E050245E340D00BC4946 /* DBManager.swift */,
-				C3B0E052245F209F00BC4946 /* DatabaseWriter.swift */,
 				C3B0E054245F28CF00BC4946 /* CloudKitDatabase.swift */,
 			);
 			path = Networking;
@@ -395,7 +392,6 @@
 				C33079EC246702CA005392A6 /* GraphYLabels.swift in Sources */,
 				C3BF2A9D244219AE004BDEE4 /* CameraAuthModel.swift in Sources */,
 				C3B24E34246716B900E2A737 /* GraphXLabels.swift in Sources */,
-				C3B0E053245F209F00BC4946 /* DatabaseWriter.swift in Sources */,
 				C330CE5424617F0A00FCA49A /* Positioner.swift in Sources */,
 				C31871ED244BB5BC00F079FC /* UserSettings.swift in Sources */,
 				C3BF2A9C244219AE004BDEE4 /* FirstRunModel.swift in Sources */,
@@ -587,6 +583,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopy.NoTouchCommon;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -617,6 +614,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopy.NoTouchCommon;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;

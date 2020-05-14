@@ -10,13 +10,12 @@ import CloudKit
 import Foundation
 
 protocol Database {
-    associatedtype RecordItem
-    
-    func saveItem(_ item: RecordItem, completionHandler: @escaping (RecordItem?, Error?) -> Void)
+    func saveItem(_ item: CKRecord, completionHandler: @escaping (CKRecord?, Error?) -> Void) // FIXME: CKRecord should be wrapped in a custom type, so we're not so tied to CloudKit.
+    func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void)
 }
 
 class CloudKitDatabase: Database {
-    
+
     typealias RecordItem = CKRecord
 
     func saveItem(_ item: CKRecord, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
@@ -51,6 +50,80 @@ class CloudKitDatabase: Database {
         
         // TODO: Should we call createCustomZone here?
         //createSubscriptions()
+    }
+    
+    func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void) {
+        /// Turn CKRecord into TouchRecord
+        func ckRecordToTouchRecord(_ ckRecord: CKRecord) -> TouchRecord? {
+            guard let deviceName = ckRecord["deviceName"] as? String,
+                let timestamp = ckRecord["timestamp"] as? Date,
+                let version = ckRecord["version"] as? String else {
+                    assertionFailure("Why you failin?")
+                    return nil
+            }
+            
+            return TouchRecord(deviceName: deviceName,
+                               timestamp: timestamp,
+                               version: version)
+        }
+        
+        // The array that is to be returned.
+        var returnArray: [TouchRecord] = []
+        
+        func runOperation(_ operation: CKQueryOperation, completionHandler: @escaping (Result<Void, Error>) -> Void) {
+            operation.queryCompletionBlock = { newCursor, error in
+                if let error = error { // TODO: We need to handle errors properly (CloudKit errors may tell us if we need to call again soon, or something of the sort.
+                    completionHandler(.failure(error))
+                    return
+                }
+                
+                if let newCursor = newCursor { // We have a cursor, which means more records can be fetched.
+                    let newOperation = CKQueryOperation(cursor: newCursor)
+                    runOperation(newOperation, completionHandler: completionHandler)
+                    return
+                }
+                else { // We have a succesful completion block, we can now call the final completion, the operation is done.
+                    completionHandler(.success(()))
+                    return
+                }
+            }
+            
+            operation.recordFetchedBlock = { record in
+                guard let touchRecord = ckRecordToTouchRecord(record) else {
+                    return
+                }
+                
+                returnArray.append(touchRecord)
+            }
+            
+            // add to database to begin operation.
+            privateDB.add(queryOperation)
+        }
+        
+        // Get the start of the day based on the user's device.
+        let startOfDay = Calendar.current.startOfDay(for: date)
+        
+        // Create predicate.
+        let predicate = NSPredicate.init(format: "timestamp >= %@", argumentArray: [startOfDay])
+        
+        let query = CKQuery(recordType: RecordType.touch.rawValue, predicate: predicate)
+        
+        let queryOperation = CKQueryOperation(query: query)
+        
+        // Run the query. This method will recursively call itself if no records need to be fetched.
+        runOperation(queryOperation) { result in
+            switch result {
+            case .success:
+                completionHandler(.success(returnArray)) // Call the main `completionHandler`, passing back all of our succesful values.
+                return
+                
+            case .failure(let error):
+                // FIXME: What does proper error handling look like? What if we are told to fetch again soon? How to fix?
+                completionHandler(.failure(error))
+                return
+                
+            }
+        }
     }
 }
 

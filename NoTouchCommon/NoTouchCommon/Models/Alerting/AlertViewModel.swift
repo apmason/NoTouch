@@ -48,7 +48,7 @@ public class AlertViewModel {
       
     public init(userSettings: UserSettings) {
         self.userSettings = userSettings
-        self.dbManager = DBManager(userSettings: userSettings)
+        self.dbManager = DBManager(userSettings: userSettings, database: CloudKitDatabase())
         addAudioObserver()
     }
     
