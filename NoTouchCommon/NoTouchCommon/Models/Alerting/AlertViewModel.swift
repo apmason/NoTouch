@@ -46,9 +46,10 @@ public class AlertViewModel {
     
     private let dbManager: DBManager
       
-    public init(userSettings: UserSettings) {
+    public init(userSettings: UserSettings, database: Database) {
         self.userSettings = userSettings
-        self.dbManager = DBManager(userSettings: userSettings, database: CloudKitDatabase())
+        self.dbManager = DBManager(userSettings: userSettings, database: database)
+        self.dbManager.fetchExistingRecords(completionHandler: nil)
         addAudioObserver()
     }
     

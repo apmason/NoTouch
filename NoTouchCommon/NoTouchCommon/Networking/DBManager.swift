@@ -18,19 +18,23 @@ public class DBManager {
     init(userSettings: UserSettings, database: Database) {
         self.userSettings = userSettings
         self.database = database
-        
+    }
+    
+    internal func fetchExistingRecords(completionHandler: ((Result<Void, Error>) -> Void)?) {
         // Fetch all existing records for today.
-        database.fetchRecords(for: Date()) { result in
+        database.fetchRecords(for: Date()) { [weak self] result in
             switch result {
             case .success(let records):
                 // create function to add multiple records.
-                userSettings.recordHolder.add(records)
-                print(records.count)
-                break
+                DispatchQueue.main.async {
+                    print("Adding new records")
+                    self?.userSettings.recordHolder.add(records) // FIXME: We should make sure all records are unique
+                    completionHandler?(.success(()))
+                }
                 
             case .failure(let error):
                 print(error.localizedDescription)
-                break
+                completionHandler?(.failure(error))
                 
             }
         }

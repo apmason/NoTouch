@@ -12,12 +12,12 @@ import SwiftUI
 struct InteractiveVideoView: View {
     
     let buttonHeight: CGFloat = 40
-    let alertViewModel: AlertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings)
+    let videoFeed: VideoFeed
     @State private var showGraph = false
     
     var body: some View {
         ZStack(alignment: .top) {
-            VideoLayerView(alertModel: self.alertViewModel)
+            VideoLayerView(videoFeed: self.videoFeed)
             if !showGraph {
                 HStack(alignment: .top) {
                     OptionButtonStack()
@@ -47,8 +47,11 @@ struct InteractiveVideoView: View {
 }
 
 struct InteractiveVideoView_Previews: PreviewProvider {
+    
+    static var userSettings = UserSettings()
+    
     static var previews: some View {
-        InteractiveVideoView()
-            .environmentObject(UserSettings())
+        InteractiveVideoView(videoFeed: VideoFeed(userSettings: userSettings))
+            .environmentObject(userSettings)
     }
 }

@@ -57,11 +57,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     /// A cancellable observation that tracks whether we should stop or start recording.
     private var pauseObservation: AnyCancellable?
     
+    private let alertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings)
+    
+    private var contentViewModel: ContentViewModel!
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        self.contentViewModel = ContentViewModel(alertModel: alertViewModel)
         setCameraAuthState()
         
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        let contentView = ContentView(contentViewModel: contentViewModel)
             .environmentObject(AppDelegate.userSettings)
 
         // Create the window and set the content view. 

@@ -13,11 +13,12 @@ import NoTouchCommon
 struct ContentView: View {
     
     @EnvironmentObject var userSettings: UserSettings
+    let contentViewModel: ContentViewModel
     
     @ViewBuilder
     var body: some View {
         if userSettings.cameraAuthState == .authorized || userSettings.cameraAuthState == .notDetermined {
-            InteractiveVideoView()
+            InteractiveVideoView(videoFeed: self.contentViewModel.feed)
         } else {
             VStack {
                 Text("Please authorize camera usage to continue.")
@@ -36,8 +37,12 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    
+    static let userSettings = UserSettings()
+    static let alertViewModel = AlertViewModel(userSettings: userSettings)
+    
     static var previews: some View {
-        ContentView()
-            .environmentObject(UserSettings())
+        ContentView(contentViewModel: ContentViewModel(alertModel: alertViewModel))
+            .environmentObject(userSettings)
     }
 }

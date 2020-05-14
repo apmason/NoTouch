@@ -26,10 +26,6 @@ class ContentViewModel {
         
         visionModel.delegate = self
     }
-    
-    public func setPreviewView(to nativeView: NativeView) {
-        feed.setPreviewView(to: nativeView)
-    }
 }
 
 // MARK: - VideoFeedDelegate
