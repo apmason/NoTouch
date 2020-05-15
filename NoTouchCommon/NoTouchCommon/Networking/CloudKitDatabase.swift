@@ -70,36 +70,6 @@ public class CloudKitDatabase: Database {
         // The array that is to be returned.
         var returnArray: [TouchRecord] = []
         
-//        func runOperation(_ operation: CKQueryOperation, completionHandler: @escaping (Result<Void, Error>) -> Void) {
-//            operation.queryCompletionBlock = { newCursor, error in
-//                if let error = error { // TODO: We need to handle errors properly (CloudKit errors may tell us if we need to call again soon, or something of the sort.
-//                    completionHandler(.failure(error))
-//                    return
-//                }
-//
-//                if let newCursor = newCursor { // We have a cursor, which means more records can be fetched.
-//                    let newOperation = CKQueryOperation(cursor: newCursor)
-//                    runOperation(newOperation, completionHandler: completionHandler)
-//                    return
-//                }
-//                else { // We have a succesful completion block, we can now call the final completion, the operation is done.
-//                    completionHandler(.success(()))
-//                    return
-//                }
-//            }
-//
-//            operation.recordFetchedBlock = { record in
-//                guard let touchRecord = ckRecordToTouchRecord(record) else {
-//                    return
-//                }
-//
-//                returnArray.append(touchRecord)
-//            }
-//
-//            // add to database to begin operation.
-//            privateDB.add(queryOperation)
-//        }
-        
         // Get the start of the day based on the user's device.
         let startOfDay = Calendar.current.startOfDay(for: date) as NSDate
         
@@ -110,52 +80,51 @@ public class CloudKitDatabase: Database {
         
         let queryOperation = CKQueryOperation(query: query)
         
-        queryOperation.queryCompletionBlock = { newCursor, error in
-            if let error = error { // TODO: We need to handle errors properly (CloudKit errors may tell us if we need to call again soon, or something of the sort.
+        /// Runs an initial `operation`, and if we are returned a cursor recursively creates and runs another operation until all records have been retrieved.
+        func fetchAllRecords(with operation: CKQueryOperation, completionHandler: @escaping (Result<Void, Error>) -> Void) {
+            operation.queryCompletionBlock = { newCursor, error in
+                if let error = error { // TODO: We need to handle errors properly (CloudKit errors may tell us if we need to call again soon, or something of the sort.
+                    completionHandler(.failure(error))
+                    return
+                }
+                
+                if let newCursor = newCursor { // We have a cursor, which means more records can be fetched.
+                    let newOperation = CKQueryOperation(cursor: newCursor)
+                    fetchAllRecords(with: newOperation, completionHandler: completionHandler)
+                    return
+                }
+                else { // If we weren't supplied a cursor that means the final operation was commited, we can now call the final completion, we are done.
+                    completionHandler(.success(()))
+                    return
+                }
+            }
+            
+            operation.recordFetchedBlock = { record in
+                guard let touchRecord = ckRecordToTouchRecord(record) else {
+                    return
+                }
+                
+                returnArray.append(touchRecord)
+            }
+            
+            // add to database to begin operation.
+            privateDB.add(queryOperation)
+        }
+        
+        // Fetch all records
+        fetchAllRecords(with: queryOperation) { result in
+            switch result {
+            case .success:
+                completionHandler(.success(returnArray)) // Call the main `completionHandler`, passing back all of our succesful values.
+                return
+                
+            case .failure(let error):
+                // FIXME: What does proper error handling look like? What if we are told to fetch again soon? How to fix?
                 completionHandler(.failure(error))
                 return
-            }
-            
-            if let newCursor = newCursor { // We have a cursor, which means more records can be fetched.
-                //let newOperation = CKQueryOperation(cursor: newCursor)
-                //runOperation(newOperation, completionHandler: completionHandler)
-                print("I have a new cursor here.")
-                return
-            }
-            else { // We have a succesful completion block, we can now call the final completion, the operation is done.
-                print("Succesful completion block.")
-                // Stop executing
-                queryOperation.cancel()
-                completionHandler(.success(returnArray))
-                return
-            }
-        }
-        
-        queryOperation.recordFetchedBlock = { record in
-            guard let touchRecord = ckRecordToTouchRecord(record) else {
-                return
-            }
-            
-            returnArray.append(touchRecord)
-        }
                 
-        // add to database to begin operation.
-        privateDB.add(queryOperation)
-        
-        // Run the query. This method will recursively call itself if no records need to be fetched.
-//        runOperation(queryOperation) { result in
-//            switch result {
-//            case .success:
-//                completionHandler(.success(returnArray)) // Call the main `completionHandler`, passing back all of our succesful values.
-//                return
-//
-//            case .failure(let error):
-//                // FIXME: What does proper error handling look like? What if we are told to fetch again soon? How to fix?
-//                completionHandler(.failure(error))
-//                return
-//
-//            }
-//        }
+            }
+        }
     }
 }
 
