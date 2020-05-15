@@ -14,11 +14,11 @@ public protocol Database {
     func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void)
 }
 
-class CloudKitDatabase: Database {
+public class CloudKitDatabase: Database {
 
     typealias RecordItem = CKRecord
 
-    func saveItem(_ item: CKRecord, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
+    public func saveItem(_ item: CKRecord, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
         self.privateDB.save(item, completionHandler: completionHandler)
     }
     
@@ -44,7 +44,7 @@ class CloudKitDatabase: Database {
     private let zoneID = CKRecordZone.ID(zoneName: "MyName", ownerName: CKCurrentUserDefaultName)
     private let privateDB: CKDatabase
     
-    init() {
+    public init() {
         let container = CKContainer.default()
         self.privateDB = container.privateCloudDatabase
         
@@ -52,7 +52,7 @@ class CloudKitDatabase: Database {
         //createSubscriptions()
     }
     
-    func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void) {
+    public func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void) {
         /// Turn CKRecord into TouchRecord
         func ckRecordToTouchRecord(_ ckRecord: CKRecord) -> TouchRecord? {
             guard let deviceName = ckRecord["deviceName"] as? String,
@@ -101,10 +101,10 @@ class CloudKitDatabase: Database {
 //        }
         
         // Get the start of the day based on the user's device.
-        let startOfDay = Calendar.current.startOfDay(for: date)
+        let startOfDay = Calendar.current.startOfDay(for: date) as NSDate
         
         // Create predicate.
-        let predicate = NSPredicate.init(format: "timestamp >= %@", argumentArray: [startOfDay])
+        let predicate = NSPredicate(format: "timestamp >= %@", startOfDay)
         
         let query = CKQuery(recordType: RecordType.touch.rawValue, predicate: predicate)
         
@@ -126,8 +126,7 @@ class CloudKitDatabase: Database {
                 print("Succesful completion block.")
                 // Stop executing
                 queryOperation.cancel()
-                
-                //completionHandler(.success(returnArray))
+                completionHandler(.success(returnArray))
                 return
             }
         }

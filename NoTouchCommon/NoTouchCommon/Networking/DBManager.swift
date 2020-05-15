@@ -27,7 +27,6 @@ public class DBManager {
             case .success(let records):
                 // create function to add multiple records.
                 DispatchQueue.main.async {
-                    print("Adding new records")
                     self?.userSettings.recordHolder.add(records) // FIXME: We should make sure all records are unique
                     completionHandler?(.success(()))
                 }
@@ -42,11 +41,11 @@ public class DBManager {
     
     internal func createTouchRecord() {
         let deviceName = DeviceData.deviceName
-        let date = Date()
+        let date = NSDate()
         let appVersion = DeviceData.appVersion
         
         let touchRecord = TouchRecord(deviceName: deviceName,
-                                      timestamp: date,
+                                      timestamp: date as Date,
                                       version: appVersion)
         self.userSettings.recordHolder.add(touchRecord)
         
