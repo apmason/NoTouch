@@ -6,9 +6,28 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import Network
 import Foundation
 
-class CloudKitRetryManager {
+public protocol RetryManager {
+    var monitor: NWPathMonitor { get }
+    var networkIsUp: Bool { get }
+}
+
+class CloudKitRetryManager: RetryManager {
+    let monitor = NWPathMonitor()
+    
+    var networkIsUp: Bool = false
+    
+    let queue = DispatchQueue(label: "com.handsOff.common.pathMonitor")
+    
+    init() {
+        monitor.pathUpdateHandler = { [weak self] path in
+            self?.networkIsUp = path.status == .satisfied
+        }
+        
+        monitor.start(queue: queue)
+    }
     
     /**
      - Monitor network.
