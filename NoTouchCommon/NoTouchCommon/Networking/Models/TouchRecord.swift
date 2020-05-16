@@ -26,4 +26,9 @@ extension TouchRecord: Equatable, Hashable {
     public static func == (lhs: TouchRecord, rhs: TouchRecord) -> Bool {
         return lhs.timestamp == rhs.timestamp
     }
+    
+    /// Only compare timestamps.
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(timestamp)
+    }
 }
