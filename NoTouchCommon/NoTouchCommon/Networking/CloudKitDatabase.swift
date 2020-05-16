@@ -22,17 +22,6 @@ public class CloudKitDatabase: Database {
         self.privateDB.save(item, completionHandler: completionHandler)
     }
     
-    // A list of things that we'll need to do.
-    /**
-     Fetch records needed to launch your app and initially present data to the user.
-     Perform queries based on the user’s actions or preferences.
-     Save changes to either the private or public database.
-     Batch multiple save and fetch operations in a single operation.
-     Create subscriptions to receive push notifications when records of interest change.
-     Update the object model and views when the app receives changes to records.
-     Handle errors that may occur when executing asynchronous operations.
-     */
-    
     // Store these to disk so that they persist across launches
     private var createdCustomZone = false
     private var subscribedToPrivateChanges = false

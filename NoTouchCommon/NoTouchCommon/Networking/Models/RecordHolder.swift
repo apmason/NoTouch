@@ -26,12 +26,19 @@ public struct RecordHolder {
     
     // TODO: Make sure topAxisValue changes when we add a record.
     public mutating func add(_ record: TouchRecord) {
-        self.touchRecords.append(record)
-        updateAfterRecordAddition()
+        if !touchRecords.contains(where: { $0.timestamp == record.timestamp }) {
+            self.touchRecords.append(record)
+            updateAfterRecordAddition()
+        }
     }
     
     public mutating func add(_ records: [TouchRecord]) {
-        self.touchRecords.append(contentsOf: records)
+        for record in records {
+            if !touchRecords.contains(where: {$0.timestamp == record.timestamp }) {
+                self.touchRecords.append(record)
+            }
+        }
+        
         updateAfterRecordAddition()
     }
     

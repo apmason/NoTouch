@@ -30,7 +30,6 @@ class RecordHolderTests: XCTestCase {
             XCTAssert(touchCount == 0)
         }
         
-        
         // Days in the future shouldn't be added.
         let future = Calendar.current.date(byAdding: .day, value: 3, to: Date())!
         recordHolder.add(dummyRecordWith(date: future))
@@ -77,6 +76,53 @@ class RecordHolderTests: XCTestCase {
         
         recordHolder.add(dummyRecordWith(date: laterInDay))
         XCTAssert(recordHolder.totalTouchCount == 2)
+    }
+    
+    func testArrayAddition() {
+        var recordHolder = RecordHolder()
+        
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+        let dummyOne = dummyRecordWith(date: startOfDay)
+        
+        let laterInDay = Calendar.current.date(byAdding: .hour, value: 2, to: startOfDay)!
+        let dummyTwo = dummyRecordWith(date: laterInDay)
+        
+        XCTAssert(recordHolder.totalTouchCount == 0)
+        let records = [dummyOne, dummyTwo]
+        recordHolder.add(records)
+        
+        XCTAssert(recordHolder.totalTouchCount == 2)
+    }
+    
+    func testRepeatArrayAddition() {
+        var recordHolder = RecordHolder()
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+        // two of same date, this should be handled by this function
+        let dummyOne = dummyRecordWith(date: startOfDay)
+        let dummyTwo = dummyRecordWith(date: startOfDay)
+        
+        let laterInDay = Calendar.current.date(byAdding: .hour, value: 2, to: startOfDay)!
+        let dummyThree = dummyRecordWith(date: laterInDay)
+        
+        XCTAssert(recordHolder.totalTouchCount == 0)
+        let records = [dummyOne, dummyTwo, dummyThree]
+        recordHolder.add(records)
+        
+        XCTAssert(recordHolder.totalTouchCount == 2)
+    }
+    
+    func testRepeatAddition() {
+        var recordHolder = RecordHolder()
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+        let dummy = dummyRecordWith(date: startOfDay)
+        
+        XCTAssert(recordHolder.totalTouchCount == 0)
+        recordHolder.add(dummy)
+        
+        XCTAssert(recordHolder.totalTouchCount == 1)
+        recordHolder.add(dummy)
+        
+        XCTAssert(recordHolder.totalTouchCount == 1)
     }
     
     private func dummyRecordWith(date: Date) -> TouchRecord {

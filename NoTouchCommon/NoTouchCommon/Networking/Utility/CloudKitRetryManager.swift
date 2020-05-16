@@ -10,4 +10,14 @@ import Foundation
 
 class CloudKitRetryManager {
     
+    /**
+     - Monitor network.
+        - For sending: see if the network is up, if so send, handle errors appropriately if things fail.
+        - If network is _not up_ cache records, send when back up. As a batch.
+
+     - For a network failure, do an auto retry.
+     - Monitor the network, when it comes back on, make the call to fetch all records.
+        - This relies on us only adding unique records to the UserSettings.RecordHolder.
+        -
+     */
 }
