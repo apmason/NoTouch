@@ -42,12 +42,26 @@ class DBManagerTests: XCTestCase {
         
         wait(for: [expectation], timeout: 4)
     }
+    
+    func testDatabaseRecordConversion() {
+        let deviceName = "Alex's Mac"
+        let timestamp = Date()
+        let version = "123"
+        let touchRecord = TouchRecord(deviceName: deviceName, timestamp: timestamp, version: version)
+        
+        let database = MockDatabase()
+        let ckRecord = database.ckRecord(from: touchRecord)
+        
+        XCTAssert(ckRecord[NetworkingConstants.deviceNameKey] == deviceName)
+        XCTAssert(ckRecord[NetworkingConstants.timestampKey] == timestamp as NSDate)
+        XCTAssert(ckRecord[NetworkingConstants.versionKey] == version)
+    }
 }
 
 extension DBManagerTests {
     
     class MockDatabase: Database {
-        func saveItem(_ item: CKRecord, completionHandler: @escaping (CKRecord?, Error?) -> Void) {}
+        func saveTouchRecord(_ record: TouchRecord, completionHandler: @escaping (Result<Void, Error>) -> Void) {}
         
         /// Return one `TouchRecord` in the `completionHandler`
         func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void) {

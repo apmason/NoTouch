@@ -37,7 +37,7 @@ class AlertViewModelTests: XCTestCase {
 
 extension AlertViewModelTests {
     class MockDatabase: Database {
-        func saveItem(_ item: CKRecord, completionHandler: @escaping (CKRecord?, Error?) -> Void) {}
+        func saveTouchRecord(_ record: TouchRecord, completionHandler: @escaping (Result<Void, Error>) -> Void) {}
         
         /// Return one `TouchRecord` in the `completionHandler`
         func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void) {

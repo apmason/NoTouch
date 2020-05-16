@@ -44,7 +44,7 @@ public class AlertViewModel {
     
     private let userSettings: UserSettings
     
-    private let dbManager: DBManager
+    private let dbManager: DatabaseManager
       
     public init(userSettings: UserSettings, database: Database) {
         self.userSettings = userSettings
@@ -100,8 +100,7 @@ public class AlertViewModel {
             }
         }
         
-        // TODO: Batch these up?
-        dbManager.createTouchRecord()
+        dbManager.createAndSaveTouchRecord(at: Date())
     }
     
     /// If a touching observation was made but was below our confidence threshold call this function. The `AlertViewModel` will update its internal state to determine when a real alert should be fired.

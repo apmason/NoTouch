@@ -15,4 +15,9 @@ enum RecordType: String {
 internal struct NetworkingConstants {    
     /// The date format that all data sent to the server is in.
     static let dateFormat = "yyyy-MM-dd'T'HH:mm:ss zzz"
+    
+    /// Database info
+    static let deviceNameKey = "deviceName"
+    static let timestampKey = "timestamp"
+    static let versionKey = "version"
 }

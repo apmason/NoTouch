@@ -10,24 +10,41 @@ import SwiftUI
 import CloudKit
 import Foundation
 
-public class DBManager {
+public protocol DatabaseManager {
+    var database: Database { get }
+    var userSettings: UserSettings { get }
+    var retryManager: RetryManager { get }
     
-    private var database: Database
-    private let userSettings: UserSettings
+    /// From the database fetch all records that occured on the current date in the user's timezone.
+    /// - Parameter completionHandler: The result of the fetching operation. Items will be added to the current cache and displayed to the user automatically, this completion will return success or failure of the operation in general.
+    func fetchExistingRecords(completionHandler: ((Result<Void, Error>) -> Void)?)
+    
+    /// Create a `TouchRecord` at the specified `date` and save it to the database.
+    /// - Parameter date: The date to use for the `TouchRecord`.
+    func createAndSaveTouchRecord(at date: Date)
+}
+
+public class DBManager: DatabaseManager {
+    public var database: Database
+    public let userSettings: UserSettings
+    public let retryManager: RetryManager = CloudKitRetryManager()
+    
+    /// This contains records that were not sent because of network conditions, or records that failed to save and need to be retried.
+    private let recordsToSend: [TouchRecord] = []
     
     init(userSettings: UserSettings, database: Database) {
         self.userSettings = userSettings
         self.database = database
     }
     
-    internal func fetchExistingRecords(completionHandler: ((Result<Void, Error>) -> Void)?) {
+    public func fetchExistingRecords(completionHandler: ((Result<Void, Error>) -> Void)?) {
         // Fetch all existing records for today.
         database.fetchRecords(for: Date()) { [weak self] result in
             switch result {
             case .success(let records):
                 // create function to add multiple records.
                 DispatchQueue.main.async {
-                    self?.userSettings.recordHolder.add(records) // FIXME: We should make sure all records are unique
+                    self?.userSettings.recordHolder.add(records)
                     completionHandler?(.success(()))
                 }
                 
@@ -39,54 +56,31 @@ public class DBManager {
         }
     }
     
-    internal func createTouchRecord() {
+    public func createAndSaveTouchRecord(at date: Date) {
         let deviceName = DeviceData.deviceName
-        let date = NSDate()
         let appVersion = DeviceData.appVersion
         
         let touchRecord = TouchRecord(deviceName: deviceName,
-                                      timestamp: date as Date,
+                                      timestamp: date,
                                       version: appVersion)
-        self.userSettings.recordHolder.add(touchRecord)
+        self.userSettings.recordHolder.add(touchRecord) // Add to visible UI immediately.
         
-        // create item.
-        // send to DB
-        let record = CKRecord(recordType: RecordType.touch.rawValue)
-        record["deviceName"] = deviceName
-        record["timestamp"] = date // TODO: what timezone is this in?
-        record["version"] = appVersion
-        
-        database.saveItem(record) { record, error in
-            if let error = error {
-                print("Attempt to save item failed: \(error.localizedDescription)")
-            } else {
-             //   print("Success!")
+        database.saveTouchRecord(touchRecord) { result in
+            switch result {
+            case .success:
+                break // don't need to do anything
+                
+            case .failure(let error):
+                break // TODO: Handle this error, what's the issue?
             }
         }
     }
-    
-    internal func readTouchRecord() -> [TouchRecord] {
-        return []
-    }
-    
-    private func fetchChanges(in databaseScope: CKDatabase.Scope) {
-        // TODO: Fix these changes.
-        //database.fetchChanges(in: databaseScope) {
-            // done, reset data.
-        //}
-    }
-    
-    // What we want is: make a batched call to get records that occured on today (using a predicate).
-    // we then store this data in the `userSettings.recordHolder`. Write tests for that. We can test the DBManager class. We will pass in a dummy `UserSettings` object. We will fetch records. We should pass in the DB stub that we want. (CloudKitDatabase should be a protocol, we can make a stub that performs the actions that we want (returning an array of TouchRecords)).
-    
+
     /**
      
      Things to find out:
      -
-     - What is the API to use to call into CloudKit with a predicate? <-- Doing this NOW.
-     "When using such an operator, it is recommended that you use a cursor to batch the results into smaller groups for processing." - https://developer.apple.com/documentation/cloudkit/ckquery
      - Is there any error handling that needs to be done for that? Refetching if it decides to only get so many records?
-     - Are there performance implications for storing all the records individually? I can't imagine that on the client side it will take up that much space.
      
      Other TODOs:
      -

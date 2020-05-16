@@ -21,6 +21,7 @@
 		C3808E2B246D7C58008304F3 /* AlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */; };
 		C391EA44245F4B690062A07D /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391EA43245F4B690062A07D /* GraphView.swift */; };
 		C39AF22C24705AC000C10A54 /* TouchRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AF22B24705AC000C10A54 /* TouchRecordTests.swift */; };
+		C39AF22E24706A2E00C10A54 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AF22D24706A2E00C10A54 /* Database.swift */; };
 		C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */; };
 		C3B0E04D245E30CC00BC4946 /* TouchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */; };
 		C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */; };
@@ -77,6 +78,7 @@
 		C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModelTests.swift; sourceTree = "<group>"; };
 		C391EA43245F4B690062A07D /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C39AF22B24705AC000C10A54 /* TouchRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordTests.swift; sourceTree = "<group>"; };
+		C39AF22D24706A2E00C10A54 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAxisLabel.swift; sourceTree = "<group>"; };
 		C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecord.swift; sourceTree = "<group>"; };
 		C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingConstants.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		C3DC7E40246BF6A30093B34B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				C39AF22D24706A2E00C10A54 /* Database.swift */,
 				C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */,
 				C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */,
 				C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */,
@@ -410,6 +413,7 @@
 				C330CE5424617F0A00FCA49A /* Positioner.swift in Sources */,
 				C31871ED244BB5BC00F079FC /* UserSettings.swift in Sources */,
 				C3BF2A9C244219AE004BDEE4 /* FirstRunModel.swift in Sources */,
+				C39AF22E24706A2E00C10A54 /* Database.swift in Sources */,
 				C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */,
 				C330CE562461980B00FCA49A /* BarsView.swift in Sources */,
 				C3B0E04D245E30CC00BC4946 /* TouchRecord.swift in Sources */,

@@ -44,10 +44,11 @@ class TouchRecordTests: XCTestCase {
     }
     
     func testTouchRecordSetDuplicate() {
-        let date = Date()
+        let dateString = Date.dateToDBString(Date(), in: .current)
+        let dbDate = Date.dbStringToDate(dateString, in: .current)!
         
-        let recordOne = TouchRecord(deviceName: "123", timestamp: date, version: "123")
-        let recordTwo = TouchRecord(deviceName: "123", timestamp: date, version: "123")
+        let recordOne = TouchRecord(deviceName: "123", timestamp: dbDate, version: "123")
+        let recordTwo = TouchRecord(deviceName: "123", timestamp: dbDate, version: "123")
         
         var recordSet: Set<TouchRecord> = []
         recordSet.insert(recordOne)

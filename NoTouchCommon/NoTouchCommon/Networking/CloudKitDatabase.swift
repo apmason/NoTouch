@@ -9,18 +9,20 @@
 import CloudKit
 import Foundation
 
-public protocol Database {
-    func saveItem(_ item: CKRecord, completionHandler: @escaping (CKRecord?, Error?) -> Void) // FIXME: CKRecord should be wrapped in a custom type, so we're not so tied to CloudKit.
-    func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void)
-    var retryManager: RetryManager { get }
-}
-
 public class CloudKitDatabase: Database {
-
+    
     typealias RecordItem = CKRecord
-
-    public func saveItem(_ item: CKRecord, completionHandler: @escaping (CKRecord?, Error?) -> Void) {
-        self.privateDB.save(item, completionHandler: completionHandler)
+    
+    public func saveTouchRecord(_ record: TouchRecord,
+                                completionHandler: @escaping (Result<Void, Error>) -> Void) {
+        let ckRecord = self.ckRecord(from: record)
+        self.privateDB.save(ckRecord) { _, error in
+            if let error = error {
+                completionHandler(.failure(error))
+            } else {
+                completionHandler(.success(()))
+            }
+        }
     }
     
     // Store these to disk so that they persist across launches
@@ -33,9 +35,7 @@ public class CloudKitDatabase: Database {
     // CKCurrentUserDefaultName specifies the current user's ID when creating a zone ID
     private let zoneID = CKRecordZone.ID(zoneName: "MyName", ownerName: CKCurrentUserDefaultName)
     private let privateDB: CKDatabase
-    
-    public let retryManager: RetryManager = CloudKitRetryManager()
-    
+        
     public init() {
         let container = CKContainer.default()
         self.privateDB = container.privateCloudDatabase

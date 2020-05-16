@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum DatabaseError: Error {
+public enum DatabaseError: Error {
     case accountRestriction
     case networkFailure // (.serverRejectedRequest)
     case authenticationFailure // go to settings and sign in (.notAuthenticated)
