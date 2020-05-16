@@ -9,12 +9,20 @@
 import Network
 import Foundation
 
-public protocol RetryManager {
+public protocol RetryManagerDelegate: class {
+    func networkStateDidChange(_ networkAvailable: Bool)
+}
+
+public protocol RetryManager: class {
     var monitor: NWPathMonitor { get }
     var networkIsUp: Bool { get }
+    var delegate: RetryManagerDelegate? { get set }
 }
 
 class CloudKitRetryManager: RetryManager {
+    
+    weak var delegate: RetryManagerDelegate?
+    
     let monitor = NWPathMonitor()
     
     var networkIsUp: Bool = false
@@ -24,19 +32,9 @@ class CloudKitRetryManager: RetryManager {
     init() {
         monitor.pathUpdateHandler = { [weak self] path in
             self?.networkIsUp = path.status == .satisfied
+            self?.delegate?.networkStateDidChange(path.status == .satisfied)
         }
         
         monitor.start(queue: queue)
     }
-    
-    /**
-     - Monitor network.
-        - For sending: see if the network is up, if so send, handle errors appropriately if things fail.
-        - If network is _not up_ cache records, send when back up. As a batch.
-
-     - For a network failure, do an auto retry.
-     - Monitor the network, when it comes back on, make the call to fetch all records.
-        - This relies on us only adding unique records to the UserSettings.RecordHolder.
-        -
-     */
 }

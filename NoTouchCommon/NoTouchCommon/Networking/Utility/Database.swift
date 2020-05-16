@@ -11,6 +11,7 @@ import Foundation
 
 public protocol Database {
     func saveTouchRecord(_ record: TouchRecord, completionHandler: @escaping (Result<Void, Error>) -> Void)
+    func saveTouchRecords(_ records: [TouchRecord], completionHandler: @escaping (Result<Void, Error>) -> Void)
     func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void)
 }
 

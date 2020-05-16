@@ -30,11 +30,12 @@ public class DBManager: DatabaseManager {
     public let retryManager: RetryManager = CloudKitRetryManager()
     
     /// This contains records that were not sent because of network conditions, or records that failed to save and need to be retried.
-    private let recordsToSend: [TouchRecord] = []
+    private var recordsToSend: [TouchRecord] = []
     
     init(userSettings: UserSettings, database: Database) {
         self.userSettings = userSettings
         self.database = database
+        retryManager.delegate = self
     }
     
     public func fetchExistingRecords(completionHandler: ((Result<Void, Error>) -> Void)?) {
@@ -65,19 +66,22 @@ public class DBManager: DatabaseManager {
                                       version: appVersion)
         self.userSettings.recordHolder.add(touchRecord) // Add to visible UI immediately.
         
-        database.saveTouchRecord(touchRecord) { result in
-            switch result {
-            case .success:
-                break // don't need to do anything
-                
-            case .failure(let error):
-                break // TODO: Handle this error, what's the issue?
+        if retryManager.networkIsUp {
+            database.saveTouchRecord(touchRecord) { result in
+                switch result {
+                case .success:
+                    break // don't need to do anything
+                    
+                case .failure(let error):
+                    break // TODO: Handle this error, what's the issue?
+                }
             }
+        } else {
+            recordsToSend.append(touchRecord)
         }
     }
 
     /**
-     
      Things to find out:
      -
      - Is there any error handling that needs to be done for that? Refetching if it decides to only get so many records?
@@ -86,4 +90,14 @@ public class DBManager: DatabaseManager {
      -
      - What if CloudKit isn't available? We'll need to present something to the user telling them so. Is there a callback that we use to monitor for that? How do you present an action sheet in SwiftUI?
      */
+}
+
+extension DBManager: RetryManagerDelegate {
+    
+    public func networkStateDidChange(_ networkAvailable: Bool) {
+        if networkAvailable && !recordsToSend.isEmpty {
+            // batch and send records.
+            
+        }
+    }
 }

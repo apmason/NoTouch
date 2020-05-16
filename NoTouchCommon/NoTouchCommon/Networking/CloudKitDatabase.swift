@@ -11,20 +11,6 @@ import Foundation
 
 public class CloudKitDatabase: Database {
     
-    typealias RecordItem = CKRecord
-    
-    public func saveTouchRecord(_ record: TouchRecord,
-                                completionHandler: @escaping (Result<Void, Error>) -> Void) {
-        let ckRecord = self.ckRecord(from: record)
-        self.privateDB.save(ckRecord) { _, error in
-            if let error = error {
-                completionHandler(.failure(error))
-            } else {
-                completionHandler(.success(()))
-            }
-        }
-    }
-    
     // Store these to disk so that they persist across launches
     private var createdCustomZone = false
     private var subscribedToPrivateChanges = false
@@ -39,7 +25,6 @@ public class CloudKitDatabase: Database {
     public init() {
         let container = CKContainer.default()
         self.privateDB = container.privateCloudDatabase
-        
         // TODO: Should we call createCustomZone here?
         //createSubscriptions()
     }
@@ -150,6 +135,43 @@ public class CloudKitDatabase: Database {
                 
             }
         }
+    }
+    
+    public func saveTouchRecord(_ record: TouchRecord,
+                                completionHandler: @escaping (Result<Void, Error>) -> Void) {
+        let ckRecord = self.ckRecord(from: record)
+        self.privateDB.save(ckRecord) { _, error in
+            if let error = error {
+                completionHandler(.failure(error))
+            } else {
+                completionHandler(.success(()))
+            }
+        }
+    }
+}
+
+// MARK: - Batch Save
+
+extension CloudKitDatabase {
+    
+    public func saveTouchRecords(_ records: [TouchRecord], completionHandler: @escaping (Result<Void, Error>) -> Void) {
+        let ckRecords = records.map({ self.ckRecord(from: $0) })
+        let operation = CKModifyRecordsOperation(recordsToSave: ckRecords)
+        operation.isAtomic = true
+        operation.modifyRecordsCompletionBlock = { _, _, error in
+            if let ckError = error as? CKError {
+                switch ckError.code {
+                case .limitExceeded:
+                    // split the operation and retry. (how to monitor two seperate operations?)
+                    break
+                    
+                default:
+                    break
+                    
+                }
+            }
+        }
+        // submit
     }
 }
 
