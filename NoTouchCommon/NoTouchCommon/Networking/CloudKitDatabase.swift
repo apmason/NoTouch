@@ -81,21 +81,54 @@ public class CloudKitDatabase: Database {
         let queryOperation = CKQueryOperation(query: query)
         
         /// Runs an initial `operation`, and if we are returned a cursor recursively creates and runs another operation until all records have been retrieved.
-        func fetchAllRecords(with operation: CKQueryOperation, completionHandler: @escaping (Result<Void, Error>) -> Void) {
+        func fetchAllRecords(with operation: CKQueryOperation, completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
             operation.queryCompletionBlock = { newCursor, error in
-                if let error = error { // TODO: We need to handle errors properly (CloudKit errors may tell us if we need to call again soon, or something of the sort.
-                    completionHandler(.failure(error))
-                    return
+                if let error = error as? CKError {
+                    var dbError: DatabaseError? = nil
+                    switch error.code {
+                    case .internalError, .serverRejectedRequest, .serverResponseLost:
+                        dbError = .databaseError
+                        
+                    case .limitExceeded:
+                        // TODO: Split the operation into two, for now just use the default db error
+                        dbError = .databaseError
+                        
+                    case .managedAccountRestricted, .notAuthenticated, .permissionFailure:
+                        dbError = .authenticationFailure
+                        
+                    case .networkFailure, .networkUnavailable:
+                        print("An error that is returned when the network is available but cannot be accessed.")
+                        // TODO: Monitor network reachability, retry operations when available.
+                        // Tell the user we're still loading?
+                        // Need a backoff timer class
+                        dbError = .networkFailure
+                        
+                    case .serviceUnavailable, .requestRateLimited, .zoneBusy:
+                        // Wait the alloted amount of time, then try the operation again.
+                        if let timeToWait = error.userInfo[CKErrorRetryAfterKey] as? NSNumber {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + timeToWait.doubleValue) {
+                                fetchAllRecords(with: operation, completionHandler: completionHandler)
+                            }
+                        } else {
+                            dbError = .networkFailure
+                        }
+                        
+                    default:
+                        print("Received default error of type: \(error.localizedDescription)")
+                    }
+                    
+                    guard let unwrappedDBError = dbError else {
+                        return
+                    }
+                    
+                    completionHandler(.failure(unwrappedDBError))
                 }
-                
-                if let newCursor = newCursor { // We have a cursor, which means more records can be fetched.
+                else if let newCursor = newCursor { // We have a cursor, which means more records can be fetched.
                     let newOperation = CKQueryOperation(cursor: newCursor)
                     fetchAllRecords(with: newOperation, completionHandler: completionHandler)
-                    return
                 }
-                else { // If we weren't supplied a cursor that means the final operation was commited, we can now call the final completion, we are done.
+                else { // If we weren't supplied a cursor that means the final operation succeeded, we can now call the final completion, we are done.
                     completionHandler(.success(()))
-                    return
                 }
             }
             
