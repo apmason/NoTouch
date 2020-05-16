@@ -20,25 +20,19 @@ public struct RecordHolder {
     
     public var touchObservances: [Touch] = [Touch](repeating: 0, count: 24)
     
-    private var touchRecords: [TouchRecord] = []
+    private var touchRecords: Set<TouchRecord> = []
     
     private var topAxisValue: Touch = 0
     
     // TODO: Make sure topAxisValue changes when we add a record.
     public mutating func add(_ record: TouchRecord) {
-        if !touchRecords.contains(where: { $0.timestamp == record.timestamp }) {
-            self.touchRecords.append(record)
-            updateAfterRecordAddition()
-        }
+        self.touchRecords.insert(record)
+        updateAfterRecordAddition()
     }
     
     public mutating func add(_ records: [TouchRecord]) {
-        for record in records {
-            if !touchRecords.contains(where: {$0.timestamp == record.timestamp }) {
-                self.touchRecords.append(record)
-            }
-        }
-        
+        let recordSet: Set<TouchRecord> = Set(records)
+        self.touchRecords = self.touchRecords.union(recordSet)
         updateAfterRecordAddition()
     }
     

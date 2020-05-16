@@ -21,3 +21,9 @@ public struct TouchRecord: Identifiable {
         self.version = version
     }
 }
+
+extension TouchRecord: Equatable, Hashable {
+    public static func == (lhs: TouchRecord, rhs: TouchRecord) -> Bool {
+        return lhs.timestamp == rhs.timestamp
+    }
+}
