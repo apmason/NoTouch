@@ -9,10 +9,11 @@
 import Foundation
 
 public enum DatabaseError: Error {
-    case accountRestriction
     case networkFailure // (.serverRejectedRequest)
     case authenticationFailure // go to settings and sign in (.notAuthenticated)
     case databaseError // CKError.internalError
+    case batchSaveFailed
+    case unknownError(Error)
 }
 
 // .limitExceeded <- Handle internally

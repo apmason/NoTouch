@@ -74,6 +74,7 @@ public class DBManager: DatabaseManager {
                     
                 case .failure(let error):
                     break // TODO: Handle this error, what's the issue?
+
                 }
             }
         } else {
@@ -96,8 +97,34 @@ extension DBManager: RetryManagerDelegate {
     
     public func networkStateDidChange(_ networkAvailable: Bool) {
         if networkAvailable && !recordsToSend.isEmpty {
-            // batch and send records.
-            
+            // To avoid a race condition copy the current items in the array. This avoids issues where the async task takes some time and more items are added in the meantime.
+            let records = self.recordsToSend
+            database.saveTouchRecords(records) { [weak self] result in
+                guard let self = self else {
+                    return
+                }
+                
+                switch result {
+                case .success:
+                    let savedSet = Set(records)
+                    let recordsToSendSet = Set(self.recordsToSend)
+                    let remaining = recordsToSendSet.subtracting(savedSet)
+                    self.recordsToSend = Array(remaining)
+                    
+                case .failure(let dbError):
+                    switch dbError {
+                    case .authenticationFailure:
+                        // TODO: present this to the user. (We should also be monitoring CloudKit)
+                        
+                        break
+                        
+                    default:
+                        // TODO: Handle gracefully
+                        break
+                        
+                    }
+                }
+            }
         }
     }
 }

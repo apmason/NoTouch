@@ -138,11 +138,12 @@ public class CloudKitDatabase: Database {
     }
     
     public func saveTouchRecord(_ record: TouchRecord,
-                                completionHandler: @escaping (Result<Void, Error>) -> Void) {
+                                completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
         let ckRecord = self.ckRecord(from: record)
         self.privateDB.save(ckRecord) { _, error in
+            // TODO: Handle this individual errors elegantly (like we do for the batch save)
             if let error = error {
-                completionHandler(.failure(error))
+                completionHandler(.failure(.unknownError(error)))
             } else {
                 completionHandler(.success(()))
             }
@@ -154,24 +155,59 @@ public class CloudKitDatabase: Database {
 
 extension CloudKitDatabase {
     
-    public func saveTouchRecords(_ records: [TouchRecord], completionHandler: @escaping (Result<Void, Error>) -> Void) {
+    public func saveTouchRecords(_ records: [TouchRecord],
+                                 completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
         let ckRecords = records.map({ self.ckRecord(from: $0) })
         let operation = CKModifyRecordsOperation(recordsToSave: ckRecords)
+        operation.qualityOfService = .userInteractive
         operation.isAtomic = true
+        
         operation.modifyRecordsCompletionBlock = { _, _, error in
             if let ckError = error as? CKError {
+                // If we have instructions on when to retry simply retry right away.
+                if let retryTime = ckError.userInfo[CKErrorRetryAfterKey] as? NSNumber {
+                    DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + retryTime.doubleValue) { [weak self] in
+                        self?.saveTouchRecords(records, completionHandler: completionHandler)
+                    }
+                    return
+                }
+                
                 switch ckError.code {
                 case .limitExceeded:
-                    // split the operation and retry. (how to monitor two seperate operations?)
-                    break
+                    // split the operation and retry.
+                    let halfWayIndex = records.count / 2
+                    let arrayOne = Array(records[0..<halfWayIndex])
+                    let arrayTwo = Array(records[halfWayIndex..<records.count])
+                    
+                    self.saveTouchRecords(arrayOne) { result in
+                        switch result {
+                        case .success: // If we succeed then call the second array with the top level completionHandler
+                            self.saveTouchRecords(arrayTwo, completionHandler: completionHandler)
+                            
+                        case .failure(let error): // We failed on a larger scale that we can't recover from.
+                            completionHandler(.failure(error))
+                            
+                        }
+                    }
+                    
+                case .batchRequestFailed:
+                    // TODO: Handle individual failures? How does one do that?
+                    completionHandler(.failure(.batchSaveFailed))
+                    
+                case .managedAccountRestricted, .notAuthenticated, .permissionFailure:
+                    completionHandler(.failure(.authenticationFailure)) // tell the user they need to sign in.
                     
                 default:
-                    break
+                    completionHandler(.failure(.unknownError(ckError)))
                     
                 }
+            } else {
+                completionHandler(.success(()))
             }
         }
+        
         // submit
+        self.privateDB.add(operation)
     }
 }
 
