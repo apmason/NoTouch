@@ -21,12 +21,49 @@ public class CloudKitDatabase: Database {
     // CKCurrentUserDefaultName specifies the current user's ID when creating a zone ID
     private let zoneID = CKRecordZone.ID(zoneName: "MyName", ownerName: CKCurrentUserDefaultName)
     private let privateDB: CKDatabase
-        
+    private let container = CKContainer.default()
+    
+    public var hasCompletedInitialFetch: Bool = false
+    
+    public weak var delegate: DatabaseDelegate?
+    
     public init() {
-        let container = CKContainer.default()
         self.privateDB = container.privateCloudDatabase
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(cloudKitAuthStateChanged(_:)), name: Notification.Name.CKAccountChanged, object: nil)
+        fetchCloudKitAccountStatus()
+       
         // TODO: Should we call createCustomZone here?
         //createSubscriptions()
+    }
+    
+    private func fetchCloudKitAccountStatus() {
+        container.accountStatus { [weak self] accountStatus, error in
+            if let error = error {
+                print("Error getting account status: \(error.localizedDescription)")
+                self?.delegate?.databaseAuthDidChange(.signedOut)
+                return
+            }
+            
+            switch accountStatus {
+            case .available:
+                self?.delegate?.databaseAuthDidChange(.available)
+                
+            case .couldNotDetermine, .noAccount:
+                self?.delegate?.databaseAuthDidChange(.signedOut)
+                
+            case .restricted:
+                self?.delegate?.databaseAuthDidChange(.restricted)
+                
+            @unknown default:
+                self?.delegate?.databaseAuthDidChange(.signedOut)
+                
+            }
+        }
+    }
+    
+    @objc func cloudKitAuthStateChanged(_ notification: Notification) {
+        fetchCloudKitAccountStatus()
     }
     
     public func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void) {
@@ -57,10 +94,19 @@ public class CloudKitDatabase: Database {
         
         let queryOperation = CKQueryOperation(query: query)
         
-        /// Runs an initial `operation`, and if we are returned a cursor recursively creates and runs another operation until all records have been retrieved.
+        /// Runs an initial `operation`, and if we are returned a cursor, recursively creates and runs another operation until all records have been retrieved.
         func fetchAllRecords(with operation: CKQueryOperation, completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
             operation.queryCompletionBlock = { newCursor, error in
                 if let error = error as? CKError {
+                    
+                    // If we are told we can retry do so immediately, hoping this will catch errors we're not thinking of/explicitly handling.
+                    if let timeToWait = error.userInfo[CKErrorRetryAfterKey] as? NSNumber {
+                        DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + timeToWait.doubleValue) {
+                            fetchAllRecords(with: operation, completionHandler: completionHandler)
+                        }
+                        return
+                    }
+                    
                     var dbError: DatabaseError? = nil
                     switch error.code {
                     case .internalError, .serverRejectedRequest, .serverResponseLost:
@@ -73,21 +119,11 @@ public class CloudKitDatabase: Database {
                         dbError = .authenticationFailure
                         
                     case .networkFailure, .networkUnavailable:
-                        print("An error that is returned when the network is available but cannot be accessed.")
-                        // TODO: Monitor network reachability, retry operations when available.
-                        // Tell the user we're still loading?
                         // Need a backoff timer class
                         dbError = .networkFailure
                         
                     case .serviceUnavailable, .requestRateLimited, .zoneBusy:
-                        // Wait the alloted amount of time, then try the operation again.
-                        if let timeToWait = error.userInfo[CKErrorRetryAfterKey] as? NSNumber {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + timeToWait.doubleValue) {
-                                fetchAllRecords(with: operation, completionHandler: completionHandler)
-                            }
-                        } else {
-                            dbError = .networkFailure
-                        }
+                        dbError = .networkFailure
                         
                     default:
                         print("Received default error of type: \(error.localizedDescription)")
@@ -124,14 +160,16 @@ public class CloudKitDatabase: Database {
         }
         
         // Fetch all records
-        fetchAllRecords(with: queryOperation) { result in
+        fetchAllRecords(with: queryOperation) { [weak self] result in
             switch result {
             case .success:
+                self?.hasCompletedInitialFetch = true
                 completionHandler(.success(returnArray)) // Call the main `completionHandler`, passing back all of our succesful values.
                 return
                 
             case .failure(let error):
                 // FIXME: What does proper error handling look like? What if we are told to fetch again soon? How to fix?
+                self?.hasCompletedInitialFetch = true
                 completionHandler(.failure(error))
                 return
                 

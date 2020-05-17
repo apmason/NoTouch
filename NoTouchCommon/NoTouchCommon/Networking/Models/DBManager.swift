@@ -13,7 +13,7 @@ import Foundation
 public protocol DatabaseManager {
     var database: Database { get }
     var userSettings: UserSettings { get }
-    var retryManager: RetryManager { get }
+    var networkMonitor: NetworkMonitor { get }
     
     /// From the database fetch all records that occured on the current date in the user's timezone.
     /// - Parameter completionHandler: The result of the fetching operation. Items will be added to the current cache and displayed to the user automatically, this completion will return success or failure of the operation in general.
@@ -27,7 +27,7 @@ public protocol DatabaseManager {
 public class DBManager: DatabaseManager {
     public var database: Database
     public let userSettings: UserSettings
-    public let retryManager: RetryManager = CloudKitRetryManager()
+    public let networkMonitor: NetworkMonitor = NetworkMonitor()
     
     /// This contains records that were not sent because of network conditions, or records that failed to save and need to be retried.
     private var recordsToSend: [TouchRecord] = []
@@ -35,11 +35,16 @@ public class DBManager: DatabaseManager {
     init(userSettings: UserSettings, database: Database) {
         self.userSettings = userSettings
         self.database = database
-        retryManager.delegate = self
+        
+        self.networkMonitor.delegate = self
+        self.database.delegate = self
     }
     
     public func fetchExistingRecords(completionHandler: ((Result<Void, Error>) -> Void)?) {
-        // Fetch all existing records for today.
+        guard userSettings.networkTracker.isNetworkAvailable && userSettings.networkTracker.cloudKitAuthStatus == .available else {
+            return
+        }
+        
         database.fetchRecords(for: Date()) { [weak self] result in
             switch result {
             case .success(let records):
@@ -66,37 +71,40 @@ public class DBManager: DatabaseManager {
                                       version: appVersion)
         self.userSettings.recordHolder.add(touchRecord) // Add to visible UI immediately.
         
-        if retryManager.networkIsUp {
-            database.saveTouchRecord(touchRecord) { result in
-                switch result {
-                case .success:
-                    break // don't need to do anything
+        // Only attempt a save when the network is up and we are able to use CloudKit
+        guard userSettings.networkTracker.isNetworkAvailable && userSettings.networkTracker.cloudKitAuthStatus == .available else {
+            recordsToSend.append(touchRecord) // Cache the record for when we are able to send again.
+            return
+        }
+        
+        database.saveTouchRecord(touchRecord) { [weak self] result in
+            switch result {
+            case .success:
+                break // don't need to do anything
+                
+            case .failure(let error):
+                // The save failed, so cache this record to be uploaded when the issue is (hopefully) fixed in the future.
+                switch error {
+                case .authenticationFailure, .networkFailure:
+                    self?.recordsToSend.append(touchRecord)
+                default:
+                    // present a light message telling the user that things aren't uploading.
+                    break
                     
-                case .failure(let error):
-                    break // TODO: Handle this error, what's the issue?
-
                 }
             }
-        } else {
-            recordsToSend.append(touchRecord)
         }
     }
-
-    /**
-     Things to find out:
-     -
-     - Is there any error handling that needs to be done for that? Refetching if it decides to only get so many records?
-     
-     Other TODOs:
-     -
-     - What if CloudKit isn't available? We'll need to present something to the user telling them so. Is there a callback that we use to monitor for that? How do you present an action sheet in SwiftUI?
-     */
 }
 
-extension DBManager: RetryManagerDelegate {
+// MARK: - Handle Network Availability and Database Authorization
+
+extension DBManager {
     
-    public func networkStateDidChange(_ networkAvailable: Bool) {
-        if networkAvailable && !recordsToSend.isEmpty {
+    /// If the network is up and we are signed in to CloudKit then send the saved records.
+    private func attemptCachedRecordsSave() {
+        // Attempt cached records save only if the network is up and the user is signed in to CloudKit.
+        if !recordsToSend.isEmpty && userSettings.networkTracker.isNetworkAvailable && userSettings.networkTracker.cloudKitAuthStatus == .available {
             // To avoid a race condition copy the current items in the array. This avoids issues where the async task takes some time and more items are added in the meantime.
             let records = self.recordsToSend
             database.saveTouchRecords(records) { [weak self] result in
@@ -118,6 +126,9 @@ extension DBManager: RetryManagerDelegate {
                         
                         break
                         
+                    case .networkFailure:
+                        break // TODO: ALSO TELL THE USER ABOUT THIS.
+                        
                     default:
                         // TODO: Handle gracefully
                         break
@@ -126,5 +137,42 @@ extension DBManager: RetryManagerDelegate {
                 }
             }
         }
+    }
+    
+    /// If the network is up and we are signed in to CloudKit attempt to fetch the day's touch data from the server.
+    private func attemptInitialRecordFetch() {
+        if !database.hasCompletedInitialFetch && userSettings.networkTracker.isNetworkAvailable && userSettings.networkTracker.cloudKitAuthStatus == .available {
+            self.fetchExistingRecords(completionHandler: nil)
+        }
+    }
+}
+
+// MARK: - RetryManagerDelegate
+
+extension DBManager: NetworkMonitorDelegate {
+        
+    public func networkStateDidChange(_ networkAvailable: Bool) {
+        // Update on the main thread because this may trigger a UI update.
+        DispatchQueue.main.async { [weak self] in
+            self?.userSettings.networkTracker.isNetworkAvailable = networkAvailable
+        }
+        
+        attemptCachedRecordsSave()
+        attemptInitialRecordFetch()
+    }
+}
+
+// MARK: - DatabaseDelegate
+
+extension DBManager: DatabaseDelegate {
+    
+    public func databaseAuthDidChange(_ status: DatabaseAuthStatus) {
+        // Update on the main thread because this may trigger a UI update.
+        DispatchQueue.main.async { [weak self] in
+            self?.userSettings.networkTracker.cloudKitAuthStatus = status
+        }
+        
+        attemptCachedRecordsSave()
+        attemptInitialRecordFetch()
     }
 }

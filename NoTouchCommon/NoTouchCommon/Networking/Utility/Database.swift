@@ -9,10 +9,22 @@
 import CloudKit
 import Foundation
 
-public protocol Database {
+public enum DatabaseAuthStatus {
+    case available
+    case signedOut
+    case restricted
+}
+
+public protocol DatabaseDelegate: class {
+    func databaseAuthDidChange(_ status: DatabaseAuthStatus)
+}
+
+public protocol Database: class {
     func saveTouchRecord(_ record: TouchRecord, completionHandler: @escaping (Result<Void, DatabaseError>) -> Void)
     func saveTouchRecords(_ records: [TouchRecord], completionHandler: @escaping (Result<Void, DatabaseError>) -> Void)
     func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void)
+    var hasCompletedInitialFetch: Bool { get set }
+    var delegate: DatabaseDelegate? { get set }
 }
 
 extension Database {

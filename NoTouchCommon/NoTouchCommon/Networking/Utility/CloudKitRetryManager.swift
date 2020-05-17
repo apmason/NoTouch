@@ -9,29 +9,20 @@
 import Network
 import Foundation
 
-public protocol RetryManagerDelegate: class {
+public protocol NetworkMonitorDelegate: class {
     func networkStateDidChange(_ networkAvailable: Bool)
 }
 
-public protocol RetryManager: class {
-    var monitor: NWPathMonitor { get }
-    var networkIsUp: Bool { get }
-    var delegate: RetryManagerDelegate? { get set }
-}
-
-class CloudKitRetryManager: RetryManager {
+public class NetworkMonitor {
     
-    weak var delegate: RetryManagerDelegate?
+    weak var delegate: NetworkMonitorDelegate?
     
     let monitor = NWPathMonitor()
-    
-    var networkIsUp: Bool = false
-    
+        
     let queue = DispatchQueue(label: "com.handsOff.common.pathMonitor")
     
     init() {
         monitor.pathUpdateHandler = { [weak self] path in
-            self?.networkIsUp = path.status == .satisfied
             self?.delegate?.networkStateDidChange(path.status == .satisfied)
         }
         
