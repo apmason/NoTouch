@@ -66,12 +66,11 @@ public class CloudKitDatabase: Database {
         }
     }
     
-    @objc func cloudKitAuthStateChanged(_ notification: Notification) {
-        print("Auth state changed.")
+    @objc private func cloudKitAuthStateChanged(_ notification: Notification) {
         fetchCloudKitAccountStatus()
     }
     
-    public func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void) {
+    public func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
         /// Turn CKRecord into TouchRecord
         func ckRecordToTouchRecord(_ ckRecord: CKRecord) -> TouchRecord? {
             guard let deviceName = ckRecord["deviceName"] as? String,
@@ -112,33 +111,27 @@ public class CloudKitDatabase: Database {
                         return
                     }
                     
-                    var dbError: DatabaseError? = nil
+                    let dbError: DatabaseError
+                    
                     switch error.code {
-                    case .internalError, .serverRejectedRequest, .serverResponseLost:
+                    case .internalError, .serverRejectedRequest, .serverResponseLost, .limitExceeded:
                         dbError = .databaseError
-                        
-                    case .limitExceeded:
-                        dbError = .databaseError // We should never hit this, we should be returned a cursor for large values.
                         
                     case .managedAccountRestricted, .notAuthenticated, .permissionFailure:
                         dbError = .authenticationFailure
                         
                     case .networkFailure, .networkUnavailable:
-                        // Need a backoff timer class
                         dbError = .networkFailure
                         
-                    case .serviceUnavailable, .requestRateLimited, .zoneBusy: // TODO: Fix this. Is requestRateLimited supposed to be called here?
+                    case .serviceUnavailable, .requestRateLimited, .zoneBusy: // These should hopefully never get hit because we are retrying ASAP if possible.
                         dbError = .networkFailure
                         
                     default:
                         print("Received default error of type: \(error.localizedDescription)")
+                        dbError = .unknownError(error)
                     }
                     
-                    guard let unwrappedDBError = dbError else {
-                        return
-                    }
-                    
-                    completionHandler(.failure(unwrappedDBError))
+                    completionHandler(.failure(dbError))
                 }
                 else if let newCursor = newCursor { // We have a cursor, which means more records can be fetched.
                     // Stop the old operation
@@ -173,7 +166,6 @@ public class CloudKitDatabase: Database {
                 return
                 
             case .failure(let error):
-                // FIXME: What does proper error handling look like? What if we are told to fetch again soon? How to fix?
                 self?.hasCompletedInitialFetch = false
                 completionHandler(.failure(error))
                 return
@@ -186,9 +178,23 @@ public class CloudKitDatabase: Database {
                                 completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
         let ckRecord = self.ckRecord(from: record)
         self.privateDB.save(ckRecord) { _, error in
-            // TODO: Handle this individual errors elegantly (like we do for the batch save)
-            if let error = error {
-                completionHandler(.failure(.unknownError(error)))
+            if let error = error, let ckError = error as? CKError {
+                // Attempt a retry if we're told to.
+                if let retryTime = ckError.userInfo[CKErrorRetryAfterKey] as? NSNumber {
+                    DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + retryTime.doubleValue) { [weak self] in
+                        self?.saveTouchRecord(record, completionHandler: completionHandler)
+                    }
+                    return
+                }
+                
+                switch ckError.code {
+                case .serverRejectedRequest, .invalidArguments, .incompatibleVersion, .constraintViolation: // fatal errors
+                    completionHandler(.failure(.fatalError))
+                    
+                default:
+                    completionHandler(.failure(.unknownError(error)))
+                    
+                }
             } else {
                 completionHandler(.success(()))
             }
@@ -241,6 +247,9 @@ extension CloudKitDatabase {
                     
                 case .managedAccountRestricted, .notAuthenticated, .permissionFailure:
                     completionHandler(.failure(.authenticationFailure)) // tell the user they need to sign in.
+                    
+                case .serverRejectedRequest, .invalidArguments, .incompatibleVersion, .constraintViolation:
+                    completionHandler(.failure(.fatalError))
                     
                 default:
                     completionHandler(.failure(.unknownError(ckError)))

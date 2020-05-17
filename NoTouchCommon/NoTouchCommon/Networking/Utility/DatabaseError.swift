@@ -14,6 +14,7 @@ public enum DatabaseError: Error {
     case databaseError // CKError.internalError
     case batchSaveFailed
     case unknownError(Error)
+    case fatalError
 }
 
 // .limitExceeded <- Handle internally

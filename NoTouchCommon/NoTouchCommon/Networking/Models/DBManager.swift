@@ -48,13 +48,13 @@ public class DBManager: DatabaseManager {
         database.fetchRecords(for: Date()) { [weak self] result in
             switch result {
             case .success(let records):
-                // create function to add multiple records.
                 DispatchQueue.main.async {
                     self?.userSettings.recordHolder.add(records)
                     completionHandler?(.success(()))
                 }
                 
             case .failure(let error):
+                // TODO: Tell the user we're having networking issues (if the error is a networking error.)
                 print(error.localizedDescription)
                 completionHandler?(.failure(error))
                 
@@ -85,11 +85,11 @@ public class DBManager: DatabaseManager {
             case .failure(let error):
                 // The save failed, so cache this record to be uploaded when the issue is (hopefully) fixed in the future.
                 switch error {
-                case .authenticationFailure, .networkFailure:
-                    self?.recordsToSend.append(touchRecord)
-                default:
-                    // present a light message telling the user that things aren't uploading.
+                case .fatalError: // something went horribly wrong, so just banish this record to the shadow realm.
                     break
+                    
+                default: // something went wrong, but try to retry in the future.
+                    self?.recordsToSend.append(touchRecord)
                     
                 }
             }
@@ -121,16 +121,10 @@ extension DBManager {
                     
                 case .failure(let dbError):
                     switch dbError {
-                    case .authenticationFailure:
-                        // TODO: present this to the user. (We should also be monitoring CloudKit)
-                        
-                        break
-                        
-                    case .networkFailure:
-                        break // TODO: ALSO TELL THE USER ABOUT THIS.
+                    case .fatalError:
+                        self.recordsToSend.removeAll() // If we hit a non-recoverable error dump everything.
                         
                     default:
-                        // TODO: Handle gracefully
                         break
                         
                     }
