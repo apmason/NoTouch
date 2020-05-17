@@ -12,17 +12,57 @@ import SwiftUI
 struct InteractiveVideoView: View {
     
     let buttonHeight: CGFloat = 40
+    
     let videoFeed: VideoFeed
+    
+    /// Tracks whether we should be showing the graph. Passed into the `ResultsView` so it can dismiss itself.
     @State private var showGraph = false
     
+    @EnvironmentObject var userSettings: UserSettings
+    
+    @ViewBuilder
     var body: some View {
         ZStack(alignment: .top) {
-            VideoLayerView(videoFeed: self.videoFeed)
+            VideoLayerView(videoFeed: self.videoFeed) // always on bottom.
+            
             if !showGraph {
                 HStack(alignment: .top) {
-                    OptionButtonStack()
+                    OptionButtonStack() // Stack on the left side.
+                    
                     Spacer()
-                    Button(action: {
+                    
+                    VStack(spacing: 10) {
+                        if !userSettings.networkTracker.isNetworkAvailable {
+                            Text("Disconnected From Internet")
+                                .fontWeight(.medium)
+                        }
+                        
+                        if userSettings.networkTracker.cloudKitAuthStatus == .signedOut {
+                            Text("Sign in to iCloud to track how many times you touch your face in a day and see your progress improve!")
+                                .fontWeight(.medium)
+                                .frame(alignment: .center)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .minimumScaleFactor(0.3)
+                                .allowsTightening(true)
+                                .padding(.horizontal, 40)
+                            
+                        } else if userSettings.networkTracker.cloudKitAuthStatus == .restricted {
+                            Text("Enable iCloud to track how many times you touch your face in a day.")
+                                .fontWeight(.medium)
+                                .frame(alignment: .center)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .minimumScaleFactor(0.3)
+                                .allowsTightening(true)
+                                .padding(.horizontal, 40)
+                        }
+                        
+                    }.padding(.top, 8)
+                    
+                    Spacer()
+                    
+                    Button(action: { // Graph button on the right side.
                         withAnimation {
                             self.showGraph.toggle()
                         }

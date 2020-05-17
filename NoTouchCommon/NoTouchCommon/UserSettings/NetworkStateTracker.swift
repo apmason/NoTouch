@@ -9,6 +9,6 @@
 import Foundation
 
 public struct NetworkStateTracker {
-    var cloudKitAuthStatus: DatabaseAuthStatus = .available
-    var isNetworkAvailable = true
+    public var cloudKitAuthStatus: DatabaseAuthStatus = .available
+    public var isNetworkAvailable = true
 }
