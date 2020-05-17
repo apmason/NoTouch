@@ -22,7 +22,7 @@ public protocol DatabaseDelegate: class {
 public protocol Database: class {
     func saveTouchRecord(_ record: TouchRecord, completionHandler: @escaping (Result<Void, DatabaseError>) -> Void)
     func saveTouchRecords(_ records: [TouchRecord], completionHandler: @escaping (Result<Void, DatabaseError>) -> Void)
-    func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void)
+    func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void) // TODO: Return DatabaseError, not Error.
     var hasCompletedInitialFetch: Bool { get set }
     var delegate: DatabaseDelegate? { get set }
 }

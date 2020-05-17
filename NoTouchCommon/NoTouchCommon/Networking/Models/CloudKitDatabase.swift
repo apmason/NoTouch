@@ -31,6 +31,10 @@ public class CloudKitDatabase: Database {
         self.privateDB = container.privateCloudDatabase
         
         NotificationCenter.default.addObserver(self, selector: #selector(cloudKitAuthStateChanged(_:)), name: Notification.Name.CKAccountChanged, object: nil)
+        
+        NotificationCenter.default.addObserver(forName: .CKAccountChanged, object: nil, queue: .main) { (notification) in
+            print("In my block notification received")
+        }
         fetchCloudKitAccountStatus()
        
         // TODO: Should we call createCustomZone here?
@@ -63,6 +67,7 @@ public class CloudKitDatabase: Database {
     }
     
     @objc func cloudKitAuthStateChanged(_ notification: Notification) {
+        print("Auth state changed.")
         fetchCloudKitAccountStatus()
     }
     
@@ -122,7 +127,7 @@ public class CloudKitDatabase: Database {
                         // Need a backoff timer class
                         dbError = .networkFailure
                         
-                    case .serviceUnavailable, .requestRateLimited, .zoneBusy:
+                    case .serviceUnavailable, .requestRateLimited, .zoneBusy: // TODO: Fix this. Is requestRateLimited supposed to be called here?
                         dbError = .networkFailure
                         
                     default:
@@ -169,7 +174,7 @@ public class CloudKitDatabase: Database {
                 
             case .failure(let error):
                 // FIXME: What does proper error handling look like? What if we are told to fetch again soon? How to fix?
-                self?.hasCompletedInitialFetch = true
+                self?.hasCompletedInitialFetch = false
                 completionHandler(.failure(error))
                 return
                 
