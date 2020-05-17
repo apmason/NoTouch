@@ -14,6 +14,7 @@ public class UserSettings: ObservableObject {
     @Published public var pauseDetection = false
     @Published public var cameraAuthState: CameraAuthModel.CameraAuthState = .notDetermined
     @Published public var recordHolder = RecordHolder()
+    @Published public var networkTracker = NetworkStateTracker()
     
     public init() {}
 }

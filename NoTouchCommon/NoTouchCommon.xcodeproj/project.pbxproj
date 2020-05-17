@@ -23,6 +23,7 @@
 		C39AF22C24705AC000C10A54 /* TouchRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AF22B24705AC000C10A54 /* TouchRecordTests.swift */; };
 		C39AF22E24706A2E00C10A54 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AF22D24706A2E00C10A54 /* Database.swift */; };
 		C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */; };
+		C3AB7864247135F000F26BA1 /* NetworkStateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AB7863247135F000F26BA1 /* NetworkStateTracker.swift */; };
 		C3B0E04D245E30CC00BC4946 /* TouchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */; };
 		C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */; };
 		C3B0E051245E340D00BC4946 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E050245E340D00BC4946 /* DBManager.swift */; };
@@ -80,6 +81,7 @@
 		C39AF22B24705AC000C10A54 /* TouchRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordTests.swift; sourceTree = "<group>"; };
 		C39AF22D24706A2E00C10A54 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		C3A7BB54246026DF00FD8010 /* YAxisLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAxisLabel.swift; sourceTree = "<group>"; };
+		C3AB7863247135F000F26BA1 /* NetworkStateTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStateTracker.swift; sourceTree = "<group>"; };
 		C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecord.swift; sourceTree = "<group>"; };
 		C3B0E04E245E31EE00BC4946 /* NetworkingConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingConstants.swift; sourceTree = "<group>"; };
 		C3B0E050245E340D00BC4946 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
@@ -152,10 +154,21 @@
 		C35EA90D246897DF005A6942 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C3B0E050245E340D00BC4946 /* DBManager.swift */,
+				C3B0E054245F28CF00BC4946 /* CloudKitDatabase.swift */,
 				C3B0E04C245E30CB00BC4946 /* TouchRecord.swift */,
 				C35EA90E246897E8005A6942 /* RecordHolder.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C3AB7862247135C900F26BA1 /* UserSettings */ = {
+			isa = PBXGroup;
+			children = (
+				C31871EC244BB5BC00F079FC /* UserSettings.swift */,
+				C3AB7863247135F000F26BA1 /* NetworkStateTracker.swift */,
+			);
+			path = UserSettings;
 			sourceTree = "<group>";
 		};
 		C3B0E04B245E30BC00BC4946 /* Networking */ = {
@@ -163,8 +176,6 @@
 			children = (
 				C3DC7E40246BF6A30093B34B /* Utility */,
 				C35EA90D246897DF005A6942 /* Models */,
-				C3B0E050245E340D00BC4946 /* DBManager.swift */,
-				C3B0E054245F28CF00BC4946 /* CloudKitDatabase.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -200,6 +211,7 @@
 		C3BF2A77244215FE004BDEE4 /* NoTouchCommon */ = {
 			isa = PBXGroup;
 			children = (
+				C3AB7862247135C900F26BA1 /* UserSettings */,
 				C3B24E37246719F000E2A737 /* Extensions */,
 				C3FA9C30245F3DD5007A5A2C /* Views */,
 				C3B0E04B245E30BC00BC4946 /* Networking */,
@@ -274,7 +286,6 @@
 			children = (
 				C3BF2AA424422042004BDEE4 /* Vision */,
 				C3BF2AA32442202B004BDEE4 /* Alerting */,
-				C31871EC244BB5BC00F079FC /* UserSettings.swift */,
 				C3BF2A97244219AE004BDEE4 /* CameraAuthModel.swift */,
 			);
 			path = Models;
@@ -440,6 +451,7 @@
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
 				C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */,
 				C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */,
+				C3AB7864247135F000F26BA1 /* NetworkStateTracker.swift in Sources */,
 				C3B58D3C2462A93100DF4D8D /* DateExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
