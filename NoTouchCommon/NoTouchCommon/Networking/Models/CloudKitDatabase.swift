@@ -67,8 +67,7 @@ public class CloudKitDatabase: Database {
                         dbError = .databaseError
                         
                     case .limitExceeded:
-                        // TODO: Split the operation into two, for now just use the default db error
-                        dbError = .databaseError
+                        dbError = .databaseError // We should never hit this, we should be returned a cursor for large values.
                         
                     case .managedAccountRestricted, .notAuthenticated, .permissionFailure:
                         dbError = .authenticationFailure
@@ -101,6 +100,9 @@ public class CloudKitDatabase: Database {
                     completionHandler(.failure(unwrappedDBError))
                 }
                 else if let newCursor = newCursor { // We have a cursor, which means more records can be fetched.
+                    // Stop the old operation
+                    operation.cancel()
+                    
                     let newOperation = CKQueryOperation(cursor: newCursor)
                     fetchAllRecords(with: newOperation, completionHandler: completionHandler)
                 }
@@ -118,7 +120,7 @@ public class CloudKitDatabase: Database {
             }
             
             // add to database to begin operation.
-            privateDB.add(queryOperation)
+            privateDB.add(operation)
         }
         
         // Fetch all records
