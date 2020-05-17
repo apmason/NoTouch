@@ -10,9 +10,17 @@ import CloudKit
 import Foundation
 
 public enum DatabaseAuthStatus {
+    case unknown
     case available
     case signedOut
     case restricted
+}
+
+public enum RecordFetchState {
+    case notAttempted
+    case inProcess
+    case success
+    case failure
 }
 
 public protocol DatabaseDelegate: class {
@@ -39,7 +47,7 @@ public protocol Database: class {
     ///   - completionHandler: The result of the operation.
     func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void)
     
-    var hasCompletedInitialFetch: Bool { get set }
+    var initialRecordsFetchState: RecordFetchState { get set }
     
     var delegate: DatabaseDelegate? { get set }
 }

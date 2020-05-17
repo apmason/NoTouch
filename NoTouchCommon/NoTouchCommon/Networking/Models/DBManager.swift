@@ -135,7 +135,9 @@ extension DBManager {
     
     /// If the network is up and we are signed in to CloudKit attempt to fetch the day's touch data from the server.
     private func attemptInitialRecordFetch() {
-        if !database.hasCompletedInitialFetch && userSettings.networkTracker.isNetworkAvailable && userSettings.networkTracker.cloudKitAuthStatus == .available {
+        if database.initialRecordsFetchState == .notAttempted
+            && userSettings.networkTracker.isNetworkAvailable
+            && userSettings.networkTracker.cloudKitAuthStatus == .available {
             self.fetchExistingRecords(completionHandler: nil)
         }
     }
@@ -149,10 +151,9 @@ extension DBManager: NetworkMonitorDelegate {
         // Update on the main thread because this may trigger a UI update.
         DispatchQueue.main.async { [weak self] in
             self?.userSettings.networkTracker.isNetworkAvailable = networkAvailable
+            self?.attemptCachedRecordsSave()
+            self?.attemptInitialRecordFetch()
         }
-        
-        attemptCachedRecordsSave()
-        attemptInitialRecordFetch()
     }
 }
 
@@ -163,10 +164,10 @@ extension DBManager: DatabaseDelegate {
     public func databaseAuthDidChange(_ status: DatabaseAuthStatus) {
         // Update on the main thread because this may trigger a UI update.
         DispatchQueue.main.async { [weak self] in
+            print("New auth status is \(status)")
             self?.userSettings.networkTracker.cloudKitAuthStatus = status
+            self?.attemptCachedRecordsSave()
+            self?.attemptInitialRecordFetch()
         }
-        
-        attemptCachedRecordsSave()
-        attemptInitialRecordFetch()
     }
 }

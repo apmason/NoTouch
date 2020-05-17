@@ -23,7 +23,7 @@ public class CloudKitDatabase: Database {
     private let privateDB: CKDatabase
     private let container = CKContainer.default()
     
-    public var hasCompletedInitialFetch: Bool = false
+    public var initialRecordsFetchState: RecordFetchState = .notAttempted
     
     public weak var delegate: DatabaseDelegate?
     
@@ -31,10 +31,7 @@ public class CloudKitDatabase: Database {
         self.privateDB = container.privateCloudDatabase
         
         NotificationCenter.default.addObserver(self, selector: #selector(cloudKitAuthStateChanged(_:)), name: Notification.Name.CKAccountChanged, object: nil)
-        
-        NotificationCenter.default.addObserver(forName: .CKAccountChanged, object: nil, queue: .main) { (notification) in
-            print("In my block notification received")
-        }
+
         fetchCloudKitAccountStatus()
        
         // TODO: Should we call createCustomZone here?
@@ -73,7 +70,8 @@ public class CloudKitDatabase: Database {
     }
     
     public func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
-        print("top level fetch all records.")
+        initialRecordsFetchState = .inProcess
+        
         /// Turn CKRecord into TouchRecord
         func ckRecordToTouchRecord(_ ckRecord: CKRecord) -> TouchRecord? {
             guard let deviceName = ckRecord["deviceName"] as? String,
@@ -100,6 +98,7 @@ public class CloudKitDatabase: Database {
         let query = CKQuery(recordType: RecordType.touch.rawValue, predicate: predicate)
         
         let queryOperation = CKQueryOperation(query: query)
+        queryOperation.qualityOfService = .userInteractive
         
         /// Runs an initial `operation`, and if we are returned a cursor, recursively creates and runs another operation until all records have been retrieved.
         func fetchAllRecords(with operation: CKQueryOperation, completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
@@ -110,7 +109,7 @@ public class CloudKitDatabase: Database {
                     // If we are told we can retry do so immediately, hoping this will catch errors we're not thinking of/explicitly handling.
                     if let timeToWait = error.userInfo[CKErrorRetryAfterKey] as? NSNumber {
                         print("Told to wait")
-                        //operation.cancel() // cancel before trying again
+                        operation.cancel() // cancel before trying again
                         DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + timeToWait.doubleValue + 3.0) {
                             print("trying again.")
                             // should be a new operation with the same params.
@@ -173,12 +172,20 @@ public class CloudKitDatabase: Database {
         fetchAllRecords(with: queryOperation) { [weak self] result in
             switch result {
             case .success:
-                self?.hasCompletedInitialFetch = true
+                self?.initialRecordsFetchState = .success
                 completionHandler(.success(returnArray)) // Call the main `completionHandler`, passing back all of our succesful values.
                 return
                 
             case .failure(let error):
-                self?.hasCompletedInitialFetch = false
+                switch error {
+                case .authenticationFailure:
+                    self?.initialRecordsFetchState = .notAttempted // let us try again once re-authenticated
+                    
+                default:
+                    self?.initialRecordsFetchState = .failure
+                    
+                }
+                
                 completionHandler(.failure(error))
                 return
                 
