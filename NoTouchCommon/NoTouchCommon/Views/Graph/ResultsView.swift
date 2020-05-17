@@ -22,18 +22,38 @@ public struct ResultsView: View {
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Button.init(action: {
-                withAnimation {
-                    self.showGraph.toggle()
+            HStack {
+                VStack(alignment: .leading, spacing: 10) {
+                    Button.init(action: {
+                        withAnimation {
+                            self.showGraph.toggle()
+                        }
+                    }) {
+                        Text("Back")
+                    }
+                    .padding(.leading, leadingXOffset)
+                    
+                    Text("Touches Today: \(userSettings.recordHolder.totalTouchCount)")
+                        .font(.headline)
+                        .padding(.leading, leadingXOffset)
                 }
-            }) {
-                Text("Back")
+                
+                Spacer()
+                
+                VStack(alignment: .trailing, spacing: 10) {
+                    if !userSettings.networkTracker.isNetworkAvailable {
+                        Text("No Internet")
+                            .font(.caption)
+                            .foregroundColor(Color.red)
+                    }
+                
+                    if userSettings.networkTracker.cloudKitAuthStatus == .signedOut || userSettings.networkTracker.cloudKitAuthStatus == .restricted {
+                            Text("iCloud Disabled")
+                            .font(.caption)
+                            .foregroundColor(Color.red)
+                    }
+                }.padding(.trailing, 10)
             }
-            .padding(.leading, leadingXOffset)
-            
-            Text("Touches Today: \(userSettings.recordHolder.totalTouchCount)")
-                .font(.headline)
-                .padding(.leading, leadingXOffset)
             
             GraphView(leadingXOffset: leadingXOffset)
         }
