@@ -62,25 +62,34 @@ public class VideoFeed: NSObject {
             }
         })
         
-        detectionObservation = userSettings.$pauseDetection.sink(receiveValue: { pause in
+        detectionObservation = userSettings.$pauseDetection.sink(receiveValue: { [weak self] pause in
+            guard let self = self else {
+                return
+            }
+            
             // Tear everything down.
             if pause {
                 self.session.stopRunning()
                 self.teardownPreviewLayer()
             }
             else { // Activate everything
-                self.startup()
+                self.setupSessionForUsage()
             }
         })
     }
     
-    private func startup() {
-        getCameraUsage()
-    }
-    
     /// Determine if a user can use the camera or not. If a user can use the camera proceed with settings up the capture session. If they cannot, add a message telling the user that they need to authorize camera usage.
-    private func getCameraUsage() {
+    private func setupSessionForUsage() {
         guard self.userSettings.cameraAuthState == .notDetermined else {
+            // We've already determined the state, so we can skip setting up the session and simply restart it, then setup the layers.
+            self.videoDataOutputQueue.sync { [weak self] in
+                self?.startCaptureSession()
+                DispatchQueue.main.async {
+                    self?.createPreviewLayer()
+                    self?.setNativeViewLayerIfNeeded()
+                }
+            }
+            
             return
         }
         
@@ -90,10 +99,7 @@ public class VideoFeed: NSObject {
             case .success:
                 print("In success section")
                 self?.userSettings.cameraAuthState = .authorized
-                self?.videoDataOutputQueue.sync { [weak self] in
-                    self?.setupAVCapture()
-                    self?.startCaptureSession()
-                }
+                self?.kickoffCaptureSetup()
                 
             case .failure:
                 self?.userSettings.cameraAuthState = .denied
@@ -102,8 +108,19 @@ public class VideoFeed: NSObject {
         }
     }
     
+    private func kickoffCaptureSetup() {
+        self.videoDataOutputQueue.sync { [weak self] in
+            self?.setupAVCapture()
+            self?.startCaptureSession()
+            DispatchQueue.main.async {
+                self?.createPreviewLayer()
+                self?.setNativeViewLayerIfNeeded()
+            }
+        }
+    }
+    
     /// Setup the video device inputs and capture session.
-    func setupAVCapture() {
+    private func setupAVCapture() {
         // Select a video device and make an input.
         let inputDevice: AVCaptureDevice?
         
@@ -159,11 +176,9 @@ public class VideoFeed: NSObject {
         }
 
         session.commitConfiguration()
-        createPreviewLayer()
-        setNativeViewLayerIfNeeded()
     }
     
-    func createPreviewLayer() {
+    private func createPreviewLayer() {
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
         self.previewLayer?.connection?.isEnabled = true
         self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
@@ -176,25 +191,27 @@ public class VideoFeed: NSObject {
         // Cache the nativeView right away. This may be called before the session is running.
         self.nativeView = nativeView
         
-        // We cache the above view but then don't do anything if we're supposed to be hiding the feed.
-        // TODO: What happens when they re-enable?
-        if userSettings.hideCameraFeed {
-            return
-        }
-        
         setNativeViewLayerIfNeeded()
     }
     
     private func setNativeViewLayerIfNeeded() {
-        // We need the nativeView to have been set to proceed.
-        // We also need the previewLayer.
-        guard let nativeView = self.nativeView, let previewLayer = self.previewLayer else {
-            return
-        }
-        
         DispatchQueue.main.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            if self.userSettings.hideCameraFeed {
+                return
+            }
+            
+            // We need the nativeView to have been set to proceed.
+            // We also need the previewLayer.
+            guard let nativeView = self.nativeView, let previewLayer = self.previewLayer else {
+                return
+            }
+            
             // Set the previewLayer bounds in case the nativeView already has the layer added and just needs to update the frame size.
-            self?.updatePreviewLayerFrame(to: nativeView.nativeBounds)
+            self.updatePreviewLayerFrame(to: nativeView.nativeBounds)
             
             if nativeView.nativeLayer?.sublayers == nil || nativeView.nativeLayer?.sublayers?.count == 0 {
                 nativeView.nativeLayer?.addSublayer(previewLayer)
