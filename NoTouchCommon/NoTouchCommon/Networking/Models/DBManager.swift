@@ -164,7 +164,6 @@ extension DBManager: DatabaseDelegate {
     public func databaseAuthDidChange(_ status: DatabaseAuthStatus) {
         // Update on the main thread because this may trigger a UI update.
         DispatchQueue.main.async { [weak self] in
-            print("New auth status is \(status)")
             self?.userSettings.networkTracker.cloudKitAuthStatus = status
             self?.attemptCachedRecordsSave()
             self?.attemptInitialRecordFetch()

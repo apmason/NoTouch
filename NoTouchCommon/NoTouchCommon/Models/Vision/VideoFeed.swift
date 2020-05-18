@@ -58,11 +58,7 @@ public class VideoFeed: NSObject {
                 // add feed
                 self.teardownPreviewLayer()
             } else {
-                guard let view = self.nativeView else {
-                    return
-                }
-                
-                self.setPreviewView(to: view)
+                self.setNativeViewLayerIfNeeded()
             }
         })
         
@@ -78,18 +74,26 @@ public class VideoFeed: NSObject {
         })
     }
     
-    public func startup() {
+    private func startup() {
         getCameraUsage()
     }
     
     /// Determine if a user can use the camera or not. If a user can use the camera proceed with settings up the capture session. If they cannot, add a message telling the user that they need to authorize camera usage.
-    func getCameraUsage() {
+    private func getCameraUsage() {
+        guard self.userSettings.cameraAuthState == .notDetermined else {
+            return
+        }
+        
+        print("Get camera usage called")
         CameraAuthModel.authorizeCameraForUsage { [weak self] result in
             switch result {
             case .success:
+                print("In success section")
                 self?.userSettings.cameraAuthState = .authorized
-                self?.setupAVCapture()
-                self?.startCaptureSession()
+                self?.videoDataOutputQueue.sync { [weak self] in
+                    self?.setupAVCapture()
+                    self?.startCaptureSession()
+                }
                 
             case .failure:
                 self?.userSettings.cameraAuthState = .denied
@@ -156,85 +160,68 @@ public class VideoFeed: NSObject {
 
         session.commitConfiguration()
         createPreviewLayer()
+        setNativeViewLayerIfNeeded()
     }
     
     func createPreviewLayer() {
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
+        self.previewLayer?.connection?.isEnabled = true
+        self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
+        self.previewLayer?.connection?.isVideoMirrored = true
+        self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
     }
     
-    /// Resets the `VideoFeed`'s `previewLayer` property, and sets it to fit within the `nativeView`'s bounds, and inserts it as a SVlayer.
+    /// Resets the `VideoFeed`'s `previewLayer` property, and sets it to fit within the `nativeView`'s bounds, and inserts it as a layer.
     public func setPreviewView(to nativeView: NativeView) {
+        // Cache the nativeView right away. This may be called before the session is running.
+        self.nativeView = nativeView
+        
+        // We cache the above view but then don't do anything if we're supposed to be hiding the feed.
+        // TODO: What happens when they re-enable?
         if userSettings.hideCameraFeed {
             return
         }
         
-        func configurePreviewLayer() {
-            self.previewLayer?.connection?.isEnabled = true
-            self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
-            self.previewLayer?.connection?.isVideoMirrored = true
-            self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            self.previewLayer?.frame = nativeView.nativeBounds
-            nativeView.setToWantLayer(true)
-            if let previewLayer = self.previewLayer {
-                nativeView.nativeLayer?.addSublayer(previewLayer)
-            }
+        setNativeViewLayerIfNeeded()
+    }
+    
+    private func setNativeViewLayerIfNeeded() {
+        // We need the nativeView to have been set to proceed.
+        // We also need the previewLayer.
+        guard let nativeView = self.nativeView, let previewLayer = self.previewLayer else {
+            return
         }
         
-        self.nativeView = nativeView
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else {
-                return
-            }
+            // Set the previewLayer bounds in case the nativeView already has the layer added and just needs to update the frame size.
+            self?.updatePreviewLayerFrame(to: nativeView.nativeBounds)
             
-            // If for some reason we don't have a layer make one then configure the layer.
-            guard let previewLayer = self.previewLayer else {
-                self.createPreviewLayer()
-                configurePreviewLayer()
-                return
-            }
-            
-            // We should really never hit the else part of this conditonal.
-            if previewLayer == nativeView.nativeLayer,
-                let connection = previewLayer.connection {
-                
-                // If the video isn't mirrored reconfigure
-                if !connection.isVideoMirrored || !connection.isEnabled {
-                    configurePreviewLayer()
-                    return
-                }
-                
-                previewLayer.frame = nativeView.nativeBounds
-            }
-            else {
-                configurePreviewLayer()
-                return
+            if nativeView.nativeLayer?.sublayers == nil || nativeView.nativeLayer?.sublayers?.count == 0 {
+                nativeView.nativeLayer?.addSublayer(previewLayer)
             }
         }
     }
     
     /// Remove the previewLayer from any super layer and destroy it.
-    func teardownPreviewLayer() {
+    private func teardownPreviewLayer() {
         DispatchQueue.main.async { [weak self] in
-            self?.nativeView?.setToWantLayer(false)
             self?.nativeView?.nativeLayer?.sublayers?.forEach({
                 $0.removeFromSuperlayer()
             })
+            
+            self?.nativeView?.nativeLayer?.sublayers?.removeAll()
             
             self?.previewLayer?.removeFromSuperlayer()
         }
     }
     
-    public func updatePreviewLayerFrame(to rect: CGRect) {
-        previewLayer?.frame = rect
+    /// This should be called on its own synchronous queue.
+    private func startCaptureSession() {
+        self.session.startRunning()
     }
     
-    func startCaptureSession() {
-        /*
-         The startRunning() method is a blocking call which can take some time, therefore you should perform session setup on a serial queue so that the main queue isn’t blocked (which keeps the UI responsive)
-         */
-        videoDataOutputQueue.sync { [weak self] in
-            self?.session.startRunning()
-        }
+    public func updatePreviewLayerFrame(to rect: CGRect) {
+        previewLayer?.frame = rect
     }
 }
 

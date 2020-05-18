@@ -22,7 +22,6 @@ class ContentViewModel {
         self.alertVM = alertModel
         feedResizer = FeedResizer(feed)
         feed.delegate = self
-        feed.startup()
         
         visionModel.delegate = self
     }

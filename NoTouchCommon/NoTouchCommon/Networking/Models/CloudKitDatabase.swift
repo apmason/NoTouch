@@ -103,17 +103,11 @@ public class CloudKitDatabase: Database {
         /// Runs an initial `operation`, and if we are returned a cursor, recursively creates and runs another operation until all records have been retrieved.
         func fetchAllRecords(with operation: CKQueryOperation, completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
             operation.queryCompletionBlock = { newCursor, error in
-                print("In completion block.")
                 if let error = error as? CKError {
-                    print("Is an error though.")
                     // If we are told we can retry do so immediately, hoping this will catch errors we're not thinking of/explicitly handling.
                     if let timeToWait = error.userInfo[CKErrorRetryAfterKey] as? NSNumber {
-                        print("Told to wait")
                         operation.cancel() // cancel before trying again
                         DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + timeToWait.doubleValue + 3.0) {
-                            print("trying again.")
-                            // should be a new operation with the same params.
-                            
                             fetchAllRecords(with: operation, completionHandler: completionHandler)
                         }
                         return
@@ -161,7 +155,6 @@ public class CloudKitDatabase: Database {
                 returnArray.append(touchRecord)
             }
             
-            print("adding operation")
             // add to database to begin operation.
             if !operation.isExecuting {
                 privateDB.add(operation)
@@ -329,7 +322,6 @@ extension CloudKitDatabase {
                     // TODO: Fix this.
                     assertionFailure("Failure making subscription: \(error.localizedDescription)")
                 } else {
-                    print("No error out here")
                     self.subscribedToPrivateChanges = true
                 }
                 self.privateDB.add(createSubscriptionOperation)

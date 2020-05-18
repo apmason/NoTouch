@@ -13,7 +13,15 @@ import NoTouchCommon
 import SwiftUI
 
 class UpdatableMacView: NSView, NativeView {
-    var nativeLayer: CALayer?
+    
+    /// This layer should be set directly.
+    var nativeLayer: CALayer? {
+        if !self.wantsLayer {
+            self.wantsLayer = true
+        }
+        
+        return self.layer!
+    }
 
     var nativeFrame: CGRect {
         return self.frame
@@ -32,12 +40,21 @@ struct VideoLayerView: NSViewRepresentable {
     
     let videoFeed: VideoFeed
     
+//    init(videoFeed: VideoFeed) {
+//        self.videoFeed = videoFeed
+//    }
+    
     func makeNSView(context: Context) -> UpdatableMacView {
         let nativeView = UpdatableMacView()
+        nativeView.wantsLayer = true
         return nativeView
     }
     
     func updateNSView(_ nativeView: UpdatableMacView, context: Context) {
+//        if !nativeView.wantsLayer {
+//            print("FUCK")
+//        }
+        
         videoFeed.setPreviewView(to: nativeView)
     }
 }
