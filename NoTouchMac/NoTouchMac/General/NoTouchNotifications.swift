@@ -1,6 +1,6 @@
 //
 //  NoTouchNotifications.swift
-//  NoTouchMac
+//  HandsOff
 //
 //  Created by Alexander Mason on 4/11/20.
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
