@@ -65,7 +65,7 @@
 		C3BF2AAB2442223E004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3DA3EF424562CD400FA02A3 /* InteractiveVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveVideoView.swift; sourceTree = "<group>"; };
-		C3EE594C243DFE8B00461EB4 /* NoTouchMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoTouchMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3EE594C243DFE8B00461EB4 /* HandsOff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandsOff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3EE594F243DFE8B00461EB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3EE5951243DFE8B00461EB4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C3EE5953243DFE9000461EB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 		C3EE594D243DFE8B00461EB4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C3EE594C243DFE8B00461EB4 /* NoTouchMac.app */,
+				C3EE594C243DFE8B00461EB4 /* HandsOff.app */,
 				C3EE5961243DFE9100461EB4 /* NoTouchMacTests.xctest */,
 				C3EE596C243DFE9100461EB4 /* NoTouchMacUITests.xctest */,
 			);
@@ -213,9 +213,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C3EE594B243DFE8B00461EB4 /* NoTouchMac */ = {
+		C3EE594B243DFE8B00461EB4 /* HandsOff */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3EE5975243DFE9100461EB4 /* Build configuration list for PBXNativeTarget "NoTouchMac" */;
+			buildConfigurationList = C3EE5975243DFE9100461EB4 /* Build configuration list for PBXNativeTarget "HandsOff" */;
 			buildPhases = (
 				C3EE5948243DFE8B00461EB4 /* Sources */,
 				C3EE5949243DFE8B00461EB4 /* Frameworks */,
@@ -226,9 +226,9 @@
 			);
 			dependencies = (
 			);
-			name = NoTouchMac;
+			name = HandsOff;
 			productName = NoTouchMac;
-			productReference = C3EE594C243DFE8B00461EB4 /* NoTouchMac.app */;
+			productReference = C3EE594C243DFE8B00461EB4 /* HandsOff.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C3EE5960243DFE9100461EB4 /* NoTouchMacTests */ = {
@@ -303,7 +303,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C3EE594B243DFE8B00461EB4 /* NoTouchMac */,
+				C3EE594B243DFE8B00461EB4 /* HandsOff */,
 				C3EE5960243DFE9100461EB4 /* NoTouchMacTests */,
 				C3EE596B243DFE9100461EB4 /* NoTouchMacUITests */,
 			);
@@ -374,12 +374,12 @@
 /* Begin PBXTargetDependency section */
 		C3EE5963243DFE9100461EB4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C3EE594B243DFE8B00461EB4 /* NoTouchMac */;
+			target = C3EE594B243DFE8B00461EB4 /* HandsOff */;
 			targetProxy = C3EE5962243DFE9100461EB4 /* PBXContainerItemProxy */;
 		};
 		C3EE596E243DFE9100461EB4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C3EE594B243DFE8B00461EB4 /* NoTouchMac */;
+			target = C3EE594B243DFE8B00461EB4 /* HandsOff */;
 			targetProxy = C3EE596D243DFE9100461EB4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -659,7 +659,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3EE5975243DFE9100461EB4 /* Build configuration list for PBXNativeTarget "NoTouchMac" */ = {
+		C3EE5975243DFE9100461EB4 /* Build configuration list for PBXNativeTarget "HandsOff" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3EE5976243DFE9100461EB4 /* Debug */,

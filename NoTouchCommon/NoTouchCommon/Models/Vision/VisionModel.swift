@@ -192,7 +192,6 @@ public class VisionModel {
                         //print("Confidence is: \(objectObservation.confidence)")
                         
                         DispatchQueue.main.async { [weak self] in
-                            print("Confidence is \(objectObservation.confidence)")
                             if objectObservation.confidence > 0.7 {
                                 self?.delegate?.fireAlert()
                             } else {
