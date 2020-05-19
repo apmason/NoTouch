@@ -25,7 +25,7 @@ public struct ResultsView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 10) {
                     Button.init(action: {
-                        withAnimation {
+                        withAnimation(.easeInOut(duration: 0.35)) {
                             self.showGraph.toggle()
                         }
                     }) {

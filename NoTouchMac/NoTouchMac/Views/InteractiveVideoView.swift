@@ -63,7 +63,7 @@ struct InteractiveVideoView: View {
                     Spacer()
                     
                     Button(action: { // Graph button on the right side.
-                        withAnimation {
+                        withAnimation(.easeInOut(duration: 0.35)) {
                             self.showGraph.toggle()
                         }
                     }) {
