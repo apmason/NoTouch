@@ -27,7 +27,7 @@ public class AlertViewModel {
     private var timer: Timer?
     
     // The number of seconds to wait to see if we should move out of the alert state.
-    private let delayTime: TimeInterval = 0.2
+    private let delayTime: TimeInterval = 0.3
     
     var audioIsMuted: Bool {
         get {
@@ -40,7 +40,7 @@ public class AlertViewModel {
     /// How many `fireAlert()` calls have we received? Once we reach the `triggerThreshold` we will send an alert to all observers and reset this value to 0.
     private var triggerCount = 0
     /// How many `fireAlert()` calls should be received before sending an alert to all observers.
-    private var triggerThreshold = 1
+    private var triggerThreshold = 2
     
     private let userSettings: UserSettings
     

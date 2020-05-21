@@ -23,7 +23,26 @@ struct InteractiveVideoView: View {
     @ViewBuilder
     var body: some View {
         ZStack(alignment: .top) {
+            
+            if !userSettings.hideCameraFeed && !userSettings.pauseDetection {
+                Text("Loading Video...")
+                    .fontWeight(.bold)
+                    .padding(8)
+            }
+            
             VideoLayerView(videoFeed: self.videoFeed) // always on bottom.
+            
+            if userSettings.hideCameraFeed {
+                Text("Camera Hidden")
+                    .fontWeight(.bold)
+                    .padding(8)
+            }
+            
+            if userSettings.pauseDetection {
+                Text("Detection Paused")
+                    .fontWeight(.bold)
+                    .padding(8)
+            }
             
             if !showGraph {
                 HStack(alignment: .top) {

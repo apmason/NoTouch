@@ -192,7 +192,7 @@ public class VisionModel {
                         //print("Confidence is: \(objectObservation.confidence)")
                         
                         DispatchQueue.main.async { [weak self] in
-                            if objectObservation.confidence > 0.7 {
+                            if objectObservation.confidence > 0.65 {
                                 self?.delegate?.fireAlert()
                             } else {
                                 self?.delegate?.notTouchingDetected()
@@ -218,6 +218,8 @@ public class VisionModel {
             assertionFailure("No pixelbuffer, this shouldn't happen, who removed it?")
             return
         }
+        
+        //DifferenceDetector.detectDifference(bufferOne: pixelBuffer)
         
         let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,
                                                    orientation: Orienter.currentCGOrientation())

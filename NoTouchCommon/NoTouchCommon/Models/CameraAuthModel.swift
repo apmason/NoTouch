@@ -41,8 +41,9 @@ public class CameraAuthModel {
             }
             
         case .denied:
-            completion(.failure(NoTouchError.cameraAccessDenied))
-            
+            DispatchQueue.main.async {
+                completion(.failure(NoTouchError.cameraAccessDenied))
+            }
         }
     }
     
@@ -56,9 +57,6 @@ public class CameraAuthModel {
             return .notDetermined
             
         case .denied, .restricted:
-            return .denied
-            
-        default:
             return .denied
             
         }
