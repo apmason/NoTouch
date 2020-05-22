@@ -100,7 +100,6 @@ struct InteractiveVideoView: View {
             }
             else {
                 ResultsView(showGraph: $showGraph)
-                    .background(Color.white)
             }
         }
     }

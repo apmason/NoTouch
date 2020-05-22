@@ -14,6 +14,9 @@ struct AxisView: View {
     let leadingXOffset: CGFloat
     let bottomYOffset: CGFloat
     
+    // Determine if we are in light mode or dark mode.
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         GeometryReader { geometry in
             Path { path in
@@ -52,7 +55,8 @@ struct AxisView: View {
                             y: 0)
                 )
             }
-            .stroke(Color.black, lineWidth: self.lineWidth * 2)
+            .stroke(self.colorScheme == .light ? Color.black : Color.white,
+                    lineWidth: self.lineWidth * 2)
         }
     }
 }

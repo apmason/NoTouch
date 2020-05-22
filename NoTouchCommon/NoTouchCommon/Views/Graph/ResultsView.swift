@@ -16,6 +16,9 @@ public struct ResultsView: View {
     
     @Binding private var showGraph: Bool
     
+    // Determine if we are in light mode or dark mode.
+    @Environment(\.colorScheme) var colorScheme
+    
     public init(showGraph: Binding<Bool>) {
         self._showGraph = showGraph
     }
@@ -58,6 +61,7 @@ public struct ResultsView: View {
             GraphView(leadingXOffset: leadingXOffset)
         }
         .padding(.top, 8)
+        .background(colorScheme == .dark ? Color(.sRGB, red: 46/255, green: 47/255, blue: 48/255, opacity: 1.0) : Color.white)
     }
 }
 

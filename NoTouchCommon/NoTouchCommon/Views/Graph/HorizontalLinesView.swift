@@ -16,6 +16,9 @@ struct HorizontalLinesView: View {
     let positioner: Positioner
     private let numLines: Int = 3
     
+    // Determine if we are in light mode or dark mode.
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         GeometryReader { geometry in
             Path { path in
@@ -33,7 +36,8 @@ struct HorizontalLinesView: View {
                     )
                 }
             }
-            .stroke(Color.gray, lineWidth: self.positioner.lineWidth)
+            .stroke(self.colorScheme == .light ? Color.gray : Color.white,
+                    lineWidth: self.positioner.lineWidth)
         }
     }
 }
