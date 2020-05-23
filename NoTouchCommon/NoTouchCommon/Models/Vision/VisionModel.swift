@@ -117,7 +117,7 @@ public class VisionModel {
             let bounds = boundingBox.applying(translate)
             
             let cheekOffset = ciImage.extent.height * 0.025
-            let chinOffset: CGFloat = ciImage.extent.width * 0.09
+            let chinOffset: CGFloat = ciImage.extent.width * 0.1
             
             let updatedBounds = CGRect(x: bounds.origin.x - chinOffset,
                                        y: bounds.origin.y - cheekOffset,
@@ -126,7 +126,7 @@ public class VisionModel {
             #elseif os(OSX)
             let bounds = VNImageRectForNormalizedRect(boundingBox, Int(ciImage.extent.width), Int(ciImage.extent.height))
                         
-            let chinOffset = ciImage.extent.height * 0.08
+            let chinOffset = ciImage.extent.height * 0.1
             let widthOffset: CGFloat = ciImage.extent.width * 0.025
             
             // NOTE: x and y will be flipped when bringing into NoTouch
