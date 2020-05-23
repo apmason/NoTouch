@@ -47,7 +47,7 @@ public class VisionModel {
     /// - Tag: SetupVisionRequest
     @discardableResult
     private func setupVision() -> NoTouchError? {
-        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "NoTouch_YOLO_2", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "UpdatedNoTouchYolo", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
@@ -108,7 +108,7 @@ public class VisionModel {
                     }
                     return
             }
-                        
+            
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
             #if os(iOS)
@@ -125,15 +125,15 @@ public class VisionModel {
                                        height: bounds.height + (cheekOffset * 2))
             #elseif os(OSX)
             let bounds = VNImageRectForNormalizedRect(boundingBox, Int(ciImage.extent.width), Int(ciImage.extent.height))
-                        
+            
             let chinOffset = ciImage.extent.height * 0.1
             let widthOffset: CGFloat = ciImage.extent.width * 0.025
             
             // NOTE: x and y will be flipped when bringing into NoTouch
             let updatedBounds = CGRect(x: bounds.origin.x - widthOffset,
-                                     y: bounds.origin.y - chinOffset,
-                                     width: bounds.width + (widthOffset * 2),
-                                     height: bounds.height + (chinOffset * 2))
+                                       y: bounds.origin.y - chinOffset,
+                                       width: bounds.width + (widthOffset * 2),
+                                       height: bounds.height + (chinOffset * 2))
             #endif
             
             let cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
@@ -144,8 +144,8 @@ public class VisionModel {
             }
             
             // Don't need to analyze the images currently.
-//            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
-//            ImageStorer.storeNewImage(image: image)
+            //            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
+            //            ImageStorer.storeNewImage(image: image)
             
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
             self.visionQueue.async { [weak self] in
@@ -188,6 +188,8 @@ public class VisionModel {
                         guard bestObservation.identifier == "hand" else {
                             return
                         }
+                        
+                        //print("Confidence is: \(objectObservation.confidence)")
                                                 
                         DispatchQueue.main.async { [weak self] in
                             if objectObservation.confidence > 0.65 {
