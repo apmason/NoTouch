@@ -26,17 +26,7 @@ struct InteractiveVideoView: View {
                 Text("Loading Video...")
                     .fontWeight(.bold)
                     .padding(8)
-            }
-            
-            // Always on bottom.
-            #if os(OSX)
-            MacLayerView(videoFeed: self.videoFeed)
-            #elseif os(iOS)
-            iOSLayerView(videoFeed: self.videoFeed)
-                .edgesIgnoringSafeArea(.all)
-            #endif
-            
-            if userSettings.hideCameraFeed {
+            } else if userSettings.hideCameraFeed {
                 Text("Camera Hidden")
                     .fontWeight(.bold)
                     .padding(8)
@@ -45,6 +35,13 @@ struct InteractiveVideoView: View {
                     .fontWeight(.bold)
                     .padding(8)
             }
+            
+            #if os(OSX)
+            MacLayerView(videoFeed: self.videoFeed)
+            #elseif os(iOS)
+            iOSLayerView(videoFeed: self.videoFeed)
+                .edgesIgnoringSafeArea(.all)
+            #endif
             
             if !showGraph {
                 HStack(alignment: .top) {
@@ -86,10 +83,13 @@ struct StateWarningView: View {
     @EnvironmentObject var userSettings: UserSettings
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(alignment: .center, spacing: 10) {
+            Spacer()
+            
             if !userSettings.networkTracker.isNetworkAvailable {
                 Text("Disconnected From Internet")
                     .fontWeight(.medium)
+                    .foregroundColor(Color.red)
             }
             
             if userSettings.networkTracker.cloudKitAuthStatus == .signedOut {
@@ -101,6 +101,7 @@ struct StateWarningView: View {
                     .minimumScaleFactor(0.3)
                     .allowsTightening(true)
                     .padding(.horizontal, 40)
+                    .foregroundColor(Color.red)
                 
             } else if userSettings.networkTracker.cloudKitAuthStatus == .restricted {
                 Text("Enable iCloud to track how many times you touch your face in a day.")
@@ -111,9 +112,10 @@ struct StateWarningView: View {
                     .minimumScaleFactor(0.3)
                     .allowsTightening(true)
                     .padding(.horizontal, 40)
+                    .foregroundColor(Color.red)
             }
-            
-        }.padding(.top, 8)
+        }
+        .padding(8)
     }
 }
 
