@@ -59,6 +59,9 @@ public class CameraAuthModel {
         case .denied, .restricted:
             return .denied
             
+        @unknown default:
+            return .denied
+            
         }
     }
 }

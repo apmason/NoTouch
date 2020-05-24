@@ -22,7 +22,6 @@ struct InteractiveVideoView: View {
     @ViewBuilder
     var body: some View {
         ZStack(alignment: .top) {
-            
             if !userSettings.hideCameraFeed && !userSettings.pauseDetection {
                 Text("Loading Video...")
                     .fontWeight(.bold)
