@@ -6,15 +6,32 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import NoTouchCommon
 import UIKit
+
+class DataModel {
+    
+    private let alertViewModel: AlertViewModel
+
+    public let userSettings: UserSettings = UserSettings()
+    
+    public let contentViewModel: ContentViewModel
+    
+    private init() {
+        self.alertViewModel = AlertViewModel(userSettings: userSettings,
+                                              database: CloudKitDatabase())
+        
+        self.contentViewModel = ContentViewModel(alertModel: alertViewModel, userSettings: userSettings)
+    }
+    
+    static let shared = DataModel()
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
         return true
     }
 

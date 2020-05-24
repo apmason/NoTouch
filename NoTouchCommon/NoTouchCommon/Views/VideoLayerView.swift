@@ -6,6 +6,7 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+#if os(OSX)
 import AppKit
 import CoreMedia
 import Foundation
@@ -19,7 +20,7 @@ class UpdatableMacView: NSView, NativeView {
             self.wantsLayer = true
         }
         
-        return self.layer!
+        return self.layer
     }
 
     var nativeFrame: CGRect {
@@ -49,4 +50,4 @@ struct MacLayerView: NSViewRepresentable {
         videoFeed.setPreviewView(to: nativeView)
     }
 }
-
+#endif

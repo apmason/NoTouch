@@ -57,7 +57,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     /// A cancellable observation that tracks whether we should stop or start recording.
     private var pauseObservation: AnyCancellable?
     
-    private let alertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings, database: CloudKitDatabase())
+    private let alertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings,
+                                                database: CloudKitDatabase())
     
     private var contentViewModel: ContentViewModel!
     

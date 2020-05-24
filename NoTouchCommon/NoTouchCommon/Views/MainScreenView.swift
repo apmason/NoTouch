@@ -35,7 +35,7 @@ public struct MainScreenView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             #else
-                Text("You are on iOS.")
+                Text("You are on iOS but you need to enable touching!.")
             #endif
         }
     }

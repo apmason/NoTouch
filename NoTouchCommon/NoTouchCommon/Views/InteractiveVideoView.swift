@@ -87,7 +87,7 @@ struct InteractiveVideoView: View {
                             self.showGraph.toggle()
                         }
                     }) {
-                        Image("graph")
+                        Image("graph", bundle: Bundle(for: VisionModel.self))
                             .resizable()
                             .padding(10)
                             .foregroundColor(Color.white)

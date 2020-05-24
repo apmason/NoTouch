@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:HandsOff-iOS/HandsOff-iOS.xcodeproj">
+      location = "group:NoTouchCommon/NoTouchCommon.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:NoTouchCommon/NoTouchCommon.xcodeproj">
+      location = "group:HandsOff-iOS/HandsOff-iOS.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:NoTouchMac/NoTouchMac.xcodeproj">

@@ -6,16 +6,27 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import NoTouchCommon
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var userSettings: UserSettings
+    let contentViewModel: ContentViewModel
+    
     var body: some View {
-        Text("Hello, World!")
+        MainScreenView(contentViewModel: contentViewModel)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    
+    static let userSettings = UserSettings()
+    static let alertViewModel = AlertViewModel(userSettings: userSettings, database: CloudKitDatabase())
+    
     static var previews: some View {
-        ContentView()
+        ContentView(contentViewModel: ContentViewModel(alertModel: alertViewModel,
+                                                       userSettings: userSettings))
+            .environmentObject(userSettings)
     }
 }

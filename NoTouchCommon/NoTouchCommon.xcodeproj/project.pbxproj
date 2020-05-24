@@ -16,6 +16,7 @@
 		C338C1DB247A948100475304 /* InteractiveVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DA247A948000475304 /* InteractiveVideoView.swift */; };
 		C338C1DD247A957B00475304 /* VideoLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DC247A957B00475304 /* VideoLayerView.swift */; };
 		C338C1DF247A95EF00475304 /* OptionButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DE247A95EF00475304 /* OptionButtonStack.swift */; };
+		C338C1EB247AD72B00475304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C338C1EA247AD72B00475304 /* Assets.xcassets */; };
 		C3523EF124749EDB002108A7 /* DifferenceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3523EF024749EDB002108A7 /* DifferenceDetector.swift */; };
 		C355357B2466108900E991AA /* TouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357A2466108900E991AA /* TouchExtensions.swift */; };
 		C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357C246610AB00E991AA /* TouchRecordExtensions.swift */; };
@@ -81,6 +82,7 @@
 		C338C1DA247A948000475304 /* InteractiveVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveVideoView.swift; sourceTree = "<group>"; };
 		C338C1DC247A957B00475304 /* VideoLayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLayerView.swift; sourceTree = "<group>"; };
 		C338C1DE247A95EF00475304 /* OptionButtonStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionButtonStack.swift; sourceTree = "<group>"; };
+		C338C1EA247AD72B00475304 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3523EF024749EDB002108A7 /* DifferenceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceDetector.swift; sourceTree = "<group>"; };
 		C355357A2466108900E991AA /* TouchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchExtensions.swift; sourceTree = "<group>"; };
 		C355357C246610AB00E991AA /* TouchRecordExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordExtensions.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
 				C3F139A72479C37900FFAB28 /* UpdatedNoTouchYolo.mlmodel */,
 				C3F4BE8F24426373003CBD59 /* NoTouch_YOLO_2.mlmodel */,
+				C338C1EA247AD72B00475304 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C338C1EB247AD72B00475304 /* Assets.xcassets in Resources */,
 				C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

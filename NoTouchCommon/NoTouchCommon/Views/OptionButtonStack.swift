@@ -18,8 +18,10 @@ struct OptionButtonStack: View {
             Button(action: {
                 self.userSettings.muteSound.toggle()
             }) {
-                Image(userSettings.muteSound ? "speaker.slash" : "speaker")
+                // Note: `VisionModel` should always be in this common framework, otherwise this will break.
+                Image(userSettings.muteSound ? "speaker.slash" : "speaker", bundle: Bundle(for: VisionModel.self))
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .padding(8)
                     .foregroundColor(Color.white)
                     .background(Color.black.opacity(0.75))
@@ -32,8 +34,9 @@ struct OptionButtonStack: View {
             Button(action: {
                 self.userSettings.hideCameraFeed.toggle()
             }) {
-                Image(userSettings.hideCameraFeed ? "eye.slash" : "eye")
+                return Image(userSettings.hideCameraFeed ? "eye.slash" : "eye", bundle: Bundle(for: VisionModel.self))
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .padding(5)
                     .foregroundColor(Color.white)
                     .background(Color.black.opacity(0.75))
@@ -46,8 +49,9 @@ struct OptionButtonStack: View {
             Button(action: {
                 self.userSettings.pauseDetection.toggle()
             }) {
-                Image(userSettings.pauseDetection ? "play" : "pause")
+                Image(userSettings.pauseDetection ? "play" : "pause", bundle: Bundle(for: VisionModel.self))
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .padding(7.5)
                     .foregroundColor(Color.white)
                     .background(Color.black.opacity(0.75))

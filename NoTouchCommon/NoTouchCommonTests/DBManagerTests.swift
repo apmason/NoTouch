@@ -14,33 +14,30 @@ class DBManagerTests: XCTestCase {
 
     func testRecordFetch() {
         let userSettings = UserSettings()
-        XCTAssert(userSettings.recordHolder.touchObservances.count == 24)
-        for touch in userSettings.recordHolder.touchObservances {
-            XCTAssert(touch == 0)
-        }
+        let mockDB = MockDatabase()
         
-        let expectation = XCTestExpectation(description: "Fetch existing record")
+        // Make sure we can make the network call.
+        userSettings.networkTracker.isNetworkAvailable = true
+        userSettings.networkTracker.cloudKitAuthStatus = .available
         
-        // We will automatically fetch the old records.
-        let dbManager = DBManager(userSettings: userSettings, database: MockDatabase())
-        dbManager.fetchExistingRecords { result in
-            if case Result.failure = result {
-                XCTFail("Fetching failed")
-            } else {
-                XCTAssert(userSettings.recordHolder.touchObservances.count == 24)
-                for (index, touch) in userSettings.recordHolder.touchObservances.enumerated() {
-                    if index == 0 {
-                        XCTAssert(touch == 1)
-                    } else {
-                        XCTAssert(touch == 0)
-                    }
+        let manager = DBManager(userSettings: userSettings, database: mockDB)
+        
+        let expectation = XCTestExpectation(description: "Wait for initial async fetch")
+        
+        manager.fetchExistingRecords { _ in
+            XCTAssert(userSettings.recordHolder.touchObservances.count == 24)
+            for (index, touch) in userSettings.recordHolder.touchObservances.enumerated() {
+                if index == 0 {
+                    XCTAssert(touch == 1)
+                } else {
+                    XCTAssert(touch == 0)
                 }
             }
             
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 4)
+        wait(for: [expectation], timeout: 2)
     }
     
     func testDatabaseRecordConversion() {
@@ -61,12 +58,17 @@ class DBManagerTests: XCTestCase {
 extension DBManagerTests {
     
     class MockDatabase: Database {
+        
+        var initialRecordsFetchState: RecordFetchState = .notAttempted
+        
+        var delegate: DatabaseDelegate?
+        
         func saveTouchRecord(_ record: TouchRecord, completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {}
         
         func saveTouchRecords(_ records: [TouchRecord], completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {}
         
         /// Return one `TouchRecord` in the `completionHandler`
-        func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], Error>) -> Void) {
+        func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
             let startOfDay = Calendar.current.startOfDay(for: Date())
             let record = TouchRecord(deviceName: "123", timestamp: startOfDay, version: "123")
             completionHandler(.success([record]))
