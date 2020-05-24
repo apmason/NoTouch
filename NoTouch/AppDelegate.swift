@@ -5,6 +5,7 @@ Abstract:
 Contains the sample's app delegate.
 */
 
+import CloudKit
 import Firebase
 import UIKit
 
@@ -40,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         
+        // Used for silent push notifications for CloudKit updates.
+        application.registerForRemoteNotifications()
         return true
     }
     
@@ -57,6 +60,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break // They haven't been asked yet, do nothing.
             
         }
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // pass this to common code.
+        guard let dict = userInfo as? [String: Any],
+            let ckNotification = CKNotification(fromRemoteNotificationDictionary: dict) as? CKDatabaseNotification else {
+                return
+        }
+        
+        print("new ck notif")
     }
 }
 

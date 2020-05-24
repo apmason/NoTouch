@@ -26,7 +26,7 @@ extension UIImage {
             let bounds = $0.boundingBox.applying(translate)
             print("Initial bounds: \(bounds)")
             
-            let chinOffset = ciImage.extent.height * 0.1
+            let chinOffset = ciImage.extent.height * 0.08
             let widthOffset: CGFloat = ciImage.extent.width * 0.025
             
             // NOTE: x and y will be flipped when bringing into NoTouch

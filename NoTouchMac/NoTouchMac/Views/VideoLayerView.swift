@@ -1,6 +1,6 @@
 //
 //  VideoLayerView.swift
-//  NoTouchMac
+//  HandsOff
 //
 //  Created by Alexander Mason on 4/11/20.
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
@@ -12,8 +12,16 @@ import Foundation
 import NoTouchCommon
 import SwiftUI
 
-class UpdatableMacView: NSView, NativewView {
-    var nativeLayer: CALayer?
+class UpdatableMacView: NSView, NativeView {
+    
+    /// This layer should be set directly.
+    var nativeLayer: CALayer? {
+        if !self.wantsLayer {
+            self.wantsLayer = true
+        }
+        
+        return self.layer!
+    }
 
     var nativeFrame: CGRect {
         return self.frame
@@ -23,41 +31,31 @@ class UpdatableMacView: NSView, NativewView {
         return self.bounds
     }
     
-//    init() {
-//        super.init(frame: .zero)
-//        self.nativeLayer = layer
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//        self.nativeLayer = layer
-//    }
+    func setToWantLayer(_ wantsLayer: Bool) {
+        self.wantsLayer = wantsLayer
+    }
 }
 
-final class VideoLayerView: NSViewRepresentable {
+struct VideoLayerView: NSViewRepresentable {
+    
+    let videoFeed: VideoFeed
+    
+//    init(videoFeed: VideoFeed) {
+//        self.videoFeed = videoFeed
+//    }
     
     func makeNSView(context: Context) -> UpdatableMacView {
-        print("Make ns view called")
         let nativeView = UpdatableMacView()
+        nativeView.wantsLayer = true
         return nativeView
     }
     
-    func updateNSView(_ nsView: UpdatableMacView, context: Context) {
-        // Update our video layer.
-        context.coordinator.contentViewModel.setPreviewView(to: nsView)
-    }
-    
-    class Coordinator: NSObject {
-        var parent: VideoLayerView
-        let contentViewModel = ContentViewModel()
-
-        init(_ videoLayerView: VideoLayerView) {
-            self.parent = videoLayerView
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+    func updateNSView(_ nativeView: UpdatableMacView, context: Context) {
+//        if !nativeView.wantsLayer {
+//            print("FUCK")
+//        }
+        
+        videoFeed.setPreviewView(to: nativeView)
     }
 }
 

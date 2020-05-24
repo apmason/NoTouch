@@ -16,4 +16,5 @@ enum NoTouchError: Error {
     case modelCreationFailure(Error)
     case missingModelFile
     case visionRequestFailure
+    case improperDatesUsed
 }

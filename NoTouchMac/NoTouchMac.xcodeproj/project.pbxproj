@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		C31B31BE244C7089009C8A57 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31B31BD244C7089009C8A57 /* ContentViewModel.swift */; };
+		C3808E26246D75FF008304F3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39193D0245E20C800789E35 /* CloudKit.framework */; };
 		C394DA95244C6DEF00608CFC /* FeedResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C394DA94244C6DEF00608CFC /* FeedResizer.swift */; };
+		C3B24E3224670B2600E2A737 /* OptionButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B24E31246709F600E2A737 /* OptionButtonStack.swift */; };
 		C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */; };
 		C3BF2AB524422464004BDEE4 /* NoTouchCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; };
 		C3BF2AB624422464004BDEE4 /* NoTouchCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C3DA3EF524562CD400FA02A3 /* InteractiveVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DA3EF424562CD400FA02A3 /* InteractiveVideoView.swift */; };
 		C3EE5950243DFE8B00461EB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE594F243DFE8B00461EB4 /* AppDelegate.swift */; };
 		C3EE5952243DFE8B00461EB4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE5951243DFE8B00461EB4 /* ContentView.swift */; };
 		C3EE5954243DFE9000461EB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3EE5953243DFE9000461EB4 /* Assets.xcassets */; };
@@ -55,11 +58,14 @@
 
 /* Begin PBXFileReference section */
 		C31B31BD244C7089009C8A57 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		C39193D0245E20C800789E35 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		C394DA94244C6DEF00608CFC /* FeedResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResizer.swift; sourceTree = "<group>"; };
+		C3B24E31246709F600E2A737 /* OptionButtonStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButtonStack.swift; sourceTree = "<group>"; };
 		C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLayerView.swift; sourceTree = "<group>"; };
 		C3BF2AAB2442223E004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3EE594C243DFE8B00461EB4 /* NoTouchMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoTouchMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3DA3EF424562CD400FA02A3 /* InteractiveVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveVideoView.swift; sourceTree = "<group>"; };
+		C3EE594C243DFE8B00461EB4 /* HandsOff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandsOff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3EE594F243DFE8B00461EB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3EE5951243DFE8B00461EB4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C3EE5953243DFE9000461EB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3BF2AB524422464004BDEE4 /* NoTouchCommon.framework in Frameworks */,
+				C3808E26246D75FF008304F3 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +132,9 @@
 		C3BF2AA7244221A2004BDEE4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C3B24E31246709F600E2A737 /* OptionButtonStack.swift */,
 				C3EE5951243DFE8B00461EB4 /* ContentView.swift */,
+				C3DA3EF424562CD400FA02A3 /* InteractiveVideoView.swift */,
 				C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */,
 			);
 			path = Views;
@@ -134,6 +143,7 @@
 		C3BF2AAA2442223E004BDEE4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C39193D0245E20C800789E35 /* CloudKit.framework */,
 				C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */,
 				C3BF2AAB2442223E004BDEE4 /* NoTouchCommon.framework */,
 			);
@@ -154,7 +164,7 @@
 		C3EE594D243DFE8B00461EB4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C3EE594C243DFE8B00461EB4 /* NoTouchMac.app */,
+				C3EE594C243DFE8B00461EB4 /* HandsOff.app */,
 				C3EE5961243DFE9100461EB4 /* NoTouchMacTests.xctest */,
 				C3EE596C243DFE9100461EB4 /* NoTouchMacUITests.xctest */,
 			);
@@ -203,9 +213,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C3EE594B243DFE8B00461EB4 /* NoTouchMac */ = {
+		C3EE594B243DFE8B00461EB4 /* HandsOff */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3EE5975243DFE9100461EB4 /* Build configuration list for PBXNativeTarget "NoTouchMac" */;
+			buildConfigurationList = C3EE5975243DFE9100461EB4 /* Build configuration list for PBXNativeTarget "HandsOff" */;
 			buildPhases = (
 				C3EE5948243DFE8B00461EB4 /* Sources */,
 				C3EE5949243DFE8B00461EB4 /* Frameworks */,
@@ -216,9 +226,9 @@
 			);
 			dependencies = (
 			);
-			name = NoTouchMac;
+			name = HandsOff;
 			productName = NoTouchMac;
-			productReference = C3EE594C243DFE8B00461EB4 /* NoTouchMac.app */;
+			productReference = C3EE594C243DFE8B00461EB4 /* HandsOff.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C3EE5960243DFE9100461EB4 /* NoTouchMacTests */ = {
@@ -293,7 +303,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C3EE594B243DFE8B00461EB4 /* NoTouchMac */,
+				C3EE594B243DFE8B00461EB4 /* HandsOff */,
 				C3EE5960243DFE9100461EB4 /* NoTouchMacTests */,
 				C3EE596B243DFE9100461EB4 /* NoTouchMacUITests */,
 			);
@@ -334,8 +344,10 @@
 			files = (
 				C3F4BE942442968B003CBD59 /* NoTouchNotifications.swift in Sources */,
 				C3EE5952243DFE8B00461EB4 /* ContentView.swift in Sources */,
+				C3DA3EF524562CD400FA02A3 /* InteractiveVideoView.swift in Sources */,
 				C31B31BE244C7089009C8A57 /* ContentViewModel.swift in Sources */,
 				C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */,
+				C3B24E3224670B2600E2A737 /* OptionButtonStack.swift in Sources */,
 				C394DA95244C6DEF00608CFC /* FeedResizer.swift in Sources */,
 				C3EE5950243DFE8B00461EB4 /* AppDelegate.swift in Sources */,
 			);
@@ -362,12 +374,12 @@
 /* Begin PBXTargetDependency section */
 		C3EE5963243DFE9100461EB4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C3EE594B243DFE8B00461EB4 /* NoTouchMac */;
+			target = C3EE594B243DFE8B00461EB4 /* HandsOff */;
 			targetProxy = C3EE5962243DFE9100461EB4 /* PBXContainerItemProxy */;
 		};
 		C3EE596E243DFE9100461EB4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C3EE594B243DFE8B00461EB4 /* NoTouchMac */;
+			target = C3EE594B243DFE8B00461EB4 /* HandsOff */;
 			targetProxy = C3EE596D243DFE9100461EB4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -502,10 +514,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouchMac/NoTouchMac.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"NoTouchMac/Preview Content\"";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -517,7 +529,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.canopy.NoTouchMac;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.handsOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -528,10 +541,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NoTouchMac/NoTouchMac.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"NoTouchMac/Preview Content\"";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -543,7 +556,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.canopy.NoTouchMac;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.handsOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -645,7 +659,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3EE5975243DFE9100461EB4 /* Build configuration list for PBXNativeTarget "NoTouchMac" */ = {
+		C3EE5975243DFE9100461EB4 /* Build configuration list for PBXNativeTarget "HandsOff" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3EE5976243DFE9100461EB4 /* Debug */,

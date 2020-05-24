@@ -1,6 +1,6 @@
 //
 //  ContentViewModel.swift
-//  NoTouchMac
+//  HandsOff
 //
 //  Created by Alexander Mason on 4/19/20.
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
@@ -16,19 +16,14 @@ class ContentViewModel {
     let feed: VideoFeed = VideoFeed(userSettings: AppDelegate.userSettings)
     private let feedResizer: FeedResizer
     private let visionModel = VisionModel()
-    private let alertVM = AlertViewModel(userSettings: AppDelegate.userSettings)
+    private let alertVM: AlertViewModel
     
-    init() {
+    init(alertModel: AlertViewModel) {
+        self.alertVM = alertModel
         feedResizer = FeedResizer(feed)
         feed.delegate = self
-        feed.startup()
         
         visionModel.delegate = self
-    }
-    
-    public func setPreviewView(to nativeView: NSView) {
-        print("Set preview view called")
-        feed.setPreviewView(to: nativeView)
     }
 }
 

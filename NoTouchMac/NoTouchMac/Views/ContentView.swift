@@ -1,43 +1,48 @@
 //
 //  ContentView.swift
-//  NoTouchMac
+//  HandsOff
 //
 //  Created by Alexander Mason on 4/8/20.
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import AppKit
 import SwiftUI
 import NoTouchCommon
 
 struct ContentView: View {
     
     @EnvironmentObject var userSettings: UserSettings
-        
-    //let contentViewModel = ContentViewModel()
+    let contentViewModel: ContentViewModel
     
+    @ViewBuilder
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            VideoLayerView()
-            Button(action: {
-                self.userSettings.muteSound.toggle()
-            }) {
-                Image(userSettings.muteSound ? "speaker.slash" : "speaker")
-                    .resizable()
-                    .padding(8)
-                    .foregroundColor(Color.white)
-                    .background(Color.black.opacity(0.75))
-                    .cornerRadius(10)
+        if userSettings.cameraAuthState == .authorized || userSettings.cameraAuthState == .notDetermined {
+            InteractiveVideoView(videoFeed: self.contentViewModel.feed)
+        } else {
+            VStack {
+                Text("Please authorize camera usage to continue.")
+                    .font(.headline)
+                    .padding(.bottom, 10)
+                
+                Text("Go to System Preferences -> Security & Privacy -> Privacy -> Camera and authorize HandsOff.")
+                    .font(.body)
+                    .padding(.horizontal)
+                    .multilineTextAlignment(.center)
+                
             }
-            .buttonStyle(PlainButtonStyle())
-            .frame(width: 40, height: 40, alignment: .topLeading)
-            .padding(10)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    
+    static let userSettings = UserSettings()
+    static let alertViewModel = AlertViewModel(userSettings: userSettings, database: CloudKitDatabase())
+    
     static var previews: some View {
-        ContentView()
-            .environmentObject(UserSettings())
+        ContentView(contentViewModel: ContentViewModel(alertModel: alertViewModel))
+            .environmentObject(userSettings)
     }
 }

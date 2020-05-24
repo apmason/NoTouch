@@ -17,15 +17,17 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.lifestyle</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>LSUIElement</key>
 	<false/>
 	<key>NSCameraUsageDescription</key>
-	<string>Use your camera to detect touching of the face.</string>
+	<string>HandsOff would like to access your camera to determine if you are touching your face. All calculations to determine if you are touching your face are done on your device, your camera data is never sent anywhere (you can use HandsOff without Internet). Your camera data is never stored anywhere.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2020 Canopy Interactive. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
