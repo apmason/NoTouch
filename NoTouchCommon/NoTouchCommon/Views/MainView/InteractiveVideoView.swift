@@ -40,9 +40,7 @@ struct InteractiveVideoView: View {
                 Text("Camera Hidden")
                     .fontWeight(.bold)
                     .padding(8)
-            }
-            
-            if userSettings.pauseDetection {
+            } else if userSettings.pauseDetection {
                 Text("Detection Paused")
                     .fontWeight(.bold)
                     .padding(8)
@@ -54,34 +52,8 @@ struct InteractiveVideoView: View {
                     
                     Spacer()
                     
-                    VStack(spacing: 10) {
-                        if !userSettings.networkTracker.isNetworkAvailable {
-                            Text("Disconnected From Internet")
-                                .fontWeight(.medium)
-                        }
-                        
-                        if userSettings.networkTracker.cloudKitAuthStatus == .signedOut {
-                            Text("Sign in to iCloud to track how many times you touch your face in a day and see your progress improve!")
-                                .fontWeight(.medium)
-                                .frame(alignment: .center)
-                                .multilineTextAlignment(.center)
-                                .lineLimit(nil)
-                                .minimumScaleFactor(0.3)
-                                .allowsTightening(true)
-                                .padding(.horizontal, 40)
-                            
-                        } else if userSettings.networkTracker.cloudKitAuthStatus == .restricted {
-                            Text("Enable iCloud to track how many times you touch your face in a day.")
-                                .fontWeight(.medium)
-                                .frame(alignment: .center)
-                                .multilineTextAlignment(.center)
-                                .lineLimit(nil)
-                                .minimumScaleFactor(0.3)
-                                .allowsTightening(true)
-                                .padding(.horizontal, 40)
-                        }
-                        
-                    }.padding(.top, 8)
+                    StateWarningView()
+                        .environmentObject(userSettings)
                     
                     Spacer()
                     
@@ -106,6 +78,42 @@ struct InteractiveVideoView: View {
                 ResultsView(showGraph: $showGraph)
             }
         }
+    }
+}
+
+struct StateWarningView: View {
+    
+    @EnvironmentObject var userSettings: UserSettings
+    
+    var body: some View {
+        VStack(spacing: 10) {
+            if !userSettings.networkTracker.isNetworkAvailable {
+                Text("Disconnected From Internet")
+                    .fontWeight(.medium)
+            }
+            
+            if userSettings.networkTracker.cloudKitAuthStatus == .signedOut {
+                Text("Sign in to iCloud to track how many times you touch your face in a day and see your progress improve!")
+                    .fontWeight(.medium)
+                    .frame(alignment: .center)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(nil)
+                    .minimumScaleFactor(0.3)
+                    .allowsTightening(true)
+                    .padding(.horizontal, 40)
+                
+            } else if userSettings.networkTracker.cloudKitAuthStatus == .restricted {
+                Text("Enable iCloud to track how many times you touch your face in a day.")
+                    .fontWeight(.medium)
+                    .frame(alignment: .center)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(nil)
+                    .minimumScaleFactor(0.3)
+                    .allowsTightening(true)
+                    .padding(.horizontal, 40)
+            }
+            
+        }.padding(.top, 8)
     }
 }
 

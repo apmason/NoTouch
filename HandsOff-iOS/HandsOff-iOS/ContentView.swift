@@ -15,7 +15,11 @@ struct ContentView: View {
     let contentViewModel: ContentViewModel
     
     var body: some View {
-        MainScreenView(contentViewModel: contentViewModel)
+        NavigationView {
+            MainScreenView(contentViewModel: contentViewModel)
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+        }
     }
 }
 
