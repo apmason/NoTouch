@@ -8,6 +8,6 @@
       location = "group:NoTouchMac/NoTouchMac.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:NoTouch.xcodeproj">
+      location = "group:../HandsOff-iOS/HandsOff-iOS.xcodeproj">
    </FileRef>
 </Workspace>

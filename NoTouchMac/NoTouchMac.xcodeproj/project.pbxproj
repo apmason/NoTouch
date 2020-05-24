@@ -132,8 +132,8 @@
 		C3BF2AA7244221A2004BDEE4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C3B24E31246709F600E2A737 /* OptionButtonStack.swift */,
 				C3EE5951243DFE8B00461EB4 /* ContentView.swift */,
+				C3B24E31246709F600E2A737 /* OptionButtonStack.swift */,
 				C3DA3EF424562CD400FA02A3 /* InteractiveVideoView.swift */,
 				C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */,
 			);

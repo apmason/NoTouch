@@ -6,7 +6,6 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
-import AppKit
 import SwiftUI
 import NoTouchCommon
 
@@ -29,7 +28,6 @@ struct ContentView: View {
                     .font(.body)
                     .padding(.horizontal)
                     .multilineTextAlignment(.center)
-                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
