@@ -6,6 +6,7 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+#if os(iOS)
 import SwiftUI
 
 struct iOSCameraAuthView: View {
@@ -41,3 +42,4 @@ struct iOSCameraAuthView_Previews: PreviewProvider {
         iOSCameraAuthView()
     }
 }
+#endif

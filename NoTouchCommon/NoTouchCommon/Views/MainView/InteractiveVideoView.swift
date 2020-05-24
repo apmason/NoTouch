@@ -33,6 +33,7 @@ struct InteractiveVideoView: View {
             MacLayerView(videoFeed: self.videoFeed)
             #elseif os(iOS)
             iOSLayerView(videoFeed: self.videoFeed)
+                .edgesIgnoringSafeArea(.all)
             #endif
             
             if userSettings.hideCameraFeed {
