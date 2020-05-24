@@ -17,6 +17,12 @@ public protocol VideoFeedDelegate: class {
     func captureOutput(didOutput sampleBuffer: CMSampleBuffer)
 }
 
+#if DEBUG
+#if os(iOS)
+import UIKit
+#endif
+#endif
+
 // FIXME: Change this name to VideoFeedProvider? Or something of the sort?
 public class VideoFeed: NSObject {
         
@@ -48,6 +54,16 @@ public class VideoFeed: NSObject {
     private var nativeView: NativeView?
     
     private let userSettings: UserSettings
+    
+    #if DEBUG
+    #if os(iOS)
+    public let trackingView: UIView = {
+        let trackingView = UIView()
+        trackingView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        return trackingView
+    }()
+    #endif
+    #endif
     
     public init(userSettings: UserSettings) {
         self.userSettings = userSettings
@@ -190,6 +206,12 @@ public class VideoFeed: NSObject {
     public func setPreviewView(to nativeView: NativeView) {
         // Cache the nativeView right away. This may be called before the session is running.
         self.nativeView = nativeView
+        
+        #if DEBUG
+        #if os(iOS)
+        //self.nativeView?.addTrackingSubview(self.trackingView)
+        #endif
+        #endif
         
         setNativeViewLayerIfNeeded()
     }

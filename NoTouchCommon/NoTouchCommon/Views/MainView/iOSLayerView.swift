@@ -25,6 +25,16 @@ class UpdatableIOSView: UIView, NativeView {
     }
     
     func setToWantLayer(_ wantsLayer: Bool) {}
+    
+    #if DEBUG
+    #if os(iOS)
+    func addTrackingSubview(_ trackingView: UIView) {
+//        if !self.subviews.contains(trackingView) {
+//            self.addSubview(trackingView)
+//        }
+    }
+    #endif
+    #endif
 }
 
 struct iOSLayerView: UIViewRepresentable {

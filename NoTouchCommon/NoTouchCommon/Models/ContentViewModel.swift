@@ -54,6 +54,11 @@ extension ContentViewModel: VisionModelDelegate {
         //        DispatchQueue.main.async {
         //            self.trackingView.frame = rect
         //        }
+        #if os(iOS)
+//        DispatchQueue.main.async {
+//            self.feed.trackingView.frame = rect
+//        }
+        #endif
     }
     #endif
 }

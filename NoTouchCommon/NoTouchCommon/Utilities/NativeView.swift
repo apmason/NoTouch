@@ -10,6 +10,12 @@ import CoreGraphics
 import Foundation
 import QuartzCore
 
+#if DEBUG
+#if os(iOS)
+import UIKit
+#endif
+#endif
+
 /// A protocol that defines a cross-platform view.
 public protocol NativeView: class {
     
@@ -17,4 +23,10 @@ public protocol NativeView: class {
     var nativeFrame: CGRect { get }
     var nativeBounds: CGRect { get }
     func setToWantLayer(_ wantsLayer: Bool)
+    
+    #if DEBUG
+    #if os(iOS)
+    func addTrackingSubview(_ trackingView: UIView)
+    #endif
+    #endif
 }

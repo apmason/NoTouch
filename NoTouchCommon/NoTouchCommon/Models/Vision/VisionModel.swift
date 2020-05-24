@@ -8,6 +8,8 @@
 
 #if os(OSX)
 import AppKit
+#elseif os(iOS)
+import UIKit
 #endif
 import AVFoundation
 import Foundation
@@ -111,29 +113,28 @@ public class VisionModel {
             
             let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
             
-            #if os(iOS)
-            // Image is rotated 90 degrees to the left
-            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
-            let bounds = boundingBox.applying(translate)
-            
-            let cheekOffset = ciImage.extent.height * 0.025
-            let chinOffset: CGFloat = ciImage.extent.width * 0.1
-            
-            let updatedBounds = CGRect(x: bounds.origin.x - chinOffset,
-                                       y: bounds.origin.y - cheekOffset,
-                                       width: bounds.width + (chinOffset * 2),
-                                       height: bounds.height + (cheekOffset * 2))
-            #elseif os(OSX)
             let bounds = VNImageRectForNormalizedRect(boundingBox, Int(ciImage.extent.width), Int(ciImage.extent.height))
             
+            #if os(OSX)
             let chinOffset = ciImage.extent.height * 0.1
-            let widthOffset: CGFloat = ciImage.extent.width * 0.025
+            #else
+            let chinOffset = ciImage.extent.height * 0.025
+            #endif
             
-            // NOTE: x and y will be flipped when bringing into NoTouch
+            #if os(OSX)
+            let widthOffset: CGFloat = ciImage.extent.width * 0.025
+            #else
+            let widthOffset: CGFloat = ciImage.extent.width * 0.1
+            #endif
+            
+            
             let updatedBounds = CGRect(x: bounds.origin.x - widthOffset,
                                        y: bounds.origin.y - chinOffset,
                                        width: bounds.width + (widthOffset * 2),
                                        height: bounds.height + (chinOffset * 2))
+            
+            #if DEBUG
+            self.delegate?.faceBoundingBoxUpdated(updatedBounds)
             #endif
             
             let cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
@@ -144,10 +145,16 @@ public class VisionModel {
             }
             
             // Don't need to analyze the images currently.
-            //            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
-            //            ImageStorer.storeNewImage(image: image)
+            //#if os(OSX)
+//            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
+//            ImageStorer.storeNewImage(image: image)
+//            #elseif os(iOS)
+//            let image = UIImage(cgImage: unwrappedCGImage)
+//            ImageStorer.storeNewImage(image: image)
+//            #endif
             
-            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
+            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage,
+                                                     orientation: Orienter.currentCGOrientation())
             self.visionQueue.async { [weak self] in
                 guard let self = self else {
                     return
