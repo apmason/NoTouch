@@ -28,8 +28,11 @@ struct InteractiveVideoView: View {
                     .padding(8)
             }
             
+            // Always on bottom.
             #if os(OSX)
-            MacLayerView(videoFeed: self.videoFeed) // always on bottom.
+            MacLayerView(videoFeed: self.videoFeed)
+            #elseif os(iOS)
+            iOSLayerView(videoFeed: self.videoFeed)
             #endif
             
             if userSettings.hideCameraFeed {

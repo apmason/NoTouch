@@ -35,7 +35,7 @@ public struct MainScreenView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             #else
-                Text("You are on iOS but you need to enable touching!.")
+            iOSCameraAuthView()
             #endif
         }
     }
@@ -46,9 +46,15 @@ struct MainScreenView_Previews: PreviewProvider {
     static let userSettings = UserSettings()
     static let alertViewModel = AlertViewModel(userSettings: userSettings, database: CloudKitDatabase())
     
+    static func mockUserSettings() -> UserSettings {
+        let userSettings = UserSettings()
+        userSettings.cameraAuthState = .denied
+        return userSettings
+    }
+    
     static var previews: some View {
         MainScreenView(contentViewModel: ContentViewModel(alertModel: alertViewModel,
-                                                          userSettings: userSettings))
+                                                          userSettings: mockUserSettings()))
             .environmentObject(userSettings)
     }
 }

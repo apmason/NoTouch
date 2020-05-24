@@ -14,7 +14,7 @@
 		C338C1D5247A8E1900475304 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1D4247A8E1900475304 /* MainScreenView.swift */; };
 		C338C1D9247A8EF000475304 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1D8247A8EF000475304 /* ContentViewModel.swift */; };
 		C338C1DB247A948100475304 /* InteractiveVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DA247A948000475304 /* InteractiveVideoView.swift */; };
-		C338C1DD247A957B00475304 /* VideoLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DC247A957B00475304 /* VideoLayerView.swift */; };
+		C338C1DD247A957B00475304 /* MacLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DC247A957B00475304 /* MacLayerView.swift */; };
 		C338C1DF247A95EF00475304 /* OptionButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DE247A95EF00475304 /* OptionButtonStack.swift */; };
 		C338C1EB247AD72B00475304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C338C1EA247AD72B00475304 /* Assets.xcassets */; };
 		C3523EF124749EDB002108A7 /* DifferenceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3523EF024749EDB002108A7 /* DifferenceDetector.swift */; };
@@ -53,6 +53,8 @@
 		C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A99244219AE004BDEE4 /* AlertViewModel.swift */; };
 		C3BF2AA0244219AE004BDEE4 /* VisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2A9A244219AE004BDEE4 /* VisionModel.swift */; };
 		C3BF2AA224421A1D004BDEE4 /* Orienter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2AA124421A1D004BDEE4 /* Orienter.swift */; };
+		C3C46EBC247AE7020042E602 /* iOSCameraAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C46EBB247AE7020042E602 /* iOSCameraAuthView.swift */; };
+		C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C46EBD247AE8440042E602 /* iOSLayerView.swift */; };
 		C3C69771246B317A006FCD7C /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C69770246B317A006FCD7C /* ResultsView.swift */; };
 		C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */; };
 		C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */; };
@@ -80,7 +82,7 @@
 		C338C1D4247A8E1900475304 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		C338C1D8247A8EF000475304 /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		C338C1DA247A948000475304 /* InteractiveVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveVideoView.swift; sourceTree = "<group>"; };
-		C338C1DC247A957B00475304 /* VideoLayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLayerView.swift; sourceTree = "<group>"; };
+		C338C1DC247A957B00475304 /* MacLayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacLayerView.swift; sourceTree = "<group>"; };
 		C338C1DE247A95EF00475304 /* OptionButtonStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionButtonStack.swift; sourceTree = "<group>"; };
 		C338C1EA247AD72B00475304 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3523EF024749EDB002108A7 /* DifferenceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceDetector.swift; sourceTree = "<group>"; };
@@ -122,6 +124,8 @@
 		C3BF2A99244219AE004BDEE4 /* AlertViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		C3BF2A9A244219AE004BDEE4 /* VisionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisionModel.swift; sourceTree = "<group>"; };
 		C3BF2AA124421A1D004BDEE4 /* Orienter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Orienter.swift; sourceTree = "<group>"; };
+		C3C46EBB247AE7020042E602 /* iOSCameraAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCameraAuthView.swift; sourceTree = "<group>"; };
+		C3C46EBD247AE8440042E602 /* iOSLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSLayerView.swift; sourceTree = "<group>"; };
 		C3C69770246B317A006FCD7C /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitRetryManager.swift; sourceTree = "<group>"; };
@@ -287,6 +291,19 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		C3C46EBA247AE6B00042E602 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				C338C1D4247A8E1900475304 /* MainScreenView.swift */,
+				C338C1DA247A948000475304 /* InteractiveVideoView.swift */,
+				C3C46EBD247AE8440042E602 /* iOSLayerView.swift */,
+				C338C1DC247A957B00475304 /* MacLayerView.swift */,
+				C338C1DE247A95EF00475304 /* OptionButtonStack.swift */,
+				C3C46EBB247AE7020042E602 /* iOSCameraAuthView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
 		C3DC7E40246BF6A30093B34B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,11 +340,8 @@
 		C3FA9C30245F3DD5007A5A2C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C3C46EBA247AE6B00042E602 /* MainView */,
 				C33079EA2467028F005392A6 /* Graph */,
-				C338C1D4247A8E1900475304 /* MainScreenView.swift */,
-				C338C1DA247A948000475304 /* InteractiveVideoView.swift */,
-				C338C1DC247A957B00475304 /* VideoLayerView.swift */,
-				C338C1DE247A95EF00475304 /* OptionButtonStack.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -450,13 +464,14 @@
 				C31871ED244BB5BC00F079FC /* UserSettings.swift in Sources */,
 				C338C1DB247A948100475304 /* InteractiveVideoView.swift in Sources */,
 				C3BF2A9C244219AE004BDEE4 /* FirstRunModel.swift in Sources */,
-				C338C1DD247A957B00475304 /* VideoLayerView.swift in Sources */,
+				C338C1DD247A957B00475304 /* MacLayerView.swift in Sources */,
 				C3F139A82479C37900FFAB28 /* UpdatedNoTouchYolo.mlmodel in Sources */,
 				C39AF22E24706A2E00C10A54 /* Database.swift in Sources */,
 				C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */,
 				C330CE562461980B00FCA49A /* BarsView.swift in Sources */,
 				C3B0E04D245E30CC00BC4946 /* TouchRecord.swift in Sources */,
 				C3BF2A902442163B004BDEE4 /* VideoFeed.swift in Sources */,
+				C3C46EBC247AE7020042E602 /* iOSCameraAuthView.swift in Sources */,
 				C3BF2AA224421A1D004BDEE4 /* Orienter.swift in Sources */,
 				C3523EF124749EDB002108A7 /* DifferenceDetector.swift in Sources */,
 				C338C1D9247A8EF000475304 /* ContentViewModel.swift in Sources */,
@@ -478,6 +493,7 @@
 				C391EA44245F4B690062A07D /* GraphView.swift in Sources */,
 				C3C69771246B317A006FCD7C /* ResultsView.swift in Sources */,
 				C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */,
+				C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */,
 				C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */,
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
 				C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */,
