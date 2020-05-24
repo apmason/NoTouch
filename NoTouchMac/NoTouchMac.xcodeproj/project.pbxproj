@@ -7,14 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C31B31BE244C7089009C8A57 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31B31BD244C7089009C8A57 /* ContentViewModel.swift */; };
 		C3808E26246D75FF008304F3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C39193D0245E20C800789E35 /* CloudKit.framework */; };
 		C394DA95244C6DEF00608CFC /* FeedResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C394DA94244C6DEF00608CFC /* FeedResizer.swift */; };
-		C3B24E3224670B2600E2A737 /* OptionButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B24E31246709F600E2A737 /* OptionButtonStack.swift */; };
-		C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */; };
 		C3BF2AB524422464004BDEE4 /* NoTouchCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; };
 		C3BF2AB624422464004BDEE4 /* NoTouchCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C3DA3EF524562CD400FA02A3 /* InteractiveVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DA3EF424562CD400FA02A3 /* InteractiveVideoView.swift */; };
 		C3EE5950243DFE8B00461EB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE594F243DFE8B00461EB4 /* AppDelegate.swift */; };
 		C3EE5952243DFE8B00461EB4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EE5951243DFE8B00461EB4 /* ContentView.swift */; };
 		C3EE5954243DFE9000461EB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3EE5953243DFE9000461EB4 /* Assets.xcassets */; };
@@ -57,14 +53,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C31B31BD244C7089009C8A57 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		C39193D0245E20C800789E35 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		C394DA94244C6DEF00608CFC /* FeedResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResizer.swift; sourceTree = "<group>"; };
-		C3B24E31246709F600E2A737 /* OptionButtonStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButtonStack.swift; sourceTree = "<group>"; };
-		C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLayerView.swift; sourceTree = "<group>"; };
 		C3BF2AAB2442223E004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BF2AB424422464004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3DA3EF424562CD400FA02A3 /* InteractiveVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveVideoView.swift; sourceTree = "<group>"; };
 		C3EE594C243DFE8B00461EB4 /* HandsOff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandsOff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3EE594F243DFE8B00461EB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3EE5951243DFE8B00461EB4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				C394DA94244C6DEF00608CFC /* FeedResizer.swift */,
-				C31B31BD244C7089009C8A57 /* ContentViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -133,9 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				C3EE5951243DFE8B00461EB4 /* ContentView.swift */,
-				C3B24E31246709F600E2A737 /* OptionButtonStack.swift */,
-				C3DA3EF424562CD400FA02A3 /* InteractiveVideoView.swift */,
-				C3BF2AA8244221CA004BDEE4 /* VideoLayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -344,10 +332,6 @@
 			files = (
 				C3F4BE942442968B003CBD59 /* NoTouchNotifications.swift in Sources */,
 				C3EE5952243DFE8B00461EB4 /* ContentView.swift in Sources */,
-				C3DA3EF524562CD400FA02A3 /* InteractiveVideoView.swift in Sources */,
-				C31B31BE244C7089009C8A57 /* ContentViewModel.swift in Sources */,
-				C3BF2AA9244221CA004BDEE4 /* VideoLayerView.swift in Sources */,
-				C3B24E3224670B2600E2A737 /* OptionButtonStack.swift in Sources */,
 				C394DA95244C6DEF00608CFC /* FeedResizer.swift in Sources */,
 				C3EE5950243DFE8B00461EB4 /* AppDelegate.swift in Sources */,
 			);

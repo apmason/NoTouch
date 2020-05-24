@@ -11,6 +11,11 @@
 		C33079EC246702CA005392A6 /* GraphYLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33079EB246702CA005392A6 /* GraphYLabels.swift */; };
 		C330CE5424617F0A00FCA49A /* Positioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330CE5324617F0A00FCA49A /* Positioner.swift */; };
 		C330CE562461980B00FCA49A /* BarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C330CE552461980B00FCA49A /* BarsView.swift */; };
+		C338C1D5247A8E1900475304 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1D4247A8E1900475304 /* MainScreenView.swift */; };
+		C338C1D9247A8EF000475304 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1D8247A8EF000475304 /* ContentViewModel.swift */; };
+		C338C1DB247A948100475304 /* InteractiveVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DA247A948000475304 /* InteractiveVideoView.swift */; };
+		C338C1DD247A957B00475304 /* VideoLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DC247A957B00475304 /* VideoLayerView.swift */; };
+		C338C1DF247A95EF00475304 /* OptionButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DE247A95EF00475304 /* OptionButtonStack.swift */; };
 		C3523EF124749EDB002108A7 /* DifferenceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3523EF024749EDB002108A7 /* DifferenceDetector.swift */; };
 		C355357B2466108900E991AA /* TouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357A2466108900E991AA /* TouchExtensions.swift */; };
 		C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357C246610AB00E991AA /* TouchRecordExtensions.swift */; };
@@ -71,6 +76,11 @@
 		C33079EB246702CA005392A6 /* GraphYLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphYLabels.swift; sourceTree = "<group>"; };
 		C330CE5324617F0A00FCA49A /* Positioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positioner.swift; sourceTree = "<group>"; };
 		C330CE552461980B00FCA49A /* BarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarsView.swift; sourceTree = "<group>"; };
+		C338C1D4247A8E1900475304 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		C338C1D8247A8EF000475304 /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		C338C1DA247A948000475304 /* InteractiveVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveVideoView.swift; sourceTree = "<group>"; };
+		C338C1DC247A957B00475304 /* VideoLayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLayerView.swift; sourceTree = "<group>"; };
+		C338C1DE247A95EF00475304 /* OptionButtonStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionButtonStack.swift; sourceTree = "<group>"; };
 		C3523EF024749EDB002108A7 /* DifferenceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceDetector.swift; sourceTree = "<group>"; };
 		C355357A2466108900E991AA /* TouchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchExtensions.swift; sourceTree = "<group>"; };
 		C355357C246610AB00E991AA /* TouchRecordExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordExtensions.swift; sourceTree = "<group>"; };
@@ -289,6 +299,7 @@
 		C3EF684024506F2900741E50 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C338C1D8247A8EF000475304 /* ContentViewModel.swift */,
 				C3BF2AA424422042004BDEE4 /* Vision */,
 				C3BF2AA32442202B004BDEE4 /* Alerting */,
 				C3BF2A97244219AE004BDEE4 /* CameraAuthModel.swift */,
@@ -310,6 +321,10 @@
 			isa = PBXGroup;
 			children = (
 				C33079EA2467028F005392A6 /* Graph */,
+				C338C1D4247A8E1900475304 /* MainScreenView.swift */,
+				C338C1DA247A948000475304 /* InteractiveVideoView.swift */,
+				C338C1DC247A957B00475304 /* VideoLayerView.swift */,
+				C338C1DE247A95EF00475304 /* OptionButtonStack.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -429,7 +444,9 @@
 				C3B24E34246716B900E2A737 /* GraphXLabels.swift in Sources */,
 				C330CE5424617F0A00FCA49A /* Positioner.swift in Sources */,
 				C31871ED244BB5BC00F079FC /* UserSettings.swift in Sources */,
+				C338C1DB247A948100475304 /* InteractiveVideoView.swift in Sources */,
 				C3BF2A9C244219AE004BDEE4 /* FirstRunModel.swift in Sources */,
+				C338C1DD247A957B00475304 /* VideoLayerView.swift in Sources */,
 				C3F139A82479C37900FFAB28 /* UpdatedNoTouchYolo.mlmodel in Sources */,
 				C39AF22E24706A2E00C10A54 /* Database.swift in Sources */,
 				C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */,
@@ -438,6 +455,7 @@
 				C3BF2A902442163B004BDEE4 /* VideoFeed.swift in Sources */,
 				C3BF2AA224421A1D004BDEE4 /* Orienter.swift in Sources */,
 				C3523EF124749EDB002108A7 /* DifferenceDetector.swift in Sources */,
+				C338C1D9247A8EF000475304 /* ContentViewModel.swift in Sources */,
 				C3B0E055245F28CF00BC4946 /* CloudKitDatabase.swift in Sources */,
 				C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */,
 				C355357B2466108900E991AA /* TouchExtensions.swift in Sources */,
@@ -445,6 +463,7 @@
 				C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */,
 				C3F4BE9024426373003CBD59 /* NoTouch_YOLO_2.mlmodel in Sources */,
 				C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */,
+				C338C1D5247A8E1900475304 /* MainScreenView.swift in Sources */,
 				C3BF2A9B244219AE004BDEE4 /* ImageStorer.swift in Sources */,
 				C3BF2AA0244219AE004BDEE4 /* VisionModel.swift in Sources */,
 				C3BF2A94244218E6004BDEE4 /* NoTouchError.swift in Sources */,
@@ -459,6 +478,7 @@
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
 				C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */,
 				C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */,
+				C338C1DF247A95EF00475304 /* OptionButtonStack.swift in Sources */,
 				C3AB7864247135F000F26BA1 /* NetworkStateTracker.swift in Sources */,
 				C3B58D3C2462A93100DF4D8D /* DateExtensions.swift in Sources */,
 			);

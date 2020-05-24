@@ -61,8 +61,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private var contentViewModel: ContentViewModel!
     
+    private var feedResizer: FeedResizer!
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        self.contentViewModel = ContentViewModel(alertModel: alertViewModel)
+        // Setup models.
+        self.contentViewModel = ContentViewModel(alertModel: alertViewModel,
+                                                 userSettings: AppDelegate.userSettings)
+        self.feedResizer = FeedResizer(contentViewModel.feed)
+        
         setCameraAuthState()
         
         // Create the SwiftUI view that provides the window contents.

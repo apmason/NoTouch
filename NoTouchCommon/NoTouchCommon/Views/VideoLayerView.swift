@@ -9,7 +9,6 @@
 import AppKit
 import CoreMedia
 import Foundation
-import NoTouchCommon
 import SwiftUI
 
 class UpdatableMacView: NSView, NativeView {
@@ -36,13 +35,9 @@ class UpdatableMacView: NSView, NativeView {
     }
 }
 
-struct VideoLayerView: NSViewRepresentable {
+struct MacLayerView: NSViewRepresentable {
     
     let videoFeed: VideoFeed
-    
-//    init(videoFeed: VideoFeed) {
-//        self.videoFeed = videoFeed
-//    }
     
     func makeNSView(context: Context) -> UpdatableMacView {
         let nativeView = UpdatableMacView()
@@ -51,10 +46,6 @@ struct VideoLayerView: NSViewRepresentable {
     }
     
     func updateNSView(_ nativeView: UpdatableMacView, context: Context) {
-//        if !nativeView.wantsLayer {
-//            print("FUCK")
-//        }
-        
         videoFeed.setPreviewView(to: nativeView)
     }
 }

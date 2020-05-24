@@ -6,7 +6,6 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
-import NoTouchCommon
 import SwiftUI
 
 struct InteractiveVideoView: View {
@@ -30,7 +29,9 @@ struct InteractiveVideoView: View {
                     .padding(8)
             }
             
-            VideoLayerView(videoFeed: self.videoFeed) // always on bottom.
+            #if os(OSX)
+            MacLayerView(videoFeed: self.videoFeed) // always on bottom.
+            #endif
             
             if userSettings.hideCameraFeed {
                 Text("Camera Hidden")
