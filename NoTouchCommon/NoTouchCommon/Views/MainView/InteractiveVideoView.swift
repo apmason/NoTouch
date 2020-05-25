@@ -48,16 +48,26 @@ struct InteractiveVideoView: View {
                     .environmentObject(userSettings)
             }
             else {
-                #if os(OSX)
                 ResultsView(showGraph: $showGraph)
-                    .transition(.slide)
-                #elseif os(iOS)
-                ResultsView(showGraph: $showGraph)
-                    .transition(.slide)
-                    .edgesIgnoringSafeArea(.all)
-                #endif
+                    .graphTransition()
             }
         }
+    }
+}
+
+private struct GraphTransition: ViewModifier {
+    func body(content: Content) -> some View {
+        #if os(OSX)
+        return content.transition(.slide)
+        #else
+        return content.transition(.slide).edgesIgnoringSafeArea(.all)
+        #endif
+    }
+}
+
+private extension View {
+    func graphTransition() -> some View {
+        self.modifier(GraphTransition())
     }
 }
 
