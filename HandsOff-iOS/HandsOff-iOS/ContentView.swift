@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             MainScreenView(contentViewModel: contentViewModel)
-                .navigationBarTitle("")
+                .navigationBarTitle("", displayMode: .inline)
                 .navigationBarHidden(true)
         }
     }

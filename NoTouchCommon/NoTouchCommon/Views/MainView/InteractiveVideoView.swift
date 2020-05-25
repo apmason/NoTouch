@@ -43,38 +43,86 @@ struct InteractiveVideoView: View {
                 .edgesIgnoringSafeArea(.all)
             #endif
             
+            #if os(OSX)
             if !showGraph {
-                HStack(alignment: .top) {
-                    OptionButtonStack() // Stack on the left side.
-                    
-                    Spacer()
-                    
-                    StateWarningView()
-                        .environmentObject(userSettings)
-                    
-                    Spacer()
-                    
-                    Button(action: { // Graph button on the right side.
-                        withAnimation(.easeInOut(duration: 0.35)) {
-                            self.showGraph.toggle()
-                        }
-                    }) {
-                        Image("graph", bundle: Bundle(for: VisionModel.self))
-                            .resizable()
-                            .padding(10)
-                            .foregroundColor(Color.white)
-                            .background(Color.black.opacity(0.75))
-                            .cornerRadius(10)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .frame(width: buttonHeight, height: buttonHeight, alignment: .top)
-                    .padding(8)
-                }
+                HorizontalButtonArrangement(showGraph: self.$showGraph, buttonHeight: self.buttonHeight)
+                    .environmentObject(userSettings)
             }
             else {
                 ResultsView(showGraph: $showGraph)
             }
+            
+            #elseif os(iOS)
+            HorizontalButtonArrangement(showGraph: self.$showGraph, buttonHeight: self.buttonHeight)
+                .environmentObject(userSettings)
+            #endif
         }
+    }
+}
+
+struct HorizontalButtonArrangement: View {
+    
+    @Binding var showGraph: Bool
+    @EnvironmentObject var userSettings: UserSettings
+    let buttonHeight: CGFloat
+    
+    var body: some View {
+        HStack(alignment: .top) {
+            OptionButtonStack() // Stack on the left side.
+            
+            Spacer()
+            
+            StateWarningView()
+                .environmentObject(userSettings)
+            
+            Spacer()
+            
+            #if os(OSX)
+            GraphButton(showGraph: self.$showGraph, buttonHeight: buttonHeight)
+            #elseif os(iOS)
+            NavigationLink(destination: ResultsView(showGraph: $showGraph), isActive: self.$showGraph) {
+                GraphButton(showGraph: self.$showGraph, buttonHeight: buttonHeight)
+                    .navigationBarHidden(false)
+            }
+            
+//            GraphButton(showGraph: self.$showGraph, buttonHeight: buttonHeight)
+//                .popover(isPresented: self.$showGraph) {
+//                    ResultsView(showGraph: self.$showGraph)
+//                        .environmentObject(self.userSettings)
+//            }
+            #endif
+            
+            //            NavigationLink(destination: ResultsView(showGraph: $showGraph), isActive: self.$showGraph) {
+            //                GraphButton(showGraph: self.$showGraph, buttonHeight: buttonHeight)
+            //                .navigationBarHidden(false)
+            //                //.navigationBarBackButtonHidden(false)
+            //            }
+            //            #endif
+        }
+    }
+}
+
+struct GraphButton: View {
+    
+    @Binding var showGraph: Bool
+    let buttonHeight: CGFloat
+    
+    var body: some View {
+        Button(action: { // Graph button on the right side.
+            withAnimation(.easeInOut(duration: 0.35)) {
+                self.showGraph.toggle()
+            }
+        }) {
+            Image("graph", bundle: Bundle(for: VisionModel.self))
+                .resizable()
+                .padding(10)
+                .foregroundColor(Color.white)
+                .background(Color.black.opacity(0.75))
+                .cornerRadius(10)
+        }
+        .buttonStyle(PlainButtonStyle())
+        .frame(width: buttonHeight, height: buttonHeight, alignment: .top)
+        .padding(8)
     }
 }
 
