@@ -8,22 +8,42 @@
 
 import SwiftUI
 
-public struct ResultsView: View {
+struct ResultsView: View {
     
     @EnvironmentObject var userSettings: UserSettings
     
     private let leadingXOffset: CGFloat = 30
     
-    @Binding private var showGraph: Bool
+    @Binding var showGraph: Bool
+    
+    var body: some View {
+        GeometryReader { geometry in
+            #if os(OSX)
+            GraphContent(showGraph: self.$showGraph, leadingXOffset: self.leadingXOffset)
+                .environmentObject(self.userSettings)
+                //.padding(.top, 8)
+            #elseif os(iOS)
+            GraphContent(showGraph: self.$showGraph, leadingXOffset: self.leadingXOffset)
+                .environmentObject(self.userSettings)
+                .padding(.top, geometry.safeAreaInsets.top)
+                .padding(.bottom, geometry.safeAreaInsets.bottom)
+            #endif
+        }
+    }
+}
+
+private struct GraphContent: View {
+    
+    @EnvironmentObject var userSettings: UserSettings
+    
+    @Binding var showGraph: Bool
+    
+    let leadingXOffset: CGFloat
     
     // Determine if we are in light mode or dark mode.
     @Environment(\.colorScheme) var colorScheme
     
-    public init(showGraph: Binding<Bool>) {
-        self._showGraph = showGraph
-    }
-    
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 VStack(alignment: .leading, spacing: 10) {
@@ -34,34 +54,33 @@ public struct ResultsView: View {
                     }) {
                         Text("Back")
                     }
-                    .padding(.leading, leadingXOffset)
+                    .padding(.leading, self.leadingXOffset)
                     
-                    Text("Touches Today: \(userSettings.recordHolder.totalTouchCount)")
+                    Text("Touches Today: \(self.userSettings.recordHolder.totalTouchCount)")
                         .font(.headline)
-                        .padding(.leading, leadingXOffset)
+                        .padding(.leading, self.leadingXOffset)
                 }
                 
                 Spacer()
                 
                 VStack(alignment: .trailing, spacing: 10) {
-                    if !userSettings.networkTracker.isNetworkAvailable {
+                    if !self.userSettings.networkTracker.isNetworkAvailable {
                         Text("No Internet")
                             .font(.caption)
                             .foregroundColor(Color.red)
                     }
-                
-                    if userSettings.networkTracker.cloudKitAuthStatus == .signedOut || userSettings.networkTracker.cloudKitAuthStatus == .restricted {
-                            Text("iCloud Disabled")
+                    
+                    if self.userSettings.networkTracker.cloudKitAuthStatus == .signedOut || self.userSettings.networkTracker.cloudKitAuthStatus == .restricted {
+                        Text("iCloud Disabled")
                             .font(.caption)
                             .foregroundColor(Color.red)
                     }
                 }.padding(.trailing, 10)
             }
             
-            GraphView(leadingXOffset: leadingXOffset)
+            GraphView(leadingXOffset: self.leadingXOffset)
         }
-        .padding(.top, 8)
-        .background(colorScheme == .dark ? Color(.sRGB, red: 46/255, green: 47/255, blue: 48/255, opacity: 1.0) : Color.white)
+        .background(self.colorScheme == .dark ? Color(.sRGB, red: 46/255, green: 47/255, blue: 48/255, opacity: 1.0) : Color.white)
     }
 }
 

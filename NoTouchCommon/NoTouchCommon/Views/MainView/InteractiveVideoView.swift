@@ -43,19 +43,20 @@ struct InteractiveVideoView: View {
                 .edgesIgnoringSafeArea(.all)
             #endif
             
-            #if os(OSX)
             if !showGraph {
                 HorizontalButtonArrangement(showGraph: self.$showGraph, buttonHeight: self.buttonHeight)
                     .environmentObject(userSettings)
             }
             else {
+                #if os(OSX)
                 ResultsView(showGraph: $showGraph)
+                    .transition(.slide)
+                #elseif os(iOS)
+                ResultsView(showGraph: $showGraph)
+                    .transition(.slide)
+                    .edgesIgnoringSafeArea(.all)
+                #endif
             }
-            
-            #elseif os(iOS)
-            HorizontalButtonArrangement(showGraph: self.$showGraph, buttonHeight: self.buttonHeight)
-                .environmentObject(userSettings)
-            #endif
         }
     }
 }
@@ -77,27 +78,7 @@ struct HorizontalButtonArrangement: View {
             
             Spacer()
             
-            #if os(OSX)
             GraphButton(showGraph: self.$showGraph, buttonHeight: buttonHeight)
-            #elseif os(iOS)
-            NavigationLink(destination: ResultsView(showGraph: $showGraph), isActive: self.$showGraph) {
-                GraphButton(showGraph: self.$showGraph, buttonHeight: buttonHeight)
-                    .navigationBarHidden(false)
-            }
-            
-//            GraphButton(showGraph: self.$showGraph, buttonHeight: buttonHeight)
-//                .popover(isPresented: self.$showGraph) {
-//                    ResultsView(showGraph: self.$showGraph)
-//                        .environmentObject(self.userSettings)
-//            }
-            #endif
-            
-            //            NavigationLink(destination: ResultsView(showGraph: $showGraph), isActive: self.$showGraph) {
-            //                GraphButton(showGraph: self.$showGraph, buttonHeight: buttonHeight)
-            //                .navigationBarHidden(false)
-            //                //.navigationBarBackButtonHidden(false)
-            //            }
-            //            #endif
         }
     }
 }
