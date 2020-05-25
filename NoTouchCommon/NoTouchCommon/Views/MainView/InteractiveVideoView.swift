@@ -58,9 +58,9 @@ struct InteractiveVideoView: View {
 private struct GraphTransition: ViewModifier {
     func body(content: Content) -> some View {
         #if os(OSX)
-        return content.transition(.slide)
+        return content.transition(.move(edge: .trailing))
         #else
-        return content.transition(.slide).edgesIgnoringSafeArea(.all)
+        return content.transition(.move(edge: .trailing)).edgesIgnoringSafeArea(.all)
         #endif
     }
 }

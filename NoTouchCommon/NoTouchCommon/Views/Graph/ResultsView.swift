@@ -21,7 +21,7 @@ struct ResultsView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 24) {
                 HStack {
                     VStack(alignment: .leading, spacing: 10) {
                         Button.init(action: {
