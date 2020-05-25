@@ -113,23 +113,51 @@ public class CloudKitDatabase: Database {
         }
 
         SubscriptionTracker.attemptingSubscriptionCreation = true
-
-        let zoneSub = CKRecordZoneSubscription(zoneID: self.customZoneID)
-
-        let info = CKSubscription.NotificationInfo()
-        // Silent notifs
-        info.shouldSendContentAvailable = true
-        zoneSub.notificationInfo = info
-
-        privateDB.save(zoneSub) { subscription, error in
-            SubscriptionTracker.attemptingSubscriptionCreation = false
-
-            if let error = error {
-                print("error creating sub: \(error.localizedDescription)")
-            } else if let subscription = subscription {
-                SubscriptionTracker.hasAddedSubscription = true
-                SubscriptionTracker.subscriptionID = subscription.subscriptionID // Save ID for future use.
+        
+        self.hasNotificationSubscription { [weak self] hasSub in
+            guard !hasSub, let self = self else {
+                SubscriptionTracker.attemptingSubscriptionCreation = false
+                return // We have a sub, we can exit.
             }
+                
+            let zoneSub = CKRecordZoneSubscription(zoneID: self.customZoneID)
+
+            let info = CKSubscription.NotificationInfo()
+            // Silent notifs
+            info.shouldSendContentAvailable = true
+            zoneSub.notificationInfo = info
+
+            self.privateDB.save(zoneSub) { subscription, error in
+                SubscriptionTracker.attemptingSubscriptionCreation = false
+
+                if let error = error {
+                    print("error creating sub: \(error.localizedDescription)")
+                } else if let subscription = subscription {
+                    SubscriptionTracker.hasAddedSubscription = true
+                    SubscriptionTracker.subscriptionID = subscription.subscriptionID // Save ID for future use.
+                }
+            }
+        }
+    }
+    
+    // Asynchronously determines if the user has a subscription created that will notify them about record additions.
+    private func hasNotificationSubscription(completion: @escaping (_ hasNotification: Bool) -> Void) {
+        privateDB.fetchAllSubscriptions { (subs, error) in
+            guard let subs = subs else {
+                completion(false)
+                return
+            }
+            
+            let notifSub = subs.first(where: { $0.notificationInfo?.shouldSendContentAvailable ?? false })
+            
+            guard let sub = notifSub else {
+                completion(false)
+                return
+            }
+            
+            SubscriptionTracker.hasAddedSubscription = true
+            SubscriptionTracker.subscriptionID = sub.subscriptionID
+            completion(true)
         }
     }
     

@@ -102,11 +102,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String : Any]) {
-        guard let ckNotification = CKNotification(fromRemoteNotificationDictionary: userInfo) as? CKDatabaseNotification else {
+        guard CKNotification(fromRemoteNotificationDictionary: userInfo) != nil else {
                 return
         }
         
-        //ckManager.fetchChanges(in: ckNotification.databaseScope)
+        // Give a slight delay and run on a background queue, we want to make sure the data can be fetched from the DB.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+            self.alertViewModel.fetchLatestRecords { _ in }
+        }
+    }
+    
+    func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("did register")
     }
     
     // MARK: - IBActions
