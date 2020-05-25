@@ -7,6 +7,7 @@
 //
 
 import NoTouchCommon
+import CloudKit
 import UIKit
 
 class DataModel {
@@ -58,6 +59,12 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("did receive remote notif here")
+        guard let ckNotification = CKNotification(fromRemoteNotificationDictionary: userInfo) else {
+            completionHandler(.noData)
+            return
+        }
+        
+        
         completionHandler(.noData)
     }
     

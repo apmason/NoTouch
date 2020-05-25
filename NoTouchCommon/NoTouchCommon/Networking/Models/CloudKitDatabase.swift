@@ -72,9 +72,6 @@ public class CloudKitDatabase: Database {
         NotificationCenter.default.addObserver(self, selector: #selector(cloudKitAuthStateChanged(_:)), name: Notification.Name.CKAccountChanged, object: nil)
 
         fetchCloudKitAccountStatus()
-
-        // TODO: Should we call createCustomZone here?
-        //createSubscriptions()
     }
     
     private func fetchCloudKitAccountStatus() {
@@ -136,7 +133,8 @@ public class CloudKitDatabase: Database {
         }
     }
     
-    public func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
+    public func fetchRecords(for date: Date,
+                             completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
         initialRecordsFetchState = .inProcess
         
         /// Turn CKRecord into TouchRecord
