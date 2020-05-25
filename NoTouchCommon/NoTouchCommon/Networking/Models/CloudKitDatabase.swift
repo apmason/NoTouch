@@ -20,7 +20,11 @@ private class SubscriptionTracker {
         }
     }
     
-    static var attemptingCreation: Bool = false
+    static var attemptingZoneCreation: Bool = false
+    
+    static var hasAddedSubscription: Bool = false
+    
+    static var attemptingSubscriptionCreation: Bool = false
 }
 
 public class CloudKitDatabase: Database {
@@ -64,6 +68,7 @@ public class CloudKitDatabase: Database {
                 case .available:
                     self?.delegate?.databaseAuthDidChange(.available)
                     self?.attemptCustomZoneCreation()
+                    self?.createTouchRecordSubscription()
                     
                 case .couldNotDetermine, .noAccount:
                     self?.delegate?.databaseAuthDidChange(.signedOut)
@@ -81,6 +86,30 @@ public class CloudKitDatabase: Database {
     
     @objc private func cloudKitAuthStateChanged(_ notification: Notification) {
         fetchCloudKitAccountStatus()
+    }
+    
+    private func createTouchRecordSubscription() {
+        guard !SubscriptionTracker.attemptingSubscriptionCreation, !SubscriptionTracker.hasAddedSubscription else {
+            return
+        }
+        
+        SubscriptionTracker.attemptingSubscriptionCreation = true
+        
+        let zoneSub = CKRecordZoneSubscription(zoneID: self.customZoneID)
+        
+        let info = CKSubscription.NotificationInfo()
+        // Silent notifs
+        zoneSub.notificationInfo = info
+        
+        privateDB.save(zoneSub) { _, error in
+            SubscriptionTracker.attemptingSubscriptionCreation = false
+            
+            if let error = error {
+                print("error creating sub: \(error.localizedDescription)")
+            } else {
+                SubscriptionTracker.hasAddedSubscription = true
+            }
+        }
     }
     
     public func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
@@ -298,33 +327,35 @@ extension CloudKitDatabase {
     
     /// Create a custom zone in order to allow us to subscribe to events
     public func attemptCustomZoneCreation() {
-        if !SubscriptionTracker.createdCustomZone && !SubscriptionTracker.attemptingCreation {
-            SubscriptionTracker.attemptingCreation = true
-            
-            let createZoneGroup = DispatchGroup()
-            
-            createZoneGroup.enter()
-            
-            let customZone = CKRecordZone(zoneID: customZoneID)
-            
-            let createZoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [customZone], recordZoneIDsToDelete: [])
-            
-            createZoneOperation.modifyRecordZonesCompletionBlock = { saved, deleted, error in
-                SubscriptionTracker.attemptingCreation = false
-                
-                if error == nil {
-                    SubscriptionTracker.createdCustomZone = true
-                } else {
-                    print("Failed to create custom zone: \(error!.localizedDescription)")
-                }
-                
-                // else custom error handling
-                createZoneGroup.leave()
-            }
-            createZoneOperation.qualityOfService = .userInitiated
-            
-            self.privateDB.add(createZoneOperation)
+        guard !SubscriptionTracker.createdCustomZone && !SubscriptionTracker.attemptingZoneCreation else {
+            return
         }
+        
+        SubscriptionTracker.attemptingZoneCreation = true
+        
+        let createZoneGroup = DispatchGroup()
+        
+        createZoneGroup.enter()
+        
+        let customZone = CKRecordZone(zoneID: customZoneID)
+        
+        let createZoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [customZone], recordZoneIDsToDelete: [])
+        
+        createZoneOperation.modifyRecordZonesCompletionBlock = { saved, deleted, error in
+            SubscriptionTracker.attemptingZoneCreation = false
+            
+            if error == nil {
+                SubscriptionTracker.createdCustomZone = true
+            } else {
+                print("Failed to create custom zone: \(error!.localizedDescription)")
+            }
+            
+            // else custom error handling
+            createZoneGroup.leave()
+        }
+        createZoneOperation.qualityOfService = .userInitiated
+        
+        self.privateDB.add(createZoneOperation)
     }
 }
 
