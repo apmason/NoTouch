@@ -11,6 +11,11 @@ import Foundation
 
 private class SubscriptionTracker {
     private static let createdCustomZoneKey = "CreatedCustomZone"
+    private static let createdSubscriptionKey = "CreatedZoneSubscription"
+    
+    private static let subscriptionIDKey = "SubscriptionIDKey"
+    
+    // MARK: - Zone Creation
     
     static var createdCustomZone: Bool {
         get {
@@ -22,9 +27,26 @@ private class SubscriptionTracker {
     
     static var attemptingZoneCreation: Bool = false
     
-    static var hasAddedSubscription: Bool = false
+    // MARK: - Zone Subscription
+    
+    static var hasAddedSubscription: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: createdSubscriptionKey)
+        } set {
+            UserDefaults.standard.set(newValue, forKey: createdSubscriptionKey)
+        }
+    }
     
     static var attemptingSubscriptionCreation: Bool = false
+    
+    /// The currently active `CKSubscription.ID`
+    static var subscriptionID: String? {
+        get {
+            return UserDefaults.standard.string(forKey: subscriptionIDKey)
+        } set {
+            UserDefaults.standard.set(newValue, forKey: subscriptionIDKey)
+        }
+    }
 }
 
 public class CloudKitDatabase: Database {
@@ -92,22 +114,24 @@ public class CloudKitDatabase: Database {
         guard !SubscriptionTracker.attemptingSubscriptionCreation, !SubscriptionTracker.hasAddedSubscription else {
             return
         }
-        
+
         SubscriptionTracker.attemptingSubscriptionCreation = true
-        
+
         let zoneSub = CKRecordZoneSubscription(zoneID: self.customZoneID)
-        
+
         let info = CKSubscription.NotificationInfo()
         // Silent notifs
+        info.shouldSendContentAvailable = true
         zoneSub.notificationInfo = info
-        
-        privateDB.save(zoneSub) { _, error in
+
+        privateDB.save(zoneSub) { subscription, error in
             SubscriptionTracker.attemptingSubscriptionCreation = false
-            
+
             if let error = error {
                 print("error creating sub: \(error.localizedDescription)")
-            } else {
+            } else if let subscription = subscription {
                 SubscriptionTracker.hasAddedSubscription = true
+                SubscriptionTracker.subscriptionID = subscription.subscriptionID // Save ID for future use.
             }
         }
     }
