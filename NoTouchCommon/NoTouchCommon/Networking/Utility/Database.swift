@@ -57,8 +57,9 @@ public protocol Database: class {
 
 extension Database {
     
-    func ckRecord(from touchRecord: TouchRecord) -> CKRecord {
-        let ckRecord = CKRecord(recordType: RecordType.touch.rawValue)
+    func ckRecord(from touchRecord: TouchRecord, recordZoneID: CKRecordZone.ID) -> CKRecord {
+        let recordID = CKRecord.ID(recordName: touchRecord.id.uuidString, zoneID: recordZoneID)
+        let ckRecord = CKRecord(recordType: RecordType.touch.rawValue, recordID: recordID)
         ckRecord["deviceName"] = touchRecord.deviceName
         ckRecord["timestamp"] = touchRecord.timestamp as NSDate
         ckRecord["version"] = touchRecord.version

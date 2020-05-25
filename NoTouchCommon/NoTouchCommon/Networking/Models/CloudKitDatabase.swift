@@ -32,7 +32,7 @@ public class CloudKitDatabase: Database {
     
     // Use a consistent zone ID across the user's devices
     // CKCurrentUserDefaultName specifies the current user's ID when creating a zone ID
-    private let zoneID = CKRecordZone.ID(zoneName: "TouchZone", ownerName: CKCurrentUserDefaultName)
+    private let customZoneID = CKRecordZone.ID(zoneName: "TouchZone", ownerName: CKCurrentUserDefaultName)
     private let privateDB: CKDatabase
     private let container = CKContainer.default()
     
@@ -112,6 +112,7 @@ public class CloudKitDatabase: Database {
         let query = CKQuery(recordType: RecordType.touch.rawValue, predicate: predicate)
         
         let queryOperation = CKQueryOperation(query: query)
+        queryOperation.zoneID = self.customZoneID
         queryOperation.qualityOfService = .userInteractive
         
         /// Runs an initial `operation`, and if we are returned a cursor, recursively creates and runs another operation until all records have been retrieved.
@@ -202,7 +203,7 @@ public class CloudKitDatabase: Database {
     
     public func saveTouchRecord(_ record: TouchRecord,
                                 completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
-        let ckRecord = self.ckRecord(from: record)
+        let ckRecord = self.ckRecord(from: record, recordZoneID: customZoneID)
         self.privateDB.save(ckRecord) { _, error in
             if let error = error, let ckError = error as? CKError {
                 // Attempt a retry if we're told to.
@@ -234,7 +235,7 @@ extension CloudKitDatabase {
     
     public func saveTouchRecords(_ records: [TouchRecord],
                                  completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
-        let ckRecords = records.map({ self.ckRecord(from: $0) })
+        let ckRecords = records.map({ self.ckRecord(from: $0, recordZoneID: self.customZoneID) })
         let operation = CKModifyRecordsOperation(recordsToSave: ckRecords)
         operation.qualityOfService = .userInteractive
         operation.isAtomic = true
@@ -304,7 +305,7 @@ extension CloudKitDatabase {
             
             createZoneGroup.enter()
             
-            let customZone = CKRecordZone(zoneID: zoneID)
+            let customZone = CKRecordZone(zoneID: customZoneID)
             
             let createZoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [customZone], recordZoneIDsToDelete: [])
             
