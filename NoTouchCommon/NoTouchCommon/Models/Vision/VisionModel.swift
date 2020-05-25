@@ -195,9 +195,7 @@ public class VisionModel {
                         guard bestObservation.identifier == "hand" else {
                             return
                         }
-                        
-                        print("Confidence is: \(objectObservation.confidence)")
-                                                
+                                                                        
                         DispatchQueue.main.async { [weak self] in
                             if objectObservation.confidence > 0.8 {
                                 self?.delegate?.fireAlert()

@@ -47,6 +47,9 @@ public protocol Database: class {
     ///   - completionHandler: The result of the operation.
     func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void)
     
+    /// Attempts to create a custom zone for saving custom records.
+    func attemptCustomZoneCreation()
+    
     var initialRecordsFetchState: RecordFetchState { get set }
     
     var delegate: DatabaseDelegate? { get set }

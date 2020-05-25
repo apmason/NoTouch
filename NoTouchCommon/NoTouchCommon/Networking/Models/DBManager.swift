@@ -148,6 +148,10 @@ extension DBManager {
 extension DBManager: NetworkMonitorDelegate {
         
     public func networkStateDidChange(_ networkAvailable: Bool) {
+        if networkAvailable {
+            database.attemptCustomZoneCreation()
+        }
+        
         // Update on the main thread because this may trigger a UI update.
         DispatchQueue.main.async { [weak self] in
             self?.userSettings.networkTracker.isNetworkAvailable = networkAvailable

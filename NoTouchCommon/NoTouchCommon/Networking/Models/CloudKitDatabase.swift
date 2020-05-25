@@ -9,17 +9,30 @@
 import CloudKit
 import Foundation
 
+private class SubscriptionTracker {
+    private static let createdCustomZoneKey = "CreatedCustomZone"
+    
+    static var createdCustomZone: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: createdCustomZoneKey)
+        } set {
+            UserDefaults.standard.set(newValue, forKey: createdCustomZoneKey)
+        }
+    }
+    
+    static var attemptingCreation: Bool = false
+}
+
 public class CloudKitDatabase: Database {
     
     // Store these to disk so that they persist across launches
-    private var createdCustomZone = false
     private var subscribedToPrivateChanges = false
      
     private let privateSubscriptionID = "private-changes"
     
     // Use a consistent zone ID across the user's devices
     // CKCurrentUserDefaultName specifies the current user's ID when creating a zone ID
-    private let zoneID = CKRecordZone.ID(zoneName: "MyName", ownerName: CKCurrentUserDefaultName)
+    private let zoneID = CKRecordZone.ID(zoneName: "TouchZone", ownerName: CKCurrentUserDefaultName)
     private let privateDB: CKDatabase
     private let container = CKContainer.default()
     
@@ -33,7 +46,7 @@ public class CloudKitDatabase: Database {
         NotificationCenter.default.addObserver(self, selector: #selector(cloudKitAuthStateChanged(_:)), name: Notification.Name.CKAccountChanged, object: nil)
 
         fetchCloudKitAccountStatus()
-       
+
         // TODO: Should we call createCustomZone here?
         //createSubscriptions()
     }
@@ -50,6 +63,7 @@ public class CloudKitDatabase: Database {
                 switch accountStatus {
                 case .available:
                     self?.delegate?.databaseAuthDidChange(.available)
+                    self?.attemptCustomZoneCreation()
                     
                 case .couldNotDetermine, .noAccount:
                     self?.delegate?.databaseAuthDidChange(.signedOut)
@@ -282,10 +296,12 @@ extension CloudKitDatabase {
 extension CloudKitDatabase {
     
     /// Create a custom zone in order to allow us to subscribe to events
-    private func createCustomZone() {
-        let createZoneGroup = DispatchGroup()
-         
-        if !self.createdCustomZone {
+    public func attemptCustomZoneCreation() {
+        if !SubscriptionTracker.createdCustomZone && !SubscriptionTracker.attemptingCreation {
+            SubscriptionTracker.attemptingCreation = true
+            
+            let createZoneGroup = DispatchGroup()
+            
             createZoneGroup.enter()
             
             let customZone = CKRecordZone(zoneID: zoneID)
@@ -293,11 +309,12 @@ extension CloudKitDatabase {
             let createZoneOperation = CKModifyRecordZonesOperation(recordZonesToSave: [customZone], recordZoneIDsToDelete: [])
             
             createZoneOperation.modifyRecordZonesCompletionBlock = { saved, deleted, error in
+                SubscriptionTracker.attemptingCreation = false
+                
                 if error == nil {
-                    self.createdCustomZone = true
+                    SubscriptionTracker.createdCustomZone = true
                 } else {
-                    // TODO: Fix this.
-                    assertionFailure("Failed to create custom zone: \(error!.localizedDescription)")
+                    print("Failed to create custom zone: \(error!.localizedDescription)")
                 }
                 
                 // else custom error handling
@@ -314,6 +331,7 @@ extension CloudKitDatabase {
 
 extension CloudKitDatabase {
     
+    // NOTE: Does this persist?
     private func createSubscriptions() {
         if !self.subscribedToPrivateChanges {
             let createSubscriptionOperation = createDatabaseSubscriptionOperation(subscriptionID: privateSubscriptionID)
@@ -345,18 +363,6 @@ extension CloudKitDatabase {
     }
 }
 
-/**
-After app launch or the receipt of a push, your app uses CKFetchDatabaseChangesOperation and then CKFetchRecordZoneChangesOperation to ask the server for only the changes since the last time it updated.
-
-The key to these operations is the previousServerChangeToken object, which tells the server when your app last spoke to the server, allowing the server to return only the items that were changed since that time.
-
-First your app will use a CKFetchDatabaseChangesOperation to find out which zones have changed and:
-
-Collect the IDs for the new and updated zones.
-Clean up local data from zones that were deleted.
-Here is some example code to fetch the database changes:
-*/
-
 // MARK: - Fetching Changes
 
 extension CloudKitDatabase {
@@ -381,17 +387,6 @@ extension CloudKitDatabase {
             
         }
     }
-    
-//    func fetchChanges(in databaseScope: CKDatabase.Scope, completion: @escaping () -> Void) {
-//        switch databaseScope {
-//        case .private:
-//            fetchDatabaseChanges(database: self.privateDB, databaseTokenKey: "private", completion: completion)
-//
-//        case .public, .shared:
-//            fatalError()
-//
-//        }
-//    }
 
     private func fetchDatabaseChanges(database: CKDatabase, databaseTokenKey: String, completion: @escaping () -> Void) {
         var changedZoneIDs: [CKRecordZone.ID] = []
@@ -496,27 +491,3 @@ extension CloudKitDatabase
         database.add(operation)
     }
 }
-
-// TODO:
-/*
- Advanced Local Caching
-
- A user can delete your app's data on the CloudKit servers through iCloud Settings->Manage Storage. Your app needs to handle this gracefully and re-create the zone and subscriptions on the server again if they don't exist. The specific error returned in this case is userDeletedZone.
-
- The operation dependency system outlined in the Advanced NSOperations talk from WWDC2015 is a great way to manage your CloudKit operations so that account and network statuses are checked and zones and subscriptions are created at the right time.
-
- The network connection may disappear at any time, so make sure to properly handle networkUnavailable errors from any operation.
-
- Watch for network reachability, and retry the operation when the network becomes available again.
- */
-
-
-// We'll need something that can configure subscriptions for CloudKit
-/**
- After you configure your app to maintain a local cache, here is the general flow your app will follow:
-
- When your app launches for the first time on a new device it will subscribe to changes in the user's private and shared databases.
- When a user modifies their data locally on Device A your app will send those changes to CloudKit.
- Your app will receive a push notification on the same user's Device B notifying it that there was a change made on the server.
- Your app on Device B will ask the server for the changes that occurred since the last time it spoke with the server and then update its local cache with those changes.
- */
