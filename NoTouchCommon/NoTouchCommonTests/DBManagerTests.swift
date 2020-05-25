@@ -47,7 +47,8 @@ class DBManagerTests: XCTestCase {
         let touchRecord = TouchRecord(deviceName: deviceName, timestamp: timestamp, version: version)
         
         let database = MockDatabase()
-        let ckRecord = database.ckRecord(from: touchRecord)
+        let zoneID = CKRecordZone.ID(zoneName: "test", ownerName: "test")
+        let ckRecord = database.ckRecord(from: touchRecord, recordZoneID: zoneID)
         
         XCTAssert(ckRecord[NetworkingConstants.deviceNameKey] == deviceName)
         XCTAssert(ckRecord[NetworkingConstants.timestampKey] == timestamp as NSDate)
@@ -58,7 +59,10 @@ class DBManagerTests: XCTestCase {
 extension DBManagerTests {
     
     class MockDatabase: Database {
+        func fetchLatestRecords(completionHandler: ((Result<[TouchRecord], DatabaseError>) -> Void)?) {}
         
+        func attemptCustomZoneCreation() {}
+    
         var initialRecordsFetchState: RecordFetchState = .notAttempted
         
         var delegate: DatabaseDelegate?
@@ -68,7 +72,7 @@ extension DBManagerTests {
         func saveTouchRecords(_ records: [TouchRecord], completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {}
         
         /// Return one `TouchRecord` in the `completionHandler`
-        func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
+        func fetchRecords(sinceStartOf date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
             let startOfDay = Calendar.current.startOfDay(for: Date())
             let record = TouchRecord(deviceName: "123", timestamp: startOfDay, version: "123")
             completionHandler(.success([record]))

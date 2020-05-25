@@ -133,10 +133,56 @@ public class CloudKitDatabase: Database {
         }
     }
     
-    public func fetchRecords(for date: Date,
+    public func fetchRecords(sinceStartOf date: Date,
                              completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
         initialRecordsFetchState = .inProcess
         
+        // Get the start of the day based on the user's device.
+        let startOfDay = Calendar.current.startOfDay(for: date) as NSDate
+        
+        // Create predicate.
+        let predicate = NSPredicate(format: "timestamp >= %@", startOfDay)
+        
+        let query = CKQuery(recordType: RecordType.touch.rawValue, predicate: predicate)
+        self.runQuery(query) { [weak self] result in
+            switch result {
+            case .success(let records):
+                self?.initialRecordsFetchState = .success
+                completionHandler(.success(records)) // Call the main `completionHandler`, passing back all of our succesful values.
+                return
+                
+            case .failure(let error):
+                switch error {
+                case .authenticationFailure:
+                    self?.initialRecordsFetchState = .notAttempted // let us try again once re-authenticated
+                    
+                default:
+                    self?.initialRecordsFetchState = .failure
+                    
+                }
+                
+                completionHandler(.failure(error))
+                return
+                
+            }
+        }
+    }
+    
+    public func fetchLatestRecords(completionHandler: @escaping ((Result<[TouchRecord], DatabaseError>) -> Void)) {
+        // get latest record date.
+        guard let latestDate = delegate?.latestTouchRecordDate() else {
+            completionHandler(.failure(DatabaseError.fatalError))
+            return
+        }
+        
+        let predicate = NSPredicate(format: "timestamp > %@", latestDate as NSDate)
+        let query = CKQuery(recordType: RecordType.touch.rawValue,
+                            predicate: predicate)
+        
+        self.runQuery(query, completionHandler: completionHandler)
+    }
+    
+    private func runQuery(_ ckQuery: CKQuery, completionHandler:  @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
         /// Turn CKRecord into TouchRecord
         func ckRecordToTouchRecord(_ ckRecord: CKRecord) -> TouchRecord? {
             guard let deviceName = ckRecord["deviceName"] as? String,
@@ -148,33 +194,27 @@ public class CloudKitDatabase: Database {
             
             return TouchRecord(deviceName: deviceName,
                                timestamp: timestamp,
-                               version: version)
+                               version: version,
+                               origin: .database)
         }
         
         // The array that is to be returned.
         var returnArray: [TouchRecord] = []
         
-        // Get the start of the day based on the user's device.
-        let startOfDay = Calendar.current.startOfDay(for: date) as NSDate
-        
-        // Create predicate.
-        let predicate = NSPredicate(format: "timestamp >= %@", startOfDay)
-        
-        let query = CKQuery(recordType: RecordType.touch.rawValue, predicate: predicate)
-        
-        let queryOperation = CKQueryOperation(query: query)
+        let queryOperation = CKQueryOperation(query: ckQuery)
         queryOperation.zoneID = self.customZoneID
         queryOperation.qualityOfService = .userInteractive
         
         /// Runs an initial `operation`, and if we are returned a cursor, recursively creates and runs another operation until all records have been retrieved.
-        func fetchAllRecords(with operation: CKQueryOperation, completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {
+        func fetchAllRecords(with operation: CKQueryOperation,
+                             completion: @escaping (Result<Void, DatabaseError>) -> Void) {
             operation.queryCompletionBlock = { newCursor, error in
                 if let error = error as? CKError {
                     // If we are told we can retry do so immediately, hoping this will catch errors we're not thinking of/explicitly handling.
                     if let timeToWait = error.userInfo[CKErrorRetryAfterKey] as? NSNumber {
                         operation.cancel() // cancel before trying again
                         DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + timeToWait.doubleValue + 3.0) {
-                            fetchAllRecords(with: operation, completionHandler: completionHandler)
+                            fetchAllRecords(with: operation, completion: completion)
                         }
                         return
                     }
@@ -199,17 +239,17 @@ public class CloudKitDatabase: Database {
                         dbError = .unknownError(error)
                     }
                     
-                    completionHandler(.failure(dbError))
+                    completion(.failure(dbError))
                 }
                 else if let newCursor = newCursor { // We have a cursor, which means more records can be fetched.
                     // Stop the old operation
                     operation.cancel()
                     
                     let newOperation = CKQueryOperation(cursor: newCursor)
-                    fetchAllRecords(with: newOperation, completionHandler: completionHandler)
+                    fetchAllRecords(with: newOperation, completion: completion)
                 }
                 else { // If we weren't supplied a cursor that means the final operation succeeded, we can now call the final completion, we are done.
-                    completionHandler(.success(()))
+                    completion(.success(()))
                 }
             }
             
@@ -228,23 +268,13 @@ public class CloudKitDatabase: Database {
         }
         
         // Fetch all records
-        fetchAllRecords(with: queryOperation) { [weak self] result in
+        fetchAllRecords(with: queryOperation) { result in
             switch result {
             case .success:
-                self?.initialRecordsFetchState = .success
                 completionHandler(.success(returnArray)) // Call the main `completionHandler`, passing back all of our succesful values.
                 return
                 
             case .failure(let error):
-                switch error {
-                case .authenticationFailure:
-                    self?.initialRecordsFetchState = .notAttempted // let us try again once re-authenticated
-                    
-                default:
-                    self?.initialRecordsFetchState = .failure
-                    
-                }
-                
                 completionHandler(.failure(error))
                 return
                 

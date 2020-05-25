@@ -25,6 +25,19 @@ class DataModel {
         self.contentViewModel = ContentViewModel(alertModel: alertViewModel, userSettings: userSettings)
     }
     
+    public func fetchLatestRecords(completion: @escaping (Result<Void, Error>) -> Void) {
+        self.alertViewModel.fetchLatestRecords { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+                
+            case .failure(let error):
+                completion(.failure(error))
+                
+            }
+        }
+    }
+    
     static let shared = DataModel()
 }
 
@@ -59,13 +72,24 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("did receive remote notif here")
-        guard let ckNotification = CKNotification(fromRemoteNotificationDictionary: userInfo) else {
+        guard CKNotification(fromRemoteNotificationDictionary: userInfo) != nil else {
             completionHandler(.noData)
             return
         }
         
-        
-        completionHandler(.noData)
+        // Give a slight delay and run on a background queue, we want to make sure the data can be fetched from the DB.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DataModel.shared.fetchLatestRecords { result in
+                switch result {
+                case .success:
+                    completionHandler(.newData)
+                    
+                case .failure:
+                    completionHandler(.failed)
+                    
+                }
+            }
+        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

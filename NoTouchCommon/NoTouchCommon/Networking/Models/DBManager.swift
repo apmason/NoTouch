@@ -19,9 +19,19 @@ public protocol DatabaseManager {
     /// - Parameter completionHandler: The result of the fetching operation. Items will be added to the current cache and displayed to the user automatically, this completion will return success or failure of the operation in general.
     func fetchExistingRecords(completionHandler: ((Result<Void, Error>) -> Void)?)
     
+    /// Fetch any records after the latest record's date.
+    func fetchLatestRecords(completionHandler: @escaping ((Result<Void, DatabaseError>) -> Void))
+    
     /// Create a `TouchRecord` at the specified `date` and save it to the database.
     /// - Parameter date: The date to use for the `TouchRecord`.
     func createAndSaveTouchRecord(at date: Date)
+}
+
+extension DatabaseManager {
+    
+    public func latestTouchRecordDate() -> Date? {
+        return userSettings.recordHolder.latestTouchRecordDate()
+    }
 }
 
 public class DBManager: DatabaseManager {
@@ -31,6 +41,9 @@ public class DBManager: DatabaseManager {
     
     /// This contains records that were not sent because of network conditions, or records that failed to save and need to be retried.
     private var recordsToSend: [TouchRecord] = []
+    
+    /// Tracks whether we should fetch the latest records when we come back online or receive iCloud authentication.
+    private var shouldFetchLatest: Bool = false
     
     init(userSettings: UserSettings, database: Database) {
         self.userSettings = userSettings
@@ -45,7 +58,7 @@ public class DBManager: DatabaseManager {
             return
         }
         
-        database.fetchRecords(for: Date()) { [weak self] result in
+        database.fetchRecords(sinceStartOf: Date()) { [weak self] result in
             switch result {
             case .success(let records):
                 DispatchQueue.main.async {
@@ -62,13 +75,38 @@ public class DBManager: DatabaseManager {
         }
     }
     
+    public func fetchLatestRecords(completionHandler: @escaping ((Result<Void, DatabaseError>) -> Void)) {
+        guard userSettings.networkTracker.isNetworkAvailable && userSettings.networkTracker.cloudKitAuthStatus == .available else {
+            self.shouldFetchLatest = true
+            return
+        }
+        
+        database.fetchLatestRecords { [weak self] result in
+            switch result {
+            case .success(let records):
+                self?.shouldFetchLatest = false
+                
+                DispatchQueue.main.async {
+                    self?.userSettings.recordHolder.add(records)
+                    completionHandler(.success(()))
+                }
+                
+            case .failure(let error):
+                self?.shouldFetchLatest = true
+                completionHandler(.failure(error))
+                
+            }
+        }
+    }
+    
     public func createAndSaveTouchRecord(at date: Date) {
         let deviceName = DeviceData.deviceName
         let appVersion = DeviceData.appVersion
         
         let touchRecord = TouchRecord(deviceName: deviceName,
                                       timestamp: date,
-                                      version: appVersion)
+                                      version: appVersion,
+                                      origin: .local)
         self.userSettings.recordHolder.add(touchRecord) // Add to visible UI immediately.
         
         // Only attempt a save when the network is up and we are able to use CloudKit
@@ -141,6 +179,12 @@ extension DBManager {
             self.fetchExistingRecords(completionHandler: nil)
         }
     }
+    
+    private func attemptLatestRecordFetch() {
+        if shouldFetchLatest {
+            self.fetchLatestRecords { _ in }
+        }
+    }
 }
 
 // MARK: - RetryManagerDelegate
@@ -157,6 +201,7 @@ extension DBManager: NetworkMonitorDelegate {
             self?.userSettings.networkTracker.isNetworkAvailable = networkAvailable
             self?.attemptCachedRecordsSave()
             self?.attemptInitialRecordFetch()
+            self?.attemptLatestRecordFetch()
         }
     }
 }
@@ -171,6 +216,7 @@ extension DBManager: DatabaseDelegate {
             self?.userSettings.networkTracker.cloudKitAuthStatus = status
             self?.attemptCachedRecordsSave()
             self?.attemptInitialRecordFetch()
+            self?.attemptLatestRecordFetch()
         }
     }
 }

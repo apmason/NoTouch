@@ -109,6 +109,11 @@ public class AlertViewModel {
         triggerCount = 0
     }
     
+    /// Tells the Database to fetch all records that occured after the latest record.
+    public func fetchLatestRecords(completionHandler: @escaping ((Result<Void, DatabaseError>) -> Void)) {
+        self.dbManager.fetchLatestRecords(completionHandler: completionHandler)
+    }
+    
     @objc func fireTimer() {
         let now = Date().timeIntervalSince1970
         

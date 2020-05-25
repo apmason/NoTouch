@@ -18,6 +18,10 @@ class AlertViewModelTests: XCTestCase {
 extension AlertViewModelTests {
     class MockDatabase: Database {
         
+        func fetchLatestRecords(completionHandler: ((Result<[TouchRecord], DatabaseError>) -> Void)?) {}
+        
+        func attemptCustomZoneCreation() {}
+        
         var initialRecordsFetchState: RecordFetchState = .notAttempted
         
         var delegate: DatabaseDelegate?
@@ -27,7 +31,7 @@ extension AlertViewModelTests {
         func saveTouchRecords(_ records: [TouchRecord], completionHandler: @escaping (Result<Void, DatabaseError>) -> Void) {}
         
         /// Return one `TouchRecord` in the `completionHandler`
-        func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
+        func fetchRecords(sinceStartOf date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
             let startOfDay = Calendar.current.startOfDay(for: Date())
             let record = TouchRecord(deviceName: "123", timestamp: startOfDay, version: "123")
             completionHandler(.success([record]))

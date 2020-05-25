@@ -25,6 +25,7 @@ public enum RecordFetchState {
 
 public protocol DatabaseDelegate: class {
     func databaseAuthDidChange(_ status: DatabaseAuthStatus)
+    func latestTouchRecordDate() -> Date?
 }
 
 public protocol Database: class {
@@ -45,7 +46,9 @@ public protocol Database: class {
     /// - Parameters:
     ///   - date: The date to fetch records for.
     ///   - completionHandler: The result of the operation.
-    func fetchRecords(for date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void)
+    func fetchRecords(sinceStartOf date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void)
+    
+    func fetchLatestRecords(completionHandler: @escaping ((Result<[TouchRecord], DatabaseError>) -> Void))
     
     /// Attempts to create a custom zone for saving custom records.
     func attemptCustomZoneCreation()
