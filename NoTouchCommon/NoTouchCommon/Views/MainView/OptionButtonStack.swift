@@ -11,7 +11,7 @@ import SwiftUI
 struct OptionButtonStack: View {
     
     @EnvironmentObject var userSettings: UserSettings
-    private let buttonHeight: CGFloat = 40
+    let buttonHeight: CGFloat
     
     var body: some View {
         VStack {
@@ -66,7 +66,7 @@ struct OptionButtonStack: View {
 
 struct OptionButtonStack_Previews: PreviewProvider {
     static var previews: some View {
-        OptionButtonStack()
+        OptionButtonStack(buttonHeight: 40)
             .environmentObject(UserSettings())
     }
 }

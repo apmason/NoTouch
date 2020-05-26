@@ -9,9 +9,7 @@
 import SwiftUI
 
 struct InteractiveVideoView: View {
-    
-    let buttonHeight: CGFloat = 40
-    
+        
     let videoFeed: VideoFeed
     
     /// Tracks whether we should be showing the graph. Passed into the `ResultsView` so it can dismiss itself.
@@ -44,7 +42,7 @@ struct InteractiveVideoView: View {
             #endif
             
             if !showGraph {
-                HorizontalButtonArrangement(showGraph: self.$showGraph, buttonHeight: self.buttonHeight)
+                HorizontalButtonArrangement(showGraph: self.$showGraph)
                     .environmentObject(userSettings)
             }
             else {
@@ -75,11 +73,16 @@ struct HorizontalButtonArrangement: View {
     
     @Binding var showGraph: Bool
     @EnvironmentObject var userSettings: UserSettings
-    let buttonHeight: CGFloat
+    
+    #if os(iOS)
+    private let buttonHeight: CGFloat = 45
+    #else
+    private let buttonHeight: CGFloat = 40
+    #endif
     
     var body: some View {
         HStack(alignment: .top) {
-            OptionButtonStack() // Stack on the left side.
+            OptionButtonStack(buttonHeight: self.buttonHeight) // Stack on the left side.
             
             Spacer()
             
