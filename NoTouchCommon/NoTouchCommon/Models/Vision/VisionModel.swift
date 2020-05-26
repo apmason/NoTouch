@@ -49,7 +49,7 @@ public class VisionModel {
     /// - Tag: SetupVisionRequest
     @discardableResult
     private func setupVision() -> NoTouchError? {
-        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "UpdatedNoTouchYolo", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "newmodel3", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
@@ -152,9 +152,14 @@ public class VisionModel {
 //            let image = UIImage(cgImage: unwrappedCGImage)
 //            ImageStorer.storeNewImage(image: image)
 //            #endif
-            
+            #if os(iOS)
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage,
-                                                     orientation: Orienter.currentCGOrientation())
+                                                     orientation: .leftMirrored)
+            #else
+            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage,
+                                                     orientation: .up)
+            #endif
+            
             self.visionQueue.async { [weak self] in
                 guard let self = self else {
                     return
@@ -196,8 +201,15 @@ public class VisionModel {
                             return
                         }
                                                                         
+                        print("Confidence is: \(objectObservation.confidence)")
+                        #if os(OSX)
+                        let threshold: Float = 0.75
+                        #else
+                        let threshold: Float = 0.6
+                        #endif
+                        
                         DispatchQueue.main.async { [weak self] in
-                            if objectObservation.confidence > 0.8 {
+                            if objectObservation.confidence > threshold {
                                 self?.delegate?.fireAlert()
                             } else {
                                 self?.delegate?.notTouchingDetected()

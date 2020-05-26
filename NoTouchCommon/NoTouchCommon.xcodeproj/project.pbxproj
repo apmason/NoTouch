@@ -23,6 +23,7 @@
 		C355357F2466121F00E991AA /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357E2466121F00E991AA /* TouchTests.swift */; };
 		C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35EA90E246897E8005A6942 /* RecordHolder.swift */; };
 		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
+		C377584F247D40B4004A80D2 /* newmodel3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C377584E247D40B4004A80D2 /* newmodel3.mlmodel */; };
 		C37BE7BD246783E00012A299 /* RecordHolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE7BC246783E00012A299 /* RecordHolderTests.swift */; };
 		C3808E29246D7715008304F3 /* DBManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E28246D7715008304F3 /* DBManagerTests.swift */; };
 		C3808E2B246D7C58008304F3 /* AlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */; };
@@ -60,7 +61,6 @@
 		C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */; };
 		C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */; };
 		C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */; };
-		C3F139A82479C37900FFAB28 /* UpdatedNoTouchYolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3F139A72479C37900FFAB28 /* UpdatedNoTouchYolo.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +90,7 @@
 		C355357E2466121F00E991AA /* TouchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTests.swift; sourceTree = "<group>"; };
 		C35EA90E246897E8005A6942 /* RecordHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolder.swift; sourceTree = "<group>"; };
 		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
+		C377584E247D40B4004A80D2 /* newmodel3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = newmodel3.mlmodel; sourceTree = "<group>"; };
 		C37BE7BC246783E00012A299 /* RecordHolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolderTests.swift; sourceTree = "<group>"; };
 		C3808E28246D7715008304F3 /* DBManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerTests.swift; sourceTree = "<group>"; };
 		C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModelTests.swift; sourceTree = "<group>"; };
@@ -130,7 +131,6 @@
 		C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitRetryManager.swift; sourceTree = "<group>"; };
 		C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLinesView.swift; sourceTree = "<group>"; };
 		C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLinesView.swift; sourceTree = "<group>"; };
-		C3F139A72479C37900FFAB28 /* UpdatedNoTouchYolo.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = UpdatedNoTouchYolo.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,7 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
-				C3F139A72479C37900FFAB28 /* UpdatedNoTouchYolo.mlmodel */,
+				C377584E247D40B4004A80D2 /* newmodel3.mlmodel */,
 				C338C1EA247AD72B00475304 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -462,7 +462,6 @@
 				C338C1DB247A948100475304 /* InteractiveVideoView.swift in Sources */,
 				C3BF2A9C244219AE004BDEE4 /* FirstRunModel.swift in Sources */,
 				C338C1DD247A957B00475304 /* MacLayerView.swift in Sources */,
-				C3F139A82479C37900FFAB28 /* UpdatedNoTouchYolo.mlmodel in Sources */,
 				C39AF22E24706A2E00C10A54 /* Database.swift in Sources */,
 				C3B0E04F245E31EE00BC4946 /* NetworkingConstants.swift in Sources */,
 				C330CE562461980B00FCA49A /* BarsView.swift in Sources */,
@@ -481,6 +480,7 @@
 				C338C1D5247A8E1900475304 /* MainScreenView.swift in Sources */,
 				C3BF2A9B244219AE004BDEE4 /* ImageStorer.swift in Sources */,
 				C3BF2AA0244219AE004BDEE4 /* VisionModel.swift in Sources */,
+				C377584F247D40B4004A80D2 /* newmodel3.mlmodel in Sources */,
 				C3BF2A94244218E6004BDEE4 /* NoTouchError.swift in Sources */,
 				C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */,
 				C3BF2A9E244219AE004BDEE4 /* AudioAlert.swift in Sources */,
