@@ -213,6 +213,14 @@ public class VideoFeed: NSObject {
         #endif
         #endif
         
+        #if os(iOS)
+        if previewLayer?.connection?.isVideoOrientationSupported ?? false,
+            let newOrientation = Orienter.videoOrientation,
+            previewLayer?.connection?.videoOrientation != newOrientation {
+            previewLayer?.connection?.videoOrientation = newOrientation
+        }
+        #endif
+        
         setNativeViewLayerIfNeeded()
     }
     
