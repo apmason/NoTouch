@@ -49,7 +49,7 @@ public class VisionModel {
     /// - Tag: SetupVisionRequest
     @discardableResult
     private func setupVision() -> NoTouchError? {
-        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "newmodel3", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "wacky2", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
@@ -118,11 +118,11 @@ public class VisionModel {
             #if os(OSX)
             let chinOffset = ciImage.extent.height * 0.1
             #else
-            let chinOffset = ciImage.extent.height * 0.025
+            let chinOffset = ciImage.extent.height * 0.1
             #endif
             
             #if os(OSX)
-            let widthOffset: CGFloat = ciImage.extent.width * 0.025
+            let widthOffset: CGFloat = ciImage.extent.width * 0.1
             #else
             let widthOffset: CGFloat = ciImage.extent.width * 0.1
             #endif
@@ -154,7 +154,7 @@ public class VisionModel {
 //            #endif
             #if os(iOS)
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage,
-                                                     orientation: .leftMirrored)
+                                                     orientation: .leftMirrored) // This is the format of the camera itself. A back facing camera on iOS is mirrored, front facing is not. In portrait mode the image is rotated to the left (for CGImage, not sure if this is true when in other orientations).
             #else
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage,
                                                      orientation: .up)
@@ -195,15 +195,24 @@ public class VisionModel {
 
                     // Make sure we have at least one item detected.
                     if objectObservation.labels.count > 0 {
-                        let bestObservation = objectObservation.labels[0]
                         
-                        guard bestObservation.identifier == "hand" else {
-                            return
+                        for obv in objectObservation.labels {
+                            print("Object label is: \(obv.identifier), confidence is: \(obv.confidence)")
                         }
-                                                                        
+                        
+                        //let bestObservation = objectObservation.labels[0]
+                        
                         print("Confidence is: \(objectObservation.confidence)")
+                        
+                        
+//                        guard bestObservation.identifier == "hand" else {
+//                            return
+//                        }
+//
+//                        print("Confidence is: \(objectObservation.confidence)")
+                        
                         #if os(OSX)
-                        let threshold: Float = 0.75
+                        let threshold: Float = 0.86
                         #else
                         let threshold: Float = 0.6
                         #endif
