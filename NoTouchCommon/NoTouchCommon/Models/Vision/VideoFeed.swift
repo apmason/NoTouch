@@ -98,12 +98,10 @@ public class VideoFeed: NSObject {
     private func setupSessionForUsage() {
         guard self.userSettings.cameraAuthState == .notDetermined else {
             // We've already determined the state, so we can skip setting up the session and simply restart it, then setup the layers.
-            self.videoDataOutputQueue.sync { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.startCaptureSession()
-                DispatchQueue.main.async {
-                    self?.createPreviewLayer()
-                    self?.setNativeViewLayerIfNeeded()
-                }
+                self?.createPreviewLayer()
+                self?.setNativeViewLayerIfNeeded()
             }
             
             return
@@ -125,13 +123,11 @@ public class VideoFeed: NSObject {
     }
     
     private func kickoffCaptureSetup() {
-        self.videoDataOutputQueue.sync { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.setupAVCapture()
             self?.startCaptureSession()
-            DispatchQueue.main.async {
-                self?.createPreviewLayer()
-                self?.setNativeViewLayerIfNeeded()
-            }
+            self?.createPreviewLayer()
+            self?.setNativeViewLayerIfNeeded()
         }
     }
     
@@ -195,11 +191,16 @@ public class VideoFeed: NSObject {
     }
     
     private func createPreviewLayer() {
+        guard self.previewLayer == nil else {
+            return
+        }
+        
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)
         self.previewLayer?.connection?.isEnabled = true
         self.previewLayer?.connection?.automaticallyAdjustsVideoMirroring = false
         self.previewLayer?.connection?.isVideoMirrored = true
         self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        print("create preview done")
     }
     
     /// Resets the `VideoFeed`'s `previewLayer` property, and sets it to fit within the `nativeView`'s bounds, and inserts it as a layer.
@@ -265,6 +266,7 @@ public class VideoFeed: NSObject {
     /// This should be called on its own synchronous queue.
     private func startCaptureSession() {
         self.session.startRunning()
+        print("start capture session done.")
     }
     
     public func updatePreviewLayerFrame(to rect: CGRect) {
