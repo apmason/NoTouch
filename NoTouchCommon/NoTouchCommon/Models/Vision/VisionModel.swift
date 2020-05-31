@@ -42,11 +42,14 @@ public class VisionModel {
     
     public weak var delegate: VisionModelDelegate?
     
+    // Throttling only available on macOS.
+    #if os(OSX)
     /// The number of frames that have come through without being processed
     private var frameCount = 0
     
     /// The threshold of frames that must come through before one is processed.
     private var threshold = 3
+    #endif
     
     public init() {
         setupVision()
@@ -250,12 +253,14 @@ extension VisionModel {
     
     public func analyzeNewSampleBuffer(_ sampleBuffer: CMSampleBuffer) {
         if currentlyAnalyzedCIImage == nil {
+            #if os(OSX)
             frameCount += 1
             if frameCount > threshold {
                 frameCount = 0
             } else {
                 return
             }
+            #endif
             
             guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
                 return
