@@ -92,31 +92,9 @@ public class VisionModel {
             
             guard let results = request.results as? [VNFaceObservation],
                 let boundingBox = results.first?.boundingBox else {
-                    // TODO: tell the user they're in this state (also, check the confidence, we don't want people trying to run this in a dark room that doesn't work well.)
-                    //print("can't detect face!")
-                    // As a fallback run with the whole pixel buffer, rather than just focusing on the face.
-                    let touchRequest = VNImageRequestHandler(ciImage: ciImage, orientation: Orienter.currentCGOrientation())
-                    self.visionQueue.async { [weak self] in
-                        guard let self = self else {
-                            return
-                        }
-                        
-                        // TODO: Tell the user we can't find their face so they update their position. (If we can't find their face then should we stop analysis? Will need to test, maybe if they do it a certain number of times, how much does it degrade the performance?)
-                        
-                        // TODO: Also do as we do below with `modelUpdater.addImage`, we should not perform a touching request here.
-                        
-                        do {
-                            // Release the pixel buffer when done, allowing the next buffer to be processed.
-                            
-                            guard let touchingRequest = self.touchingRequest else {
-                                return
-                            }
-                            
-                            try touchRequest.perform([touchingRequest])
-                        } catch {
-                            print("Error: Vision request failed with error \"\(error)\"")
-                        }
-                    }
+                    // If a face can't be found don't analyze. TODO: Tell the user if a face is found
+                    print("no face") 
+                    self.currentlyAnalyzedCIImage = nil
                     return
             }
             

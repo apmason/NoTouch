@@ -79,6 +79,10 @@ extension AudioAlert: AlertObserver {
             return
         }
         
+        #if os(OSX)
+        player.stop()
+        player.prepareToPlay()
+        #endif
         player.play()
     }
     
@@ -93,5 +97,9 @@ extension AudioAlert: AlertObserver {
 extension AudioAlert: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         print("Finished playing succesfully: \(flag)")
+    }
+    
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        print("Decoding error: \(error?.localizedDescription)")
     }
 }
