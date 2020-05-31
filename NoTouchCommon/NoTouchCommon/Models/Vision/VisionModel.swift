@@ -144,7 +144,7 @@ public class VisionModel {
             #if os(iOS)
             // If using the front facing camera this will always be in portrait mode.
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage,
-                                                     orientation: .leftMirrored) // This is the format of the camera itself. A back facing camera on iOS is mirrored, front facing is not. In portrait mode the image is rotated to the left (for CGImage, not sure if this is true when in other orientations).
+                                                     orientation: .up) // This is the format of the camera itself. A back facing camera on iOS is mirrored, front facing is not. In portrait mode the image is rotated to the left (for CGImage, not sure if this is true when in other orientations).
             #else
             let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage,
                                                      orientation: .up)
@@ -173,6 +173,7 @@ public class VisionModel {
         do {
             let yoloModel = try VNCoreMLModel(for: mlModel)
             let observationRequest = VNCoreMLRequest(model: yoloModel, completionHandler: { [weak self] (request, error) in
+                //print("detect: \(Date().timeIntervalSince1970)")
                 self?.currentlyAnalyzedCIImage = nil
                 guard let results = request.results as? [VNRecognizedObjectObservation],
                     let bestObservation = results.max(by: { $0.confidence < $1.confidence }) else {
@@ -219,6 +220,7 @@ public class VisionModel {
         //DifferenceDetector.detectDifference(bufferOne: pixelBuffer)
         
         // TODO: Should this be .left or .right on iOS?
+        // should be .rightMirrored on iOS
         let requestHandler = VNImageRequestHandler(ciImage: ciImage,
                                                    orientation: .up)
         
