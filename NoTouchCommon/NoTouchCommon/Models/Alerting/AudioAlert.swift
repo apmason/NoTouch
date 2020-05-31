@@ -39,6 +39,17 @@ class AudioAlert: NSObject {
     override init() {
         super.init()
         
+        #if os(iOS)
+        // setup AudioSession.
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.ambient, options: [.allowBluetooth, .mixWithOthers])
+            try AVAudioSession.sharedInstance().setMode(.default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Error setting category: \(error.localizedDescription)")
+        }
+        #endif
+        
         // setup Audio Session
         guard let url = Bundle(for: type(of: self)).url(forResource: fileName, withExtension: "m4a") else {
             fatalError("No audio file")

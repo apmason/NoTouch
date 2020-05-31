@@ -45,6 +45,17 @@ class ImageStorer {
     }
     #endif
     
+    #if os(iOS)
+    static func storeNewImage(image: UIImage) {
+        #if DEBUG // Only allow this in debug mode, don't want this to sneak into a production build.
+        let data = image.jpegData(compressionQuality: 1)!
+        let path = filePath(forKey: "\(count)")
+        count += 1
+        //print("Writing to: \(path)")
+        try! data.write(to: path)
+        #endif
+    }
+    #endif
     
     // FIXME: Less important but may be good for testing. Pass in CGImage mayhaps?
     //    static func storeNewImage(image: UIImage) {

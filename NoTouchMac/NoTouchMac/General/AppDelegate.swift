@@ -57,12 +57,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     /// A cancellable observation that tracks whether we should stop or start recording.
     private var pauseObservation: AnyCancellable?
     
-    private let alertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings, database: CloudKitDatabase())
+    private let alertViewModel = AlertViewModel(userSettings: AppDelegate.userSettings,
+                                                database: CloudKitDatabase())
     
     private var contentViewModel: ContentViewModel!
     
+    private var feedResizer: FeedResizer!
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        self.contentViewModel = ContentViewModel(alertModel: alertViewModel)
+        // Setup models.
+        self.contentViewModel = ContentViewModel(alertModel: alertViewModel,
+                                                 userSettings: AppDelegate.userSettings)
+        self.feedResizer = FeedResizer(contentViewModel.feed)
+        
         setCameraAuthState()
         
         // Create the SwiftUI view that provides the window contents.
@@ -95,11 +102,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String : Any]) {
-        guard let ckNotification = CKNotification(fromRemoteNotificationDictionary: userInfo) as? CKDatabaseNotification else {
+        guard CKNotification(fromRemoteNotificationDictionary: userInfo) != nil else {
                 return
         }
         
-        //ckManager.fetchChanges(in: ckNotification.databaseScope)
+        // Give a slight delay and run on a background queue, we want to make sure the data can be fetched from the DB.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+            self.alertViewModel.fetchLatestRecords { _ in }
+        }
+    }
+    
+    func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("did register")
     }
     
     // MARK: - IBActions

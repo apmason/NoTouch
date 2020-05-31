@@ -8,60 +8,86 @@
 
 import SwiftUI
 
-public struct ResultsView: View {
+struct ResultsView: View {
     
     @EnvironmentObject var userSettings: UserSettings
     
     private let leadingXOffset: CGFloat = 30
     
-    @Binding private var showGraph: Bool
+    @Binding var showGraph: Bool
     
     // Determine if we are in light mode or dark mode.
     @Environment(\.colorScheme) var colorScheme
     
-    public init(showGraph: Binding<Bool>) {
-        self._showGraph = showGraph
-    }
-    
-    public var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                VStack(alignment: .leading, spacing: 10) {
-                    Button.init(action: {
-                        withAnimation(.easeInOut(duration: 0.35)) {
-                            self.showGraph.toggle()
+    var body: some View {
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 24) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Button.init(action: {
+                            withAnimation(.easeInOut(duration: 0.35)) {
+                                self.showGraph.toggle()
+                            }
+                        }) {
+                            Text("Back")
                         }
-                    }) {
-                        Text("Back")
+                        .padding(.leading, self.leadingXOffset)
+                        
+                        Text("Touches Today: \(self.userSettings.recordHolder.totalTouchCount)")
+                            .font(.headline)
+                            .padding(.leading, self.leadingXOffset)
                     }
-                    .padding(.leading, leadingXOffset)
                     
-                    Text("Touches Today: \(userSettings.recordHolder.totalTouchCount)")
-                        .font(.headline)
-                        .padding(.leading, leadingXOffset)
+                    Spacer()
+                    
+                    VStack(alignment: .trailing, spacing: 10) {
+                        if !self.userSettings.networkTracker.isNetworkAvailable {
+                            Text("No Internet")
+                                .font(.caption)
+                                .foregroundColor(Color.red)
+                        }
+                        
+                        if self.userSettings.networkTracker.cloudKitAuthStatus == .signedOut || self.userSettings.networkTracker.cloudKitAuthStatus == .restricted {
+                            Text("iCloud Disabled")
+                                .font(.caption)
+                                .foregroundColor(Color.red)
+                        }
+                    }.padding(.trailing, 10)
                 }
                 
-                Spacer()
-                
-                VStack(alignment: .trailing, spacing: 10) {
-                    if !userSettings.networkTracker.isNetworkAvailable {
-                        Text("No Internet")
-                            .font(.caption)
-                            .foregroundColor(Color.red)
-                    }
-                
-                    if userSettings.networkTracker.cloudKitAuthStatus == .signedOut || userSettings.networkTracker.cloudKitAuthStatus == .restricted {
-                            Text("iCloud Disabled")
-                            .font(.caption)
-                            .foregroundColor(Color.red)
-                    }
-                }.padding(.trailing, 10)
+                GraphView(leadingXOffset: self.leadingXOffset)
             }
-            
-            GraphView(leadingXOffset: leadingXOffset)
+            .edgePadding(topInsets: geometry.safeAreaInsets.top, bottomInsets: geometry.safeAreaInsets.bottom)
+            .padding(.leading, geometry.safeAreaInsets.leading)
+            .padding(.trailing, geometry.safeAreaInsets.trailing)
+            .background(self.colorScheme == .dark ? Color(.sRGB, red: 46/255, green: 47/255, blue: 48/255, opacity: 1.0) : Color.white)
         }
-        .padding(.top, 8)
-        .background(colorScheme == .dark ? Color(.sRGB, red: 46/255, green: 47/255, blue: 48/255, opacity: 1.0) : Color.white)
+    }
+}
+
+private struct MacPadding: ViewModifier {
+    
+    func body(content: Content) -> some View {
+        content.padding(.top, 8)
+    }
+}
+
+private struct iOSPadding: ViewModifier {
+    let topInsets: CGFloat
+    let bottomInsets: CGFloat
+    
+    func body(content: Content) -> some View {
+        content.padding(.top, max(14, topInsets)).padding(.bottom, bottomInsets)
+    }
+}
+
+private extension View {
+    func edgePadding(topInsets: CGFloat, bottomInsets: CGFloat) -> some View {
+        #if os(OSX)
+        return self.modifier(MacPadding())
+        #else
+        return self.modifier(iOSPadding(topInsets: topInsets, bottomInsets: bottomInsets))
+        #endif
     }
 }
 

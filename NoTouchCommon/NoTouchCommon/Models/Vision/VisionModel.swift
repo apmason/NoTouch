@@ -8,6 +8,8 @@
 
 #if os(OSX)
 import AppKit
+#elseif os(iOS)
+import UIKit
 #endif
 import AVFoundation
 import Foundation
@@ -28,7 +30,7 @@ public class VisionModel {
     private var analysisRequests = [VNRequest]()
         
     // The current pixel buffer undergoing analysis. Run requests in a serial fashion, one after another.
-    private var currentlyAnalyzedPixelBuffer: CVPixelBuffer?
+    private var currentlyAnalyzedCIImage: CIImage?
     
     // Queue for dispatching vision classification and barcode requests
     private let visionQueue = DispatchQueue(label: "com.NoTouch.serialVisionQueue")
@@ -40,6 +42,15 @@ public class VisionModel {
     
     public weak var delegate: VisionModelDelegate?
     
+    // Throttling only available on macOS.
+    #if os(OSX)
+    /// The number of frames that have come through without being processed
+    private var frameCount = 0
+    
+    /// The threshold of frames that must come through before one is processed.
+    private var threshold = 3
+    #endif
+    
     public init() {
         setupVision()
     }
@@ -47,7 +58,7 @@ public class VisionModel {
     /// - Tag: SetupVisionRequest
     @discardableResult
     private func setupVision() -> NoTouchError? {
-        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "UpdatedNoTouchYolo", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "newness", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
@@ -75,7 +86,7 @@ public class VisionModel {
         print("Create face bounding request called")
         // Release the pixel buffer when done, allowing the next buffer to be processed.
         let request = VNDetectFaceRectanglesRequest { [weak self] request, error in
-            guard let self = self, let pixelBuffer = self.currentlyAnalyzedPixelBuffer else {
+            guard let self = self, let ciImage = self.currentlyAnalyzedCIImage else {
                 return
             }
             
@@ -84,7 +95,7 @@ public class VisionModel {
                     // TODO: tell the user they're in this state (also, check the confidence, we don't want people trying to run this in a dark room that doesn't work well.)
                     //print("can't detect face!")
                     // As a fallback run with the whole pixel buffer, rather than just focusing on the face.
-                    let touchRequest = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: Orienter.currentCGOrientation())
+                    let touchRequest = VNImageRequestHandler(ciImage: ciImage, orientation: Orienter.currentCGOrientation())
                     self.visionQueue.async { [weak self] in
                         guard let self = self else {
                             return
@@ -109,45 +120,45 @@ public class VisionModel {
                     return
             }
             
-            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-            
-            #if os(iOS)
-            // Image is rotated 90 degrees to the left
-            let translate = CGAffineTransform.identity.scaledBy(x: ciImage.extent.width, y: ciImage.extent.height)
-            let bounds = boundingBox.applying(translate)
-            
-            let cheekOffset = ciImage.extent.height * 0.025
-            let chinOffset: CGFloat = ciImage.extent.width * 0.1
-            
-            let updatedBounds = CGRect(x: bounds.origin.x - chinOffset,
-                                       y: bounds.origin.y - cheekOffset,
-                                       width: bounds.width + (chinOffset * 2),
-                                       height: bounds.height + (cheekOffset * 2))
-            #elseif os(OSX)
             let bounds = VNImageRectForNormalizedRect(boundingBox, Int(ciImage.extent.width), Int(ciImage.extent.height))
             
             let chinOffset = ciImage.extent.height * 0.1
-            let widthOffset: CGFloat = ciImage.extent.width * 0.025
+            let widthOffset: CGFloat = ciImage.extent.width * 0.1
             
-            // NOTE: x and y will be flipped when bringing into NoTouch
             let updatedBounds = CGRect(x: bounds.origin.x - widthOffset,
                                        y: bounds.origin.y - chinOffset,
                                        width: bounds.width + (widthOffset * 2),
                                        height: bounds.height + (chinOffset * 2))
+            
+            #if DEBUG
+            self.delegate?.faceBoundingBoxUpdated(updatedBounds)
             #endif
             
             let cgImage = self.ciContext.createCGImage(ciImage, from: updatedBounds)
             
             guard let unwrappedCGImage = cgImage else { // Things broke for some reason, just exit.
-                self.currentlyAnalyzedPixelBuffer = nil
+                self.currentlyAnalyzedCIImage = nil
                 return
             }
             
             // Don't need to analyze the images currently.
-            //            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
-            //            ImageStorer.storeNewImage(image: image)
+            #if os(OSX)
+            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
+            ImageStorer.storeNewImage(image: image)
+            #elseif os(iOS)
+            let image = UIImage(cgImage: unwrappedCGImage)
+            ImageStorer.storeNewImage(image: image)
+            #endif
             
-            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage, orientation: Orienter.currentCGOrientation())
+            #if os(iOS)
+            // If using the front facing camera this will always be in portrait mode.
+            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage,
+                                                     orientation: .up) // This is the format of the camera itself. A back facing camera on iOS is mirrored, front facing is not. In portrait mode the image is rotated to the left (for CGImage, not sure if this is true when in other orientations).
+            #else
+            let touchRequest = VNImageRequestHandler(cgImage: unwrappedCGImage,
+                                                     orientation: .up)
+            #endif
+            
             self.visionQueue.async { [weak self] in
                 guard let self = self else {
                     return
@@ -171,32 +182,28 @@ public class VisionModel {
         do {
             let yoloModel = try VNCoreMLModel(for: mlModel)
             let observationRequest = VNCoreMLRequest(model: yoloModel, completionHandler: { [weak self] (request, error) in
-                self?.currentlyAnalyzedPixelBuffer = nil
-                guard let results = request.results else {
+                //print("detect: \(Date().timeIntervalSince1970)")
+                self?.currentlyAnalyzedCIImage = nil
+                guard let results = request.results as? [VNRecognizedObjectObservation],
+                    let bestObservation = results.max(by: { $0.confidence < $1.confidence }) else {
                     return
                 }
                 
-                for observation in results where observation is VNRecognizedObjectObservation {
-                    guard let objectObservation = observation as? VNRecognizedObjectObservation else {
-                        continue
-                    }
-
-                    // Make sure we have at least one item detected.
-                    if objectObservation.labels.count > 0 {
-                        let bestObservation = objectObservation.labels[0]
-                        
-                        guard bestObservation.identifier == "hand" else {
-                            return
-                        }
-                        
-                        //print("Confidence is: \(objectObservation.confidence)")
-                                                
-                        DispatchQueue.main.async { [weak self] in
-                            if objectObservation.confidence > 0.65 {
-                                self?.delegate?.fireAlert()
-                            } else {
-                                self?.delegate?.notTouchingDetected()
-                            }
+                // Make sure we have at least one item detected.
+                if bestObservation.labels.count > 0 {
+                    print("Confidence is: \(bestObservation.confidence)")
+                    
+                    #if os(OSX)
+                    let threshold: Float = 0.7
+                    #else
+                    let threshold: Float = 0.7
+                    #endif
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        if bestObservation.confidence > threshold {
+                            self?.delegate?.fireAlert()
+                        } else {
+                            self?.delegate?.notTouchingDetected()
                         }
                     }
                 }
@@ -214,15 +221,17 @@ public class VisionModel {
     /// - Tag: AnalyzeImage
     private func findFace() {
         // Most computer vision tasks are not rotation-agnostic, so it is important to pass in the orientation of the image with respect to device.
-        guard let pixelBuffer = currentlyAnalyzedPixelBuffer else {
+        guard let ciImage = currentlyAnalyzedCIImage else {
             assertionFailure("No pixelbuffer, this shouldn't happen, who removed it?")
             return
         }
         
         //DifferenceDetector.detectDifference(bufferOne: pixelBuffer)
         
-        let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,
-                                                   orientation: Orienter.currentCGOrientation())
+        // TODO: Should this be .left or .right on iOS?
+        // should be .rightMirrored on iOS
+        let requestHandler = VNImageRequestHandler(ciImage: ciImage,
+                                                   orientation: .up)
         
         visionQueue.async { [weak self] in
             guard let self = self else {
@@ -243,13 +252,39 @@ public class VisionModel {
 extension VisionModel {
     
     public func analyzeNewSampleBuffer(_ sampleBuffer: CMSampleBuffer) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            return
-        }
-                
-        if currentlyAnalyzedPixelBuffer == nil {
-            // Retain the image buffer for Vision processing.
-            currentlyAnalyzedPixelBuffer = pixelBuffer
+        if currentlyAnalyzedCIImage == nil {
+            #if os(OSX)
+            frameCount += 1
+            if frameCount > threshold {
+                frameCount = 0
+            } else {
+                return
+            }
+            #endif
+            
+            guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+                return
+            }
+            
+            self.currentlyAnalyzedCIImage = CIImage(cvPixelBuffer: pixelBuffer)
+            guard let ciImage = currentlyAnalyzedCIImage else {
+                return
+            }
+                        
+            #if os(iOS)
+            /**
+             In portrait mode the image is rotated 90 degrees to the left, this is the default when using the front facing camera on iOS.
+             If we are not currently in portrait mode, transform the image so we are. Then this is the only transformation we need to do, and the processing can use a shared codebase.
+             */
+            if UIDevice.current.orientation == .landscapeLeft {
+                let beforeWidth = ciImage.extent.width
+                self.currentlyAnalyzedCIImage = ciImage.transformed(by: CGAffineTransform(rotationAngle: -CGFloat(Double.pi/2))).transformed(by: CGAffineTransform(translationX: 0, y: beforeWidth))
+            } else if UIDevice.current.orientation == .landscapeRight {
+                let beforeHeight = ciImage.extent.height
+                self.currentlyAnalyzedCIImage = ciImage.transformed(by: CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))).transformed(by: CGAffineTransform(translationX: beforeHeight, y: 0))
+            }            
+            #endif
+            
             findFace()
         }
     }

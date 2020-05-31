@@ -27,7 +27,7 @@ public class AlertViewModel {
     private var timer: Timer?
     
     // The number of seconds to wait to see if we should move out of the alert state.
-    private let delayTime: TimeInterval = 0.3
+    private let delayTime: TimeInterval = 0.5
     
     var audioIsMuted: Bool {
         get {
@@ -107,6 +107,11 @@ public class AlertViewModel {
     public func notTouchingDetected() {
         // Triggers need to be successively succesful to avoid non-discrete random triggers from adding up and causing a trigger.
         triggerCount = 0
+    }
+    
+    /// Tells the Database to fetch all records that occured after the latest record.
+    public func fetchLatestRecords(completionHandler: @escaping ((Result<Void, DatabaseError>) -> Void)) {
+        self.dbManager.fetchLatestRecords(completionHandler: completionHandler)
     }
     
     @objc func fireTimer() {

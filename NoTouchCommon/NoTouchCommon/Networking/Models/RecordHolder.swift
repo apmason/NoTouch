@@ -56,6 +56,10 @@ public struct RecordHolder {
         })
     }
     
+    public func latestTouchRecordDate() -> Date? {
+        return self.touchRecords.latestTouchRecordDate()
+    }
+    
     private mutating func updateAfterRecordAddition() {
         let todaysRecords = self.touchRecords.todaysRecords().getTouchesPerHour(forDay: Date())
         self.touchObservances = todaysRecords

@@ -9,6 +9,7 @@
 import CoreGraphics
 import Foundation
 #if os(iOS)
+import AVFoundation
 import UIKit
 #endif
 
@@ -44,4 +45,23 @@ class Orienter {
         return .up
         #endif
     }
+    
+    #if os(iOS)
+    public static var videoOrientation: AVCaptureVideoOrientation? {
+        let deviceOrientation = UIDevice.current.orientation
+        switch deviceOrientation {
+        case .landscapeLeft:       // Device oriented horizontally, Home button on the right
+        return .landscapeRight
+        case .landscapeRight:      // Device oriented horizontally, Home button on the left
+        return .landscapeLeft
+        case .portrait:            // Device oriented vertically, Home button on the bottom
+        return .portrait
+        
+        case .portraitUpsideDown:
+        return nil
+        default:
+        return .portrait
+        }
+    }
+    #endif
 }

@@ -31,4 +31,11 @@ extension Collection where Element == TouchRecord {
         
         return returnArray
     }
+    
+    func latestTouchRecordDate() -> Date? {
+        let filteredArray = self.filter({ $0.origin == .database })
+        return filteredArray.max(by: {
+            $0.timestamp < $1.timestamp
+        })?.timestamp
+    }
 }

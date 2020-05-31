@@ -10,15 +10,22 @@ import CloudKit
 import Foundation
 
 public struct TouchRecord: Identifiable {
+    public enum Origin {
+        case database
+        case local
+    }
+    
     public let id = UUID()
     let deviceName: String
     let timestamp: Date
     let version: String
+    let origin: Origin
     
-    public init(deviceName: String, timestamp: Date, version: String) {
+    public init(deviceName: String, timestamp: Date, version: String, origin: Origin) {
         self.deviceName = deviceName
         self.timestamp = timestamp
         self.version = version
+        self.origin = origin
     }
 }
 

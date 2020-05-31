@@ -56,4 +56,26 @@ class TouchRecordTests: XCTestCase {
         
         XCTAssert(recordSet.count == 1)
     }
+    
+    func testLatestRecordSuccess() {
+        let today = Date()
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+        let past = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        
+        let todayRecord = TouchRecord(deviceName: "123", timestamp: today, version: "123")
+        let tomorrowRecord = TouchRecord(deviceName: "123", timestamp: tomorrow, version: "123")
+        let pastRecord = TouchRecord(deviceName: "123", timestamp: past, version: "123")
+        
+        let records: [TouchRecord] = [todayRecord, tomorrowRecord, pastRecord]
+        
+        let latestDate = records.latestTouchRecordDate()
+        XCTAssert(latestDate == tomorrow)
+    }
+    
+    func testLatestRecordEmpty() {
+        let records: [TouchRecord] = []
+        
+        let latestDate = records.latestTouchRecordDate()
+        XCTAssertNil(latestDate)
+    }
 }
