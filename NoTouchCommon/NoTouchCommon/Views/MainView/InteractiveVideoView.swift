@@ -24,12 +24,12 @@ struct InteractiveVideoView: View {
                 Text("Loading Video...")
                     .fontWeight(.bold)
                     .padding(8)
-            } else if userSettings.hideCameraFeed {
-                Text("Camera Hidden")
-                    .fontWeight(.bold)
-                    .padding(8)
             } else if userSettings.pauseDetection {
                 Text("Detection Paused")
+                    .fontWeight(.bold)
+                    .padding(8)
+            } else if userSettings.hideCameraFeed {
+                Text("Camera Hidden")
                     .fontWeight(.bold)
                     .padding(8)
             }

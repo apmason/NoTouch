@@ -58,6 +58,8 @@ struct ResultsView: View {
                 GraphView(leadingXOffset: self.leadingXOffset)
             }
             .edgePadding(topInsets: geometry.safeAreaInsets.top, bottomInsets: geometry.safeAreaInsets.bottom)
+            .padding(.leading, geometry.safeAreaInsets.leading)
+            .padding(.trailing, geometry.safeAreaInsets.trailing)
             .background(self.colorScheme == .dark ? Color(.sRGB, red: 46/255, green: 47/255, blue: 48/255, opacity: 1.0) : Color.white)
         }
     }
@@ -75,7 +77,7 @@ private struct iOSPadding: ViewModifier {
     let bottomInsets: CGFloat
     
     func body(content: Content) -> some View {
-        content.padding(.top, topInsets).padding(.bottom, bottomInsets)
+        content.padding(.top, max(14, topInsets)).padding(.bottom, bottomInsets)
     }
 }
 
