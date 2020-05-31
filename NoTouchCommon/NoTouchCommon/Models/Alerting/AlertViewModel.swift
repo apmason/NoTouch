@@ -27,7 +27,7 @@ public class AlertViewModel {
     private var timer: Timer?
     
     // The number of seconds to wait to see if we should move out of the alert state.
-    private let delayTime: TimeInterval = 0.3
+    private let delayTime: TimeInterval = 0.5
     
     var audioIsMuted: Bool {
         get {

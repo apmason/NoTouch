@@ -46,7 +46,7 @@ public class VisionModel {
     private var frameCount = 0
     
     /// The threshold of frames that must come through before one is processed.
-    private var threshold = 1
+    private var threshold = 3
     
     public init() {
         setupVision()
@@ -191,9 +191,9 @@ public class VisionModel {
                     print("Confidence is: \(bestObservation.confidence)")
                     
                     #if os(OSX)
-                    let threshold: Float = 0.80
+                    let threshold: Float = 0.7
                     #else
-                    let threshold: Float = 0.75
+                    let threshold: Float = 0.7
                     #endif
                     
                     DispatchQueue.main.async { [weak self] in
