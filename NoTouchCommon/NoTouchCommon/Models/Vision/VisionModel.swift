@@ -49,7 +49,7 @@ public class VisionModel {
     /// - Tag: SetupVisionRequest
     @discardableResult
     private func setupVision() -> NoTouchError? {
-        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "crazy", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "newness", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
@@ -174,33 +174,27 @@ public class VisionModel {
             let yoloModel = try VNCoreMLModel(for: mlModel)
             let observationRequest = VNCoreMLRequest(model: yoloModel, completionHandler: { [weak self] (request, error) in
                 self?.currentlyAnalyzedCIImage = nil
-                guard let results = request.results else {
+                guard let results = request.results as? [VNRecognizedObjectObservation],
+                    let bestObservation = results.max(by: { $0.confidence < $1.confidence }) else {
                     return
                 }
                 
-                for observation in results where observation is VNRecognizedObjectObservation {
-                    guard let objectObservation = observation as? VNRecognizedObjectObservation else {
-                        continue
-                    }
-
-                    // Make sure we have at least one item detected.
-                    if objectObservation.labels.count > 0 {
-                        print("Confidence is: \(objectObservation.confidence)")
-                        
-                        #if os(OSX)
-                        let threshold: Float = 0.86
-                        #else
-                        let threshold: Float = 0.75
-                        #endif
-                        
-                        DispatchQueue.main.async { [weak self] in
-                            if objectObservation.confidence > threshold {
-                                self?.delegate?.fireAlert()
-                            } else {
-                                self?.delegate?.notTouchingDetected()
-                            }
+                // Make sure we have at least one item detected.
+                if bestObservation.labels.count > 0 {
+                    print("Confidence is: \(bestObservation.confidence)")
+                    
+                    #if os(OSX)
+                    let threshold: Float = 0.86
+                    #else
+                    let threshold: Float = 0.75
+                    #endif
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        if bestObservation.confidence > threshold {
+                            self?.delegate?.fireAlert()
+                        } else {
+                            self?.delegate?.notTouchingDetected()
                         }
-                        return
                     }
                 }
             })
@@ -256,18 +250,19 @@ extension VisionModel {
             guard let ciImage = currentlyAnalyzedCIImage else {
                 return
             }
-            
-//            print("before extent is: \(self.currentlyAnalyzedCIImage?.extent)")
-//            print("before orientation is: \(self.currentlyAnalyzedCIImage?.orientationTransform(for: .left))")
-            
+                        
             #if os(iOS)
-            // make everything left mirrored
+            /**
+             In portrait mode the image is rotated 90 degrees to the left, this is the default when using the front facing camera on iOS.
+             If we are not currently in portrait mode, transform the image so we are. Then this is the only transformation we need to do, and the processing can use a shared codebase.
+             */
             if UIDevice.current.orientation == .landscapeLeft {
                 let beforeWidth = ciImage.extent.width
                 self.currentlyAnalyzedCIImage = ciImage.transformed(by: CGAffineTransform(rotationAngle: -CGFloat(Double.pi/2))).transformed(by: CGAffineTransform(translationX: 0, y: beforeWidth))
-//                print("image extent is: \(self.currentlyAnalyzedCIImage?.extent)")
-//                print("image orientation is: \(self.currentlyAnalyzedCIImage?.orientationTransform(for: .left))")
-            }
+            } else if UIDevice.current.orientation == .landscapeRight {
+                let beforeHeight = ciImage.extent.height
+                self.currentlyAnalyzedCIImage = ciImage.transformed(by: CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))).transformed(by: CGAffineTransform(translationX: beforeHeight, y: 0))
+            }            
             #endif
             
             findFace()
