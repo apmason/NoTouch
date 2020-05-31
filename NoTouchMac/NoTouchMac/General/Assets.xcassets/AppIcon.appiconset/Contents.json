@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "NotherOne.png",
+      "filename" : "Shadowed-4.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "NotherOne@2x.png",
+      "filename" : "Shadowed@2x-4.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "NotherOne-4.png",
+      "filename" : "Shadowed-3.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "NotherOne@2x-4.png",
+      "filename" : "Shadowed@2x-3.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "NotherOne-3.png",
+      "filename" : "Shadowed-2.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "NotherOne@2x-3.png",
+      "filename" : "Shadowed@2x-2.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "NotherOne-2.png",
+      "filename" : "Shadowed-1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "NotherOne@2x-2.png",
+      "filename" : "Shadowed@2x-1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "NotherOne-1.png",
+      "filename" : "Shadowed.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "NotherOne@2x-1.png",
+      "filename" : "Shadowed@2x.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
