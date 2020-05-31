@@ -42,6 +42,12 @@ public class VisionModel {
     
     public weak var delegate: VisionModelDelegate?
     
+    /// The number of frames that have come through without being processed
+    private var frameCount = 0
+    
+    /// The threshold of frames that must come through before one is processed.
+    private var threshold = 1
+    
     public init() {
         setupVision()
     }
@@ -185,7 +191,7 @@ public class VisionModel {
                     print("Confidence is: \(bestObservation.confidence)")
                     
                     #if os(OSX)
-                    let threshold: Float = 0.86
+                    let threshold: Float = 0.80
                     #else
                     let threshold: Float = 0.75
                     #endif
@@ -244,6 +250,13 @@ extension VisionModel {
     
     public func analyzeNewSampleBuffer(_ sampleBuffer: CMSampleBuffer) {
         if currentlyAnalyzedCIImage == nil {
+            frameCount += 1
+            if frameCount > threshold {
+                frameCount = 0
+            } else {
+                return
+            }
+            
             guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
                 return
             }
