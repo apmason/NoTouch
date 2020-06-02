@@ -272,8 +272,10 @@ public class VideoFeed: NSObject {
     
     /// This should be called on its own synchronous queue.
     private func startCaptureSession() {
+        var shouldUnlock = false
         do {
             try self.inputDevice?.lockForConfiguration()
+            shouldUnlock = true
             setInputFormat()
         } catch {
             print("error locking device!")
@@ -281,7 +283,9 @@ public class VideoFeed: NSObject {
         
         self.session.startRunning()
         print("start capture session done.")
-        self.inputDevice?.unlockForConfiguration()
+        if shouldUnlock {
+            self.inputDevice?.unlockForConfiguration()
+        }
     }
     
     private func setInputFormat() {
