@@ -55,9 +55,6 @@ public class VideoFeed: NSObject {
     
     private let userSettings: UserSettings
     
-    /// The session's input camera.
-    private var inputDevice: AVCaptureDevice?
-    
     #if DEBUG
     #if os(iOS)
     public let trackingView: UIView = {
@@ -138,16 +135,15 @@ public class VideoFeed: NSObject {
     private func setupAVCapture() {
         // Select a video device and make an input.
         
-        // TODO: This should change.
         #if os(OSX)
-        self.inputDevice = AVCaptureDevice.default(for: .video)
+        let inputDevice = AVCaptureDevice.default(for: .video)
         #else
-        self.inputDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+        let inputDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
                                               for: .video,
                                               position: .front)
         #endif
         
-        guard let unwrappedInputDevice = self.inputDevice else {
+        guard let unwrappedInputDevice = inputDevice else {
             assertionFailure("Couldn't create video device.")
             return
         }
@@ -168,11 +164,16 @@ public class VideoFeed: NSObject {
         
         // The model input size is smaller than 640x480, so better resolution won't help us.
         #if os(OSX)
-        session.sessionPreset = .low
+        if session.canSetSessionPreset(.low) {
+            session.sessionPreset = .low
+        } else if session.canSetSessionPreset(.medium) {
+            session.sessionPreset = .medium
+        }
         #else
-        session.sessionPreset = .hd1280x720
+        if session.canSetSessionPreset(.hd1280x720) {
+            session.sessionPreset = .hd1280x720
+        }
         #endif
-        
         
         // Add a video input.
         guard session.canAddInput(deviceInput) else {
@@ -272,47 +273,7 @@ public class VideoFeed: NSObject {
     
     /// This should be called on its own synchronous queue.
     private func startCaptureSession() {
-        var shouldUnlock = false
-        do {
-            try self.inputDevice?.lockForConfiguration()
-            shouldUnlock = true
-            setInputFormat()
-        } catch {
-            print("error locking device!")
-        }
-        
         self.session.startRunning()
-        print("start capture session done.")
-        if shouldUnlock {
-            self.inputDevice?.unlockForConfiguration()
-        }
-    }
-    
-    private func setInputFormat() {
-        guard let device = inputDevice else {
-            return
-        }
-        
-        var lowestRange: AVFrameRateRange?
-        
-        for range in device.activeFormat.videoSupportedFrameRateRanges {
-            if lowestRange == nil {
-                lowestRange = range
-            }
-            
-            if let minFrameDuration = lowestRange?.minFrameDuration {
-                if range.minFrameDuration > minFrameDuration {
-                    lowestRange = range
-                }
-            }
-        }
-        
-        guard let rangeToUse = lowestRange else {
-            return
-        }
-        
-        device.activeVideoMinFrameDuration = rangeToUse.minFrameDuration
-        device.activeVideoMaxFrameDuration = rangeToUse.minFrameDuration
     }
     
     public func updatePreviewLayerFrame(to rect: CGRect) {
