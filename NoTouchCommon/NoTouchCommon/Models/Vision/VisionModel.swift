@@ -58,7 +58,7 @@ public class VisionModel {
     /// - Tag: SetupVisionRequest
     @discardableResult
     private func setupVision() -> NoTouchError? {
-        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "newness", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "lit", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
@@ -172,7 +172,7 @@ public class VisionModel {
                     print("Confidence is: \(bestObservation.confidence)")
                     
                     #if os(OSX)
-                    let threshold: Float = 0.7
+                    let threshold: Float = 0.8
                     #else
                     let threshold: Float = 0.7
                     #endif

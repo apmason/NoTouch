@@ -61,6 +61,7 @@
 		C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */; };
 		C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */; };
 		C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */; };
+		C3DAC66F248BC29D00F34745 /* lit.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3DAC66E248BC29D00F34745 /* lit.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitRetryManager.swift; sourceTree = "<group>"; };
 		C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLinesView.swift; sourceTree = "<group>"; };
 		C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLinesView.swift; sourceTree = "<group>"; };
+		C3DAC66E248BC29D00F34745 /* lit.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = lit.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +331,7 @@
 			children = (
 				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
 				C35B5E482483FFD700A64308 /* newness.mlmodel */,
+				C3DAC66E248BC29D00F34745 /* lit.mlmodel */,
 				C338C1EA247AD72B00475304 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -477,6 +480,7 @@
 				C355357B2466108900E991AA /* TouchExtensions.swift in Sources */,
 				C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */,
 				C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */,
+				C3DAC66F248BC29D00F34745 /* lit.mlmodel in Sources */,
 				C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */,
 				C338C1D5247A8E1900475304 /* MainScreenView.swift in Sources */,
 				C3BF2A9B244219AE004BDEE4 /* ImageStorer.swift in Sources */,
