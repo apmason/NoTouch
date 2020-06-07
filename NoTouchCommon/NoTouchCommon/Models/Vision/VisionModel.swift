@@ -167,28 +167,36 @@ public class VisionModel {
                     return
                 }
                 
+                var activate = false
+                #if os(iOS)
+                if results.count >= 3 && results.contains(where: { $0.confidence > 0.60 }) {
+                    print("activate")
+                    activate = true
+                }
+                #endif
+                
                 // Make sure we have at least one item detected.
                 if bestObservation.labels.count > 0 {
                     #if os(OSX)
                     let threshold: Float = 0.85
                     #else
-                    let threshold: Float = 0.7
+                    let threshold: Float = 0.89
                     #endif
                     
+                    print("=====overall confidence is: \(bestObservation.confidence)=====")
+                    
+                    #if os(OSX)
+                    let fingerThreshold: Float = 0.60
                     let fingerConfidence = bestObservation.labels.first(where: { $0.identifier == "Finger" })?.confidence ?? 0
-                    
-//                    print("Finger confidence is: \(fingerConfidence)")
-//                    print("overall confidence is: \(bestObservation.confidence)")
-                    
-                    let fingerDetected = bestObservation.confidence > 0.75 && fingerConfidence > 0.99
-                    if fingerDetected {
-                        print("finger detected!!: \(bestObservation.confidence)")
-                    }
+                    let fingerDetected = bestObservation.confidence > fingerThreshold && fingerConfidence > 0.99
+                    #else
+                    let fingerDetected = false
+                    #endif
                     
                     print("Best confidence is: \(bestObservation.confidence)")
                     
                     DispatchQueue.main.async { [weak self] in
-                        if bestObservation.confidence > threshold || fingerDetected {
+                        if bestObservation.confidence > threshold || activate || fingerDetected {
                             self?.delegate?.fireAlert()
                         } else {
                             self?.delegate?.notTouchingDetected()
