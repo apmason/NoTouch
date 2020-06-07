@@ -45,10 +45,16 @@ public class AlertViewModel {
     private let userSettings: UserSettings
     
     private let dbManager: DatabaseManager
+    
+    /// Handles setting the UserSettings being set to touching or not touching
+    private let touchDetectedModel: TouchDetectedModel
       
     public init(userSettings: UserSettings, database: Database) {
         self.userSettings = userSettings
         self.dbManager = DBManager(userSettings: userSettings, database: database)
+        self.touchDetectedModel = TouchDetectedModel(userSettings)
+        addObserver(touchDetectedModel)
+        
         self.dbManager.fetchExistingRecords(completionHandler: nil)
         addAudioObserver()
     }

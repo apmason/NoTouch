@@ -172,7 +172,7 @@ public class VisionModel {
                     #if os(OSX)
                     let threshold: Float = 0.85
                     #else
-                    let threshold: Float = 0.85
+                    let threshold: Float = 0.7
                     #endif
                     
                     let fingerConfidence = bestObservation.labels.first(where: { $0.identifier == "Finger" })?.confidence ?? 0
@@ -180,10 +180,12 @@ public class VisionModel {
 //                    print("Finger confidence is: \(fingerConfidence)")
 //                    print("overall confidence is: \(bestObservation.confidence)")
                     
-                    let fingerDetected = bestObservation.confidence > 0.60 && fingerConfidence > 0.99
+                    let fingerDetected = bestObservation.confidence > 0.75 && fingerConfidence > 0.99
                     if fingerDetected {
-                        print("finger detected!!")
+                        print("finger detected!!: \(bestObservation.confidence)")
                     }
+                    
+                    print("Best confidence is: \(bestObservation.confidence)")
                     
                     DispatchQueue.main.async { [weak self] in
                         if bestObservation.confidence > threshold || fingerDetected {

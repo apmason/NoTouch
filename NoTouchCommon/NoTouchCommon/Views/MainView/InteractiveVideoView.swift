@@ -128,6 +128,11 @@ struct StateWarningView: View {
         VStack(alignment: .center, spacing: 10) {
             Spacer()
             
+            // if touch detected
+            if userSettings.isTouching {
+                TouchDetectedView()
+            }
+            
             if !userSettings.networkTracker.isNetworkAvailable {
                 Text("Disconnected From Internet")
                     .fontWeight(.medium)
