@@ -58,7 +58,7 @@ public class VisionModel {
     /// - Tag: SetupVisionRequest
     @discardableResult
     private func setupVision() -> NoTouchError? {
-        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "lit", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "annot-4789", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
@@ -169,16 +169,21 @@ public class VisionModel {
                 
                 // Make sure we have at least one item detected.
                 if bestObservation.labels.count > 0 {
-                    print("Confidence is: \(bestObservation.confidence)")
-                    
                     #if os(OSX)
-                    let threshold: Float = 0.8
+                    let threshold: Float = 0.85
                     #else
-                    let threshold: Float = 0.7
+                    let threshold: Float = 0.85
                     #endif
                     
+                    let fingerConfidence = bestObservation.labels.first(where: { $0.identifier == "Finger" })?.confidence ?? 0
+                    
+                    print("Finger confidence is: \(fingerConfidence)")
+                    print("overall confidence is: \(bestObservation.confidence)")
+                    
+                    let fingerDetected = bestObservation.confidence > 0.60 && fingerConfidence > 0.985
+                    
                     DispatchQueue.main.async { [weak self] in
-                        if bestObservation.confidence > threshold {
+                        if bestObservation.confidence > threshold || fingerDetected {
                             self?.delegate?.fireAlert()
                         } else {
                             self?.delegate?.notTouchingDetected()

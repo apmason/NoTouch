@@ -17,6 +17,7 @@
 		C338C1DD247A957B00475304 /* MacLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DC247A957B00475304 /* MacLayerView.swift */; };
 		C338C1DF247A95EF00475304 /* OptionButtonStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C338C1DE247A95EF00475304 /* OptionButtonStack.swift */; };
 		C338C1EB247AD72B00475304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C338C1EA247AD72B00475304 /* Assets.xcassets */; };
+		C33E4ED4248D277700B98FE7 /* annot-4789.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */; };
 		C3523EF124749EDB002108A7 /* DifferenceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3523EF024749EDB002108A7 /* DifferenceDetector.swift */; };
 		C355357B2466108900E991AA /* TouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357A2466108900E991AA /* TouchExtensions.swift */; };
 		C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357C246610AB00E991AA /* TouchRecordExtensions.swift */; };
@@ -61,7 +62,6 @@
 		C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */; };
 		C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */; };
 		C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */; };
-		C3DAC66F248BC29D00F34745 /* lit.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3DAC66E248BC29D00F34745 /* lit.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +85,7 @@
 		C338C1DC247A957B00475304 /* MacLayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacLayerView.swift; sourceTree = "<group>"; };
 		C338C1DE247A95EF00475304 /* OptionButtonStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionButtonStack.swift; sourceTree = "<group>"; };
 		C338C1EA247AD72B00475304 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "annot-4789.mlmodel"; sourceTree = "<group>"; };
 		C3523EF024749EDB002108A7 /* DifferenceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceDetector.swift; sourceTree = "<group>"; };
 		C355357A2466108900E991AA /* TouchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchExtensions.swift; sourceTree = "<group>"; };
 		C355357C246610AB00E991AA /* TouchRecordExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordExtensions.swift; sourceTree = "<group>"; };
@@ -132,7 +133,6 @@
 		C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitRetryManager.swift; sourceTree = "<group>"; };
 		C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLinesView.swift; sourceTree = "<group>"; };
 		C3D3822A245F860500F2DB23 /* HorizontalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLinesView.swift; sourceTree = "<group>"; };
-		C3DAC66E248BC29D00F34745 /* lit.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = lit.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,7 +331,7 @@
 			children = (
 				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
 				C35B5E482483FFD700A64308 /* newness.mlmodel */,
-				C3DAC66E248BC29D00F34745 /* lit.mlmodel */,
+				C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */,
 				C338C1EA247AD72B00475304 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -480,12 +480,12 @@
 				C355357B2466108900E991AA /* TouchExtensions.swift in Sources */,
 				C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */,
 				C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */,
-				C3DAC66F248BC29D00F34745 /* lit.mlmodel in Sources */,
 				C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */,
 				C338C1D5247A8E1900475304 /* MainScreenView.swift in Sources */,
 				C3BF2A9B244219AE004BDEE4 /* ImageStorer.swift in Sources */,
 				C3BF2AA0244219AE004BDEE4 /* VisionModel.swift in Sources */,
 				C3BF2A94244218E6004BDEE4 /* NoTouchError.swift in Sources */,
+				C33E4ED4248D277700B98FE7 /* annot-4789.mlmodel in Sources */,
 				C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */,
 				C3BF2A9E244219AE004BDEE4 /* AudioAlert.swift in Sources */,
 				C3B58D3A24621EF300DF4D8D /* AxisView.swift in Sources */,
