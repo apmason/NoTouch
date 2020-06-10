@@ -168,12 +168,10 @@ public class VisionModel {
                 }
                 
                 var activate = false
-                #if os(iOS)
-                if results.count >= 3 && results.contains(where: { $0.confidence > 0.60 }) {
+                if results.count >= 3 && results.contains(where: { $0.confidence > 0.70 }) {
                     print("activate")
                     activate = true
                 }
-                #endif
                 
                 // Make sure we have at least one item detected.
                 if bestObservation.labels.count > 0 {
@@ -185,18 +183,8 @@ public class VisionModel {
                     
                     print("=====overall confidence is: \(bestObservation.confidence)=====")
                     
-                    #if os(OSX)
-                    let fingerThreshold: Float = 0.60
-                    let fingerConfidence = bestObservation.labels.first(where: { $0.identifier == "Finger" })?.confidence ?? 0
-                    let fingerDetected = bestObservation.confidence > fingerThreshold && fingerConfidence > 0.99
-                    #else
-                    let fingerDetected = false
-                    #endif
-                    
-                    print("Best confidence is: \(bestObservation.confidence)")
-                    
                     DispatchQueue.main.async { [weak self] in
-                        if bestObservation.confidence > threshold || activate || fingerDetected {
+                        if bestObservation.confidence > threshold || activate {
                             self?.delegate?.fireAlert()
                         } else {
                             self?.delegate?.notTouchingDetected()

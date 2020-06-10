@@ -9,16 +9,17 @@
 import SwiftUI
 
 struct TouchDetectedView: View {
+    
+    // Determine if we are in light mode or dark mode.
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         Text("Touch Detected!")
             .font(.subheadline)
-            .padding()
-            .foregroundColor(.white)
-            .background(
-                Rectangle()
-                    .background(Color.black.opacity(0.75))
-                    .cornerRadius(10)
-        )
+            .padding(18)
+            .foregroundColor(Color.white)
+            .background(Color.black.opacity(0.75))
+            .cornerRadius(10)
     }
 }
 
