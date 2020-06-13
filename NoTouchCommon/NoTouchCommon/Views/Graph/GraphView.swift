@@ -42,9 +42,9 @@ public struct GraphView: View {
                 
                 BarsView(spacing: 5)
                     .frame(width: geometry.size.width - self.positioner.leadingXOffset,
-                           height: geometry.size.height - self.positioner.bottomYOffset - self.positioner.topYOffset)
+                           height: geometry.size.height - self.positioner.bottomYOffset - self.positioner.topYOffset - self.positioner.lineWidth)
                     .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
-                              y: (geometry.size.height - self.positioner.topYOffset - self.positioner.bottomYOffset) / 2 + self.positioner.topYOffset)
+                              y: (geometry.size.height - self.positioner.topYOffset - self.positioner.bottomYOffset) / 2 + self.positioner.topYOffset - self.positioner.lineWidth)
             }
         }
     }
@@ -52,9 +52,24 @@ public struct GraphView: View {
 
 struct GraphView_Previews: PreviewProvider {
     
+    static var userSettings: UserSettings {
+        let userSettings = UserSettings()
+        userSettings.recordHolder.add(dummyRecordWith(date: Date()))
+        userSettings.recordHolder.add(dummyRecordWith(date: Date()))
+        userSettings.recordHolder.add(dummyRecordWith(date: Date()))
+        return userSettings
+    }
+    
     // FIXME: fill with dummy data.
     static var previews: some View {
         GraphView(leadingXOffset: 20)
-            .environmentObject(UserSettings())
+            .environmentObject(userSettings)
+    }
+    
+    private static func dummyRecordWith(date: Date) -> TouchRecord {
+        return TouchRecord(deviceName: "test",
+                           timestamp: date,
+                           version: "123",
+                           origin: .database)
     }
 }

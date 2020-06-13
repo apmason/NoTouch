@@ -23,7 +23,7 @@ struct ResultsView: View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 24) {
                 HStack {
-                    VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 10) {
                         Button.init(action: {
                             withAnimation(.easeInOut(duration: 0.35)) {
                                 self.showGraph.toggle()
@@ -35,7 +35,8 @@ struct ResultsView: View {
                         
                         Text("Touches Today: \(self.userSettings.recordHolder.totalTouchCount)")
                             .font(.headline)
-                            .padding(.leading, self.leadingXOffset)
+                            .fontWeight(.semibold)
+                            .padding(.trailing, 8)
                     }
                     
                     Spacer()

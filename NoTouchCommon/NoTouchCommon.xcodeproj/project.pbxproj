@@ -31,6 +31,7 @@
 		C355357F2466121F00E991AA /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357E2466121F00E991AA /* TouchTests.swift */; };
 		C35B5E492483FFD800A64308 /* newness.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C35B5E482483FFD700A64308 /* newness.mlmodel */; };
 		C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35EA90E246897E8005A6942 /* RecordHolder.swift */; };
+		C3652D79249539C0008E5899 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3652D78249539C0008E5899 /* RoundedCorner.swift */; };
 		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
 		C37BE7BD246783E00012A299 /* RecordHolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE7BC246783E00012A299 /* RecordHolderTests.swift */; };
 		C3808E29246D7715008304F3 /* DBManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E28246D7715008304F3 /* DBManagerTests.swift */; };
@@ -106,6 +107,7 @@
 		C355357E2466121F00E991AA /* TouchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTests.swift; sourceTree = "<group>"; };
 		C35B5E482483FFD700A64308 /* newness.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = newness.mlmodel; sourceTree = "<group>"; };
 		C35EA90E246897E8005A6942 /* RecordHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolder.swift; sourceTree = "<group>"; };
+		C3652D78249539C0008E5899 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C37BE7BC246783E00012A299 /* RecordHolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolderTests.swift; sourceTree = "<group>"; };
 		C3808E28246D7715008304F3 /* DBManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerTests.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				C33E4ED8248D419C00B98FE7 /* TouchDetectedView.swift */,
+				C3652D78249539C0008E5899 /* RoundedCorner.swift */,
 			);
 			path = Random;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				C3B0E055245F28CF00BC4946 /* CloudKitDatabase.swift in Sources */,
 				C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */,
 				C355357B2466108900E991AA /* TouchExtensions.swift in Sources */,
+				C3652D79249539C0008E5899 /* RoundedCorner.swift in Sources */,
 				C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */,
 				C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */,
 				C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */,

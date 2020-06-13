@@ -29,9 +29,30 @@ struct BarsView: View {
                 Rectangle().frame(width: self.spacing / 2, height: 0)
                 HStack(alignment: .bottom, spacing: self.spacing) {
                     ForEach(self.userSettings.recordHolder.touchObservances, id: \.self) { touch in
-                        Rectangle()
-                            .frame(width: self.rectangleWidth(for: geometry.size.width),
-                                   height: touch.ratio(withTopValue: self.userSettings.recordHolder.touchObservances.topAxisValue) * geometry.size.height)
+                        // Create a Rectangle that takes up all the space between the tap of the bar and the top of the screen in order to detect taps.
+                        VStack(alignment: .center, spacing: 0) {
+                            Rectangle()
+                                .fill(Color.black.opacity(0.00000001)) // can't detect taps on view with opacity of 0
+                                .frame(width: self.rectangleWidth(for: geometry.size.width))
+                            .gesture(
+                                TapGesture()
+                                    .onEnded({ _ in
+                                        print("Top touch is: \(touch)")
+                                    })
+                            )
+                            
+                            Rectangle()
+                                .fill(Color.orange)
+                                .frame(width: self.rectangleWidth(for: geometry.size.width),
+                                       height: touch.ratio(withTopValue: self.userSettings.recordHolder.touchObservances.topAxisValue) * geometry.size.height)
+                                .mask(TopRoundedCorner(radius: 2))
+                            .gesture(
+                                TapGesture()
+                                    .onEnded({ _ in
+                                        print("Ended, touch is: \(touch)")
+                                    })
+                            )
+                        }
                     }
                 }
                 Rectangle().frame(width: self.spacing / 2, height: 0)
