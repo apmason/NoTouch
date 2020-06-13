@@ -20,6 +20,11 @@
 		C33E4ED4248D277700B98FE7 /* annot-4789.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */; };
 		C33E4ED9248D419C00B98FE7 /* TouchDetectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33E4ED8248D419C00B98FE7 /* TouchDetectedView.swift */; };
 		C33E4EDB248D46B500B98FE7 /* TouchDetectedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33E4EDA248D46B500B98FE7 /* TouchDetectedModel.swift */; };
+		C34BC3352492F54200F98FF7 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C34BC3332492F52000F98FF7 /* SF-Pro-Display-Bold.otf */; };
+		C34BC3362492F54200F98FF7 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C34BC3342492F52000F98FF7 /* SF-Pro-Display-Medium.otf */; };
+		C34BC3372492F54200F98FF7 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C34BC3312492F51F00F98FF7 /* SF-Pro-Display-Regular.otf */; };
+		C34BC3382492F54200F98FF7 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C34BC3322492F51F00F98FF7 /* SF-Pro-Display-Semibold.otf */; };
+		C34BC33A2492F62200F98FF7 /* NoTouchFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BC3392492F62200F98FF7 /* NoTouchFont.swift */; };
 		C3523EF124749EDB002108A7 /* DifferenceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3523EF024749EDB002108A7 /* DifferenceDetector.swift */; };
 		C355357B2466108900E991AA /* TouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357A2466108900E991AA /* TouchExtensions.swift */; };
 		C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357C246610AB00E991AA /* TouchRecordExtensions.swift */; };
@@ -90,6 +95,11 @@
 		C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "annot-4789.mlmodel"; sourceTree = "<group>"; };
 		C33E4ED8248D419C00B98FE7 /* TouchDetectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDetectedView.swift; sourceTree = "<group>"; };
 		C33E4EDA248D46B500B98FE7 /* TouchDetectedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDetectedModel.swift; sourceTree = "<group>"; };
+		C34BC3312492F51F00F98FF7 /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		C34BC3322492F51F00F98FF7 /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
+		C34BC3332492F52000F98FF7 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		C34BC3342492F52000F98FF7 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		C34BC3392492F62200F98FF7 /* NoTouchFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTouchFont.swift; sourceTree = "<group>"; };
 		C3523EF024749EDB002108A7 /* DifferenceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceDetector.swift; sourceTree = "<group>"; };
 		C355357A2466108900E991AA /* TouchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchExtensions.swift; sourceTree = "<group>"; };
 		C355357C246610AB00E991AA /* TouchRecordExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordExtensions.swift; sourceTree = "<group>"; };
@@ -300,6 +310,7 @@
 				C3BF2A93244218E6004BDEE4 /* NoTouchError.swift */,
 				C3B0E056245F30E500BC4946 /* DeviceData.swift */,
 				C3523EF024749EDB002108A7 /* DifferenceDetector.swift */,
+				C34BC3392492F62200F98FF7 /* NoTouchFont.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -342,6 +353,10 @@
 		C3F4BE8E2442635F003CBD59 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C34BC3332492F52000F98FF7 /* SF-Pro-Display-Bold.otf */,
+				C34BC3342492F52000F98FF7 /* SF-Pro-Display-Medium.otf */,
+				C34BC3312492F51F00F98FF7 /* SF-Pro-Display-Regular.otf */,
+				C34BC3322492F51F00F98FF7 /* SF-Pro-Display-Semibold.otf */,
 				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
 				C35B5E482483FFD700A64308 /* newness.mlmodel */,
 				C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */,
@@ -452,6 +467,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C34BC3352492F54200F98FF7 /* SF-Pro-Display-Bold.otf in Resources */,
+				C34BC3362492F54200F98FF7 /* SF-Pro-Display-Medium.otf in Resources */,
+				C34BC3372492F54200F98FF7 /* SF-Pro-Display-Regular.otf in Resources */,
+				C34BC3382492F54200F98FF7 /* SF-Pro-Display-Semibold.otf in Resources */,
 				C338C1EB247AD72B00475304 /* Assets.xcassets in Resources */,
 				C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */,
 			);
@@ -486,6 +505,7 @@
 				C330CE562461980B00FCA49A /* BarsView.swift in Sources */,
 				C3B0E04D245E30CC00BC4946 /* TouchRecord.swift in Sources */,
 				C3BF2A902442163B004BDEE4 /* VideoFeed.swift in Sources */,
+				C34BC33A2492F62200F98FF7 /* NoTouchFont.swift in Sources */,
 				C3C46EBC247AE7020042E602 /* iOSCameraAuthView.swift in Sources */,
 				C3BF2AA224421A1D004BDEE4 /* Orienter.swift in Sources */,
 				C35B5E492483FFD800A64308 /* newness.mlmodel in Sources */,

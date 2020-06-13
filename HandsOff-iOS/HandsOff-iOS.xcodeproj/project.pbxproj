@@ -55,7 +55,7 @@
 		C338C1E1247AA01500475304 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C338C1E5247AA4A900475304 /* HandsOff-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "HandsOff-iOS.entitlements"; sourceTree = "<group>"; };
 		C338C1E6247AA4AF00475304 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		C3B22687247A7F6E00465684 /* HandsOff-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HandsOff-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3B22687247A7F6E00465684 /* HandsOff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandsOff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B2268A247A7F6E00465684 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3B2268C247A7F6E00465684 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C3B2268E247A7F6E00465684 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		C3B22688247A7F6E00465684 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C3B22687247A7F6E00465684 /* HandsOff-iOS.app */,
+				C3B22687247A7F6E00465684 /* HandsOff.app */,
 				C3B2269D247A7F7200465684 /* HandsOff-iOSTests.xctest */,
 				C3B226A8247A7F7200465684 /* HandsOff-iOSUITests.xctest */,
 			);
@@ -187,7 +187,7 @@
 			);
 			name = "HandsOff-iOS";
 			productName = "HandsOff-iOS";
-			productReference = C3B22687247A7F6E00465684 /* HandsOff-iOS.app */;
+			productReference = C3B22687247A7F6E00465684 /* HandsOff.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C3B2269C247A7F7200465684 /* HandsOff-iOSTests */ = {
@@ -470,6 +470,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "HandsOff-iOS/HandsOff-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"HandsOff-iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				ENABLE_PREVIEWS = YES;
@@ -479,10 +480,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.handsOff;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HandsOff;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -492,6 +494,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "HandsOff-iOS/HandsOff-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"HandsOff-iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				ENABLE_PREVIEWS = YES;
@@ -501,10 +504,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.handsOff;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HandsOff;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
