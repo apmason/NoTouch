@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension Animation {
-    static func ripple(index: Int) -> Animation {
+    static func ripple() -> Animation {
         Animation.spring(dampingFraction: 0.5)
             .speed(3)
     }
@@ -53,7 +53,7 @@ struct BarsView: View {
                                 .frame(width: self.rectangleWidth(for: geometry.size.width),
                                        height: hour.touches.ratio(withTopValue: self.userSettings.recordHolder.hourlyData.topAxisValue) * geometry.size.height)
                                 .mask(TopRoundedCorner(radius: 2))
-                                .animation(.ripple(index: hour.hour))
+                                .animation(.ripple())
                             .gesture(
                                 TapGesture()
                                     .onEnded({ _ in
