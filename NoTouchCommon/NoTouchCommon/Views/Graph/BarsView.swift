@@ -8,6 +8,13 @@
 
 import SwiftUI
 
+extension Animation {
+    static func ripple(index: Int) -> Animation {
+        Animation.spring(dampingFraction: 0.5)
+            .speed(3)
+    }
+}
+
 struct BarsView: View {
     
     @EnvironmentObject var userSettings: UserSettings
@@ -28,7 +35,7 @@ struct BarsView: View {
             HStack(alignment: .bottom, spacing: 0) {
                 Rectangle().frame(width: self.spacing / 2, height: 0)
                 HStack(alignment: .bottom, spacing: self.spacing) {
-                    ForEach(self.userSettings.recordHolder.touchObservances, id: \.self) { touch in
+                    ForEach(self.userSettings.recordHolder.hourlyData, id: \.id) { hour in
                         // Create a Rectangle that takes up all the space between the tap of the bar and the top of the screen in order to detect taps.
                         VStack(alignment: .center, spacing: 0) {
                             Rectangle()
@@ -37,19 +44,20 @@ struct BarsView: View {
                             .gesture(
                                 TapGesture()
                                     .onEnded({ _ in
-                                        print("Top touch is: \(touch)")
+                                        print("Top touch is: \(hour.touches)")
                                     })
                             )
                             
                             Rectangle()
                                 .fill(Color.orange)
                                 .frame(width: self.rectangleWidth(for: geometry.size.width),
-                                       height: touch.ratio(withTopValue: self.userSettings.recordHolder.touchObservances.topAxisValue) * geometry.size.height)
+                                       height: hour.touches.ratio(withTopValue: self.userSettings.recordHolder.hourlyData.topAxisValue) * geometry.size.height)
                                 .mask(TopRoundedCorner(radius: 2))
+                                .animation(.ripple(index: hour.hour))
                             .gesture(
                                 TapGesture()
                                     .onEnded({ _ in
-                                        print("Ended, touch is: \(touch)")
+                                        print("Ended, touch is: \(hour.touches)")
                                     })
                             )
                         }

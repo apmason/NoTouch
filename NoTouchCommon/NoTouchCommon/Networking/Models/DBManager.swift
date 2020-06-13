@@ -29,8 +29,8 @@ public protocol DatabaseManager {
 
 extension DatabaseManager {
     
-    public func latestTouchRecordDate() -> Date? {
-        return userSettings.recordHolder.latestTouchRecordDate()
+    public func newestDBRecordDate() -> Date? {
+        return userSettings.recordHolder.latestTouchRecordDate(withOrigin: .database)
     }
 }
 

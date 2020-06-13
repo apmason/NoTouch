@@ -168,8 +168,9 @@ public class VisionModel {
                 }
                 
                 var activate = false
-                if results.count >= 3 && results.contains(where: { $0.confidence > 0.70 }) {
-                    print("activate")
+                if results.count >= 3 && results.contains(where: { $0.confidence > 0.90 }) {
+                    let max = results.max(by: { $0.confidence < $1.confidence })!
+                    print("activate, max confidence is: \(max.confidence)")
                     activate = true
                 }
                 

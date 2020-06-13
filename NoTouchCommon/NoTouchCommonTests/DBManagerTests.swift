@@ -25,12 +25,12 @@ class DBManagerTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Wait for initial async fetch")
         
         manager.fetchExistingRecords { _ in
-            XCTAssert(userSettings.recordHolder.touchObservances.count == 24)
-            for (index, touch) in userSettings.recordHolder.touchObservances.enumerated() {
+            XCTAssert(userSettings.recordHolder.hourlyData.count == 24)
+            for (index, hour) in userSettings.recordHolder.hourlyData.enumerated() {
                 if index == 0 {
-                    XCTAssert(touch == 1)
+                    XCTAssert(hour.touches == 1)
                 } else {
-                    XCTAssert(touch == 0)
+                    XCTAssert(hour.touches == 0)
                 }
             }
             
@@ -44,7 +44,7 @@ class DBManagerTests: XCTestCase {
         let deviceName = "Alex's Mac"
         let timestamp = Date()
         let version = "123"
-        let touchRecord = TouchRecord(deviceName: deviceName, timestamp: timestamp, version: version)
+        let touchRecord = TouchRecord(deviceName: deviceName, timestamp: timestamp, version: version, origin: .local)
         
         let database = MockDatabase()
         let zoneID = CKRecordZone.ID(zoneName: "test", ownerName: "test")
@@ -59,7 +59,7 @@ class DBManagerTests: XCTestCase {
 extension DBManagerTests {
     
     class MockDatabase: Database {
-        func fetchLatestRecords(completionHandler: ((Result<[TouchRecord], DatabaseError>) -> Void)?) {}
+        func fetchLatestRecords(completionHandler: @escaping ((Result<[TouchRecord], DatabaseError>) -> Void)) {}
         
         func attemptCustomZoneCreation() {}
     
@@ -74,7 +74,7 @@ extension DBManagerTests {
         /// Return one `TouchRecord` in the `completionHandler`
         func fetchRecords(sinceStartOf date: Date, completionHandler: @escaping (Result<[TouchRecord], DatabaseError>) -> Void) {
             let startOfDay = Calendar.current.startOfDay(for: Date())
-            let record = TouchRecord(deviceName: "123", timestamp: startOfDay, version: "123")
+            let record = TouchRecord(deviceName: "123", timestamp: startOfDay, version: "123", origin: .local)
             completionHandler(.success([record]))
         }
     }
