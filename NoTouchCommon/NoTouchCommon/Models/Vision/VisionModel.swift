@@ -167,31 +167,73 @@ public class VisionModel {
                     return
                 }
                 
-                var activate = false
-                if results.count >= 3 && results.contains(where: { $0.confidence > 0.90 }) {
-                    let max = results.max(by: { $0.confidence < $1.confidence })!
-                    print("activate, max confidence is: \(max.confidence)")
-                    activate = true
+                var score = 0
+                print("+++++")
+                // loop through all results
+                for result in results {
+                    if result.confidence > 0.93 {
+                        print("top score")
+                        score += 4
+                    }
+                    else if result.confidence > 0.87 {
+                        print("mid score")
+                        score += 3
+                    }
+                    else if result.confidence > 0.8 {
+                        for label in result.labels {
+                            if label.identifier == "BackOfHand" && label.confidence > 0.95 {
+                                print("back of hand, confidence = \(result.confidence)")
+                                score += 2
+                            }
+                            else if label.identifier == "Finger" && label.confidence > 0.95 {
+                                print("big finger, confidence = \(result.confidence)")
+                                score += 2
+                            }
+                        }
+                    }
+                    else if result.confidence > 0.3 {
+                        for label in result.labels where label.identifier == "Finger" {
+                            if label.confidence > 0.9 {
+                                print("Small finger")
+                                score += 1
+                            }
+                        }
+                    }
                 }
+                
+                var activate = false
+                if score > 3 {
+                    activate = true
+                    print("activating")
+                }
+                print("------")
+                
+                
+//                if results.count >= 3 && results.filter({ $0.confidence > 0.60 }).count >= 3 {
+//                    print("Greater than 80 is: \(results.filter({ $0.confidence > 0.60 }).count)")
+//                    activate = true
+//                }
                 
                 // Make sure we have at least one item detected.
                 if bestObservation.labels.count > 0 {
-                    #if os(OSX)
-                    let threshold: Float = 0.90
-                    #else
-                    let threshold: Float = 0.89
-                    #endif
-                    
+//                    #if os(OSX)
+//                    let threshold: Float = 0.90
+//                    #else
+//                    let threshold: Float = 0.90
+//                    #endif
+//                    if results.count > 1 {
+//                        print("multi results")
+//                    }
                     if bestObservation.confidence > 0.70 {
-                        print("=====overall confidence is: \(bestObservation.confidence)=====")
-                        for label in bestObservation.labels {
-                            print("Name is: \(label.identifier), confidence is: \(label.confidence)")
-                            print("+++++++")
-                        }
+//                        print("=====overall confidence is: \(bestObservation.confidence)=====")
+//                        for label in bestObservation.labels {
+//                            print("Name is: \(label.identifier), confidence is: \(label.confidence), results count is: \(results.count)")
+//                            print("+++++++")
+//                        }
                     }
                     
                     DispatchQueue.main.async { [weak self] in
-                        if bestObservation.confidence > threshold || activate {
+                        if activate {
                             self?.delegate?.fireAlert()
                         } else {
                             self?.delegate?.notTouchingDetected()
