@@ -8,35 +8,23 @@
 
 import SwiftUI
 
-struct TopRoundedCorner: Shape {
+/// A shape that is as wide as it's given view, and as tall as the given `radius` parameter. Used to cover a view's corners.
+struct CornerCoverer: Shape {
     
     let radius: CGFloat
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
         
-        let tls = CGPoint(x: rect.minX + radius, y: rect.minY)
-        let tlc = CGPoint(x: rect.minX + radius, y: rect.minY + radius)
+        let bottomLeft = CGPoint(x: rect.minX, y: rect.maxY)
+        let bottomRight = CGPoint(x: rect.maxX, y: rect.maxY)
+        let topLeft = CGPoint(x: rect.minX, y: rect.maxY - (radius))
+        let topRight = CGPoint(x: rect.maxX, y: rect.maxY - (radius))
         
-        let trc = CGPoint(x: rect.maxX - radius, y: rect.minY + radius)
-        let trs = CGPoint(x: rect.maxX, y: rect.minY + radius)
-        
-        let br = CGPoint(x: rect.maxX, y: rect.maxY)
-        let bl = CGPoint(x: rect.minX, y: rect.maxY)
-        
-        // cover bottom
-        path.move(to: bl)
-        path.addLine(to: br)
-        
-        // draw top right curve
-        path.addLine(to: trs)
-        path.addRelativeArc(center: trc, radius: radius, startAngle: Angle.degrees(0), delta: Angle.degrees(-90))
-        
-        // draw top left curve
-        path.addLine(to: tls)
-        
-        
-        path.addRelativeArc(center: tlc, radius: radius, startAngle: Angle.degrees(0), delta: Angle.degrees(-180))
+        path.move(to: topLeft)
+        path.addLine(to: bottomLeft)
+        path.addLine(to: bottomRight)
+        path.addLine(to: topRight)
         
         return path
     }
@@ -46,7 +34,7 @@ struct TopRoundedCorner: Shape {
 
 struct RoundedCorner_Previews: PreviewProvider {
     static var previews: some View {
-        TopRoundedCorner(radius: 5)
+        CornerCoverer(radius: 5)
             .frame(width: 50, height: 50)
     }
 }

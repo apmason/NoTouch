@@ -21,7 +21,7 @@ public struct HourlyData: Identifiable {
     public var id = UUID()
     
     /// The hour in question. 0 is 12 midnight, 1 is 1 a.m, etc.
-    let hour: Int
+    let index: Int
     
     /// Number of touches in the hour.
     var touches: Touch
@@ -30,7 +30,7 @@ public struct HourlyData: Identifiable {
     public static func generate24Hours() -> [HourlyData] {
         var returnArray: [HourlyData] = []
         for i in 0..<24 {
-            returnArray.append(HourlyData(hour: i, touches: 0))
+            returnArray.append(HourlyData(index: i, touches: 0))
         }
         return returnArray
     }

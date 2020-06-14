@@ -53,17 +53,17 @@ public struct GraphView: View {
                 // X Axis Labels
                 GraphXLabels(positioner: self.positioner)
                 
-                BarsView(selectedBar: self.$selectedBar, spacing: self.barSpacing)
-                    .frame(width: geometry.size.width - self.positioner.leadingXOffset,
-                           height: self.barViewHeight(totalHeight: geometry.size.height))
-                    .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
-                              y: (geometry.size.height - self.positioner.topYOffset - self.positioner.bottomYOffset) / 2 + self.positioner.topYOffset - self.positioner.lineWidth)
-                
                 if self.selectedBar != nil {
                     SelectedBarView()
                         .frame(width: 5, height: self.selectedBarHeight(barViewHeight: self.barViewHeight(totalHeight: geometry.size.height)))
                         .position(x: self.selectedBarXPosition(), y: self.selectedBarYPosition(totalViewHeight: geometry.size.height))
                 }
+                
+                BarsView(selectedBar: self.$selectedBar, spacing: self.barSpacing)
+                    .frame(width: geometry.size.width - self.positioner.leadingXOffset,
+                           height: self.barViewHeight(totalHeight: geometry.size.height))
+                    .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
+                              y: (geometry.size.height - self.positioner.topYOffset - self.positioner.bottomYOffset) / 2 + self.positioner.topYOffset - self.positioner.lineWidth)
             }
         }
     }

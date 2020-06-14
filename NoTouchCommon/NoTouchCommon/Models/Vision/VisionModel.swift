@@ -182,7 +182,13 @@ public class VisionModel {
                     let threshold: Float = 0.89
                     #endif
                     
-                    print("=====overall confidence is: \(bestObservation.confidence)=====")
+                    if bestObservation.confidence > 0.70 {
+                        print("=====overall confidence is: \(bestObservation.confidence)=====")
+                        for label in bestObservation.labels {
+                            print("Name is: \(label.identifier), confidence is: \(label.confidence)")
+                            print("+++++++")
+                        }
+                    }
                     
                     DispatchQueue.main.async { [weak self] in
                         if bestObservation.confidence > threshold || activate {

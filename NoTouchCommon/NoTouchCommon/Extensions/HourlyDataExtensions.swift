@@ -29,7 +29,7 @@ extension Array where Element == HourlyData {
             let hour = Calendar.current.component(.hour, from: record.timestamp)
             
             if Calendar.current.isDate(record.timestamp, inSameDayAs: date) {
-                guard let index = self.firstIndex(where: { $0.hour == hour }) else {
+                guard let index = self.firstIndex(where: { $0.index == hour }) else {
                     assertionFailure("This shouldn't happen")
                     continue
                 }
