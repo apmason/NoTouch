@@ -11,6 +11,7 @@ import SwiftUI
 struct SelectedInfoView: View {
     
     @Binding var selectedBar: SelectedBar?
+    @EnvironmentObject var userSettings: UserSettings
     
     @ViewBuilder
     var body: some View {
@@ -40,7 +41,7 @@ struct SelectedInfoView: View {
                     .font(.caption)
                     .foregroundColor(Color.init(red: 123/255, green: 123/255, blue: 123/255))
                 HStack(alignment: .firstTextBaseline, spacing: 5) {
-                    Text("28")
+                    Text("\(userSettings.recordHolder.totalTouchCount)")
                         .font(.title)
                         .fontWeight(.bold)
                     Text("touches")
@@ -48,7 +49,7 @@ struct SelectedInfoView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(Color.init(red: 137/255, green: 137/255, blue: 137/255))
                 }
-                Text("Monday June 14, 2020")
+                Text("Today")
                     .font(.footnote)
                     .fontWeight(.regular)
                     .foregroundColor(Color.init(red: 123/255, green: 123/255, blue: 123/255))
@@ -61,5 +62,6 @@ struct SelectedInfoView: View {
 struct SelectedInfoView_Previews: PreviewProvider {
     static var previews: some View {
         SelectedInfoView(selectedBar: .constant(nil))
+            .environmentObject(UserSettings())
     }
 }
