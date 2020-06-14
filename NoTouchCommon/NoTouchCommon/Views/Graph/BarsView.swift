@@ -19,6 +19,7 @@ struct BarsView: View {
     
     @EnvironmentObject var userSettings: UserSettings
     
+    @Binding var selectedBar: SelectedBar?
     let spacing: CGFloat
     
     func rectangleWidth(for totalWidth: CGFloat) -> CGFloat {
@@ -45,6 +46,7 @@ struct BarsView: View {
                                 TapGesture()
                                     .onEnded({ _ in
                                         print("Top touch is: \(hour.touches)")
+                                        self.selectedBar = SelectedBar(barWidth: self.rectangleWidth(for: geometry.size.width), barIndex: hour.hour)
                                     })
                             )
                             
@@ -58,6 +60,7 @@ struct BarsView: View {
                                 TapGesture()
                                     .onEnded({ _ in
                                         print("Ended, touch is: \(hour.touches)")
+                                        self.selectedBar = SelectedBar(barWidth: self.rectangleWidth(for: geometry.size.width), barIndex: hour.hour)
                                     })
                             )
                         }
@@ -75,7 +78,7 @@ struct BarsView: View {
 struct BarsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        BarsView(spacing: 10)
+        BarsView(selectedBar: .constant(nil), spacing: 10)
             .environmentObject(UserSettings())
     }
 }

@@ -8,6 +8,11 @@
 
 import SwiftUI
 
+struct SelectedBar {
+    let barWidth: CGFloat
+    let barIndex: Int
+}
+
 public struct GraphView: View {
     
     private let positioner: Positioner
@@ -16,6 +21,11 @@ public struct GraphView: View {
         self.positioner = Positioner(leadingXOffset: leadingXOffset)
     }
     
+    @State var selectedBar: SelectedBar?
+    
+    private let barSpacing: CGFloat = 5
+    
+    @ViewBuilder
     public var body: some View {
         GeometryReader { geometry in
             // Vertical line
@@ -40,13 +50,34 @@ public struct GraphView: View {
                 // X Axis Labels
                 GraphXLabels(positioner: self.positioner)
                 
-                BarsView(spacing: 5)
+                BarsView(selectedBar: self.$selectedBar, spacing: self.barSpacing)
                     .frame(width: geometry.size.width - self.positioner.leadingXOffset,
                            height: geometry.size.height - self.positioner.bottomYOffset - self.positioner.topYOffset - self.positioner.lineWidth)
                     .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
                               y: (geometry.size.height - self.positioner.topYOffset - self.positioner.bottomYOffset) / 2 + self.positioner.topYOffset - self.positioner.lineWidth)
+                
+                if self.selectedBar != nil {
+                    SelectedBarView()
+                        .frame(width: 5, height: 30)
+                        .position(x: self.selectedBarWidthOffset(), y: 100)
+                }
             }
         }
+    }
+    
+    /// Returns the offset that will set the center of a View on the center of the SelectedBar. Force unwrapping the `selectedBar` is done, so ensure `selectedBar` isn't `nil`.
+    private func selectedBarWidthOffset() -> CGFloat {
+        let index = CGFloat(selectedBar!.barIndex)
+        let spacingOffset = (barSpacing / 2) + (index * barSpacing)
+        let barOffset = (selectedBar!.barWidth / 2) + (index * selectedBar!.barWidth)
+        return self.positioner.leadingXOffset + spacingOffset + barOffset
+    }
+}
+
+struct SelectedBarView: View {
+    public var body: some View {
+        Rectangle()
+            .fill(Color.yellow)
     }
 }
 
