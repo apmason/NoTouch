@@ -34,6 +34,36 @@ public struct HourlyData: Identifiable {
         }
         return returnArray
     }
+    
+    enum PartOfDay: String {
+        case am = "AM"
+        case pm = "PM"
+    }
+
+    var dateText: String {
+        var partOfDay: PartOfDay = .am
+        
+        // 12 midnight
+        var startHour: Int = 12
+        
+        for hour in 0..<24 {
+            let start: Int = startHour
+            let end: Int = start == 12 ? 1 : start + 1
+            
+            if index == hour {
+                return "\(start) - \(end) \(partOfDay.rawValue)"
+            }
+            
+            startHour = end
+            
+            // Prepare for the roll over next iteration.
+            if startHour == 12 {
+                partOfDay = .pm
+            }
+        }
+        
+        return ""
+    }
 }
 
 public struct RecordHolder {
