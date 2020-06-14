@@ -15,40 +15,6 @@ struct SelectedBar {
     let hourlyData: HourlyData
 }
 
-struct SelectedInfoView: View {
-    
-    @Binding var selectedBar: SelectedBar?
-    
-    @ViewBuilder
-    var body: some View {
-        if self.selectedBar != nil { // show bar info
-            VStack(alignment: .leading) { // Selected item view
-                HStack {
-                    Text("\(self.selectedBar!.hourlyData.touches)")
-                        .font(.headline)
-                        .foregroundColor(Color.black)
-                    Text("touches")
-                        .font(.body)
-                        .foregroundColor(Color.gray)
-                }
-                Text("\(self.selectedBar!.hourlyData.index)")
-                    .font(.caption)
-                Text("+5% vs this hour yesterday")
-                    .font(.footnote)
-            }
-            .padding(10)
-            .frame(height: 65)
-            .background(Color.black.opacity(0.3))
-            .cornerRadius(4)
-        }
-        else {
-            Text("Touches Today")
-                .frame(height: 65)
-                .font(.headline)
-        }
-    }
-}
-
 public struct GraphView: View {
     
     private let positioner: Positioner
@@ -66,8 +32,9 @@ public struct GraphView: View {
     
     @ViewBuilder
     public var body: some View {
-        VStack(spacing: 14) {
+        VStack(alignment: .leading, spacing: 14) {
             SelectedInfoView(selectedBar: self.$selectedBar)
+                .padding(.leading, self.positioner.leadingXOffset)
             
             // Graph portion
             GeometryReader { geometry in

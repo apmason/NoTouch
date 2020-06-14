@@ -67,6 +67,7 @@
 		C3C46EBC247AE7020042E602 /* iOSCameraAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C46EBB247AE7020042E602 /* iOSCameraAuthView.swift */; };
 		C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C46EBD247AE8440042E602 /* iOSLayerView.swift */; };
 		C3C69771246B317A006FCD7C /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C69770246B317A006FCD7C /* ResultsView.swift */; };
+		C3C9017F2496B18B0007AA91 /* SelectedInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */; };
 		C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */; };
 		C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */; };
 		C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */; };
@@ -147,6 +148,7 @@
 		C3C46EBB247AE7020042E602 /* iOSCameraAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCameraAuthView.swift; sourceTree = "<group>"; };
 		C3C46EBD247AE8440042E602 /* iOSLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSLayerView.swift; sourceTree = "<group>"; };
 		C3C69770246B317A006FCD7C /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedInfoView.swift; sourceTree = "<group>"; };
 		C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitRetryManager.swift; sourceTree = "<group>"; };
 		C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLinesView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				C3C69770246B317A006FCD7C /* ResultsView.swift */,
 				C391EA43245F4B690062A07D /* GraphView.swift */,
+				C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */,
 				C330CE552461980B00FCA49A /* BarsView.swift */,
 				C3B58D3924621EF300DF4D8D /* AxisView.swift */,
 				C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */,
@@ -540,6 +543,7 @@
 				C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */,
 				C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */,
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
+				C3C9017F2496B18B0007AA91 /* SelectedInfoView.swift in Sources */,
 				C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */,
 				C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */,
 				C338C1DF247A95EF00475304 /* OptionButtonStack.swift in Sources */,
