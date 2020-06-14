@@ -177,7 +177,7 @@ public class VisionModel {
                 // Make sure we have at least one item detected.
                 if bestObservation.labels.count > 0 {
                     #if os(OSX)
-                    let threshold: Float = 0.85
+                    let threshold: Float = 0.90
                     #else
                     let threshold: Float = 0.89
                     #endif

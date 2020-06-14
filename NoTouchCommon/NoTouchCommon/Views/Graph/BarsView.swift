@@ -46,7 +46,9 @@ struct BarsView: View {
                                 TapGesture()
                                     .onEnded({ _ in
                                         print("Top touch is: \(hour.touches)")
-                                        self.selectedBar = SelectedBar(barWidth: self.rectangleWidth(for: geometry.size.width), barIndex: hour.hour)
+                                        self.selectedBar = SelectedBar(barIndex: hour.hour,
+                                                                       barWidth: self.rectangleWidth(for: geometry.size.width),
+                                                                       barHeight: hour.touches.ratio(withTopValue: self.userSettings.recordHolder.hourlyData.topAxisValue) * geometry.size.height)
                                     })
                             )
                             
@@ -60,7 +62,9 @@ struct BarsView: View {
                                 TapGesture()
                                     .onEnded({ _ in
                                         print("Ended, touch is: \(hour.touches)")
-                                        self.selectedBar = SelectedBar(barWidth: self.rectangleWidth(for: geometry.size.width), barIndex: hour.hour)
+                                        self.selectedBar = SelectedBar(barIndex: hour.hour,
+                                                                       barWidth: self.rectangleWidth(for: geometry.size.width),
+                                                                       barHeight: hour.touches.ratio(withTopValue: self.userSettings.recordHolder.hourlyData.topAxisValue) * geometry.size.height)
                                     })
                             )
                         }

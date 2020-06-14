@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct SelectedBar {
-    let barWidth: CGFloat
     let barIndex: Int
+    let barWidth: CGFloat
+    let barHeight: CGFloat
 }
 
 public struct GraphView: View {
@@ -24,6 +25,8 @@ public struct GraphView: View {
     @State var selectedBar: SelectedBar?
     
     private let barSpacing: CGFloat = 5
+    
+    private let infoSpacing: CGFloat = 10
     
     @ViewBuilder
     public var body: some View {
@@ -52,25 +55,44 @@ public struct GraphView: View {
                 
                 BarsView(selectedBar: self.$selectedBar, spacing: self.barSpacing)
                     .frame(width: geometry.size.width - self.positioner.leadingXOffset,
-                           height: geometry.size.height - self.positioner.bottomYOffset - self.positioner.topYOffset - self.positioner.lineWidth)
+                           height: self.barViewHeight(totalHeight: geometry.size.height))
                     .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
                               y: (geometry.size.height - self.positioner.topYOffset - self.positioner.bottomYOffset) / 2 + self.positioner.topYOffset - self.positioner.lineWidth)
                 
                 if self.selectedBar != nil {
                     SelectedBarView()
-                        .frame(width: 5, height: 30)
-                        .position(x: self.selectedBarWidthOffset(), y: 100)
+                        .frame(width: 5, height: self.selectedBarHeight(barViewHeight: self.barViewHeight(totalHeight: geometry.size.height)))
+                        .position(x: self.selectedBarXPosition(), y: self.selectedBarYPosition(totalViewHeight: geometry.size.height))
                 }
             }
         }
     }
     
     /// Returns the offset that will set the center of a View on the center of the SelectedBar. Force unwrapping the `selectedBar` is done, so ensure `selectedBar` isn't `nil`.
-    private func selectedBarWidthOffset() -> CGFloat {
+    private func selectedBarXPosition() -> CGFloat {
         let index = CGFloat(selectedBar!.barIndex)
         let spacingOffset = (barSpacing / 2) + (index * barSpacing)
         let barOffset = (selectedBar!.barWidth / 2) + (index * selectedBar!.barWidth)
         return self.positioner.leadingXOffset + spacingOffset + barOffset
+    }
+    
+    /// Return the height of the selected bar.
+    private func selectedBarHeight(barViewHeight: CGFloat) -> CGFloat {
+        let totalHeight = infoSpacing + barViewHeight
+        let selectorHeight = totalHeight - selectedBar!.barHeight + self.positioner.topYOffset
+        return selectorHeight
+    }
+    
+    /// Return the selected bar Y position
+    private func selectedBarYPosition(totalViewHeight: CGFloat) -> CGFloat {
+        let selectorHeight = selectedBarHeight(barViewHeight: self.barViewHeight(totalHeight: totalViewHeight))
+        let bottomSectionHeight = (selectorHeight / 2) + self.positioner.bottomYOffset + self.selectedBar!.barHeight
+        return totalViewHeight - bottomSectionHeight //- self.positioner.topYOffset
+    }
+    
+    /// Return the height of the bar view.
+    private func barViewHeight(totalHeight: CGFloat) -> CGFloat {
+        return totalHeight - self.positioner.bottomYOffset - self.positioner.topYOffset - self.positioner.lineWidth
     }
 }
 
