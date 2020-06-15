@@ -25,7 +25,10 @@ public enum RecordFetchState {
 
 public protocol DatabaseDelegate: class {
     func databaseAuthDidChange(_ status: DatabaseAuthStatus)
-    func latestTouchRecordDate() -> Date?
+    
+    
+    /// Returns the date of the newest record available that originated, in this session, from the database.
+    func newestDBRecordDate() -> Date?
 }
 
 public protocol Database: class {

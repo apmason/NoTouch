@@ -52,17 +52,18 @@ class NoTouchCommonTests: XCTestCase {
             dummyRecordWith(date: secondDate)
         ]
         
-        let touches = records.getTouchesPerHour(forDay: today)
+        var hourlyData = HourlyData.generate24Hours()
+        hourlyData.updateTouchesPerHour(from: records, on: today)
         
-        XCTAssert(touches.count == 24)
+        XCTAssert(hourlyData.count == 24)
         
-        for i in 0..<touches.count {
+        for i in 0..<hourlyData.count {
             if i == 0 {
-                XCTAssert(touches[i] == 1)
+                XCTAssert(hourlyData[i].touches == 1)
             } else if i == hourValue {
-                XCTAssert(touches[i] == 1)
+                XCTAssert(hourlyData[i].touches == 1)
             } else {
-                XCTAssert(touches[i] == 0)
+                XCTAssert(hourlyData[i].touches == 0)
             }
         }
     }
@@ -75,11 +76,13 @@ class NoTouchCommonTests: XCTestCase {
             dummyRecordWith(date: futureDate),
             dummyRecordWith(date: futureDate)
         ]
+                
+        var hourlyData = HourlyData.generate24Hours()
+        hourlyData.updateTouchesPerHour(from: futureRecords, on: today)
         
-        let futureHours = futureRecords.getTouchesPerHour(forDay: today)
-        XCTAssert(futureHours.count == 24)
-        for hour in futureHours {
-            XCTAssert(hour == 0)
+        XCTAssert(hourlyData.count == 24)
+        for hour in hourlyData {
+            XCTAssert(hour.touches == 0)
         }
         
         let pastDate = Calendar.current.date(byAdding: .day, value: -3, to: today)!
@@ -87,10 +90,11 @@ class NoTouchCommonTests: XCTestCase {
             dummyRecordWith(date: pastDate),
             dummyRecordWith(date: pastDate)
         ]
-        let pastHours = pastRecords.getTouchesPerHour(forDay: today)
-        XCTAssert(futureHours.count == 24)
-        for hour in pastHours {
-            XCTAssert(hour == 0)
+        
+        hourlyData.updateTouchesPerHour(from: pastRecords, on: today)
+        XCTAssert(hourlyData.count == 24)
+        for hour in hourlyData {
+            XCTAssert(hour.touches == 0)
         }
     }
     
@@ -108,17 +112,30 @@ class NoTouchCommonTests: XCTestCase {
         let todaysRecords = records.todaysRecords()
         XCTAssert(todaysRecords.count == 1)
         
-        let touches = todaysRecords.getTouchesPerHour(forDay: Date())
+        var hourlyData = HourlyData.generate24Hours()
+        hourlyData.updateTouchesPerHour(from: records, on: Date())
         
-        XCTAssert(touches.count == 24)
+        XCTAssert(hourlyData.count == 24)
         
-        for i in 0..<touches.count {
+        for i in 0..<hourlyData.count {
             if i == 0 {
-                XCTAssert(touches[i] == 1)
+                XCTAssert(hourlyData[i].touches == 1)
             } else {
-                XCTAssert(touches[i] == 0)
+                XCTAssert(hourlyData[i].touches == 0)
             }
         }
+    }
+    
+    func testUUIDConsistency() {
+        let beginningOfDay = Calendar.current.startOfDay(for: Date())
+        let todayRecord = dummyRecordWith(date: beginningOfDay)
+        
+        var hourlyData = HourlyData.generate24Hours()
+        let firstID = hourlyData[0].id
+        
+        hourlyData.updateTouchesPerHour(from: [todayRecord], on: Date())
+        
+        XCTAssert(hourlyData[0].id == firstID)
     }
     
     private func dummyRecordWith(date: Date) -> TouchRecord {

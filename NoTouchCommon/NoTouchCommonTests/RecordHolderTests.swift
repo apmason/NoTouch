@@ -15,9 +15,9 @@ class RecordHolderTests: XCTestCase {
     func testRecordHolderAddition() throws {
         var recordHolder = RecordHolder()
         
-        XCTAssert(recordHolder.touchObservances.count == 24)
-        for touchCount in recordHolder.touchObservances {
-            XCTAssert(touchCount == 0)
+        XCTAssert(recordHolder.hourlyData.count == 24)
+        for i in recordHolder.hourlyData {
+            XCTAssert(i.touches == 0)
         }
         
         // Days in the past shouldn't be added.
@@ -25,9 +25,9 @@ class RecordHolderTests: XCTestCase {
         recordHolder.add(dummyRecordWith(date: past))
         
         // Count should be 24 but all values are 0.
-        XCTAssert(recordHolder.touchObservances.count == 24)
-        for touchCount in recordHolder.touchObservances {
-            XCTAssert(touchCount == 0)
+        XCTAssert(recordHolder.hourlyData.count == 24)
+        for i in recordHolder.hourlyData {
+            XCTAssert(i.touches == 0)
         }
         
         // Days in the future shouldn't be added.
@@ -35,22 +35,22 @@ class RecordHolderTests: XCTestCase {
         recordHolder.add(dummyRecordWith(date: future))
         
         // Count should be 24 but all values are 0.
-        XCTAssert(recordHolder.touchObservances.count == 24)
-        for touchCount in recordHolder.touchObservances {
-            XCTAssert(touchCount == 0)
+        XCTAssert(recordHolder.hourlyData.count == 24)
+        for i in recordHolder.hourlyData {
+            XCTAssert(i.touches == 0)
         }
         
         // This is the current day so we should have 24 entries, all being zero except for index 0 (12:01 on the current day).
         let startOfDay = Calendar.current.startOfDay(for: Date())
         recordHolder.add(dummyRecordWith(date: startOfDay))
-        print("Seeing touch observance as: \(recordHolder.touchObservances)")
-        XCTAssert(recordHolder.touchObservances.count == 24)
+        print("Seeing touch observance as: \(recordHolder.hourlyData)")
+        XCTAssert(recordHolder.hourlyData.count == 24)
         
-        for (index, touchCount) in recordHolder.touchObservances.enumerated() {
+        for (index, hour) in recordHolder.hourlyData.enumerated() {
             if index == 0 {
-                XCTAssert(touchCount == 1)
+                XCTAssert(hour.touches == 1)
             } else {
-                XCTAssert(touchCount == 0)
+                XCTAssert(hour.touches == 0)
             }
         }
     }

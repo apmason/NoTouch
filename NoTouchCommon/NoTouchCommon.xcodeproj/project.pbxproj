@@ -31,6 +31,8 @@
 		C355357F2466121F00E991AA /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357E2466121F00E991AA /* TouchTests.swift */; };
 		C35B5E492483FFD800A64308 /* newness.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C35B5E482483FFD700A64308 /* newness.mlmodel */; };
 		C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35EA90E246897E8005A6942 /* RecordHolder.swift */; };
+		C3652D79249539C0008E5899 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3652D78249539C0008E5899 /* RoundedCorner.swift */; };
+		C3652D7B2495745F008E5899 /* HourlyDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */; };
 		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
 		C37BE7BD246783E00012A299 /* RecordHolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE7BC246783E00012A299 /* RecordHolderTests.swift */; };
 		C3808E29246D7715008304F3 /* DBManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E28246D7715008304F3 /* DBManagerTests.swift */; };
@@ -65,6 +67,8 @@
 		C3C46EBC247AE7020042E602 /* iOSCameraAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C46EBB247AE7020042E602 /* iOSCameraAuthView.swift */; };
 		C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C46EBD247AE8440042E602 /* iOSLayerView.swift */; };
 		C3C69771246B317A006FCD7C /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C69770246B317A006FCD7C /* ResultsView.swift */; };
+		C3C9017F2496B18B0007AA91 /* SelectedInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */; };
+		C3CD5D0C2496ED7300A884B2 /* GraphConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CD5D0B2496ED7300A884B2 /* GraphConstants.swift */; };
 		C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */; };
 		C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */; };
 		C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */; };
@@ -106,6 +110,8 @@
 		C355357E2466121F00E991AA /* TouchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTests.swift; sourceTree = "<group>"; };
 		C35B5E482483FFD700A64308 /* newness.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = newness.mlmodel; sourceTree = "<group>"; };
 		C35EA90E246897E8005A6942 /* RecordHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolder.swift; sourceTree = "<group>"; };
+		C3652D78249539C0008E5899 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyDataExtensions.swift; sourceTree = "<group>"; };
 		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C37BE7BC246783E00012A299 /* RecordHolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolderTests.swift; sourceTree = "<group>"; };
 		C3808E28246D7715008304F3 /* DBManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerTests.swift; sourceTree = "<group>"; };
@@ -143,6 +149,8 @@
 		C3C46EBB247AE7020042E602 /* iOSCameraAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCameraAuthView.swift; sourceTree = "<group>"; };
 		C3C46EBD247AE8440042E602 /* iOSLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSLayerView.swift; sourceTree = "<group>"; };
 		C3C69770246B317A006FCD7C /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedInfoView.swift; sourceTree = "<group>"; };
+		C3CD5D0B2496ED7300A884B2 /* GraphConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphConstants.swift; sourceTree = "<group>"; };
 		C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitRetryManager.swift; sourceTree = "<group>"; };
 		C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLinesView.swift; sourceTree = "<group>"; };
@@ -173,6 +181,7 @@
 			children = (
 				C3C69770246B317A006FCD7C /* ResultsView.swift */,
 				C391EA43245F4B690062A07D /* GraphView.swift */,
+				C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */,
 				C330CE552461980B00FCA49A /* BarsView.swift */,
 				C3B58D3924621EF300DF4D8D /* AxisView.swift */,
 				C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */,
@@ -181,6 +190,7 @@
 				C330CE5324617F0A00FCA49A /* Positioner.swift */,
 				C33079EB246702CA005392A6 /* GraphYLabels.swift */,
 				C3B24E33246716B900E2A737 /* GraphXLabels.swift */,
+				C3CD5D0B2496ED7300A884B2 /* GraphConstants.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -189,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				C33E4ED8248D419C00B98FE7 /* TouchDetectedView.swift */,
+				C3652D78249539C0008E5899 /* RoundedCorner.swift */,
 			);
 			path = Random;
 			sourceTree = "<group>";
@@ -227,6 +238,7 @@
 				C355357A2466108900E991AA /* TouchExtensions.swift */,
 				C355357C246610AB00E991AA /* TouchRecordExtensions.swift */,
 				C3B58D3B2462A93100DF4D8D /* DateExtensions.swift */,
+				C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -514,6 +526,7 @@
 				C3B0E055245F28CF00BC4946 /* CloudKitDatabase.swift in Sources */,
 				C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */,
 				C355357B2466108900E991AA /* TouchExtensions.swift in Sources */,
+				C3652D79249539C0008E5899 /* RoundedCorner.swift in Sources */,
 				C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */,
 				C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */,
 				C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */,
@@ -521,9 +534,11 @@
 				C3BF2A9B244219AE004BDEE4 /* ImageStorer.swift in Sources */,
 				C3BF2AA0244219AE004BDEE4 /* VisionModel.swift in Sources */,
 				C3BF2A94244218E6004BDEE4 /* NoTouchError.swift in Sources */,
+				C3652D7B2495745F008E5899 /* HourlyDataExtensions.swift in Sources */,
 				C33E4ED4248D277700B98FE7 /* annot-4789.mlmodel in Sources */,
 				C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */,
 				C3BF2A9E244219AE004BDEE4 /* AudioAlert.swift in Sources */,
+				C3CD5D0C2496ED7300A884B2 /* GraphConstants.swift in Sources */,
 				C3B58D3A24621EF300DF4D8D /* AxisView.swift in Sources */,
 				C3B0E051245E340D00BC4946 /* DBManager.swift in Sources */,
 				C391EA44245F4B690062A07D /* GraphView.swift in Sources */,
@@ -532,6 +547,7 @@
 				C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */,
 				C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */,
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
+				C3C9017F2496B18B0007AA91 /* SelectedInfoView.swift in Sources */,
 				C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */,
 				C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */,
 				C338C1DF247A95EF00475304 /* OptionButtonStack.swift in Sources */,

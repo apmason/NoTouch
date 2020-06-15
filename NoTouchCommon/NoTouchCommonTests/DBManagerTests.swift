@@ -25,12 +25,12 @@ class DBManagerTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Wait for initial async fetch")
         
         manager.fetchExistingRecords { _ in
-            XCTAssert(userSettings.recordHolder.touchObservances.count == 24)
-            for (index, touch) in userSettings.recordHolder.touchObservances.enumerated() {
+            XCTAssert(userSettings.recordHolder.hourlyData.count == 24)
+            for (index, hour) in userSettings.recordHolder.hourlyData.enumerated() {
                 if index == 0 {
-                    XCTAssert(touch == 1)
+                    XCTAssert(hour.touches == 1)
                 } else {
-                    XCTAssert(touch == 0)
+                    XCTAssert(hour.touches == 0)
                 }
             }
             

@@ -16,9 +16,60 @@ public enum LabelPosition {
     case bottom
 }
 
+/// Holds information on how many touches occured in a given hour.
+public struct HourlyData: Identifiable {
+    public var id = UUID()
+    
+    /// The hour in question. 0 is 12 midnight, 1 is 1 a.m, etc.
+    let index: Int
+    
+    /// Number of touches in the hour.
+    var touches: Touch
+    
+    /// Returns an array with 24 elements, starting at midnight (`HourlyData.hour == 0`)
+    public static func generate24Hours() -> [HourlyData] {
+        var returnArray: [HourlyData] = []
+        for i in 0..<24 {
+            returnArray.append(HourlyData(index: i, touches: 0))
+        }
+        return returnArray
+    }
+    
+    enum PartOfDay: String {
+        case am = "AM"
+        case pm = "PM"
+    }
+
+    var dateText: String {
+        var partOfDay: PartOfDay = .am
+        
+        // 12 midnight
+        var startHour: Int = 12
+        
+        for hour in 0..<24 {
+            let start: Int = startHour
+            let end: Int = start == 12 ? 1 : start + 1
+            
+            if index == hour {
+                return "\(start) - \(end) \(partOfDay.rawValue)"
+            }
+            
+            startHour = end
+            
+            // Prepare for the roll over next iteration.
+            if startHour == 12 {
+                partOfDay = .pm
+            }
+        }
+        
+        return ""
+    }
+}
+
 public struct RecordHolder {
     
-    public var touchObservances: [Touch] = [Touch](repeating: 0, count: 24)
+    /// Each item in the array represents one hour in a day.
+    public var hourlyData: [HourlyData] = HourlyData.generate24Hours()
     
     private var touchRecords: Set<TouchRecord> = []
     
@@ -51,19 +102,20 @@ public struct RecordHolder {
     }
     
     public var totalTouchCount: Touch {
-        return self.touchObservances.reduce(0, {
-            $0 + $1
+        return self.hourlyData.reduce(0, {
+            $0 + $1.touches
         })
     }
     
-    public func latestTouchRecordDate() -> Date? {
-        return self.touchRecords.latestTouchRecordDate()
+    public func latestTouchRecordDate(withOrigin origin: TouchRecord.Origin) -> Date? {
+        return self.touchRecords.latestTouchRecordDate(withOrigin: origin)
     }
     
+    /// Only adds updates for the current date, which may change in the future.
     private mutating func updateAfterRecordAddition() {
-        let todaysRecords = self.touchRecords.todaysRecords().getTouchesPerHour(forDay: Date())
-        self.touchObservances = todaysRecords
-        assert(self.touchObservances.count == 24)
-        self.topAxisValue = self.touchObservances.topAxisValue
+        let todaysRecords = self.touchRecords.todaysRecords()
+        self.hourlyData.updateTouchesPerHour(from: todaysRecords, on: Date())
+        assert(self.hourlyData.count == 24)
+        self.topAxisValue = self.hourlyData.topAxisValue
     }
 }

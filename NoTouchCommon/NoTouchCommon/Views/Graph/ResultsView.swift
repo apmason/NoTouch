@@ -21,39 +21,42 @@ struct ResultsView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .leading, spacing: 24) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Button.init(action: {
-                            withAnimation(.easeInOut(duration: 0.35)) {
-                                self.showGraph.toggle()
-                            }
-                        }) {
-                            Text("Back")
-                        }
-                        .padding(.leading, self.leadingXOffset)
-                        
-                        Text("Touches Today: \(self.userSettings.recordHolder.totalTouchCount)")
-                            .font(.headline)
-                            .padding(.leading, self.leadingXOffset)
+            VStack(alignment: .leading, spacing: 10) {
+                Button.init(action: {
+                    withAnimation(.easeInOut(duration: 0.35)) {
+                        self.showGraph.toggle()
                     }
-                    
-                    Spacer()
-                    
-                    VStack(alignment: .trailing, spacing: 10) {
-                        if !self.userSettings.networkTracker.isNetworkAvailable {
-                            Text("No Internet")
-                                .font(.caption)
-                                .foregroundColor(Color.red)
-                        }
-                        
-                        if self.userSettings.networkTracker.cloudKitAuthStatus == .signedOut || self.userSettings.networkTracker.cloudKitAuthStatus == .restricted {
-                            Text("iCloud Disabled")
-                                .font(.caption)
-                                .foregroundColor(Color.red)
-                        }
-                    }.padding(.trailing, 10)
+                }) {
+                    Text("Back")
                 }
+                .padding(.leading, self.leadingXOffset)
+                
+//                HStack {
+//                    HStack(spacing: 10) {
+//                        
+//                        
+//                        Text("Touches Today: \(self.userSettings.recordHolder.totalTouchCount)")
+//                            .font(.headline)
+//                            .fontWeight(.semibold)
+//                            .padding(.trailing, 8)
+//                    }
+//                    
+//                    Spacer()
+//                    
+//                    VStack(alignment: .trailing, spacing: 10) {
+//                        if !self.userSettings.networkTracker.isNetworkAvailable {
+//                            Text("No Internet")
+//                                .font(.caption)
+//                                .foregroundColor(Color.red)
+//                        }
+//                        
+//                        if self.userSettings.networkTracker.cloudKitAuthStatus == .signedOut || self.userSettings.networkTracker.cloudKitAuthStatus == .restricted {
+//                            Text("iCloud Disabled")
+//                                .font(.caption)
+//                                .foregroundColor(Color.red)
+//                        }
+//                    }.padding(.trailing, 10)
+//                }
                 
                 GraphView(leadingXOffset: self.leadingXOffset)
             }

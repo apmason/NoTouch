@@ -164,31 +164,55 @@ public class VisionModel {
                 self?.currentlyAnalyzedCIImage = nil
                 guard let results = request.results as? [VNRecognizedObjectObservation],
                     let bestObservation = results.max(by: { $0.confidence < $1.confidence }) else {
-                    return
+                        return
+                }
+                
+                var score = 0
+                print("+++++")
+                // loop through all results
+                for result in results {
+                    if result.confidence > 0.93 {
+                        print("top score")
+                        score += 4
+                    }
+                    else if result.confidence > 0.87 {
+                        print("mid score")
+                        score += 3
+                    }
+                    else if result.confidence > 0.8 {
+                        for label in result.labels {
+                            if label.identifier == "BackOfHand" && label.confidence > 0.95 {
+                                print("back of hand, confidence = \(result.confidence)")
+                                score += 2
+                            }
+                            else if label.identifier == "Finger" && label.confidence > 0.95 {
+                                print("big finger, confidence = \(result.confidence)")
+                                score += 2
+                            }
+                        }
+                    }
+                    else if result.confidence > 0.3 {
+                        for label in result.labels where label.identifier == "Finger" {
+                            if label.confidence > 0.9 {
+                                print("Small finger")
+                                score += 1
+                            }
+                        }
+                    }
                 }
                 
                 var activate = false
-                if results.count >= 3 && results.contains(where: { $0.confidence > 0.70 }) {
-                    print("activate")
+                if score > 3 {
                     activate = true
+                    print("activating")
                 }
+                print("------")
                 
-                // Make sure we have at least one item detected.
-                if bestObservation.labels.count > 0 {
-                    #if os(OSX)
-                    let threshold: Float = 0.85
-                    #else
-                    let threshold: Float = 0.89
-                    #endif
-                    
-                    print("=====overall confidence is: \(bestObservation.confidence)=====")
-                    
-                    DispatchQueue.main.async { [weak self] in
-                        if bestObservation.confidence > threshold || activate {
-                            self?.delegate?.fireAlert()
-                        } else {
-                            self?.delegate?.notTouchingDetected()
-                        }
+                DispatchQueue.main.async { [weak self] in
+                    if activate {
+                        self?.delegate?.fireAlert()
+                    } else {
+                        self?.delegate?.notTouchingDetected()
                     }
                 }
             })
