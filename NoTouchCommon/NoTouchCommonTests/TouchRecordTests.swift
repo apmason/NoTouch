@@ -13,8 +13,8 @@ class TouchRecordTests: XCTestCase {
 
     func testTouchRecordEquatableSuccess() {
         let date = Date()
-        let recordOne = TouchRecord(deviceName: "123", timestamp: date, version: "123")
-        let recordTwo = TouchRecord(deviceName: "123", timestamp: date, version: "123")
+        let recordOne = TouchRecord(deviceName: "123", timestamp: date, version: "123", origin: .database)
+        let recordTwo = TouchRecord(deviceName: "123", timestamp: date, version: "123", origin: .database)
         
         XCTAssert(recordOne == recordTwo)
     }
@@ -23,8 +23,8 @@ class TouchRecordTests: XCTestCase {
         let firstDate = Date()
         let secondDate = Calendar.current.date(byAdding: .hour, value: 1, to: firstDate)!
         
-        let recordOne = TouchRecord(deviceName: "123", timestamp: firstDate, version: "123")
-        let recordTwo = TouchRecord(deviceName: "123", timestamp: secondDate, version: "123")
+        let recordOne = TouchRecord(deviceName: "123", timestamp: firstDate, version: "123", origin: .database)
+        let recordTwo = TouchRecord(deviceName: "123", timestamp: secondDate, version: "123", origin: .database)
         
         XCTAssert(recordOne != recordTwo)
     }
@@ -33,8 +33,8 @@ class TouchRecordTests: XCTestCase {
         let firstDate = Date()
         let secondDate = Calendar.current.date(byAdding: .hour, value: 1, to: firstDate)!
         
-        let recordOne = TouchRecord(deviceName: "123", timestamp: firstDate, version: "123")
-        let recordTwo = TouchRecord(deviceName: "123", timestamp: secondDate, version: "123")
+        let recordOne = TouchRecord(deviceName: "123", timestamp: firstDate, version: "123", origin: .database)
+        let recordTwo = TouchRecord(deviceName: "123", timestamp: secondDate, version: "123", origin: .database)
         
         var recordSet: Set<TouchRecord> = []
         recordSet.insert(recordOne)
@@ -47,8 +47,8 @@ class TouchRecordTests: XCTestCase {
         let dateString = Date.dateToDBString(Date(), in: .current)
         let dbDate = Date.dbStringToDate(dateString, in: .current)!
         
-        let recordOne = TouchRecord(deviceName: "123", timestamp: dbDate, version: "123")
-        let recordTwo = TouchRecord(deviceName: "123", timestamp: dbDate, version: "123")
+        let recordOne = TouchRecord(deviceName: "123", timestamp: dbDate, version: "123", origin: .database)
+        let recordTwo = TouchRecord(deviceName: "123", timestamp: dbDate, version: "123", origin: .database)
         
         var recordSet: Set<TouchRecord> = []
         recordSet.insert(recordOne)
@@ -62,9 +62,9 @@ class TouchRecordTests: XCTestCase {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         let past = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         
-        let todayRecord = TouchRecord(deviceName: "123", timestamp: today, version: "123")
-        let tomorrowRecord = TouchRecord(deviceName: "123", timestamp: tomorrow, version: "123")
-        let pastRecord = TouchRecord(deviceName: "123", timestamp: past, version: "123")
+        let todayRecord = TouchRecord(deviceName: "123", timestamp: today, version: "123", origin: .database)
+        let tomorrowRecord = TouchRecord(deviceName: "123", timestamp: tomorrow, version: "123", origin: .database)
+        let pastRecord = TouchRecord(deviceName: "123", timestamp: past, version: "123", origin: .database)
         
         let records: [TouchRecord] = [todayRecord, tomorrowRecord, pastRecord]
         

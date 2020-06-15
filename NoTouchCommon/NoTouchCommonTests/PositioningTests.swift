@@ -13,7 +13,7 @@ class PositioningTests: XCTestCase {
 
     func testGraphYLabeling() throws {
         var recordHolder = RecordHolder()
-        recordHolder.add(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
+        recordHolder.add(TouchRecord(deviceName: "123", timestamp: Date(), version: "123", origin: .database))
         
         let topAxis = recordHolder.axisValue(for: .top)
         XCTAssert(topAxis == 3)

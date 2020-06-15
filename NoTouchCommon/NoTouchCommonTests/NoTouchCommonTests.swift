@@ -124,6 +124,7 @@ class NoTouchCommonTests: XCTestCase {
     private func dummyRecordWith(date: Date) -> TouchRecord {
         return TouchRecord(deviceName: "test",
                            timestamp: date,
-                           version: "123")
+                           version: "123",
+                           origin: .database)
     }
 }
