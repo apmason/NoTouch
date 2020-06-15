@@ -164,7 +164,7 @@ public class VisionModel {
                 self?.currentlyAnalyzedCIImage = nil
                 guard let results = request.results as? [VNRecognizedObjectObservation],
                     let bestObservation = results.max(by: { $0.confidence < $1.confidence }) else {
-                    return
+                        return
                 }
                 
                 var score = 0
@@ -208,36 +208,11 @@ public class VisionModel {
                 }
                 print("------")
                 
-                
-//                if results.count >= 3 && results.filter({ $0.confidence > 0.60 }).count >= 3 {
-//                    print("Greater than 80 is: \(results.filter({ $0.confidence > 0.60 }).count)")
-//                    activate = true
-//                }
-                
-                // Make sure we have at least one item detected.
-                if bestObservation.labels.count > 0 {
-//                    #if os(OSX)
-//                    let threshold: Float = 0.90
-//                    #else
-//                    let threshold: Float = 0.90
-//                    #endif
-//                    if results.count > 1 {
-//                        print("multi results")
-//                    }
-                    if bestObservation.confidence > 0.70 {
-//                        print("=====overall confidence is: \(bestObservation.confidence)=====")
-//                        for label in bestObservation.labels {
-//                            print("Name is: \(label.identifier), confidence is: \(label.confidence), results count is: \(results.count)")
-//                            print("+++++++")
-//                        }
-                    }
-                    
-                    DispatchQueue.main.async { [weak self] in
-                        if activate {
-                            self?.delegate?.fireAlert()
-                        } else {
-                            self?.delegate?.notTouchingDetected()
-                        }
+                DispatchQueue.main.async { [weak self] in
+                    if activate {
+                        self?.delegate?.fireAlert()
+                    } else {
+                        self?.delegate?.notTouchingDetected()
                     }
                 }
             })
