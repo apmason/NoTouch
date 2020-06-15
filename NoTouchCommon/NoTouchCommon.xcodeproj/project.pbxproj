@@ -20,12 +20,19 @@
 		C33E4ED4248D277700B98FE7 /* annot-4789.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */; };
 		C33E4ED9248D419C00B98FE7 /* TouchDetectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33E4ED8248D419C00B98FE7 /* TouchDetectedView.swift */; };
 		C33E4EDB248D46B500B98FE7 /* TouchDetectedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33E4EDA248D46B500B98FE7 /* TouchDetectedModel.swift */; };
+		C34BC3352492F54200F98FF7 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C34BC3332492F52000F98FF7 /* SF-Pro-Display-Bold.otf */; };
+		C34BC3362492F54200F98FF7 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C34BC3342492F52000F98FF7 /* SF-Pro-Display-Medium.otf */; };
+		C34BC3372492F54200F98FF7 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C34BC3312492F51F00F98FF7 /* SF-Pro-Display-Regular.otf */; };
+		C34BC3382492F54200F98FF7 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C34BC3322492F51F00F98FF7 /* SF-Pro-Display-Semibold.otf */; };
+		C34BC33A2492F62200F98FF7 /* NoTouchFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34BC3392492F62200F98FF7 /* NoTouchFont.swift */; };
 		C3523EF124749EDB002108A7 /* DifferenceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3523EF024749EDB002108A7 /* DifferenceDetector.swift */; };
 		C355357B2466108900E991AA /* TouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357A2466108900E991AA /* TouchExtensions.swift */; };
 		C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357C246610AB00E991AA /* TouchRecordExtensions.swift */; };
 		C355357F2466121F00E991AA /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357E2466121F00E991AA /* TouchTests.swift */; };
 		C35B5E492483FFD800A64308 /* newness.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C35B5E482483FFD700A64308 /* newness.mlmodel */; };
 		C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35EA90E246897E8005A6942 /* RecordHolder.swift */; };
+		C3652D79249539C0008E5899 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3652D78249539C0008E5899 /* RoundedCorner.swift */; };
+		C3652D7B2495745F008E5899 /* HourlyDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */; };
 		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
 		C37BE7BD246783E00012A299 /* RecordHolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE7BC246783E00012A299 /* RecordHolderTests.swift */; };
 		C3808E29246D7715008304F3 /* DBManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E28246D7715008304F3 /* DBManagerTests.swift */; };
@@ -60,6 +67,8 @@
 		C3C46EBC247AE7020042E602 /* iOSCameraAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C46EBB247AE7020042E602 /* iOSCameraAuthView.swift */; };
 		C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C46EBD247AE8440042E602 /* iOSLayerView.swift */; };
 		C3C69771246B317A006FCD7C /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C69770246B317A006FCD7C /* ResultsView.swift */; };
+		C3C9017F2496B18B0007AA91 /* SelectedInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */; };
+		C3CD5D0C2496ED7300A884B2 /* GraphConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CD5D0B2496ED7300A884B2 /* GraphConstants.swift */; };
 		C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */; };
 		C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */; };
 		C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */; };
@@ -90,12 +99,19 @@
 		C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "annot-4789.mlmodel"; sourceTree = "<group>"; };
 		C33E4ED8248D419C00B98FE7 /* TouchDetectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDetectedView.swift; sourceTree = "<group>"; };
 		C33E4EDA248D46B500B98FE7 /* TouchDetectedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDetectedModel.swift; sourceTree = "<group>"; };
+		C34BC3312492F51F00F98FF7 /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		C34BC3322492F51F00F98FF7 /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
+		C34BC3332492F52000F98FF7 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		C34BC3342492F52000F98FF7 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		C34BC3392492F62200F98FF7 /* NoTouchFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTouchFont.swift; sourceTree = "<group>"; };
 		C3523EF024749EDB002108A7 /* DifferenceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceDetector.swift; sourceTree = "<group>"; };
 		C355357A2466108900E991AA /* TouchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchExtensions.swift; sourceTree = "<group>"; };
 		C355357C246610AB00E991AA /* TouchRecordExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordExtensions.swift; sourceTree = "<group>"; };
 		C355357E2466121F00E991AA /* TouchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTests.swift; sourceTree = "<group>"; };
 		C35B5E482483FFD700A64308 /* newness.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = newness.mlmodel; sourceTree = "<group>"; };
 		C35EA90E246897E8005A6942 /* RecordHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolder.swift; sourceTree = "<group>"; };
+		C3652D78249539C0008E5899 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyDataExtensions.swift; sourceTree = "<group>"; };
 		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C37BE7BC246783E00012A299 /* RecordHolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolderTests.swift; sourceTree = "<group>"; };
 		C3808E28246D7715008304F3 /* DBManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerTests.swift; sourceTree = "<group>"; };
@@ -133,6 +149,8 @@
 		C3C46EBB247AE7020042E602 /* iOSCameraAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCameraAuthView.swift; sourceTree = "<group>"; };
 		C3C46EBD247AE8440042E602 /* iOSLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSLayerView.swift; sourceTree = "<group>"; };
 		C3C69770246B317A006FCD7C /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedInfoView.swift; sourceTree = "<group>"; };
+		C3CD5D0B2496ED7300A884B2 /* GraphConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphConstants.swift; sourceTree = "<group>"; };
 		C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitRetryManager.swift; sourceTree = "<group>"; };
 		C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLinesView.swift; sourceTree = "<group>"; };
@@ -163,6 +181,7 @@
 			children = (
 				C3C69770246B317A006FCD7C /* ResultsView.swift */,
 				C391EA43245F4B690062A07D /* GraphView.swift */,
+				C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */,
 				C330CE552461980B00FCA49A /* BarsView.swift */,
 				C3B58D3924621EF300DF4D8D /* AxisView.swift */,
 				C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */,
@@ -171,6 +190,7 @@
 				C330CE5324617F0A00FCA49A /* Positioner.swift */,
 				C33079EB246702CA005392A6 /* GraphYLabels.swift */,
 				C3B24E33246716B900E2A737 /* GraphXLabels.swift */,
+				C3CD5D0B2496ED7300A884B2 /* GraphConstants.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -179,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				C33E4ED8248D419C00B98FE7 /* TouchDetectedView.swift */,
+				C3652D78249539C0008E5899 /* RoundedCorner.swift */,
 			);
 			path = Random;
 			sourceTree = "<group>";
@@ -217,6 +238,7 @@
 				C355357A2466108900E991AA /* TouchExtensions.swift */,
 				C355357C246610AB00E991AA /* TouchRecordExtensions.swift */,
 				C3B58D3B2462A93100DF4D8D /* DateExtensions.swift */,
+				C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -300,6 +322,7 @@
 				C3BF2A93244218E6004BDEE4 /* NoTouchError.swift */,
 				C3B0E056245F30E500BC4946 /* DeviceData.swift */,
 				C3523EF024749EDB002108A7 /* DifferenceDetector.swift */,
+				C34BC3392492F62200F98FF7 /* NoTouchFont.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -342,6 +365,10 @@
 		C3F4BE8E2442635F003CBD59 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C34BC3332492F52000F98FF7 /* SF-Pro-Display-Bold.otf */,
+				C34BC3342492F52000F98FF7 /* SF-Pro-Display-Medium.otf */,
+				C34BC3312492F51F00F98FF7 /* SF-Pro-Display-Regular.otf */,
+				C34BC3322492F51F00F98FF7 /* SF-Pro-Display-Semibold.otf */,
 				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
 				C35B5E482483FFD700A64308 /* newness.mlmodel */,
 				C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */,
@@ -452,6 +479,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C34BC3352492F54200F98FF7 /* SF-Pro-Display-Bold.otf in Resources */,
+				C34BC3362492F54200F98FF7 /* SF-Pro-Display-Medium.otf in Resources */,
+				C34BC3372492F54200F98FF7 /* SF-Pro-Display-Regular.otf in Resources */,
+				C34BC3382492F54200F98FF7 /* SF-Pro-Display-Semibold.otf in Resources */,
 				C338C1EB247AD72B00475304 /* Assets.xcassets in Resources */,
 				C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */,
 			);
@@ -486,6 +517,7 @@
 				C330CE562461980B00FCA49A /* BarsView.swift in Sources */,
 				C3B0E04D245E30CC00BC4946 /* TouchRecord.swift in Sources */,
 				C3BF2A902442163B004BDEE4 /* VideoFeed.swift in Sources */,
+				C34BC33A2492F62200F98FF7 /* NoTouchFont.swift in Sources */,
 				C3C46EBC247AE7020042E602 /* iOSCameraAuthView.swift in Sources */,
 				C3BF2AA224421A1D004BDEE4 /* Orienter.swift in Sources */,
 				C35B5E492483FFD800A64308 /* newness.mlmodel in Sources */,
@@ -494,6 +526,7 @@
 				C3B0E055245F28CF00BC4946 /* CloudKitDatabase.swift in Sources */,
 				C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */,
 				C355357B2466108900E991AA /* TouchExtensions.swift in Sources */,
+				C3652D79249539C0008E5899 /* RoundedCorner.swift in Sources */,
 				C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */,
 				C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */,
 				C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */,
@@ -501,9 +534,11 @@
 				C3BF2A9B244219AE004BDEE4 /* ImageStorer.swift in Sources */,
 				C3BF2AA0244219AE004BDEE4 /* VisionModel.swift in Sources */,
 				C3BF2A94244218E6004BDEE4 /* NoTouchError.swift in Sources */,
+				C3652D7B2495745F008E5899 /* HourlyDataExtensions.swift in Sources */,
 				C33E4ED4248D277700B98FE7 /* annot-4789.mlmodel in Sources */,
 				C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */,
 				C3BF2A9E244219AE004BDEE4 /* AudioAlert.swift in Sources */,
+				C3CD5D0C2496ED7300A884B2 /* GraphConstants.swift in Sources */,
 				C3B58D3A24621EF300DF4D8D /* AxisView.swift in Sources */,
 				C3B0E051245E340D00BC4946 /* DBManager.swift in Sources */,
 				C391EA44245F4B690062A07D /* GraphView.swift in Sources */,
@@ -512,6 +547,7 @@
 				C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */,
 				C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */,
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
+				C3C9017F2496B18B0007AA91 /* SelectedInfoView.swift in Sources */,
 				C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */,
 				C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */,
 				C338C1DF247A95EF00475304 /* OptionButtonStack.swift in Sources */,

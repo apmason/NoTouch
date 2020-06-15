@@ -21,10 +21,10 @@ public struct Positioner {
     
     let lineWidth: CGFloat
     
-    init(topYOffset: CGFloat = 20,
+    init(topYOffset: CGFloat = 10,
          bottomYOffset: CGFloat = 30,
          leadingXOffset: CGFloat = 40,
-         lineWidth: CGFloat = 0.25) {
+         lineWidth: CGFloat = 0.2) {
         self.topYOffset = topYOffset
         self.bottomYOffset = bottomYOffset
         self.leadingXOffset = leadingXOffset

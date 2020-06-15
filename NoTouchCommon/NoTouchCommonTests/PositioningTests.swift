@@ -13,7 +13,7 @@ class PositioningTests: XCTestCase {
 
     func testGraphYLabeling() throws {
         var recordHolder = RecordHolder()
-        recordHolder.add(TouchRecord(deviceName: "123", timestamp: Date(), version: "123"))
+        recordHolder.add(TouchRecord(deviceName: "123", timestamp: Date(), version: "123", origin: .local))
         
         let topAxis = recordHolder.axisValue(for: .top)
         XCTAssert(topAxis == 3)
@@ -57,7 +57,7 @@ class PositioningTests: XCTestCase {
     func testBarViewSizing() {
         // Allocate with dummy data
         let spacing: CGFloat = 10
-        let barsView = BarsView(spacing: spacing)
+        let barsView = BarsView(selectedBar: .constant(nil), spacing: spacing)
         let rectangleWidth = barsView.rectangleWidth(for: 400)
         print(rectangleWidth)
         XCTAssert(rectangleWidth == 6.666666666666667)

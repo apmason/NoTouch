@@ -198,7 +198,7 @@ public class CloudKitDatabase: Database {
     
     public func fetchLatestRecords(completionHandler: @escaping ((Result<[TouchRecord], DatabaseError>) -> Void)) {
         // get latest record date.
-        guard let latestDate = delegate?.latestTouchRecordDate() else {
+        guard let latestDate = delegate?.newestDBRecordDate() else {
             completionHandler(.failure(DatabaseError.fatalError))
             return
         }

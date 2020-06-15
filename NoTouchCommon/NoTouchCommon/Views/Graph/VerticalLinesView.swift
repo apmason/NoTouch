@@ -36,7 +36,7 @@ struct VerticalLinesView: View {
                 }
             }
             .stroke(self.colorScheme == .light ? Color.gray : Color.white,
-                    lineWidth: self.positioner.lineWidth)
+                    style: StrokeStyle(lineWidth: self.positioner.lineWidth, dash: [8]))
         }
     }
 }
