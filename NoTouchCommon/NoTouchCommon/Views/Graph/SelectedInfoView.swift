@@ -33,10 +33,6 @@ struct SelectedInfoView: View {
                 .fontWeight(.regular)
                 .foregroundColor(Color.init(red: 123/255, green: 123/255, blue: 123/255))
         }
-        .frame(height: 65, alignment: .leading)
-        .padding(10)
-        .background(backgroundColor)
-        .cornerRadius(12)
     }
     
     private var touchCount: Int {
@@ -45,14 +41,6 @@ struct SelectedInfoView: View {
         }
         
         return selectedBar.hourlyData.touches
-    }
-    
-    private var backgroundColor: Color {
-        if selectedBar == nil {
-            return Color.clear
-        } else {
-            return Color.init(red: 241/255, green: 242/255, blue: 246/255)
-        }
     }
     
     private var dateText: String {

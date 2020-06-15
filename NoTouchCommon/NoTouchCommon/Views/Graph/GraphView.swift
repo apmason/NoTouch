@@ -15,6 +15,18 @@ struct SelectedBar {
     let hourlyData: HourlyData
 }
 
+extension View {
+    @ViewBuilder
+    func `if`<Content: View>(_ condition: Bool, content: (Self) -> Content) -> some View {
+        if condition {
+            content(self)
+        }
+        else {
+            self
+        }
+    }
+}
+
 public struct GraphView: View {
     
     private let positioner: Positioner
@@ -30,11 +42,30 @@ public struct GraphView: View {
     /// The spacing of the info pointer that extends beyond the graph view to the info view
     private let infoSpacing: CGFloat = 20
     
+    private var backgroundColor: Color {
+        if selectedBar == nil {
+            return Color.clear
+        } else {
+            return GraphConstants.pickerColor
+        }
+    }
+    
+    @State var rect: CGRect = .zero
+    
     @ViewBuilder
     public var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            SelectedInfoView(selectedBar: self.$selectedBar)
-                .padding(.leading, self.positioner.leadingXOffset)
+        VStack(alignment: .leading, spacing: 12) {
+            GeometryReader { geometry in
+                SelectedInfoView(selectedBar: self.$selectedBar)
+                    .padding(10)
+                    .background(self.backgroundColor)
+                    .cornerRadius(12)
+                    .padding(.leading, (self.selectedBar != nil ? 0 : self.positioner.leadingXOffset))
+                    .if(self.selectedBar != nil) { view in
+                        view.position(x: self.selectedBar != nil ? self.selectedPointerXPosition() : 0, y: geometry.size.height / 2)
+                }
+                
+            }.frame(height: 90)
             
             // Graph portion
             GeometryReader { geometry in
@@ -61,7 +92,7 @@ public struct GraphView: View {
                     
                     if self.selectedBar != nil {
                         SelectedPointerView()
-                            .frame(width: 5, height: self.selectedPointerHeight(barViewHeight: self.barViewHeight(totalHeight: geometry.size.height)))
+                            .frame(width: 3, height: self.selectedPointerHeight(barViewHeight: self.barViewHeight(totalHeight: geometry.size.height)))
                             .position(x: self.selectedPointerXPosition(), y: self.selectedPointerYPosition(totalViewHeight: geometry.size.height))
                     }
                     
@@ -106,7 +137,7 @@ public struct GraphView: View {
 struct SelectedPointerView: View {
     public var body: some View {
         Rectangle()
-            .fill(Color.yellow)
+            .fill(GraphConstants.pickerColor)
     }
 }
 
@@ -120,7 +151,6 @@ struct GraphView_Previews: PreviewProvider {
         return userSettings
     }
     
-    // FIXME: fill with dummy data.
     static var previews: some View {
         GraphView(leadingXOffset: 20)
             .environmentObject(userSettings)

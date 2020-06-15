@@ -52,9 +52,9 @@ struct BarsView: View {
                             )
                             
                             Rectangle() // The visible colored in bar representing the data.
-                                .fill(Color.orange)
+                                .fill(Color.red)
                                 .cornerRadius(self.barCornerRadius)
-                                .overlay(CornerCoverer(radius: self.barCornerRadius).fill(Color.orange))
+                                .overlay(CornerCoverer(radius: self.barCornerRadius).fill(Color.red))
                                 .frame(width: self.rectangleWidth(for: geometry.size.width),
                                        height: hour.touches.ratio(withTopValue: self.userSettings.recordHolder.hourlyData.topAxisValue) * geometry.size.height)
                                 .animation(.ripple())

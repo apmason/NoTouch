@@ -68,6 +68,7 @@
 		C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C46EBD247AE8440042E602 /* iOSLayerView.swift */; };
 		C3C69771246B317A006FCD7C /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C69770246B317A006FCD7C /* ResultsView.swift */; };
 		C3C9017F2496B18B0007AA91 /* SelectedInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */; };
+		C3CD5D0C2496ED7300A884B2 /* GraphConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CD5D0B2496ED7300A884B2 /* GraphConstants.swift */; };
 		C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */; };
 		C3D1F0EE2470495700F7EA1A /* CloudKitRetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */; };
 		C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */; };
@@ -149,6 +150,7 @@
 		C3C46EBD247AE8440042E602 /* iOSLayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSLayerView.swift; sourceTree = "<group>"; };
 		C3C69770246B317A006FCD7C /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedInfoView.swift; sourceTree = "<group>"; };
+		C3CD5D0B2496ED7300A884B2 /* GraphConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphConstants.swift; sourceTree = "<group>"; };
 		C3D1F0EB247038B000F7EA1A /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		C3D1F0ED2470495700F7EA1A /* CloudKitRetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitRetryManager.swift; sourceTree = "<group>"; };
 		C3D38228245F5D6E00F2DB23 /* VerticalLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLinesView.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				C330CE5324617F0A00FCA49A /* Positioner.swift */,
 				C33079EB246702CA005392A6 /* GraphYLabels.swift */,
 				C3B24E33246716B900E2A737 /* GraphXLabels.swift */,
+				C3CD5D0B2496ED7300A884B2 /* GraphConstants.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				C33E4ED4248D277700B98FE7 /* annot-4789.mlmodel in Sources */,
 				C3D38229245F5D6E00F2DB23 /* VerticalLinesView.swift in Sources */,
 				C3BF2A9E244219AE004BDEE4 /* AudioAlert.swift in Sources */,
+				C3CD5D0C2496ED7300A884B2 /* GraphConstants.swift in Sources */,
 				C3B58D3A24621EF300DF4D8D /* AxisView.swift in Sources */,
 				C3B0E051245E340D00BC4946 /* DBManager.swift in Sources */,
 				C391EA44245F4B690062A07D /* GraphView.swift in Sources */,
