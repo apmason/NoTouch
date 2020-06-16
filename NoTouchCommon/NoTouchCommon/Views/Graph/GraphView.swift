@@ -72,7 +72,7 @@ public struct GraphView: View {
     private let barSpacing: CGFloat = 5
     
     /// The spacing of the info pointer that extends beyond the graph view to the info view
-    private let infoSpacing: CGFloat = 30
+    private let infoSpacing: CGFloat = 25
     
     private var backgroundColor: Color {
         if selectedBar == nil {
@@ -137,9 +137,12 @@ public struct GraphView: View {
                         }
                         
                         if self.selectedBar != nil {
-                            SelectedPointerView()
-                                .frame(width: 3, height: self.selectedPointerHeight(barViewHeight: self.barViewHeight(totalHeight: geometry.size.height)))
-                                .position(x: self.selectedPointerXPosition(), y: self.selectedPointerYPosition(totalViewHeight: geometry.size.height))
+                            SelectedPointerView(selectedBar: self.$selectedBar,
+                                                     barViewHeight: self.barViewHeight(totalHeight: geometry.size.height),
+                                                     infoSpacing: self.infoSpacing,
+                                                     topYOffset: self.positioner.topYOffset)
+                                .position(x: self.selectedPointerXPosition(),
+                                          y: self.selectedPointerYPosition(totalViewHeight: geometry.size.height))
                         }
                         
                         BarsView(selectedBar: self.$selectedBar, spacing: self.barSpacing)
@@ -161,18 +164,15 @@ public struct GraphView: View {
         return self.positioner.leadingXOffset + spacingOffset + barOffset
     }
     
-    /// Return the height of the selected bar.
-    private func selectedPointerHeight(barViewHeight: CGFloat) -> CGFloat {
-        let totalHeight = infoSpacing + barViewHeight
-        let selectorHeight = totalHeight - selectedBar!.barHeight + self.positioner.topYOffset
-        return selectorHeight
-    }
-    
     /// Return the selected bar Y position
     private func selectedPointerYPosition(totalViewHeight: CGFloat) -> CGFloat {
-        let selectorHeight = selectedPointerHeight(barViewHeight: self.barViewHeight(totalHeight: totalViewHeight))
+        let selectorHeight = SelectedPointerView.selectedPointerHeight(barViewHeight: barViewHeight(totalHeight: totalViewHeight),
+                                                                       selectedBarHeight: self.selectedBar!.barHeight,
+                                                                       infoSpacing: self.infoSpacing,
+                                                                       topYOffset: self.positioner.topYOffset)
+        
         let bottomSectionHeight = (selectorHeight / 2) + self.positioner.bottomYOffset + self.selectedBar!.barHeight
-        return totalViewHeight - bottomSectionHeight + (self.infoSpacing / 2)
+        return totalViewHeight - bottomSectionHeight
     }
     
     /// Return the height of the total bar view (the view that contains all the bars).
@@ -182,9 +182,22 @@ public struct GraphView: View {
 }
 
 struct SelectedPointerView: View {
+    @Binding var selectedBar: SelectedBar?
+    let barViewHeight: CGFloat
+    let infoSpacing: CGFloat
+    let topYOffset: CGFloat
+    
     public var body: some View {
         Rectangle()
             .fill(GraphConstants.pickerColor)
+            .frame(width: 3,
+                   height: SelectedPointerView.selectedPointerHeight(barViewHeight: barViewHeight, selectedBarHeight: selectedBar?.barHeight ?? 0, infoSpacing: infoSpacing, topYOffset: topYOffset))
+    }
+    
+    static func selectedPointerHeight(barViewHeight: CGFloat, selectedBarHeight: CGFloat, infoSpacing: CGFloat, topYOffset: CGFloat) -> CGFloat {
+        let totalHeight = infoSpacing + barViewHeight
+        let selectorHeight = totalHeight - selectedBarHeight + topYOffset
+        return selectorHeight
     }
 }
 

@@ -29,7 +29,6 @@
 		C355357B2466108900E991AA /* TouchExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357A2466108900E991AA /* TouchExtensions.swift */; };
 		C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357C246610AB00E991AA /* TouchRecordExtensions.swift */; };
 		C355357F2466121F00E991AA /* TouchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C355357E2466121F00E991AA /* TouchTests.swift */; };
-		C35B5E492483FFD800A64308 /* newness.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C35B5E482483FFD700A64308 /* newness.mlmodel */; };
 		C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35EA90E246897E8005A6942 /* RecordHolder.swift */; };
 		C3652D79249539C0008E5899 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3652D78249539C0008E5899 /* RoundedCorner.swift */; };
 		C3652D7B2495745F008E5899 /* HourlyDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */; };
@@ -108,7 +107,6 @@
 		C355357A2466108900E991AA /* TouchExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchExtensions.swift; sourceTree = "<group>"; };
 		C355357C246610AB00E991AA /* TouchRecordExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordExtensions.swift; sourceTree = "<group>"; };
 		C355357E2466121F00E991AA /* TouchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchTests.swift; sourceTree = "<group>"; };
-		C35B5E482483FFD700A64308 /* newness.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = newness.mlmodel; sourceTree = "<group>"; };
 		C35EA90E246897E8005A6942 /* RecordHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolder.swift; sourceTree = "<group>"; };
 		C3652D78249539C0008E5899 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyDataExtensions.swift; sourceTree = "<group>"; };
@@ -370,7 +368,6 @@
 				C34BC3312492F51F00F98FF7 /* SF-Pro-Display-Regular.otf */,
 				C34BC3322492F51F00F98FF7 /* SF-Pro-Display-Semibold.otf */,
 				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
-				C35B5E482483FFD700A64308 /* newness.mlmodel */,
 				C33E4ED3248D277700B98FE7 /* annot-4789.mlmodel */,
 				C338C1EA247AD72B00475304 /* Assets.xcassets */,
 			);
@@ -520,7 +517,6 @@
 				C34BC33A2492F62200F98FF7 /* NoTouchFont.swift in Sources */,
 				C3C46EBC247AE7020042E602 /* iOSCameraAuthView.swift in Sources */,
 				C3BF2AA224421A1D004BDEE4 /* Orienter.swift in Sources */,
-				C35B5E492483FFD800A64308 /* newness.mlmodel in Sources */,
 				C3523EF124749EDB002108A7 /* DifferenceDetector.swift in Sources */,
 				C338C1D9247A8EF000475304 /* ContentViewModel.swift in Sources */,
 				C3B0E055245F28CF00BC4946 /* CloudKitDatabase.swift in Sources */,

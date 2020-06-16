@@ -162,12 +162,11 @@ public class VisionModel {
             let observationRequest = VNCoreMLRequest(model: yoloModel, completionHandler: { [weak self] (request, error) in
                 //print("detect: \(Date().timeIntervalSince1970)")
                 self?.currentlyAnalyzedCIImage = nil
-                guard let results = request.results as? [VNRecognizedObjectObservation],
-                    let bestObservation = results.max(by: { $0.confidence < $1.confidence }) else {
+                guard let results = request.results as? [VNRecognizedObjectObservation] else {
                         return
                 }
                 
-                var score = 0
+                var score: Double = 0
                 print("+++++")
                 // loop through all results
                 for result in results {
@@ -191,22 +190,30 @@ public class VisionModel {
                             }
                         }
                     }
+                    else if result.confidence > 0.6 {
+                        for label in result.labels where label.identifier == "Finger" {
+                            if label.confidence > 0.9 {
+                                print("0.6 finger")
+                                score += 1
+                            }
+                        }
+                    }
                     else if result.confidence > 0.3 {
                         for label in result.labels where label.identifier == "Finger" {
                             if label.confidence > 0.9 {
                                 print("Small finger")
-                                score += 1
+                                score += 0.5
                             }
                         }
                     }
                 }
                 
                 var activate = false
-                if score > 3 {
+                if score >= 3 {
                     activate = true
                     print("activating")
                 }
-                print("------")
+                print("------Score was \(score)-----")
                 
                 DispatchQueue.main.async { [weak self] in
                     if activate {
