@@ -6,13 +6,45 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
-struct SelectedBar {
+class SelectedBar {
     let barIndex: Int
     let barWidth: CGFloat
     let barHeight: CGFloat
-    let hourlyData: HourlyData
+    @Published var hourlyData: HourlyData
+    let userSettings: UserSettings
+    
+    private var cancellableObservation: AnyCancellable?
+        
+    init(barIndex: Int, barWidth: CGFloat, barHeight: CGFloat, hourlyData: HourlyData, userSettings: UserSettings) {
+        self.barIndex = barIndex
+        self.barWidth = barWidth
+        self.barHeight = barHeight
+        self.hourlyData = hourlyData
+        self.userSettings = userSettings
+        
+        setupObserver()
+    }
+    
+    func setupObserver() {
+        self.cancellableObservation = userSettings.$recordHolder.sink(receiveValue: { [weak self] recordHolder in
+            DispatchQueue.main.async {
+                guard let self = self else {
+                    return
+                }
+                
+                // Get day's current hour
+                let currentHour = Calendar.current.component(.hour, from: Date())
+                
+                // Latest date is selected, update data.
+                if self.barIndex == currentHour {
+                    self.hourlyData = self.userSettings.recordHolder.hourlyData[self.barIndex]
+                }
+            }
+        })
+    }
 }
 
 extension View {
