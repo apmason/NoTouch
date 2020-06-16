@@ -72,7 +72,7 @@ public struct GraphView: View {
     private let barSpacing: CGFloat = 5
     
     /// The spacing of the info pointer that extends beyond the graph view to the info view
-    private let infoSpacing: CGFloat = 20
+    private let infoSpacing: CGFloat = 30
     
     private var backgroundColor: Color {
         if selectedBar == nil {
@@ -86,53 +86,68 @@ public struct GraphView: View {
     
     @ViewBuilder
     public var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            GeometryReader { geometry in
-                SelectedInfoView(selectedBar: self.$selectedBar)
-                    .padding(10)
-                    .background(self.backgroundColor)
-                    .cornerRadius(12)
-                    .padding(.leading, (self.selectedBar != nil ? 0 : self.positioner.leadingXOffset))
-                    .if(self.selectedBar != nil) { view in
-                        view.position(x: self.selectedBar != nil ? self.selectedPointerXPosition() : 0, y: geometry.size.height / 2)
-                }
-                
-            }.frame(height: 90)
+        ZStack {
+            Rectangle().fill(Color.blue.opacity(0.000000001)) // This view handles taps on the tap portion of the screen and dismisses the selected bar view by setting it to nil.
+                .onTapGesture {
+                    self.selectedBar = nil
+            }
             
-            // Graph portion
-            GeometryReader { geometry in
-                ZStack {
-                    AxisView(lineWidth: self.positioner.lineWidth,
-                             leadingXOffset: self.positioner.leadingXOffset,
-                             bottomYOffset: self.positioner.bottomYOffset)
-                    
-                    VerticalLinesView(numberOfLines: 3,
-                                      bottomOffset: self.positioner.bottomYOffset + self.positioner.lineWidth * 1.5,
-                                      xOffset: self.positioner.leadingXOffset,
-                                      positioner: self.positioner)
-                    
-                    HorizontalLinesView(xOffset: self.positioner.leadingXOffset + (self.positioner.lineWidth / 2),
-                                        offsetFromBottom: self.positioner.bottomYOffset,
-                                        topOffset: self.positioner.topYOffset,
-                                        positioner: self.positioner)
-                    
-                    // Y Axis Labels
-                    GraphYLabels(positioner: self.positioner)
-                    
-                    // X Axis Labels
-                    GraphXLabels(positioner: self.positioner)
-                    
-                    if self.selectedBar != nil {
-                        SelectedPointerView()
-                            .frame(width: 3, height: self.selectedPointerHeight(barViewHeight: self.barViewHeight(totalHeight: geometry.size.height)))
-                            .position(x: self.selectedPointerXPosition(), y: self.selectedPointerYPosition(totalViewHeight: geometry.size.height))
+            VStack(alignment: .leading, spacing: 12) {
+                GeometryReader { geometry in
+                    SelectedInfoView(selectedBar: self.$selectedBar)
+                        .padding(10)
+                        .background(self.backgroundColor)
+                        .cornerRadius(12)
+                        .padding(.leading, (self.selectedBar != nil ? 0 : self.positioner.leadingXOffset))
+                        .if(self.selectedBar != nil) { view in
+                            view.position(x: self.selectedBar != nil ? self.selectedPointerXPosition() : 0, y: geometry.size.height / 2)
                     }
-                    
-                    BarsView(selectedBar: self.$selectedBar, spacing: self.barSpacing)
-                        .frame(width: geometry.size.width - self.positioner.leadingXOffset,
-                               height: self.barViewHeight(totalHeight: geometry.size.height))
-                        .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
-                                  y: (geometry.size.height - self.positioner.topYOffset - self.positioner.bottomYOffset) / 2 + self.positioner.topYOffset - self.positioner.lineWidth)
+                    .onTapGesture {
+                        self.selectedBar = nil
+                    }
+                }.frame(height: 90)
+                
+                // Graph portion
+                GeometryReader { geometry in
+                    ZStack {
+                        AxisView(lineWidth: self.positioner.lineWidth,
+                                 leadingXOffset: self.positioner.leadingXOffset,
+                                 bottomYOffset: self.positioner.bottomYOffset)
+                        
+                        VerticalLinesView(numberOfLines: 3,
+                                          bottomOffset: self.positioner.bottomYOffset + self.positioner.lineWidth * 1.5,
+                                          xOffset: self.positioner.leadingXOffset,
+                                          positioner: self.positioner)
+                        
+                        HorizontalLinesView(xOffset: self.positioner.leadingXOffset + (self.positioner.lineWidth / 2),
+                                            offsetFromBottom: self.positioner.bottomYOffset,
+                                            topOffset: self.positioner.topYOffset,
+                                            positioner: self.positioner)
+                        
+                        // Y Axis Labels
+                        GraphYLabels(positioner: self.positioner)
+                        .onTapGesture {
+                            self.selectedBar = nil
+                        }
+                        
+                        // X Axis Labels
+                        GraphXLabels(positioner: self.positioner)
+                        .onTapGesture {
+                            self.selectedBar = nil
+                        }
+                        
+                        if self.selectedBar != nil {
+                            SelectedPointerView()
+                                .frame(width: 3, height: self.selectedPointerHeight(barViewHeight: self.barViewHeight(totalHeight: geometry.size.height)))
+                                .position(x: self.selectedPointerXPosition(), y: self.selectedPointerYPosition(totalViewHeight: geometry.size.height))
+                        }
+                        
+                        BarsView(selectedBar: self.$selectedBar, spacing: self.barSpacing)
+                            .frame(width: geometry.size.width - self.positioner.leadingXOffset,
+                                   height: self.barViewHeight(totalHeight: geometry.size.height))
+                            .position(x: self.positioner.leadingXOffset + ((geometry.size.width - self.positioner.leadingXOffset) / 2),
+                                      y: (geometry.size.height - self.positioner.topYOffset - self.positioner.bottomYOffset) / 2 + self.positioner.topYOffset - self.positioner.lineWidth)
+                    }
                 }
             }
         }
@@ -157,7 +172,7 @@ public struct GraphView: View {
     private func selectedPointerYPosition(totalViewHeight: CGFloat) -> CGFloat {
         let selectorHeight = selectedPointerHeight(barViewHeight: self.barViewHeight(totalHeight: totalViewHeight))
         let bottomSectionHeight = (selectorHeight / 2) + self.positioner.bottomYOffset + self.selectedBar!.barHeight
-        return totalViewHeight - bottomSectionHeight //- self.positioner.topYOffset
+        return totalViewHeight - bottomSectionHeight + (self.infoSpacing / 2)
     }
     
     /// Return the height of the total bar view (the view that contains all the bars).

@@ -84,19 +84,11 @@ struct BarsView: View {
             dataPoint = hour
         }
         else {
-            // Search on either side of this data point (accounting for zero indexing and array count). If no suitable value is found, increment search value until the hit limit is hit.
-            for searchIndex in 1...(userSettings.recordHolder.hourlyData.count / 6) {
-                let upIndex = min(hour.index + searchIndex, userSettings.recordHolder.hourlyData.count - 1)
-                if userSettings.recordHolder.hourlyData[upIndex].touches > 0 {
-                    dataPoint = userSettings.recordHolder.hourlyData[upIndex]
-                    break
-                }
-                
-                let downIndex = max(0, hour.index - searchIndex)
-                if userSettings.recordHolder.hourlyData[downIndex].touches > 0 {
-                    dataPoint = userSettings.recordHolder.hourlyData[downIndex]
-                    break
-                }
+            dataPoint = self.closestItem(to: hour)
+            
+            // If there isn't a bar to tap, cancel out.
+            if dataPoint == nil {
+                self.selectedBar = nil
             }
         }
         
@@ -111,6 +103,23 @@ struct BarsView: View {
                                        barHeight: unwrappedDataPoint.touches.ratio(withTopValue: self.userSettings.recordHolder.hourlyData.topAxisValue) * geometryHeight,
                                        hourlyData: unwrappedDataPoint,
                                        userSettings: self.userSettings)
+    }
+    
+    func closestItem(to tappedHour: HourlyData) -> HourlyData? {
+        // Search on either side of this data point (accounting for zero indexing and array count). If no suitable value is found, increment search value until the hit limit is hit.
+        for searchIndex in 1...(userSettings.recordHolder.hourlyData.count / 6) {
+            let upIndex = min(tappedHour.index + searchIndex, userSettings.recordHolder.hourlyData.count - 1)
+            if userSettings.recordHolder.hourlyData[upIndex].touches > 0 {
+                return userSettings.recordHolder.hourlyData[upIndex]
+            }
+            
+            let downIndex = max(0, tappedHour.index - searchIndex)
+            if userSettings.recordHolder.hourlyData[downIndex].touches > 0 {
+                return userSettings.recordHolder.hourlyData[downIndex]
+            }
+        }
+        
+        return nil
     }
 }
 

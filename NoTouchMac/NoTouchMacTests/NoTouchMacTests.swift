@@ -6,9 +6,9 @@
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
-import XCTest
-@testable import NoTouchMac
-
-class NoTouchMacTests: XCTestCase {
-
-}
+//import XCTest
+//@testable import NoTouchMac
+//
+//class NoTouchMacTests: XCTestCase {
+//
+//}
