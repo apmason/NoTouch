@@ -94,7 +94,28 @@ public class VisionModel {
                 let boundingBox = results.first?.boundingBox else {
                     // If a face can't be found don't analyze. TODO: Tell the user if a face is found
                     print("no face") 
-                    self.currentlyAnalyzedCIImage = nil
+    
+                    // If using the front facing camera this will always be in portrait mode.
+                    let touchRequest = VNImageRequestHandler(ciImage: ciImage,
+                                                             orientation: .up) // This is the format of the camera itself. A back facing camera on iOS is mirrored, front facing is not. In portrait mode the image is rotated to the left (for CGImage, not sure if this is true when in other orientations).
+                    
+                    
+                    self.visionQueue.async { [weak self] in
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        do {
+                            guard let touchingRequest = self.touchingRequest else {
+                                return
+                            }
+                            
+                            try touchRequest.perform([touchingRequest])
+                        } catch {
+                            print("Error: Vision request failed with error \"\(error)\"")
+                        }
+                    }
+                    
                     return
             }
             
