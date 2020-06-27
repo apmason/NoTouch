@@ -141,13 +141,13 @@ public class VisionModel {
             }
             
             // Don't need to analyze the images currently.
-            #if os(OSX)
-            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
-            ImageStorer.storeNewImage(image: image)
-            #elseif os(iOS)
-            let image = UIImage(cgImage: unwrappedCGImage)
-            ImageStorer.storeNewImage(image: image)
-            #endif
+//            #if os(OSX)
+//            let image = NSImage(cgImage: unwrappedCGImage, size: NSSize(width: unwrappedCGImage.width, height: unwrappedCGImage.height))
+//            ImageStorer.storeNewImage(image: image)
+//            #elseif os(iOS)
+//            let image = UIImage(cgImage: unwrappedCGImage)
+//            ImageStorer.storeNewImage(image: image)
+//            #endif
             
             #if os(iOS)
             // If using the front facing camera this will always be in portrait mode.
