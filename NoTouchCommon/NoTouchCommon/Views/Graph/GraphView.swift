@@ -12,16 +12,14 @@ import SwiftUI
 class SelectedBar {
     let barIndex: Int
     let barWidth: CGFloat
-    let barHeight: CGFloat
     @Published var hourlyData: HourlyData
     let userSettings: UserSettings
     
     private var cancellableObservation: AnyCancellable?
         
-    init(barIndex: Int, barWidth: CGFloat, barHeight: CGFloat, hourlyData: HourlyData, userSettings: UserSettings) {
+    init(barIndex: Int, barWidth: CGFloat, hourlyData: HourlyData, userSettings: UserSettings) {
         self.barIndex = barIndex
         self.barWidth = barWidth
-        self.barHeight = barHeight
         self.hourlyData = hourlyData
         self.userSettings = userSettings
         
@@ -166,13 +164,10 @@ public struct GraphView: View {
     
     /// Return the selected bar Y position
     private func selectedPointerYPosition(totalViewHeight: CGFloat) -> CGFloat {
-        let selectorHeight = SelectedPointerView.selectedPointerHeight(barViewHeight: barViewHeight(totalHeight: totalViewHeight),
-                                                                       selectedBarHeight: self.selectedBar!.barHeight,
-                                                                       infoSpacing: self.infoSpacing,
-                                                                       topYOffset: self.positioner.topYOffset)
+        let selectorHeight = SelectedPointerView.selectedPointerHeight(barViewHeight: barViewHeight(totalHeight: totalViewHeight), infoSpacing: self.infoSpacing)
         
-        let bottomSectionHeight = (selectorHeight / 2) + self.positioner.bottomYOffset + self.selectedBar!.barHeight
-        return totalViewHeight - bottomSectionHeight
+        let bottomSectionHeight = (selectorHeight / 2) + self.positioner.bottomYOffset
+        return totalViewHeight - bottomSectionHeight - self.positioner.lineWidth
     }
     
     /// Return the height of the total bar view (the view that contains all the bars).
@@ -191,13 +186,12 @@ struct SelectedPointerView: View {
         Rectangle()
             .fill(GraphConstants.pickerColor)
             .frame(width: 3,
-                   height: SelectedPointerView.selectedPointerHeight(barViewHeight: barViewHeight, selectedBarHeight: selectedBar?.barHeight ?? 0, infoSpacing: infoSpacing, topYOffset: topYOffset))
+                   height: SelectedPointerView.selectedPointerHeight(barViewHeight: barViewHeight,
+                                                                     infoSpacing: infoSpacing))
     }
     
-    static func selectedPointerHeight(barViewHeight: CGFloat, selectedBarHeight: CGFloat, infoSpacing: CGFloat, topYOffset: CGFloat) -> CGFloat {
-        let totalHeight = infoSpacing + barViewHeight
-        let selectorHeight = totalHeight - selectedBarHeight + topYOffset
-        return selectorHeight
+    static func selectedPointerHeight(barViewHeight: CGFloat, infoSpacing: CGFloat) -> CGFloat {
+        return infoSpacing + barViewHeight
     }
 }
 

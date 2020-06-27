@@ -100,7 +100,6 @@ struct BarsView: View {
         
         self.selectedBar = SelectedBar(barIndex: unwrappedDataPoint.index,
                                        barWidth: self.rectangleWidth(for: geometryWidth),
-                                       barHeight: unwrappedDataPoint.touches.ratio(withTopValue: self.userSettings.recordHolder.hourlyData.topAxisValue) * geometryHeight,
                                        hourlyData: unwrappedDataPoint,
                                        userSettings: self.userSettings)
     }
