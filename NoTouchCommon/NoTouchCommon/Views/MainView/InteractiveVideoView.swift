@@ -22,15 +22,15 @@ struct InteractiveVideoView: View {
         ZStack(alignment: .top) {
             if !userSettings.hideCameraFeed && !userSettings.pauseDetection {
                 Text("Loading Video...")
-                    .fontWeight(.bold)
+                    .font(Font.defaultFont(size: 18))
                     .padding(8)
             } else if userSettings.pauseDetection {
                 Text("Detection Paused")
-                    .fontWeight(.bold)
+                    .font(Font.defaultFont(size: 18))
                     .padding(8)
             } else if userSettings.hideCameraFeed {
                 Text("Camera Hidden")
-                    .fontWeight(.bold)
+                    .font(Font.defaultFont(size: 18))
                     .padding(8)
             }
             
