@@ -33,6 +33,7 @@
 		C3652D7B2495745F008E5899 /* HourlyDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */; };
 		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
 		C37BE7BD246783E00012A299 /* RecordHolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE7BC246783E00012A299 /* RecordHolderTests.swift */; };
+		C37C211124BA721A00E444CF /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C37C211024BA721200E444CF /* Poppins-Regular.ttf */; };
 		C3808E29246D7715008304F3 /* DBManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E28246D7715008304F3 /* DBManagerTests.swift */; };
 		C3808E2B246D7C58008304F3 /* AlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */; };
 		C384651824BA279C009D7F40 /* ohyeah.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C384651724BA279C009D7F40 /* ohyeah.mlmodel */; };
@@ -111,6 +112,7 @@
 		C3652D7A2495745F008E5899 /* HourlyDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyDataExtensions.swift; sourceTree = "<group>"; };
 		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C37BE7BC246783E00012A299 /* RecordHolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolderTests.swift; sourceTree = "<group>"; };
+		C37C211024BA721200E444CF /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		C3808E28246D7715008304F3 /* DBManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerTests.swift; sourceTree = "<group>"; };
 		C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModelTests.swift; sourceTree = "<group>"; };
 		C384651724BA279C009D7F40 /* ohyeah.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ohyeah.mlmodel; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				C34BC3342492F52000F98FF7 /* SF-Pro-Display-Medium.otf */,
 				C34BC3312492F51F00F98FF7 /* SF-Pro-Display-Regular.otf */,
 				C34BC3322492F51F00F98FF7 /* SF-Pro-Display-Semibold.otf */,
+				C37C211024BA721200E444CF /* Poppins-Regular.ttf */,
 				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
 				C384651724BA279C009D7F40 /* ohyeah.mlmodel */,
 				C338C1EA247AD72B00475304 /* Assets.xcassets */,
@@ -478,6 +481,7 @@
 			files = (
 				C34BC3352492F54200F98FF7 /* SF-Pro-Display-Bold.otf in Resources */,
 				C34BC3362492F54200F98FF7 /* SF-Pro-Display-Medium.otf in Resources */,
+				C37C211124BA721A00E444CF /* Poppins-Regular.ttf in Resources */,
 				C34BC3372492F54200F98FF7 /* SF-Pro-Display-Regular.otf in Resources */,
 				C34BC3382492F54200F98FF7 /* SF-Pro-Display-Semibold.otf in Resources */,
 				C338C1EB247AD72B00475304 /* Assets.xcassets in Resources */,

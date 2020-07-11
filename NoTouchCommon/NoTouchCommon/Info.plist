@@ -22,6 +22,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Poppins-Regular.tff</string>
 		<string>SF-Pro-Display-Semibold.otf</string>
 		<string>SF-Pro-Display-Regular.otf</string>
 		<string>SF-Pro-Display-Bold.otf</string>
