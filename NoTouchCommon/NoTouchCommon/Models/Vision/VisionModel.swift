@@ -58,7 +58,7 @@ public class VisionModel {
     /// - Tag: SetupVisionRequest
     @discardableResult
     private func setupVision() -> NoTouchError? {
-        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "annot-4789", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle(for: type(of: self)).url(forResource: "ohyeah", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
             return NoTouchError.missingModelFile // TODO: Add logging.
         }
@@ -188,53 +188,30 @@ public class VisionModel {
                 }
                 
                 var score: Double = 0
-                print("+++++")
+                print("***************")
+                
                 // loop through all results
                 for result in results {
-                    if result.confidence > 0.93 {
-                        print("top score")
-                        score += 4
-                    }
-                    else if result.confidence > 0.87 {
-                        print("mid score")
+                    if result.confidence > 0.8 {
                         score += 3
-                    }
-                    else if result.confidence > 0.8 {
-                        for label in result.labels {
-                            if label.identifier == "BackOfHand" && label.confidence > 0.95 {
-                                print("back of hand, confidence = \(result.confidence)")
-                                score += 2
-                            }
-                            else if label.identifier == "Finger" && label.confidence > 0.95 {
-                                print("big finger, confidence = \(result.confidence)")
-                                score += 2
-                            }
-                        }
-                    }
-                    else if result.confidence > 0.6 {
-                        for label in result.labels where label.identifier == "Finger" {
-                            if label.confidence > 0.9 {
-                                print("0.6 finger")
-                                score += 1
-                            }
-                        }
-                    }
-                    else if result.confidence > 0.3 {
-                        for label in result.labels where label.identifier == "Finger" {
-                            if label.confidence > 0.9 {
-                                print("Small finger")
-                                score += 0.5
-                            }
-                        }
+                    } else if result.confidence < 0.6 {
+                        score += 1
+                    } else {
+                        // Using 0.8 - 0.6 = 0.2 as a constant here for speed.
+                        // Calculate the distance between 0.6 and 0.8 that the confidence is.
+                        let percentBetween = (result.confidence - 0.6) / 0.2
+                        score += Double((percentBetween * 2) + 1)
                     }
                 }
                 
                 var activate = false
+                
                 if score >= 3 {
                     activate = true
                     print("activating")
                 }
-                print("------Score was \(score)-----")
+                
+                print("&&&&&&&&&&&&&&&&&")
                 
                 DispatchQueue.main.async { [weak self] in
                     if activate {
