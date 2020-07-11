@@ -48,7 +48,7 @@ public class VisionModel {
     private var frameCount = 0
     
     /// The threshold of frames that must come through before one is processed.
-    private var threshold = 3
+    private var threshold = 4
     #endif
     
     public init() {

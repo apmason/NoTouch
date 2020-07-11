@@ -11,7 +11,7 @@ import SwiftUI
 
 extension Font {
     
-    static func defaultText(size: CGFloat) -> Font {
+    static func defaultFont(size: CGFloat) -> Font {
         Font.custom("Poppins-Regular", size: size)
     }
 }
