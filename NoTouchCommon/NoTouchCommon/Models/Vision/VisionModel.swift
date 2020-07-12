@@ -186,7 +186,7 @@ public class VisionModel {
                 var activate = false
                 
                 print("Score is: \(score)")
-                if score > 3 {
+                if score > 4.5 {
                     activate = true
                 }
                 

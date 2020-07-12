@@ -49,6 +49,7 @@
 		C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B0E056245F30E500BC4946 /* DeviceData.swift */; };
 		C3B24E34246716B900E2A737 /* GraphXLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B24E33246716B900E2A737 /* GraphXLabels.swift */; };
 		C3B24E362467193800E2A737 /* PositioningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B24E352467193800E2A737 /* PositioningTests.swift */; };
+		C3B2609D24BB76F200943AE4 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B2609C24BB76F200943AE4 /* Colors.swift */; };
 		C3B58D3A24621EF300DF4D8D /* AxisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B58D3924621EF300DF4D8D /* AxisView.swift */; };
 		C3B58D3C2462A93100DF4D8D /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B58D3B2462A93100DF4D8D /* DateExtensions.swift */; };
 		C3BF2A7F244215FF004BDEE4 /* NoTouchCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2A75244215FE004BDEE4 /* NoTouchCommon.framework */; };
@@ -128,6 +129,7 @@
 		C3B0E056245F30E500BC4946 /* DeviceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceData.swift; sourceTree = "<group>"; };
 		C3B24E33246716B900E2A737 /* GraphXLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphXLabels.swift; sourceTree = "<group>"; };
 		C3B24E352467193800E2A737 /* PositioningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningTests.swift; sourceTree = "<group>"; };
+		C3B2609C24BB76F200943AE4 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		C3B58D3924621EF300DF4D8D /* AxisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisView.swift; sourceTree = "<group>"; };
 		C3B58D3B2462A93100DF4D8D /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		C3BF2A75244215FE004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +245,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		C3B2609B24BB76E600943AE4 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				C3B2609C24BB76F200943AE4 /* Colors.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
 		C3BF2A6B244215FE004BDEE4 = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +274,7 @@
 		C3BF2A77244215FE004BDEE4 /* NoTouchCommon */ = {
 			isa = PBXGroup;
 			children = (
+				C3B2609B24BB76E600943AE4 /* Design */,
 				C3AB7862247135C900F26BA1 /* UserSettings */,
 				C3B24E37246719F000E2A737 /* Extensions */,
 				C3FA9C30245F3DD5007A5A2C /* Views */,
@@ -540,6 +551,7 @@
 				C3CD5D0C2496ED7300A884B2 /* GraphConstants.swift in Sources */,
 				C3B58D3A24621EF300DF4D8D /* AxisView.swift in Sources */,
 				C3B0E051245E340D00BC4946 /* DBManager.swift in Sources */,
+				C3B2609D24BB76F200943AE4 /* Colors.swift in Sources */,
 				C391EA44245F4B690062A07D /* GraphView.swift in Sources */,
 				C3C69771246B317A006FCD7C /* ResultsView.swift in Sources */,
 				C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */,
