@@ -36,7 +36,6 @@
 		C37C211124BA721A00E444CF /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C37C211024BA721200E444CF /* Poppins-Regular.ttf */; };
 		C3808E29246D7715008304F3 /* DBManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E28246D7715008304F3 /* DBManagerTests.swift */; };
 		C3808E2B246D7C58008304F3 /* AlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */; };
-		C384651824BA279C009D7F40 /* ohyeah.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C384651724BA279C009D7F40 /* ohyeah.mlmodel */; };
 		C391EA44245F4B690062A07D /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391EA43245F4B690062A07D /* GraphView.swift */; };
 		C39AF22C24705AC000C10A54 /* TouchRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AF22B24705AC000C10A54 /* TouchRecordTests.swift */; };
 		C39AF22E24706A2E00C10A54 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39AF22D24706A2E00C10A54 /* Database.swift */; };
@@ -50,6 +49,7 @@
 		C3B24E34246716B900E2A737 /* GraphXLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B24E33246716B900E2A737 /* GraphXLabels.swift */; };
 		C3B24E362467193800E2A737 /* PositioningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B24E352467193800E2A737 /* PositioningTests.swift */; };
 		C3B2609D24BB76F200943AE4 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B2609C24BB76F200943AE4 /* Colors.swift */; };
+		C3B2609F24BB801B00943AE4 /* ohyeah2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3B2609E24BB801B00943AE4 /* ohyeah2.mlmodel */; };
 		C3B58D3A24621EF300DF4D8D /* AxisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B58D3924621EF300DF4D8D /* AxisView.swift */; };
 		C3B58D3C2462A93100DF4D8D /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B58D3B2462A93100DF4D8D /* DateExtensions.swift */; };
 		C3BF2A7F244215FF004BDEE4 /* NoTouchCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BF2A75244215FE004BDEE4 /* NoTouchCommon.framework */; };
@@ -116,7 +116,6 @@
 		C37C211024BA721200E444CF /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		C3808E28246D7715008304F3 /* DBManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerTests.swift; sourceTree = "<group>"; };
 		C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModelTests.swift; sourceTree = "<group>"; };
-		C384651724BA279C009D7F40 /* ohyeah.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ohyeah.mlmodel; sourceTree = "<group>"; };
 		C391EA43245F4B690062A07D /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C39AF22B24705AC000C10A54 /* TouchRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchRecordTests.swift; sourceTree = "<group>"; };
 		C39AF22D24706A2E00C10A54 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		C3B24E33246716B900E2A737 /* GraphXLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphXLabels.swift; sourceTree = "<group>"; };
 		C3B24E352467193800E2A737 /* PositioningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningTests.swift; sourceTree = "<group>"; };
 		C3B2609C24BB76F200943AE4 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		C3B2609E24BB801B00943AE4 /* ohyeah2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ohyeah2.mlmodel; sourceTree = "<group>"; };
 		C3B58D3924621EF300DF4D8D /* AxisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisView.swift; sourceTree = "<group>"; };
 		C3B58D3B2462A93100DF4D8D /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		C3BF2A75244215FE004BDEE4 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -382,7 +382,7 @@
 				C34BC3322492F51F00F98FF7 /* SF-Pro-Display-Semibold.otf */,
 				C37C211024BA721200E444CF /* Poppins-Regular.ttf */,
 				C36E278224435C3F000B9CBC /* beep-offic.m4a */,
-				C384651724BA279C009D7F40 /* ohyeah.mlmodel */,
+				C3B2609E24BB801B00943AE4 /* ohyeah2.mlmodel */,
 				C338C1EA247AD72B00475304 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -557,9 +557,9 @@
 				C3B0E057245F30E500BC4946 /* DeviceData.swift in Sources */,
 				C3C46EBE247AE8440042E602 /* iOSLayerView.swift in Sources */,
 				C355357D246610AB00E991AA /* TouchRecordExtensions.swift in Sources */,
-				C384651824BA279C009D7F40 /* ohyeah.mlmodel in Sources */,
 				C3A7BB55246026DF00FD8010 /* YAxisLabel.swift in Sources */,
 				C3C9017F2496B18B0007AA91 /* SelectedInfoView.swift in Sources */,
+				C3B2609F24BB801B00943AE4 /* ohyeah2.mlmodel in Sources */,
 				C35EA90F246897E8005A6942 /* RecordHolder.swift in Sources */,
 				C3D3822B245F860500F2DB23 /* HorizontalLinesView.swift in Sources */,
 				C338C1DF247A95EF00475304 /* OptionButtonStack.swift in Sources */,
