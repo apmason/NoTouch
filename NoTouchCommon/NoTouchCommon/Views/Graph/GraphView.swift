@@ -9,54 +9,6 @@
 import Combine
 import SwiftUI
 
-class SelectedBar {
-    let barIndex: Int
-    let barWidth: CGFloat
-    @Published var hourlyData: HourlyData
-    let userSettings: UserSettings
-    
-    private var cancellableObservation: AnyCancellable?
-        
-    init(barIndex: Int, barWidth: CGFloat, hourlyData: HourlyData, userSettings: UserSettings) {
-        self.barIndex = barIndex
-        self.barWidth = barWidth
-        self.hourlyData = hourlyData
-        self.userSettings = userSettings
-        
-        setupObserver()
-    }
-    
-    func setupObserver() {
-        self.cancellableObservation = userSettings.$recordHolder.sink(receiveValue: { [weak self] recordHolder in
-            DispatchQueue.main.async {
-                guard let self = self else {
-                    return
-                }
-                
-                // Get day's current hour
-                let currentHour = Calendar.current.component(.hour, from: Date())
-                
-                // Latest date is selected, update data.
-                if self.barIndex == currentHour {
-                    self.hourlyData = self.userSettings.recordHolder.hourlyData[self.barIndex]
-                }
-            }
-        })
-    }
-}
-
-extension View {
-    @ViewBuilder
-    func `if`<Content: View>(_ condition: Bool, content: (Self) -> Content) -> some View {
-        if condition {
-            content(self)
-        }
-        else {
-            self
-        }
-    }
-}
-
 public struct GraphView: View {
     
     private let positioner: Positioner
@@ -70,7 +22,7 @@ public struct GraphView: View {
     private let barSpacing: CGFloat = 5
     
     /// The spacing of the info pointer that extends beyond the graph view to the info view
-    private let infoSpacing: CGFloat = 25
+    private let infoSpacing: CGFloat = 40
     
     private var backgroundColor: Color {
         if selectedBar == nil {
@@ -85,7 +37,7 @@ public struct GraphView: View {
     @ViewBuilder
     public var body: some View {
         ZStack {
-            Rectangle().fill(Color.blue.opacity(0.000000001)) // This view handles taps on the tap portion of the screen and dismisses the selected bar view by setting it to nil.
+            Rectangle().fill(Color.blue.opacity(0.000000001)) // This view handles taps on the tap portion of the screen and dismisses the selected bar view by setting it to nil. We need opacity > 0 or else taps aren't registered
                 .onTapGesture {
                     self.selectedBar = nil
             }
@@ -136,9 +88,8 @@ public struct GraphView: View {
                         
                         if self.selectedBar != nil {
                             SelectedPointerView(selectedBar: self.$selectedBar,
-                                                     barViewHeight: self.barViewHeight(totalHeight: geometry.size.height),
-                                                     infoSpacing: self.infoSpacing,
-                                                     topYOffset: self.positioner.topYOffset)
+                                                barViewHeight: self.barViewHeight(totalHeight: geometry.size.height),
+                                                infoSpacing: self.infoSpacing)
                                 .position(x: self.selectedPointerXPosition(),
                                           y: self.selectedPointerYPosition(totalViewHeight: geometry.size.height))
                         }
@@ -167,7 +118,7 @@ public struct GraphView: View {
         let selectorHeight = SelectedPointerView.selectedPointerHeight(barViewHeight: barViewHeight(totalHeight: totalViewHeight), infoSpacing: self.infoSpacing)
         
         let bottomSectionHeight = (selectorHeight / 2) + self.positioner.bottomYOffset
-        return totalViewHeight - bottomSectionHeight - self.positioner.lineWidth
+        return totalViewHeight - bottomSectionHeight - (self.positioner.lineWidth * 2)
     }
     
     /// Return the height of the total bar view (the view that contains all the bars).
@@ -180,7 +131,6 @@ struct SelectedPointerView: View {
     @Binding var selectedBar: SelectedBar?
     let barViewHeight: CGFloat
     let infoSpacing: CGFloat
-    let topYOffset: CGFloat
     
     public var body: some View {
         Rectangle()
@@ -191,7 +141,7 @@ struct SelectedPointerView: View {
     }
     
     static func selectedPointerHeight(barViewHeight: CGFloat, infoSpacing: CGFloat) -> CGFloat {
-        return infoSpacing + barViewHeight
+        return barViewHeight + infoSpacing
     }
 }
 

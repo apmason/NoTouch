@@ -33,6 +33,8 @@
 		C36E278324435C3F000B9CBC /* beep-offic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C36E278224435C3F000B9CBC /* beep-offic.m4a */; };
 		C37BE7BD246783E00012A299 /* RecordHolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE7BC246783E00012A299 /* RecordHolderTests.swift */; };
 		C37C211124BA721A00E444CF /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C37C211024BA721200E444CF /* Poppins-Regular.ttf */; };
+		C37CBAAB26962ACF00ADA283 /* SelectedBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37CBAAA26962ACF00ADA283 /* SelectedBar.swift */; };
+		C37CBAAF26962AFA00ADA283 /* View+if.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37CBAAE26962AFA00ADA283 /* View+if.swift */; };
 		C3808E29246D7715008304F3 /* DBManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E28246D7715008304F3 /* DBManagerTests.swift */; };
 		C3808E2B246D7C58008304F3 /* AlertViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */; };
 		C391EA44245F4B690062A07D /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C391EA43245F4B690062A07D /* GraphView.swift */; };
@@ -112,6 +114,8 @@
 		C36E278224435C3F000B9CBC /* beep-offic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "beep-offic.m4a"; sourceTree = "<group>"; };
 		C37BE7BC246783E00012A299 /* RecordHolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHolderTests.swift; sourceTree = "<group>"; };
 		C37C211024BA721200E444CF /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		C37CBAAA26962ACF00ADA283 /* SelectedBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedBar.swift; sourceTree = "<group>"; };
+		C37CBAAE26962AFA00ADA283 /* View+if.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+if.swift"; sourceTree = "<group>"; };
 		C3808E28246D7715008304F3 /* DBManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerTests.swift; sourceTree = "<group>"; };
 		C3808E2A246D7C58008304F3 /* AlertViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModelTests.swift; sourceTree = "<group>"; };
 		C391EA43245F4B690062A07D /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -179,8 +183,10 @@
 		C33079EA2467028F005392A6 /* Graph */ = {
 			isa = PBXGroup;
 			children = (
-				C3C69770246B317A006FCD7C /* ResultsView.swift */,
 				C391EA43245F4B690062A07D /* GraphView.swift */,
+				C37CBAAE26962AFA00ADA283 /* View+if.swift */,
+				C3C69770246B317A006FCD7C /* ResultsView.swift */,
+				C37CBAAA26962ACF00ADA283 /* SelectedBar.swift */,
 				C3C9017E2496B18B0007AA91 /* SelectedInfoView.swift */,
 				C330CE552461980B00FCA49A /* BarsView.swift */,
 				C3B58D3924621EF300DF4D8D /* AxisView.swift */,
@@ -527,6 +533,7 @@
 				C3B0E04D245E30CC00BC4946 /* TouchRecord.swift in Sources */,
 				C3BF2A902442163B004BDEE4 /* VideoFeed.swift in Sources */,
 				C34BC33A2492F62200F98FF7 /* NoTouchFont.swift in Sources */,
+				C37CBAAB26962ACF00ADA283 /* SelectedBar.swift in Sources */,
 				C3C46EBC247AE7020042E602 /* iOSCameraAuthView.swift in Sources */,
 				C3BF2AA224421A1D004BDEE4 /* Orienter.swift in Sources */,
 				C338C1D9247A8EF000475304 /* ContentViewModel.swift in Sources */,
@@ -535,6 +542,7 @@
 				C355357B2466108900E991AA /* TouchExtensions.swift in Sources */,
 				C3652D79249539C0008E5899 /* RoundedCorner.swift in Sources */,
 				C3D1F0EC247038B000F7EA1A /* DatabaseError.swift in Sources */,
+				C37CBAAF26962AFA00ADA283 /* View+if.swift in Sources */,
 				C3BF2A9F244219AE004BDEE4 /* AlertViewModel.swift in Sources */,
 				C3BF2A92244216AD004BDEE4 /* NativeView.swift in Sources */,
 				C338C1D5247A8E1900475304 /* MainScreenView.swift in Sources */,
