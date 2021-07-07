@@ -20,6 +20,7 @@ struct InteractiveVideoView: View {
     @ViewBuilder
     var body: some View {
         ZStack(alignment: .top) {
+            backgroundColor.edgesIgnoringSafeArea(.all)
             if !userSettings.hideCameraFeed && !userSettings.pauseDetection {
                 Text("Loading Video...")
                     .font(Font.defaultFont(size: 14))
@@ -31,7 +32,7 @@ struct InteractiveVideoView: View {
                     .foregroundColor(Color.white)
                     .padding(8)
             } else if userSettings.hideCameraFeed {
-                Text("Camera Hidden")
+                Text("Video Feed Hidden")
                     .font(Font.defaultFont(size: 14))
                     .foregroundColor(Color.white)
                     .padding(8)
@@ -56,14 +57,15 @@ struct InteractiveVideoView: View {
                 .graphTransition()
             }
         }
-        .background(backgroundColor)
     }
     
     private var backgroundColor: Color {
-        if userSettings.pauseDetection || !userSettings.hideCameraFeed {
-            return Color.appGreen
+        if userSettings.pauseDetection {
+            return .appGreen
+        } else if userSettings.hideCameraFeed {
+            return .black
         } else {
-            return Color.appBlack
+            return .black
         }
     }
 }
