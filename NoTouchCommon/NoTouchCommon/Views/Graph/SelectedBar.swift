@@ -7,6 +7,7 @@
 //
 
 import Combine
+import CoreGraphics
 
 class SelectedBar {
     let barIndex: Int

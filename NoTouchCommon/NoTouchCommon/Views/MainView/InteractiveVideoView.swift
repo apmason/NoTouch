@@ -1,6 +1,6 @@
 //
 //  InteractiveVideoView.swift
-//  HandsOff
+//  NoTouch
 //
 //  Created by Alexander Mason on 4/26/20.
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
@@ -49,8 +49,11 @@ struct InteractiveVideoView: View {
                     .environmentObject(userSettings)
             }
             else {
-                ResultsView(showGraph: $showGraph)
-                    .graphTransition()
+                ZStack {
+                    Color.white.edgesIgnoringSafeArea(.all)
+                    ResultsView(showGraph: $showGraph)
+                }
+                .graphTransition()
             }
         }
         .background(backgroundColor)
@@ -70,7 +73,7 @@ private struct GraphTransition: ViewModifier {
         #if os(OSX)
         return content.transition(.opacity)
         #else
-        return content.transition(.move(edge: .trailing)).edgesIgnoringSafeArea(.all)
+        return content.transition(.opacity)
         #endif
     }
 }

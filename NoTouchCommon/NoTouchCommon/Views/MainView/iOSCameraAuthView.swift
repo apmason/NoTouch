@@ -12,7 +12,7 @@ import SwiftUI
 struct iOSCameraAuthView: View {
     var body: some View {
         VStack {
-            Text("Camera permissions are required to use HandsOff!")
+            Text("Camera permissions are required to use NoTouch!")
                 .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding()

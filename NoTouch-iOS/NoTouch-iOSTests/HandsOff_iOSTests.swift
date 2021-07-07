@@ -1,15 +1,15 @@
 //
-//  HandsOff_iOSTests.swift
-//  HandsOff-iOSTests
+//  NoTouch_iOSTests.swift
+//  NoTouch-iOSTests
 //
 //  Created by Alexander Mason on 5/24/20.
 //  Copyright © 2020 Canopy Interactive. All rights reserved.
 //
 
 import XCTest
-@testable import HandsOff_iOS
+@testable import NoTouch_iOS
 
-class HandsOff_iOSTests: XCTestCase {
+class NoTouch_iOSTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

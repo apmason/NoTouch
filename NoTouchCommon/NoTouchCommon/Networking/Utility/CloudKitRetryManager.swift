@@ -19,7 +19,7 @@ public class NetworkMonitor {
     
     let monitor = NWPathMonitor()
         
-    let queue = DispatchQueue(label: "com.handsOff.common.pathMonitor")
+    let queue = DispatchQueue(label: "com.NoTouch.common.pathMonitor")
     
     init() {
         monitor.pathUpdateHandler = { [weak self] path in

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  HandsOff
+//  NoTouch
 //
 //  Created by Alexander Mason on 4/8/20.
 //  Copyright © 2020 Canopy Interactive. All rights reserved.

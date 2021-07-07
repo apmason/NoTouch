@@ -53,9 +53,9 @@
 
 /* Begin PBXFileReference section */
 		C338C1E1247AA01500475304 /* NoTouchCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NoTouchCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C338C1E5247AA4A900475304 /* HandsOff-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "HandsOff-iOS.entitlements"; sourceTree = "<group>"; };
+		C338C1E5247AA4A900475304 /* NoTouch-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "NoTouch-iOS.entitlements"; sourceTree = "<group>"; };
 		C338C1E6247AA4AF00475304 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		C3B22687247A7F6E00465684 /* HandsOff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandsOff.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3B22687247A7F6E00465684 /* NoTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B2268A247A7F6E00465684 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3B2268C247A7F6E00465684 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C3B2268E247A7F6E00465684 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,10 +63,10 @@
 		C3B22693247A7F7200465684 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C3B22696247A7F7200465684 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C3B22698247A7F7200465684 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3B2269D247A7F7200465684 /* HandsOff-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HandsOff-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3B2269D247A7F7200465684 /* NoTouch-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NoTouch-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B226A1247A7F7200465684 /* HandsOff_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandsOff_iOSTests.swift; sourceTree = "<group>"; };
 		C3B226A3247A7F7200465684 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3B226A8247A7F7200465684 /* HandsOff-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HandsOff-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3B226A8247A7F7200465684 /* NoTouch-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NoTouch-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B226AC247A7F7200465684 /* HandsOff_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandsOff_iOSUITests.swift; sourceTree = "<group>"; };
 		C3B226AE247A7F7200465684 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,9 +110,9 @@
 		C3B2267E247A7F6E00465684 = {
 			isa = PBXGroup;
 			children = (
-				C3B22689247A7F6E00465684 /* HandsOff-iOS */,
-				C3B226A0247A7F7200465684 /* HandsOff-iOSTests */,
-				C3B226AB247A7F7200465684 /* HandsOff-iOSUITests */,
+				C3B22689247A7F6E00465684 /* NoTouch-iOS */,
+				C3B226A0247A7F7200465684 /* NoTouch-iOSTests */,
+				C3B226AB247A7F7200465684 /* NoTouch-iOSUITests */,
 				C3B22688247A7F6E00465684 /* Products */,
 				C338C1E0247AA01500475304 /* Frameworks */,
 			);
@@ -121,17 +121,17 @@
 		C3B22688247A7F6E00465684 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C3B22687247A7F6E00465684 /* HandsOff.app */,
-				C3B2269D247A7F7200465684 /* HandsOff-iOSTests.xctest */,
-				C3B226A8247A7F7200465684 /* HandsOff-iOSUITests.xctest */,
+				C3B22687247A7F6E00465684 /* NoTouch.app */,
+				C3B2269D247A7F7200465684 /* NoTouch-iOSTests.xctest */,
+				C3B226A8247A7F7200465684 /* NoTouch-iOSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C3B22689247A7F6E00465684 /* HandsOff-iOS */ = {
+		C3B22689247A7F6E00465684 /* NoTouch-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				C338C1E5247AA4A900475304 /* HandsOff-iOS.entitlements */,
+				C338C1E5247AA4A900475304 /* NoTouch-iOS.entitlements */,
 				C3B2268A247A7F6E00465684 /* AppDelegate.swift */,
 				C3B2268C247A7F6E00465684 /* SceneDelegate.swift */,
 				C3B2268E247A7F6E00465684 /* ContentView.swift */,
@@ -140,7 +140,7 @@
 				C3B22698247A7F7200465684 /* Info.plist */,
 				C3B22692247A7F7200465684 /* Preview Content */,
 			);
-			path = "HandsOff-iOS";
+			path = "NoTouch-iOS";
 			sourceTree = "<group>";
 		};
 		C3B22692247A7F7200465684 /* Preview Content */ = {
@@ -151,30 +151,30 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		C3B226A0247A7F7200465684 /* HandsOff-iOSTests */ = {
+		C3B226A0247A7F7200465684 /* NoTouch-iOSTests */ = {
 			isa = PBXGroup;
 			children = (
 				C3B226A1247A7F7200465684 /* HandsOff_iOSTests.swift */,
 				C3B226A3247A7F7200465684 /* Info.plist */,
 			);
-			path = "HandsOff-iOSTests";
+			path = "NoTouch-iOSTests";
 			sourceTree = "<group>";
 		};
-		C3B226AB247A7F7200465684 /* HandsOff-iOSUITests */ = {
+		C3B226AB247A7F7200465684 /* NoTouch-iOSUITests */ = {
 			isa = PBXGroup;
 			children = (
 				C3B226AC247A7F7200465684 /* HandsOff_iOSUITests.swift */,
 				C3B226AE247A7F7200465684 /* Info.plist */,
 			);
-			path = "HandsOff-iOSUITests";
+			path = "NoTouch-iOSUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C3B22686247A7F6E00465684 /* HandsOff-iOS */ = {
+		C3B22686247A7F6E00465684 /* NoTouch-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3B226B1247A7F7200465684 /* Build configuration list for PBXNativeTarget "HandsOff-iOS" */;
+			buildConfigurationList = C3B226B1247A7F7200465684 /* Build configuration list for PBXNativeTarget "NoTouch-iOS" */;
 			buildPhases = (
 				C3B22683247A7F6E00465684 /* Sources */,
 				C3B22684247A7F6E00465684 /* Frameworks */,
@@ -185,14 +185,14 @@
 			);
 			dependencies = (
 			);
-			name = "HandsOff-iOS";
+			name = "NoTouch-iOS";
 			productName = "HandsOff-iOS";
-			productReference = C3B22687247A7F6E00465684 /* HandsOff.app */;
+			productReference = C3B22687247A7F6E00465684 /* NoTouch.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C3B2269C247A7F7200465684 /* HandsOff-iOSTests */ = {
+		C3B2269C247A7F7200465684 /* NoTouch-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3B226B4247A7F7200465684 /* Build configuration list for PBXNativeTarget "HandsOff-iOSTests" */;
+			buildConfigurationList = C3B226B4247A7F7200465684 /* Build configuration list for PBXNativeTarget "NoTouch-iOSTests" */;
 			buildPhases = (
 				C3B22699247A7F7200465684 /* Sources */,
 				C3B2269A247A7F7200465684 /* Frameworks */,
@@ -203,14 +203,14 @@
 			dependencies = (
 				C3B2269F247A7F7200465684 /* PBXTargetDependency */,
 			);
-			name = "HandsOff-iOSTests";
+			name = "NoTouch-iOSTests";
 			productName = "HandsOff-iOSTests";
-			productReference = C3B2269D247A7F7200465684 /* HandsOff-iOSTests.xctest */;
+			productReference = C3B2269D247A7F7200465684 /* NoTouch-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C3B226A7247A7F7200465684 /* HandsOff-iOSUITests */ = {
+		C3B226A7247A7F7200465684 /* NoTouch-iOSUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3B226B7247A7F7200465684 /* Build configuration list for PBXNativeTarget "HandsOff-iOSUITests" */;
+			buildConfigurationList = C3B226B7247A7F7200465684 /* Build configuration list for PBXNativeTarget "NoTouch-iOSUITests" */;
 			buildPhases = (
 				C3B226A4247A7F7200465684 /* Sources */,
 				C3B226A5247A7F7200465684 /* Frameworks */,
@@ -221,9 +221,9 @@
 			dependencies = (
 				C3B226AA247A7F7200465684 /* PBXTargetDependency */,
 			);
-			name = "HandsOff-iOSUITests";
+			name = "NoTouch-iOSUITests";
 			productName = "HandsOff-iOSUITests";
-			productReference = C3B226A8247A7F7200465684 /* HandsOff-iOSUITests.xctest */;
+			productReference = C3B226A8247A7F7200465684 /* NoTouch-iOSUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -249,7 +249,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C3B22682247A7F6E00465684 /* Build configuration list for PBXProject "HandsOff-iOS" */;
+			buildConfigurationList = C3B22682247A7F6E00465684 /* Build configuration list for PBXProject "NoTouch-iOS" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -262,9 +262,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C3B22686247A7F6E00465684 /* HandsOff-iOS */,
-				C3B2269C247A7F7200465684 /* HandsOff-iOSTests */,
-				C3B226A7247A7F7200465684 /* HandsOff-iOSUITests */,
+				C3B22686247A7F6E00465684 /* NoTouch-iOS */,
+				C3B2269C247A7F7200465684 /* NoTouch-iOSTests */,
+				C3B226A7247A7F7200465684 /* NoTouch-iOSUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -328,12 +328,12 @@
 /* Begin PBXTargetDependency section */
 		C3B2269F247A7F7200465684 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C3B22686247A7F6E00465684 /* HandsOff-iOS */;
+			target = C3B22686247A7F6E00465684 /* NoTouch-iOS */;
 			targetProxy = C3B2269E247A7F7200465684 /* PBXContainerItemProxy */;
 		};
 		C3B226AA247A7F7200465684 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C3B22686247A7F6E00465684 /* HandsOff-iOS */;
+			target = C3B22686247A7F6E00465684 /* NoTouch-iOS */;
 			targetProxy = C3B226A9247A7F7200465684 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -470,21 +470,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "HandsOff-iOS/HandsOff-iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "NoTouch-iOS/NoTouch-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"HandsOff-iOS/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"NoTouch-iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "HandsOff-iOS/Info.plist";
+				INFOPLIST_FILE = "NoTouch-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.handsOff;
-				PRODUCT_NAME = HandsOff;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
+				PRODUCT_NAME = NoTouch;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -494,21 +494,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "HandsOff-iOS/HandsOff-iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "NoTouch-iOS/NoTouch-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_ASSET_PATHS = "\"HandsOff-iOS/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"NoTouch-iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 79TR88QV2P;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "HandsOff-iOS/Info.plist";
+				INFOPLIST_FILE = "NoTouch-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.handsOff;
-				PRODUCT_NAME = HandsOff;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
+				PRODUCT_NAME = NoTouch;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -521,18 +521,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
-				INFOPLIST_FILE = "HandsOff-iOSTests/Info.plist";
+				INFOPLIST_FILE = "NoTouch-iOSTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.canopy.HandsOff-iOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.canopy.NoTouch-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HandsOff-iOS.app/HandsOff-iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoTouch-iOS.app/NoTouch-iOS";
 			};
 			name = Debug;
 		};
@@ -543,18 +543,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
-				INFOPLIST_FILE = "HandsOff-iOSTests/Info.plist";
+				INFOPLIST_FILE = "NoTouch-iOSTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.canopy.HandsOff-iOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.canopy.NoTouch-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HandsOff-iOS.app/HandsOff-iOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NoTouch-iOS.app/NoTouch-iOS";
 			};
 			name = Release;
 		};
@@ -564,17 +564,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
-				INFOPLIST_FILE = "HandsOff-iOSUITests/Info.plist";
+				INFOPLIST_FILE = "NoTouch-iOSUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.canopy.HandsOff-iOSUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.canopy.NoTouch-iOSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "HandsOff-iOS";
+				TEST_TARGET_NAME = "NoTouch-iOS";
 			};
 			name = Debug;
 		};
@@ -584,24 +584,24 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 79TR88QV2P;
-				INFOPLIST_FILE = "HandsOff-iOSUITests/Info.plist";
+				INFOPLIST_FILE = "NoTouch-iOSUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.canopy.HandsOff-iOSUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.canopy.NoTouch-iOSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "HandsOff-iOS";
+				TEST_TARGET_NAME = "NoTouch-iOS";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C3B22682247A7F6E00465684 /* Build configuration list for PBXProject "HandsOff-iOS" */ = {
+		C3B22682247A7F6E00465684 /* Build configuration list for PBXProject "NoTouch-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3B226AF247A7F7200465684 /* Debug */,
@@ -610,7 +610,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3B226B1247A7F7200465684 /* Build configuration list for PBXNativeTarget "HandsOff-iOS" */ = {
+		C3B226B1247A7F7200465684 /* Build configuration list for PBXNativeTarget "NoTouch-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3B226B2247A7F7200465684 /* Debug */,
@@ -619,7 +619,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3B226B4247A7F7200465684 /* Build configuration list for PBXNativeTarget "HandsOff-iOSTests" */ = {
+		C3B226B4247A7F7200465684 /* Build configuration list for PBXNativeTarget "NoTouch-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3B226B5247A7F7200465684 /* Debug */,
@@ -628,7 +628,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3B226B7247A7F7200465684 /* Build configuration list for PBXNativeTarget "HandsOff-iOSUITests" */ = {
+		C3B226B7247A7F7200465684 /* Build configuration list for PBXNativeTarget "NoTouch-iOSUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3B226B8247A7F7200465684 /* Debug */,

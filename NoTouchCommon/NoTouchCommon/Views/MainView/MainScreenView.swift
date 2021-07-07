@@ -28,7 +28,7 @@ public struct MainScreenView: View {
                     .font(.headline)
                     .padding(.bottom, 10)
                 
-                Text("Go to System Preferences -> Security & Privacy -> Privacy -> Camera and authorize HandsOff.")
+                Text("Go to System Preferences -> Security & Privacy -> Privacy -> Camera and authorize NoTouch.")
                     .font(.body)
                     .padding(.horizontal)
                     .multilineTextAlignment(.center)

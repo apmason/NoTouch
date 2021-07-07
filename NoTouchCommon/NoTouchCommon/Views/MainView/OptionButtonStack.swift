@@ -1,6 +1,6 @@
 //
 //  OptionButtonStack.swift
-//  HandsOff
+//  NoTouch
 //
 //  Created by Alexander Mason on 5/7/20.
 //  Copyright © 2020 Canopy Interactive. All rights reserved.

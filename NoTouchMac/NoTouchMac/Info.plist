@@ -27,7 +27,7 @@
 	<key>LSUIElement</key>
 	<false/>
 	<key>NSCameraUsageDescription</key>
-	<string>HandsOff would like to access your camera to determine if you are touching your face. All calculations to determine if you are touching your face are done on your device, your camera data is never saved or sent anywhere (you can use HandsOff without Internet).</string>
+	<string>NoTouch would like to access your camera to determine if you are touching your face. All calculations to determine if you are touching your face are done on your device, your camera data is never saved or sent anywhere (you can use NoTouch without Internet).</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2020 Canopy Interactive. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
