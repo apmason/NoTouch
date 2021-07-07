@@ -15,9 +15,6 @@ import UIKit
 
 class Orienter {
     
-    // FIXME: if running on iOS do this calculation, otherwise always be up and mirrored (Mac won't rotate)
-    // This is half implemented, does it work?
-    
     /// Based on the current device orientation calculate the desired CGImagePropertyOrientation
     /// - Returns: The orientation
     public static func currentCGOrientation() -> CGImagePropertyOrientation {
@@ -25,7 +22,6 @@ class Orienter {
         let curDeviceOrientation = UIDevice.current.orientation
         let exifOrientation: CGImagePropertyOrientation
         
-        // TODO: Needs to be fixed to handle all orientations. (front and back facing camera)
         switch curDeviceOrientation {
         case UIDeviceOrientation.portraitUpsideDown:  // Device oriented vertically, Home button on the top
             exifOrientation = .left
@@ -51,16 +47,16 @@ class Orienter {
         let deviceOrientation = UIDevice.current.orientation
         switch deviceOrientation {
         case .landscapeLeft:       // Device oriented horizontally, Home button on the right
-        return .landscapeRight
+            return .landscapeRight
         case .landscapeRight:      // Device oriented horizontally, Home button on the left
-        return .landscapeLeft
+            return .landscapeLeft
         case .portrait:            // Device oriented vertically, Home button on the bottom
-        return .portrait
-        
-        case .portraitUpsideDown:
-        return nil
+            return .portrait
+            
+        case .portraitUpsideDown: // Never upside down!
+            return nil
         default:
-        return .portrait
+            return .portrait
         }
     }
     #endif

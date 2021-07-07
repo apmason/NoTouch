@@ -60,7 +60,7 @@ public class VisionModel {
     private func setupVision() -> NoTouchError? {
         guard let modelURL = Bundle(for: type(of: self)).url(forResource: "ohyeah2", withExtension: "mlmodelc") else {
             assertionFailure("A model wasn't able to be retrieved")
-            return NoTouchError.missingModelFile // TODO: Add logging.
+            return NoTouchError.missingModelFile
         }
         
         do {
@@ -83,8 +83,7 @@ public class VisionModel {
     }
     
     private func createFaceBoundingRequest() -> VNDetectFaceRectanglesRequest {
-        print("Create face bounding request called")
-        // Release the pixel buffer when done, allowing the next buffer to be processed.
+        // Make sure to release the pixel buffer when done, allowing the next buffer to be processed.
         let request = VNDetectFaceRectanglesRequest { [weak self] request, error in
             guard let self = self, let ciImage = self.currentlyAnalyzedCIImage else {
                 return
@@ -92,8 +91,7 @@ public class VisionModel {
             
             guard let results = request.results as? [VNFaceObservation],
                 let boundingBox = results.first?.boundingBox else {
-                    // If a face can't be found don't analyze. TODO: Tell the user if a face is found
-                    print("no face") 
+                    // If a face can't be found don't analyze. Release the pixel buffer so we can grab a new buffer.
                     self.currentlyAnalyzedCIImage = nil
                     return
             }
@@ -214,8 +212,6 @@ public class VisionModel {
             return
         }
         
-        // TODO: Should this be .left or .right on iOS?
-        // should be .rightMirrored on iOS
         let requestHandler = VNImageRequestHandler(ciImage: ciImage,
                                                    orientation: .up)
         
@@ -260,7 +256,7 @@ extension VisionModel {
             #if os(iOS)
             /**
              In portrait mode the image is rotated 90 degrees to the left, this is the default when using the front facing camera on iOS.
-             If we are not currently in portrait mode, transform the image so we are. Then this is the only transformation we need to do, and the processing can use a shared codebase.
+             If we are not currently in portrait mode, transform the image so we are. Then this is the only transformation we need to do.
              */
             if UIDevice.current.orientation == .landscapeLeft {
                 let beforeWidth = ciImage.extent.width

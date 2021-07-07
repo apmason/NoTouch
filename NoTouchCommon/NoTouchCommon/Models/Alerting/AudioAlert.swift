@@ -15,9 +15,7 @@ class AudioAlert: NSObject {
     private let fileName = "beep-offic"
     
     private var audioEngine = AVAudioEngine()
-    
-    // TODO: On iOS we should setup an audio session
-    
+        
     var isMuted: Bool = false {
         didSet {
             if !isMuted, shouldBeAlerting {
@@ -40,7 +38,6 @@ class AudioAlert: NSObject {
         super.init()
         
         #if os(iOS)
-        // setup AudioSession.
         do {
             try AVAudioSession.sharedInstance().setCategory(.ambient, options: [.allowBluetooth, .mixWithOthers])
             try AVAudioSession.sharedInstance().setMode(.default)
@@ -50,7 +47,6 @@ class AudioAlert: NSObject {
         }
         #endif
         
-        // setup Audio Session
         guard let url = Bundle(for: type(of: self)).url(forResource: fileName, withExtension: "m4a") else {
             fatalError("No audio file")
         }
@@ -58,7 +54,7 @@ class AudioAlert: NSObject {
         do {
             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.m4a.rawValue)
             player?.delegate = self
-            player?.numberOfLoops = -1
+            player?.numberOfLoops = -1 // infinite loop
             player?.prepareToPlay()
             
         } catch {
@@ -79,10 +75,11 @@ extension AudioAlert: AlertObserver {
             return
         }
         
-        #if os(OSX)
+        #if os(OSX) // NOTE: Caught a bug during development that required this. It may not be needed now if something underlying was fixed.
         player.stop()
         player.prepareToPlay()
         #endif
+        
         player.play()
     }
     
@@ -100,6 +97,6 @@ extension AudioAlert: AVAudioPlayerDelegate {
     }
     
     func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-        print("Decoding error: \(error?.localizedDescription)")
+        print("Audio player decoding error: \(error?.localizedDescription ?? "")")
     }
 }

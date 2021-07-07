@@ -75,7 +75,6 @@ public struct RecordHolder {
     
     private var topAxisValue: Touch = 0
     
-    // TODO: Make sure topAxisValue changes when we add a record.
     public mutating func add(_ record: TouchRecord) {
         self.touchRecords.insert(record)
         updateAfterRecordAddition()

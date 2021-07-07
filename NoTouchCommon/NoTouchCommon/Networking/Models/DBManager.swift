@@ -67,8 +67,7 @@ public class DBManager: DatabaseManager {
                 }
                 
             case .failure(let error):
-                // TODO: Tell the user we're having networking issues (if the error is a networking error.)
-                print(error.localizedDescription)
+                print("Error fetching existing records: \(error.localizedDescription)")
                 completionHandler?(.failure(error))
                 
             }

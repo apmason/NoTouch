@@ -378,7 +378,6 @@ extension CloudKitDatabase {
                     }
                     
                 case .batchRequestFailed:
-                    // TODO: Handle individual failures? How does one do that?
                     completionHandler(.failure(.batchSaveFailed))
                     
                 case .managedAccountRestricted, .notAuthenticated, .permissionFailure:
@@ -443,13 +442,11 @@ extension CloudKitDatabase {
 
 extension CloudKitDatabase {
     
-    // NOTE: Does this persist?
     private func createSubscriptions() {
         if !self.subscribedToPrivateChanges {
             let createSubscriptionOperation = createDatabaseSubscriptionOperation(subscriptionID: privateSubscriptionID)
             createSubscriptionOperation.modifySubscriptionsCompletionBlock = { subscriptions, deletedIDs, error in
                 if let error = error {
-                    // TODO: Fix this.
                     assertionFailure("Failure making subscription: \(error.localizedDescription)")
                 } else {
                     self.subscribedToPrivateChanges = true
@@ -460,7 +457,7 @@ extension CloudKitDatabase {
     }
 
     private func createDatabaseSubscriptionOperation(subscriptionID: String) -> CKModifySubscriptionsOperation {
-        /// This is the subscription to the changes to the databse. We will pass this to our `CKModifySubscriptionsOperation`.
+        /// This is the subscription to changes to the database. We will pass this to our `CKModifySubscriptionsOperation`.
         let subscription = CKDatabaseSubscription.init(subscriptionID: subscriptionID)
         
         let notificationInfo = CKSubscription.NotificationInfo()
@@ -500,6 +497,7 @@ extension CloudKitDatabase {
         }
     }
 
+    // @ALEX: does this ever get changed?
     private func fetchDatabaseChanges(database: CKDatabase, databaseTokenKey: String, completion: @escaping () -> Void) {
         var changedZoneIDs: [CKRecordZone.ID] = []
         
@@ -526,10 +524,10 @@ extension CloudKitDatabase {
         /**
          The client is responsible for saving the change token at the end of the operation and passing it into the next call to CKFetchDatabaseChangesOperation. If the server returns a CKErrorChangeTokenExpired error, the previousServerChangeToken value was too old and the client should toss its local cache and re-fetch the changes in this record zone starting with a nil previousServerChangeToken.
          */
-        // TODO: Read the doc on this completion block. It contains some important steps that we'll need to adhere to.
+        // Note: Read the doc on this completion block. It contains some important steps that we'll need to adhere to.
         operation.fetchDatabaseChangesCompletionBlock = { token, moreComing, error in
             if let error = error {
-                assertionFailure("Error during fetch: \(error.localizedDescription)") // TODO: Handle this error properly. What type of errors can this spit back?
+                assertionFailure("Error during fetch: \(error.localizedDescription)")
                 completion()
                 return
             }
