@@ -167,7 +167,6 @@ public class VisionModel {
                 }
                 
                 var score: Double = 0
-                print("***************")
                 
                 // loop through all results
                 for result in results {
@@ -185,12 +184,9 @@ public class VisionModel {
                 
                 var activate = false
                 
-                print("Score is: \(score)")
                 if score > 4.5 {
                     activate = true
                 }
-                
-                print("&&&&&&&&&&&&&&&&&")
                 
                 DispatchQueue.main.async { [weak self] in
                     if activate {
@@ -201,7 +197,7 @@ public class VisionModel {
                 }
             })
             
-            observationRequest.imageCropAndScaleOption = .scaleFill // @ALEX: Test this with different options, does it work best?
+            observationRequest.imageCropAndScaleOption = .scaleFill
             return observationRequest
             
         } catch let error as NSError {
@@ -214,11 +210,9 @@ public class VisionModel {
     private func findFace() {
         // Most computer vision tasks are not rotation-agnostic, so it is important to pass in the orientation of the image with respect to device.
         guard let ciImage = currentlyAnalyzedCIImage else {
-            assertionFailure("No pixelbuffer, this shouldn't happen, who removed it?")
+            assertionFailure("No pixelbuffer, this shouldn't happen")
             return
         }
-        
-        //DifferenceDetector.detectDifference(bufferOne: pixelBuffer)
         
         // TODO: Should this be .left or .right on iOS?
         // should be .rightMirrored on iOS

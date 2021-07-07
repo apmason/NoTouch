@@ -43,7 +43,6 @@ class RecordHolderTests: XCTestCase {
         // This is the current day so we should have 24 entries, all being zero except for index 0 (12:01 on the current day).
         let startOfDay = Calendar.current.startOfDay(for: Date())
         recordHolder.add(dummyRecordWith(date: startOfDay))
-        print("Seeing touch observance as: \(recordHolder.hourlyData)")
         XCTAssert(recordHolder.hourlyData.count == 24)
         
         for (index, hour) in recordHolder.hourlyData.enumerated() {

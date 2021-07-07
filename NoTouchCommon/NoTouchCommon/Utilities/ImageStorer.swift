@@ -13,6 +13,8 @@ import AppKit
 import UIKit
 #endif
 
+/// A helper class that saves screenshots of video frames to be analyzed for proper rotations later
+#if DEBUG
 class ImageStorer {
     
     private static func filePath(forKey key: String) -> URL {
@@ -39,7 +41,6 @@ class ImageStorer {
         let data = NSBitmapImageRep(data: image.tiffRepresentation!)!.representation(using: .jpeg, properties: [:])!
         let path = filePath(forKey: "\(count)")
         count += 1
-        //print("Writing to: \(path)")
         try! data.write(to: path)
         #endif
     }
@@ -51,28 +52,9 @@ class ImageStorer {
         let data = image.jpegData(compressionQuality: 1)!
         let path = filePath(forKey: "\(count)")
         count += 1
-        //print("Writing to: \(path)")
         try! data.write(to: path)
         #endif
     }
     #endif
-    
-    // FIXME: Less important but may be good for testing. Pass in CGImage mayhaps?
-    //    static func storeNewImage(image: UIImage) {
-    //        if let pngRepresentation = image.pngData() {
-    //            if let filePath = filePath(forKey: randomString(length: 12)) {
-    //                do  {
-//                    print("Trying to write to: \(filePath)")
-//
-//                    try pngRepresentation.write(to: filePath,
-//                                                options: .atomic)
-//                } catch let err {
-//                    print("Saving file resulted in error: ", err)
-//                }
-//            }
-//
-//        } else {
-//            print("No PNG data, you fucked up")
-//        }
-//    }
 }
+#endif

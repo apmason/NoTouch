@@ -112,9 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("did register")
-    }
+    func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {}
     
     // MARK: - IBActions
 

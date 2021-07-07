@@ -37,7 +37,6 @@ class PositioningTests: XCTestCase {
         XCTAssert(lineTwoPosition == 55)
         
         let lineThreePosition = positioner.xAxisLabelOffsetFor(line: 3, contentWidth: contentWidth)
-        print(lineThreePosition)
         XCTAssert(lineThreePosition == 77.5)
         
         let endToThree = contentWidth - lineThreePosition
@@ -59,7 +58,6 @@ class PositioningTests: XCTestCase {
         let spacing: CGFloat = 10
         let barsView = BarsView(selectedBar: .constant(nil), spacing: spacing)
         let rectangleWidth = barsView.rectangleWidth(for: 400)
-        print(rectangleWidth)
         XCTAssert(rectangleWidth == 6.666666666666667)
     }
 }
