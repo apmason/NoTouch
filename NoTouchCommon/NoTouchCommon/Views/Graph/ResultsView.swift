@@ -31,33 +31,6 @@ struct ResultsView: View {
                 }
                 .padding(.leading, self.leadingXOffset)
                 
-//                HStack {
-//                    HStack(spacing: 10) {
-//                        
-//                        
-//                        Text("Touches Today: \(self.userSettings.recordHolder.totalTouchCount)")
-//                            .font(.headline)
-//                            .fontWeight(.semibold)
-//                            .padding(.trailing, 8)
-//                    }
-//                    
-//                    Spacer()
-//                    
-//                    VStack(alignment: .trailing, spacing: 10) {
-//                        if !self.userSettings.networkTracker.isNetworkAvailable {
-//                            Text("No Internet")
-//                                .font(.caption)
-//                                .foregroundColor(Color.red)
-//                        }
-//                        
-//                        if self.userSettings.networkTracker.cloudKitAuthStatus == .signedOut || self.userSettings.networkTracker.cloudKitAuthStatus == .restricted {
-//                            Text("iCloud Disabled")
-//                                .font(.caption)
-//                                .foregroundColor(Color.red)
-//                        }
-//                    }.padding(.trailing, 10)
-//                }
-                
                 GraphView(leadingXOffset: self.leadingXOffset)
             }
             .edgePadding(topInsets: geometry.safeAreaInsets.top, bottomInsets: geometry.safeAreaInsets.bottom)
