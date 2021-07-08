@@ -483,7 +483,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.handsOff;
 				PRODUCT_NAME = NoTouch;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -507,7 +507,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.noTouch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canopyInteractive.handsOff;
 				PRODUCT_NAME = NoTouch;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
