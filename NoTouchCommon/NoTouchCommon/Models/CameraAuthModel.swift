@@ -8,7 +8,6 @@
 
 import AVFoundation
 import Foundation
-// FIXME: Do we need to do this here?
 #if os(iOS)
 import UIKit
 #endif
@@ -16,15 +15,12 @@ import UIKit
 public class CameraAuthModel {
     
     // A wrapper enum to simplify our tracking of camera auth states
+    @frozen
     public enum CameraAuthState {
         case authorized
         case notDetermined
         case denied
     }
-    
-    // If non-nil this is the currently presented CameraRequirementAlertView.
-    // FIXME: Can we do the below AlertView in SwiftUI?
-    //static var alertView: AlertView?
     
     static func authorizeCameraForUsage(completion: @escaping ((Result<Void, NoTouchError>) -> Void)) {
         switch determineIfAuthorized() {

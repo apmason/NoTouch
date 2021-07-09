@@ -23,7 +23,6 @@ import UIKit
 #endif
 #endif
 
-// FIXME: Change this name to VideoFeedProvider? Or something of the sort?
 public class VideoFeed: NSObject {
         
     private let session = AVCaptureSession()
@@ -285,7 +284,6 @@ public class VideoFeed: NSObject {
 
 extension VideoFeed: AVCaptureVideoDataOutputSampleBufferDelegate {
     
-    // FIXME: Kick this back to the VisionModel somehow.
     public func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         //
     }
